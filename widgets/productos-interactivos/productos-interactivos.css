@@ -75,10 +75,7 @@
 
 /* Background Curve Decoration */
 #gpk-products-widget .bg-decor-container {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
+    display: none !important;
 }
 
 #gpk-products-widget .bg-decor-svg {
