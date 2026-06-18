@@ -1,9 +1,10 @@
 # Ignore everything by default
 /*
 
-# Allow tracking gitignore, readme, changelogs and widgets directory
+# Allow tracking gitignore, readme, vercel config, changelogs and widgets directory
 !.gitignore
 !/README.md
+!/vercel.json
 !/changelogs/
 !/widgets/
 
