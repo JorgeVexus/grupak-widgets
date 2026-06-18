@@ -18,33 +18,19 @@ Widget interactivo responsivo de 10 secciones que detalla la cadena de valor de 
 
 ---
 
-## Cómo Incrustar en Webflow
+## Cómo Incrustar en Webflow (Integración Limpia con Script)
 
-Para añadir cualquiera de estos widgets en Webflow de manera asíncrona (evitando el límite de caracteres de Webflow y facilitando el mantenimiento):
+Para añadir este widget en Webflow de manera asíncrona y con código ultra limpio (evitando el límite de caracteres de Webflow y automatizando la carga de estilos):
 
-1. Agrega un componente **HTML Embed** en el lienzo de Webflow donde desees colocar el widget.
-2. Pega el código cargador correspondiente apuntando a la URL del despliegue (ej. Vercel):
-
-### Ejemplo de Inyección para Productos Interactivos:
+1. Agrega un componente **HTML Embed** en Webflow en la posición deseada.
+2. Pega el contenedor del widget y el script cargador que apunta a Vercel:
 
 ```html
 <!-- Contenedor del Widget -->
 <div id="gpk-products-widget-root"></div>
 
-<!-- Enlace a los Estilos -->
-<link rel="stylesheet" href="https://grupak-widgets.vercel.app/widgets/productos-interactivos/productos-interactivos.css">
-
-<!-- Cargador dinámico -->
-<script>
-  fetch('https://grupak-widgets.vercel.app/widgets/productos-interactivos/productos-interactivos.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('gpk-products-widget-root').innerHTML = html;
-      
-      const script = document.createElement('script');
-      script.src = 'https://grupak-widgets.vercel.app/widgets/productos-interactivos/productos-interactivos.js';
-      script.defer = true;
-      document.body.appendChild(script);
-    });
-</script>
+<!-- Cargador Autónomo del Widget -->
+<script src="https://grupak-widgets.vercel.app/widgets/productos-interactivos/productos-interactivos.js" defer></script>
 ```
+
+El script se encargará automáticamente de inyectar los estilos CSS correspondientes, descargar el HTML del widget e inicializar todas las interacciones dinámicas.
