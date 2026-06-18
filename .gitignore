@@ -1,0 +1,11 @@
+# Ignore everything by default
+/*
+
+# Allow tracking gitignore, readme and widgets directory
+!.gitignore
+!/README.md
+!/widgets/
+
+# Ignore IDE metadata
+.claude/
+.gemini/
