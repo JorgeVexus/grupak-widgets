@@ -1,9 +1,10 @@
 # Ignore everything by default
 /*
 
-# Allow tracking gitignore, readme and widgets directory
+# Allow tracking gitignore, readme, changelogs and widgets directory
 !.gitignore
 !/README.md
+!/changelogs/
 !/widgets/
 
 # Ignore IDE metadata
