@@ -8,8 +8,8 @@
     --color-grey-medium: #6E6E6E;
     --color-grey-light: #E3E5E9;
     --color-white: #FFFFFF;
-    --font-title: 'Outfit', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-title: 'Neuehaasdisplayblack', 'Neuehaasdisplaymediu', sans-serif;
+    --font-body: 'Neuehaasdisplayroman', 'Neuehaasdisplaymediu', sans-serif;
 
     width: 100%;
     background-color: var(--color-grey-light);
