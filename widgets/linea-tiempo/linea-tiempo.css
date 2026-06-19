@@ -545,6 +545,69 @@
   transform: translateX(0);
 }
 
+/* 1985 Slide Animations (Side-by-Side) */
+#gpk-timeline-widget .photo-container-1985 {
+  position: absolute;
+  left: 0;
+  top: 238px;
+  width: 500px;
+  height: 415px;
+  z-index: 1;
+}
+
+#gpk-timeline-widget .photo-wrapper-1985 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+#gpk-timeline-widget .photo-img-1985 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+#gpk-timeline-widget .vector-img-1985 {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 1985 Text (Right Side) Slide-In From Right */
+#gpk-timeline-widget .timeline-slide[data-year="1985"] .info-section {
+  position: absolute;
+  left: 540px;
+  top: 280px;
+  width: 550px;
+  height: auto;
+  transform: translateX(40px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition-delay: 0.2s;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1985"].active .info-section {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Trigger 1985 Image Movement */
+#gpk-timeline-widget .timeline-slide[data-year="1985"].active .photo-wrapper-1985 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 #gpk-timeline-widget .map-container {
   top: 351px;
   width: 1107px;
@@ -934,6 +997,50 @@
     height: auto !important;
     max-height: 100%;
     object-fit: contain;
+  }
+
+  /* Mobile Responsive for 1985 */
+  #gpk-timeline-widget .photo-container-1985 {
+    height: 300px !important;
+    margin-bottom: 20px !important;
+  }
+
+  #gpk-timeline-widget .photo-wrapper-1985 {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 500 / 415;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    transform: none !important;
+  }
+
+  #gpk-timeline-widget .photo-img-1985 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  #gpk-timeline-widget .vector-img-1985 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  #gpk-timeline-widget .timeline-slide[data-year="1985"] .info-section {
+    position: static;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
   }
 
   #gpk-timeline-widget .timeline-scrollbar-indicator {
