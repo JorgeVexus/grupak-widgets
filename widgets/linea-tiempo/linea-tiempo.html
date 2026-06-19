@@ -1,0 +1,376 @@
+<!-- 
+    GRUPACK - SECCIÓN DE LÍNEA DE TIEMPO INTERACTIVA (EMBED PARA WEBFLOW)
+    Copia TODO este fragmento de código y pégalo en un elemento HTML Embed en Webflow.
+    CARACTERÍSTICAS:
+    - Scoped bajo el ID #gpk-timeline-widget para evitar conflictos de estilos.
+    - Carga fuentes premium (Outfit e Inter) y soporta auto-escalado responsive.
+    - Transición fluida de años e hitos históricos.
+    - Adaptado para móviles con navegación horizontal por botones táctiles.
+-->
+<div id="gpk-timeline-widget" class="gpk-timeline-widget-container">
+  <!-- Viewport container that handles auto-scaling to fit the screen -->
+  <div class="timeline-viewport">
+    
+    <!-- Widescreen Presentation Board (Figma: 1850x1028) -->
+    <div class="timeline-board" id="timeline-board">
+      
+      <!-- Background curve SVG decoration (Figma: imgVector) -->
+      <div class="bg-vector-container">
+        <svg viewBox="0 0 1850 1028" fill="none" xmlns="http://www.w3.org/2000/svg" class="bg-vector-svg">
+          <path d="M-50,600 C300,400 600,800 1000,500 C1400,200 1700,700 1950,300" stroke="#5f9d2f" stroke-width="2" stroke-opacity="0.15" fill="none" />
+          <path d="M-100,550 C250,350 550,750 950,450 C1350,150 1650,650 1900,250" stroke="#6e6e6e" stroke-width="1" stroke-opacity="0.1" fill="none" />
+        </svg>
+      </div>
+
+      <!-- Centered Header Title (Figma: left-[929px] top-[27px] w-[1440px] text-[80px]) -->
+      <header class="main-header">
+        <h1 class="header-title">
+          <span class="text-grey">Nuestra</span>
+          <span class="text-green">historia</span>
+        </h1>
+      </header>
+
+      <!-- Sidebar: Vertical timeline line (Figma: left-[358px] w-[6px]) -->
+      <div class="timeline-line-container">
+        <div class="timeline-line">
+          <div class="timeline-line-active" id="active-line"></div>
+        </div>
+      </div>
+
+      <!-- Years List (Figma: absolute year buttons positioned at top offsets) -->
+      <div class="years-sidebar" id="years-sidebar">
+        <!-- Javascript will populate the year buttons here to ensure exact positioning and state updates -->
+      </div>
+
+      <!-- Slide content pane and images/illustrations (Figma: left-[636px] top-[238px] & top-[414px]) -->
+      <div class="slides-container" id="slides-container">
+        
+        <!-- Slide 1957 -->
+        <div class="timeline-slide" data-year="1957">
+          <div class="info-section">
+            <h2 class="slide-title">Inicio de <span class="text-green font-bold">operaciones</span></h2>
+            <p class="slide-text">
+              Nuestra historia inicia en <strong class="text-black font-bold">1957</strong>, en <strong class="text-black font-bold">San Cristóbal Ecatepec</strong>. Al identificar una oportunidad clara de mercado en empaque para transportación de productos de cartón corrugado, especialmente en <strong class="text-black font-bold">alimentos</strong>, se inició la unión de los inversionistas que dieron origen a <span class="text-green font-bold">Grupak</span>.
+            </p>
+          </div>
+          <div class="illustration-section map-container-1957">
+            <div class="map-wrapper-1957">
+              <img src="mapa_1957_1.png" alt="Mapa Base 1957" class="map-base-1957">
+              <img src="mapa_1957_2.png" alt="Mapa Zoom 1957" class="map-zoom-1957">
+              <div class="map-pinpoint-1957"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 1962 -->
+        <div class="timeline-slide" data-year="1962">
+          <div class="info-section">
+            <h2 class="slide-title">Apertura de <span class="text-green font-bold">planta Cuernavaca</span> | Puesta en marcha de <span class="text-green font-bold">Unipak</span> –como primer nodo manufacturero.</h2>
+            <p class="slide-text">
+              En <strong class="text-black font-bold">1962</strong>, con la puesta en marcha de <strong class="text-black font-bold">Unipak (Cuernavaca)</strong>, se estableció nuestro <strong class="text-black font-bold">primer nodo manufacturero</strong>. Muy pronto entendimos que la continuidad y la calidad se garantizan controlando la cadena.
+            </p>
+          </div>
+          <div class="illustration-section photo-container-1962">
+            <div class="photo-wrapper-1962">
+              <img src="planta_cuernavaca_cropped.png" alt="Planta Cuernavaca Unipak" class="photo-img-1962">
+              <img src="vector_1962.png" alt="Outline Vector 1962" class="vector-img-1962">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 1966 -->
+        <div class="timeline-slide" data-year="1966">
+          <div class="illustration-section photo-container-1966">
+            <div class="photo-wrapper-1966">
+              <img src="planta_cuernavaca_cropped.png" alt="Planta Cuernavaca Unipak" class="photo-img-1966">
+              <img src="vector_1962.png" alt="Outline Vector 1962" class="vector-img-1966">
+            </div>
+          </div>
+          <div class="info-section">
+            <h2 class="slide-title">Inicio de <span class="text-green font-bold">fabricación de papel</span> | Integración vertical con producción de liner y medium (de la fibra a la caja).</h2>
+            <p class="slide-text">
+              En <strong class="text-black font-bold">1966</strong> ejecutamos <strong class="text-black font-bold">integración hacia atrás (backward integration)</strong> y comenzamos a fabricar <strong class="text-black font-bold">papel liner y medium</strong>, sentando las bases de nuestra <strong class="text-black font-bold">integración vertical</strong> “de la fibra a la caja”.
+            </p>
+          </div>
+        </div>
+
+        <!-- Slide 1983 -->
+        <div class="timeline-slide" data-year="1983">
+          <div class="info-section">
+            <h2 class="slide-title">Adquisición de abastecimientos Sta. Clara para <span class="text-green font-bold">fortalecer</span> el modelo de <span class="text-green font-bold">suministro</span></h2>
+            <p class="slide-text">
+              Durante los <strong class="text-black font-bold">años 80</strong>, aceleramos la profesionalización: en <strong class="text-black font-bold">1983</strong> realizamos una <strong class="text-black font-bold">adquisición estratégica</strong> sobre la manera de obtener la fibra, la base de nuestros productos, abriendo la abastecedora que reforzó el <strong class="text-black font-bold">modelo de suministro</strong>.
+            </p>
+          </div>
+          <div class="illustration-section vector-container">
+            <!-- Fiber recycling illustration -->
+            <svg class="vector-svg" viewBox="0 0 1119 531" xmlns="http://www.w3.org/2000/svg">
+              <path d="M560,100 A120,120 0 1,1 440,220 L420,190 M440,220 L470,210" fill="none" stroke="#5f9d2f" stroke-width="6" class="recycle-loop" />
+              <path d="M560,100 A120,120 0 0,0 680,220 L700,190 M680,220 L650,210" fill="none" stroke="#5f9d2f" stroke-width="6" class="recycle-loop" />
+              <rect x="500" y="170" width="120" height="100" rx="10" fill="#e8dbcc" stroke="#6e6e6e" stroke-width="3" />
+              <line x1="500" y1="203" x2="620" y2="203" stroke="#5f9d2f" stroke-width="4" />
+              <line x1="500" y1="236" x2="620" y2="236" stroke="#5f9d2f" stroke-width="4" />
+              <text x="560" y="320" text-anchor="middle" fill="#6e6e6e" font-family="Outfit" font-size="20px" font-weight="700">FIBRA 100% RECICLADA</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 1985 -->
+        <div class="timeline-slide" data-year="1985">
+          <div class="info-section">
+            <h2 class="slide-title">Creación del <span class="text-green font-bold">corporativo</span> | Estructuración de gobierno corporativo y estandarización de <span class="text-green font-bold">prácticas operativas</span>.</h2>
+            <p class="slide-text">
+              En <strong class="text-black font-bold">1985</strong> formalizamos el Corporativo, fortaleciendo gobernanza y estándares operativos en toda la organización.
+            </p>
+          </div>
+          <div class="illustration-section vector-container">
+            <!-- Corporate administration illustration -->
+            <svg class="vector-svg" viewBox="0 0 1119 531" xmlns="http://www.w3.org/2000/svg">
+              <rect x="410" y="140" width="300" height="250" rx="8" fill="#edf0f5" stroke="#6e6e6e" stroke-width="4" />
+              <g fill="#ffffff" stroke="#6e6e6e" stroke-width="2">
+                <rect x="440" y="170" width="40" height="30" />
+                <rect x="510" y="170" width="40" height="30" />
+                <rect x="580" y="170" width="40" height="30" />
+                <rect x="650" y="170" width="40" height="30" />
+                <rect x="440" y="230" width="40" height="30" />
+                <rect x="510" y="230" width="40" height="30" />
+                <rect x="580" y="230" width="40" height="30" />
+                <rect x="650" y="230" width="40" height="30" />
+                <rect x="440" y="290" width="40" height="30" />
+                <rect x="510" y="290" width="40" height="30" />
+                <rect x="580" y="290" width="40" height="30" />
+                <rect x="650" y="290" width="40" height="30" />
+              </g>
+              <circle cx="710" cy="140" r="40" fill="#5f9d2f" stroke="#ffffff" stroke-width="4" />
+              <path d="M690,140 L705,155 L735,125" fill="none" stroke="#ffffff" stroke-width="5" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2003 -->
+        <div class="timeline-slide" data-year="2003">
+          <div class="info-section">
+            <h2 class="slide-title"><span class="text-green font-bold">Apertura de planta Toluca</span> inicio de operaciones (proyecto greenfield)</h2>
+            <p class="slide-text">
+              En la década de <span class="text-green font-bold">2000</span>, escalamos capacidad con proyectos <span class="text-green font-bold">greenfield/brownfield: Planta Toluca (2003)</span>.
+            </p>
+          </div>
+          <div class="illustration-section photo-container">
+            <div class="photo-frame">
+              <img src="planta_toluca.png" alt="Planta Toluca" class="slide-photo">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2009 -->
+        <div class="timeline-slide" data-year="2009">
+          <div class="info-section">
+            <h2 class="slide-title">y la <span class="text-green font-bold">construcción de Abastecimientos Toluca (2009)</span></h2>
+            <p class="slide-text">
+              En la década de <span class="text-green font-bold">2000</span>, escalamos capacidad con la construcción de la planta corrugadora de Toluca y su centro de abastecimiento.
+            </p>
+          </div>
+          <div class="illustration-section map-container">
+            <svg class="map-svg" viewBox="0 0 1107 623" xmlns="http://www.w3.org/2000/svg">
+              <path d="M200,100 L900,100 L950,500 L150,500 Z" fill="#edf0f5" stroke="#edf0f5" stroke-width="4" />
+              <circle cx="550" cy="300" r="14" fill="#6e6e6e" stroke="#ffffff" stroke-width="3" />
+              <text x="550" y="270" text-anchor="middle" fill="#6e6e6e" font-family="Outfit" font-size="16px" font-weight="700">Ecatepec</text>
+              <line x1="550" y1="300" x2="350" y2="380" stroke="#5f9d2f" stroke-width="4" />
+              <circle cx="350" cy="380" r="10" fill="#5f9d2f" stroke="#ffffff" stroke-width="3" class="node-pulse" />
+              <text x="350" y="415" text-anchor="middle" fill="#5f9d2f" font-family="Outfit" font-size="16px" font-weight="700">Toluca (2009)</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2011 -->
+        <div class="timeline-slide" data-year="2011">
+          <div class="info-section">
+            <h2 class="slide-title">más tarde ampliamos cobertura con <span class="text-green font-bold">Abastecimientos Cuautitlán (2011),</span></h2>
+            <p class="slide-text">
+              En 2011 integramos el centro de Cuautitlán, expandiendo el acopio de materia prima.
+            </p>
+          </div>
+          <div class="illustration-section map-container">
+            <svg class="map-svg" viewBox="0 0 1107 623" xmlns="http://www.w3.org/2000/svg">
+              <path d="M200,100 L900,100 L950,500 L150,500 Z" fill="#edf0f5" stroke="#edf0f5" stroke-width="4" />
+              <circle cx="550" cy="300" r="14" fill="#6e6e6e" stroke="#ffffff" stroke-width="3" />
+              <text x="550" y="270" text-anchor="middle" fill="#6e6e6e" font-family="Outfit" font-size="16px" font-weight="700">Ecatepec</text>
+              <!-- Toluca -->
+              <line x1="550" y1="300" x2="350" y2="380" stroke="#5f9d2f" stroke-width="4" opacity="0.5" />
+              <circle cx="350" cy="380" r="8" fill="#5f9d2f" stroke="#ffffff" stroke-width="2" />
+              <!-- Cuautitlan -->
+              <line x1="550" y1="300" x2="520" y2="180" stroke="#5f9d2f" stroke-width="4" />
+              <circle cx="520" cy="180" r="10" fill="#5f9d2f" stroke="#ffffff" stroke-width="3" class="node-pulse" />
+              <text x="520" y="150" text-anchor="middle" fill="#5f9d2f" font-family="Outfit" font-size="16px" font-weight="700">Cuautitlán (2011)</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2013 -->
+        <div class="timeline-slide" data-year="2013">
+          <div class="info-section">
+            <h2 class="slide-title"><span class="text-green font-bold">Puebla (2013)</span></h2>
+            <p class="slide-text">
+              Ampliamos nuestra cobertura logística y de suministro con la sucursal de Puebla en 2013.
+            </p>
+          </div>
+          <div class="illustration-section map-container">
+            <svg class="map-svg" viewBox="0 0 1107 623" xmlns="http://www.w3.org/2000/svg">
+              <path d="M200,100 L900,100 L950,500 L150,500 Z" fill="#edf0f5" stroke="#edf0f5" stroke-width="4" />
+              <circle cx="550" cy="300" r="14" fill="#6e6e6e" stroke="#ffffff" stroke-width="3" />
+              <text x="550" y="270" text-anchor="middle" fill="#6e6e6e" font-family="Outfit" font-size="16px" font-weight="700">Ecatepec</text>
+              <!-- Existing -->
+              <line x1="550" y1="300" x2="350" y2="380" stroke="#5f9d2f" stroke-width="4" opacity="0.5" />
+              <circle cx="350" cy="380" r="8" fill="#5f9d2f" stroke="#ffffff" stroke-width="2" />
+              <line x1="550" y1="300" x2="520" y2="180" stroke="#5f9d2f" stroke-width="4" opacity="0.5" />
+              <circle cx="520" cy="180" r="8" fill="#5f9d2f" stroke="#ffffff" stroke-width="2" />
+              <!-- Puebla -->
+              <line x1="550" y1="300" x2="720" y2="350" stroke="#5f9d2f" stroke-width="4" />
+              <circle cx="720" cy="350" r="10" fill="#5f9d2f" stroke="#ffffff" stroke-width="3" class="node-pulse" />
+              <text x="720" y="385" text-anchor="middle" fill="#5f9d2f" font-family="Outfit" font-size="16px" font-weight="700">Puebla (2013)</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2014 -->
+        <div class="timeline-slide" data-year="2014">
+          <div class="info-section">
+            <h2 class="slide-title">y <span class="text-green font-bold">Querétaro (2014).</span></h2>
+            <p class="slide-text">
+              Establecimos Abastecimientos Querétaro para liderar el suministro de fibra en el Bajío.
+            </p>
+          </div>
+          <div class="illustration-section map-container">
+            <svg class="map-svg" viewBox="0 0 1107 623" xmlns="http://www.w3.org/2000/svg">
+              <path d="M200,100 L900,100 L950,500 L150,500 Z" fill="#edf0f5" stroke="#edf0f5" stroke-width="4" />
+              <circle cx="550" cy="300" r="14" fill="#6e6e6e" stroke="#ffffff" stroke-width="3" />
+              <text x="550" y="270" text-anchor="middle" fill="#6e6e6e" font-family="Outfit" font-size="16px" font-weight="700">Ecatepec</text>
+              <!-- Existing -->
+              <line x1="550" y1="300" x2="350" y2="380" stroke="#5f9d2f" stroke-width="4" opacity="0.5" />
+              <circle cx="350" cy="380" r="8" fill="#5f9d2f" stroke="#ffffff" stroke-width="2" />
+              <line x1="550" y1="300" x2="520" y2="180" stroke="#5f9d2f" stroke-width="4" opacity="0.5" />
+              <circle cx="520" cy="180" r="8" fill="#5f9d2f" stroke="#ffffff" stroke-width="2" />
+              <line x1="550" y1="300" x2="720" y2="350" stroke="#5f9d2f" stroke-width="4" opacity="0.5" />
+              <circle cx="720" cy="350" r="8" fill="#5f9d2f" stroke="#ffffff" stroke-width="2" />
+              <!-- Queretaro -->
+              <line x1="550" y1="300" x2="340" y2="200" stroke="#5f9d2f" stroke-width="4" />
+              <circle cx="340" cy="200" r="10" fill="#5f9d2f" stroke="#ffffff" stroke-width="3" class="node-pulse" />
+              <text x="340" y="170" text-anchor="middle" fill="#5f9d2f" font-family="Outfit" font-size="16px" font-weight="700">Querétaro (2014)</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2015 -->
+        <div class="timeline-slide" data-year="2015">
+          <div class="info-section">
+            <h2 class="slide-title">Apertura de <span class="text-green font-bold">planta Hidalgo</span>, Molino de clase mundial consolida liderazgo en <span class="text-green font-bold">papel 100% reciclado</span>.</h2>
+            <p class="slide-text">
+              El <strong class="text-black font-bold">salto tecnológico</strong> llegó con la <strong class="text-black font-bold">Planta Papel Hidalgo (2015)</strong>, invertimos en un <strong class="text-black font-bold">molino de clase mundial</strong> que consolidó nuestro liderazgo en <strong class="text-black font-bold">papel 100% reciclado.</strong>
+            </p>
+          </div>
+          <div class="illustration-section photo-container">
+            <div class="photo-frame">
+              <img src="planta_hidalgo.png" alt="Planta Hidalgo" class="slide-photo">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2021 -->
+        <div class="timeline-slide" data-year="2021">
+          <div class="info-section">
+            <h2 class="slide-title">Lanzamiento <span class="text-green font-bold">WOWPAK</span> , Inicio de operación de <span class="text-green font-bold">impresión digital</span> (alta gráfica y diferenciación en punto de venta).</h2>
+            <p class="slide-text">
+              Posteriormente, se inauguró la <strong class="text-black font-bold">Planta de empaque digital en el 2021</strong>, donde dimos el salto de solo salvaguardar productos a generar diferenciación en punto de venta con impresión en alta grafica.
+            </p>
+          </div>
+          <div class="illustration-section vector-container">
+            <!-- Printing packaging vector box -->
+            <svg class="vector-svg" viewBox="0 0 1107 623" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="350,450 550,480 550,330 350,300" fill="#d5d9e0" stroke="#6e6e6e" stroke-width="3" />
+              <polygon points="550,480 750,450 750,300 550,330" fill="#edf0f5" stroke="#6e6e6e" stroke-width="3" />
+              <polygon points="350,300 550,330 750,300 550,270" fill="#fdfdfd" stroke="#6e6e6e" stroke-width="3" />
+              <line x1="300" y1="350" x2="800" y2="350" stroke="red" stroke-width="2" class="laser-beam" />
+              <text x="550" y="390" text-anchor="middle" fill="#5f9d2f" font-family="Outfit" font-size="36px" font-weight="900" letter-spacing="2">WOWPAK</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2023 -->
+        <div class="timeline-slide" data-year="2023">
+          <div class="info-section">
+            <h2 class="slide-title">Adquisición de <span class="text-green font-bold">planta de energía</span> cogeneración <span class="text-green font-bold">Hidalgo.</span></h2>
+            <p class="slide-text">
+              En <strong class="text-black font-bold">2023</strong>, la <strong class="text-black font-bold">adquisición de una planta de energía</strong> y la <strong class="text-black font-bold">puesta en marcha de Corrugado Hidalgo</strong> impulsaron <strong class="text-black font-bold">eficiencia, capacity y resiliencia energética</strong>, habilitando crecimientos con <strong class="text-black font-bold">mejores costos totales y tiempos confiables</strong> para nuestros clientes.
+            </p>
+          </div>
+          <div class="illustration-section vector-container">
+            <svg class="vector-svg" viewBox="0 0 1107 623" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(550, 250)">
+                <line x1="0" y1="0" x2="0" y2="180" stroke="#6e6e6e" stroke-width="8" />
+                <g class="turbine-blades">
+                  <circle cx="0" cy="0" r="14" fill="#5f9d2f" />
+                  <path d="M0,0 L0,-110 C10,-80 10,-30 0,0" fill="#5f9d2f" />
+                  <path d="M0,0 L95,55 C70,45 20,10 0,0" fill="#5f9d2f" />
+                  <path d="M0,0 L-95,55 C-70,45 -20,10 0,0" fill="#5f9d2f" />
+                </g>
+              </g>
+              <polygon points="250,420 380,420 360,370 280,370" fill="#3b5066" stroke="#6e6e6e" stroke-width="2" />
+              <polygon points="720,420 850,420 830,370 750,370" fill="#3b5066" stroke="#6e6e6e" stroke-width="2" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2024 -->
+        <div class="timeline-slide" data-year="2024">
+          <div class="info-section">
+            <h2 class="slide-title">Inicio de <span class="text-green font-bold">operaciones de Corrugado</span> Hidalgo.</h2>
+            <p class="slide-text">
+              Nuestro objetivo <strong class="text-black font-bold">trasciende</strong> la simple producción de papel, cajas, empaques, laminas y embalajes de cartón corrugado de alta calidad, ya que integramos la innovación, la sustentabilidad y el cuidado del medio ambiente como pilares fundamentales de su operación. Mediante un enfoque basado en la <strong class="text-black font-bold">economía circular</strong>, la compañía ha logrado minimizar el desperdicio de recursos y la generación de residuos sólidos, incorporando en productos como papel y cartón convencional, <strong class="text-black font-bold">fibra 100% de origen posconsumo</strong>. Esta estrategia ha fortalecido su posicionamiento en el sector del empaque, donde destaca por su capacidad de recolección de fibra reciclada y por contar con procesos de producción eficientes y de calidad superior.
+            </p>
+          </div>
+          <div class="illustration-section vector-container">
+            <svg class="vector-svg" viewBox="0 0 1107 623" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="550" cy="280" r="160" fill="none" stroke="#e8eaf0" stroke-width="8" />
+              <circle cx="550" cy="280" r="160" fill="none" stroke="#5f9d2f" stroke-width="8" stroke-dasharray="100 100" class="circular-loop-active" />
+              <g transform="translate(550, 120)">
+                <circle cx="0" cy="0" r="30" fill="#ffffff" stroke="#5f9d2f" stroke-width="4" />
+                <text x="0" y="8" text-anchor="middle" font-size="28px">♻</text>
+              </g>
+              <g transform="translate(710, 280)">
+                <circle cx="0" cy="0" r="30" fill="#ffffff" stroke="#5f9d2f" stroke-width="4" />
+                <text x="0" y="8" text-anchor="middle" font-size="28px">🏭</text>
+              </g>
+              <g transform="translate(390, 280)">
+                <circle cx="0" cy="0" r="30" fill="#ffffff" stroke="#5f9d2f" stroke-width="4" />
+                <text x="0" y="8" text-anchor="middle" font-size="28px">📦</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Scrollbar progress indicator (Figma: bg-[#5f9d2f] h-[124px] left-[1803px] top-[13px] w-[15px]) -->
+      <div class="timeline-scrollbar-indicator" id="scrollbar-indicator"></div>
+
+      <!-- Bottom controls & navigation (arrow buttons + index) -->
+      <div class="footer-navigation">
+        <button class="footer-btn" id="prev-btn" aria-label="Año anterior">
+          <svg viewBox="0 0 24 24" width="28" height="28">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="index-indicator">
+          <span id="current-slide">1</span> / <span id="total-slides">14</span>
+        </div>
+        <button class="footer-btn" id="next-btn" aria-label="Año siguiente">
+          <svg viewBox="0 0 24 24" width="28" height="28">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
