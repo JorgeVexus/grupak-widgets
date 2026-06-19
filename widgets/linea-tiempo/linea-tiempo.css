@@ -615,6 +615,85 @@
   transition-delay: 0.5s;
 }
 
+/* 2003 Slide Animations (vector + photo reveal like 1962) */
+#gpk-timeline-widget .photo-container-2003 {
+  position: absolute;
+  left: 0;
+  top: 414px;
+  width: 1119px;
+  height: 531px;
+}
+
+#gpk-timeline-widget .photo-wrapper-2003 {
+  position: relative;
+  width: 1024px;
+  height: 485px;
+  margin: 0 auto;
+}
+
+#gpk-timeline-widget .photo-img-2003 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1024px;
+  height: 485px;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+#gpk-timeline-widget .vector-img-2003 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1024px;
+  height: 485px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* 2003 Text Slide-In From Bottom */
+#gpk-timeline-widget .timeline-slide[data-year="2003"] .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2009"] .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2011"] .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2013"] .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2014"] .info-section {
+  transform: translateY(80px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2003"].active .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2009"].active .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2011"].active .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2013"].active .info-section,
+#gpk-timeline-widget .timeline-slide[data-year="2014"].active .info-section {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Trigger 2003-2014 Image Animations */
+#gpk-timeline-widget .timeline-slide[data-year="2003"].active .vector-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2009"].active .vector-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2011"].active .vector-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2013"].active .vector-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2014"].active .vector-img-2003 {
+  opacity: 1;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2003"].active .photo-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2009"].active .photo-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2011"].active .photo-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2013"].active .photo-img-2003,
+#gpk-timeline-widget .timeline-slide[data-year="2014"].active .photo-img-2003 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.5s;
+}
+
 #gpk-timeline-widget .map-container {
   top: 351px;
   width: 1107px;
