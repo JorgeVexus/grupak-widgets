@@ -2927,7 +2927,8 @@
         transition: none !important;
     }
 
-    #gpk-products-widget .cajas-column {
+    #gpk-products-widget .cajas-column,
+    #gpk-products-widget .cajas-text-container {
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
     }
 
@@ -2958,40 +2959,55 @@
 
     #gpk-products-widget .cajas-image-container {
         width: 100% !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
         opacity: 1 !important;
         transform: none !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        margin-bottom: 24px !important;
     }
 
     #gpk-products-widget .cajas-main-image {
-        max-height: 280px;
-        width: auto;
-        object-fit: contain;
+        max-height: 180px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 !important;
     }
 
     #gpk-products-widget .cajas-detail-title {
-        font-size: 28px !important;
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
         text-align: left !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 12px !important;
+        line-height: 1.25 !important;
         opacity: 1 !important;
         transform: none !important;
     }
 
     #gpk-products-widget .cajas-green-line {
-        width: 100px !important;
+        width: 60px !important;
         height: 3px !important;
-        margin-bottom: 16px !important;
+        background-color: var(--color-green) !important;
+        margin: 12px 0 !important;
         opacity: 1 !important;
         transform: none !important;
+        border-radius: 1.5px !important;
     }
 
     #gpk-products-widget .cajas-paragraph-1,
     #gpk-products-widget .cajas-paragraph-2 {
-        font-size: 16px !important;
+        font-size: 14px !important;
         line-height: 1.45 !important;
-        margin-bottom: 16px !important;
+        color: var(--color-grey-medium) !important;
+        margin-bottom: 12px !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
@@ -3088,58 +3104,79 @@
 
     /* Mobile styles for new digital content (Screen 05) */
     #gpk-products-widget .digital-content-wrapper {
-        flex-direction: column !important;
-        gap: 30px !important;
+        flex-direction: column-reverse !important;
+        gap: 0px !important;
         align-items: stretch !important;
     }
 
     #gpk-products-widget .digital-text-content {
         width: 100% !important;
-        background-color: var(--color-white);
-        padding: 24px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        padding: 24px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+        box-sizing: border-box !important;
     }
 
     #gpk-products-widget .digital-subtitle {
-        font-size: 24px !important;
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
         text-align: left !important;
         margin-bottom: 12px !important;
+        line-height: 1.25 !important;
         opacity: 1 !important;
         transform: none !important;
     }
 
     #gpk-products-widget .digital-green-line {
-        width: 100px !important;
+        width: 60px !important;
         height: 3px !important;
-        margin-bottom: 16px !important;
+        background-color: var(--color-green) !important;
+        margin: 12px 0 !important;
         opacity: 1 !important;
         transform: none !important;
+        border-radius: 1.5px !important;
     }
 
     #gpk-products-widget .digital-paragraph-1,
     #gpk-products-widget .digital-paragraph-2 {
-        font-size: 16px !important;
+        font-size: 14px !important;
         line-height: 1.45 !important;
-        margin-bottom: 16px !important;
+        color: var(--color-grey-medium) !important;
+        margin-bottom: 12px !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
     }
 
+    #gpk-products-widget .digital-paragraph-2 {
+        margin-bottom: 0 !important;
+    }
+
     #gpk-products-widget .digital-image-container {
         width: 100% !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
         opacity: 1 !important;
         transform: none !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        margin-bottom: 24px !important;
     }
 
     #gpk-products-widget .digital-main-image {
-        max-height: 320px !important;
+        max-height: 180px !important;
         width: auto !important;
         object-fit: contain !important;
+        display: block !important;
+        margin: 0 !important;
     }
 
     /* Mobile styles for new papel content (Screen 06) */
@@ -3147,25 +3184,36 @@
         position: static !important;
         transform: none !important;
         opacity: 1 !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
         display: flex !important;
         justify-content: center !important;
-        margin-bottom: 20px !important;
+        align-items: center !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        margin-bottom: 24px !important;
+        width: 100% !important;
     }
 
     #gpk-products-widget .papel-main-image {
-        max-width: 100% !important;
-        max-height: 350px !important;
+        max-height: 180px !important;
         width: auto !important;
         object-fit: contain !important;
+        display: block !important;
+        margin: 0 !important;
     }
 
     #gpk-products-widget .papel-shared-title {
         position: static !important;
         transform: none !important;
         opacity: 1 !important;
-        font-size: 32px !important;
-        text-align: center !important;
-        margin-bottom: 30px !important;
+        font-size: 36px !important;
+        letter-spacing: -1px !important;
+        text-align: left !important;
+        color: var(--color-grey-medium) !important;
+        margin-bottom: 24px !important;
         white-space: normal !important;
     }
 
@@ -3185,76 +3233,107 @@
         width: 100% !important;
         opacity: 1 !important;
         transform: none !important;
-        background-color: var(--color-white);
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        padding: 24px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
     }
 
     #gpk-products-widget .papel-text-block p {
-        font-size: 15px !important;
-        line-height: 1.5 !important;
-        color: var(--color-grey-dark) !important;
+        font-size: 14px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
+        margin: 0 !important;
     }
 
     /* Mobile styles for new papel grid content (Screen 07) */
     #gpk-products-widget .papel-products-grid {
         margin-top: 0 !important;
-    }
-
-    #gpk-products-widget .papel-products-grid {
         grid-template-columns: 1fr !important;
-        gap: 20px !important;
+        gap: 24px !important;
     }
 
     #gpk-products-widget .product-card {
         flex-direction: column !important;
         opacity: 1 !important;
         transform: none !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
     }
 
     #gpk-products-widget .product-image {
         flex: 0 0 auto !important;
         width: 100% !important;
-        height: 200px !important;
+        height: auto !important;
+        background-color: transparent !important;
+        padding: 16px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
     #gpk-products-widget .product-img {
-        max-height: 200px !important;
+        max-height: 180px !important;
+        width: auto !important;
+        object-fit: contain !important;
     }
 
     #gpk-products-widget .product-info {
-        padding: 20px !important;
+        padding: 24px !important;
+        text-align: left !important;
     }
 
     #gpk-products-widget .product-name {
         font-size: 22px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
         margin-bottom: 8px !important;
     }
 
     #gpk-products-widget .product-subtitle {
         font-size: 13px !important;
-        margin-bottom: 10px !important;
+        font-weight: 500 !important;
+        color: var(--color-green) !important;
+        margin-bottom: 12px !important;
     }
 
     #gpk-products-widget .product-desc {
         font-size: 14px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
         margin-bottom: 16px !important;
     }
 
     #gpk-products-widget .product-uses {
-        padding-top: 12px !important;
+        border-top: 1px solid rgba(227, 229, 233, 0.7) !important;
+        padding-top: 16px !important;
     }
 
     #gpk-products-widget .uses-bubble {
-        font-size: 12px !important;
-        padding: 6px 12px !important;
+        background-color: rgba(95, 157, 47, 0.1) !important;
+        color: var(--color-green) !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        padding: 4px 10px !important;
+        border-radius: 20px !important;
+        display: inline-block !important;
+        margin-bottom: 8px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
         opacity: 1 !important;
         transform: none !important;
     }
 
     #gpk-products-widget .uses-text {
         font-size: 13px !important;
+        line-height: 1.4 !important;
+        color: var(--color-grey-medium) !important;
         opacity: 1 !important;
         transform: none !important;
     }
@@ -3272,6 +3351,16 @@
         padding: 0 !important;
     }
 
+    #gpk-products-widget .laminas-main-title {
+        font-size: 36px !important;
+        letter-spacing: -1px !important;
+        text-align: left !important;
+        color: var(--color-grey-medium) !important;
+        margin-bottom: 24px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
     #gpk-products-widget .laminas-intro-text {
         flex-direction: column !important;
         gap: 24px !important;
@@ -3280,25 +3369,35 @@
     #gpk-products-widget .laminas-intro-left,
     #gpk-products-widget .laminas-intro-right {
         width: 100% !important;
-        background-color: var(--color-white);
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        padding: 24px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+        box-sizing: border-box !important;
     }
 
     #gpk-products-widget .laminas-intro-left p,
     #gpk-products-widget .laminas-intro-right p {
-        font-size: 15px !important;
-        line-height: 1.5 !important;
+        font-size: 14px !important;
+        line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget .laminas-wavy-line {
+        display: none !important;
     }
 
     #gpk-products-widget .laminas-cards-grid-new {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+        position: static !important;
         margin-top: 0 !important;
     }
 
@@ -3306,29 +3405,50 @@
         flex-direction: column !important;
         opacity: 1 !important;
         transform: none !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        padding: 24px !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        align-items: center !important;
     }
 
     #gpk-products-widget .laminas-card-image {
         width: 100% !important;
-        height: 200px !important;
+        height: auto !important;
+        background-color: transparent !important;
+        padding: 0 !important;
+        margin-bottom: 16px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
     #gpk-products-widget .laminas-card-img {
-        max-height: 200px !important;
+        max-height: 180px !important;
+        width: auto !important;
+        object-fit: contain !important;
     }
 
     #gpk-products-widget .laminas-card-info {
-        padding: 20px !important;
+        padding: 0 !important;
+        text-align: center !important;
     }
 
     #gpk-products-widget .laminas-card-title {
         font-size: 22px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
         margin-bottom: 8px !important;
+        line-height: 1.25 !important;
     }
 
     #gpk-products-widget .laminas-card-desc {
         font-size: 14px !important;
-        line-height: 1.5 !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
     }
 
     /* Mobile scroll fade-in animation system */
