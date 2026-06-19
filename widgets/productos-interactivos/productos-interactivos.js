@@ -76,28 +76,7 @@
         function goToSlide(index) {
             if (index < 0 || index >= totalSlides) return;
 
-            if (window.innerWidth <= 1024) {
-                // Mobile stacked fallback: Scroll to section
-                const selectors = [
-                    "#intro-pane",
-                    "#overview-pane",
-                    "#pane-cajas",
-                    "#cajas-convencionales-content",
-                    "#cajas-digital-content",
-                    "#pane-laminas",
-                    "#pane-papel",
-                    "#papel-grid-content",
-                    "#pane-grabados",
-                    "#pane-energia"
-                ];
-                const targetEl = root.querySelector(selectors[index]);
-                if (targetEl) {
-                    targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
-                }
-                return;
-            }
-
-            // Desktop scroll management
+            // Scroll management for both desktop and mobile
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const trackerTop = rect.top + scrollTop;
@@ -116,8 +95,6 @@
         }
 
         function handleScroll() {
-            if (window.innerWidth <= 1024) return;
-
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const trackerTop = rect.top + scrollTop;
@@ -207,39 +184,6 @@
             });
         }
 
-        // --- Mobile Intersection Observer ---
-        let mobileObserver;
-        function setupMobileObserver() {
-            if (!window.IntersectionObserver) {
-                root.querySelectorAll(".fade-in-on-scroll").forEach(el => el.classList.add("in-view"));
-                return;
-            }
-
-            mobileObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("in-view");
-                    }
-                });
-            }, {
-                root: null,
-                rootMargin: "0px 0px -12% 0px",
-                threshold: 0.05
-            });
-
-            root.querySelectorAll(".fade-in-on-scroll").forEach(el => {
-                el.classList.remove("in-view");
-                mobileObserver.observe(el);
-            });
-        }
-
-        function disconnectMobileObserver() {
-            if (mobileObserver) {
-                mobileObserver.disconnect();
-                mobileObserver = null;
-            }
-        }
-
         // --- Setup Events ---
         function setupEvents() {
             prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
@@ -266,29 +210,12 @@
                 }
             });
 
-            let isMobile = window.innerWidth <= 1024;
             window.addEventListener("resize", () => {
-                const wasMobile = isMobile;
-                isMobile = window.innerWidth <= 1024;
-
                 scaleBoard();
                 updateUI();
-
-                if (isMobile && !wasMobile) {
-                    window.removeEventListener("scroll", handleScroll);
-                    setupMobileObserver();
-                } else if (!isMobile && wasMobile) {
-                    disconnectMobileObserver();
-                    window.addEventListener("scroll", handleScroll, { passive: true });
-                    root.querySelectorAll(".fade-in-on-scroll").forEach(el => el.classList.remove("in-view"));
-                }
             });
 
-            if (window.innerWidth > 1024) {
-                window.addEventListener("scroll", handleScroll, { passive: true });
-            } else {
-                setupMobileObserver();
-            }
+            window.addEventListener("scroll", handleScroll, { passive: true });
         }
 
         // --- Initialize ---
@@ -297,9 +224,7 @@
             scaleBoard();
             setupEvents();
 
-            if (window.innerWidth > 1024) {
-                handleScroll();
-            }
+            handleScroll();
             setTimeout(updateUI, 100);
         }
 

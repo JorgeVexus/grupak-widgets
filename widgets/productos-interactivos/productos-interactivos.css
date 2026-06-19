@@ -2530,33 +2530,61 @@
     }
 
     #gpk-products-widget .products-scroll-tracker {
-        height: auto !important;
-        position: static !important;
+        height: 1000vh !important;
+        position: relative !important;
+        width: 100% !important;
     }
 
     #gpk-products-widget .products-viewport {
-        height: auto !important;
         width: 100% !important;
-        display: block !important;
-        overflow: visible !important;
-        position: static !important;
+        height: 100vh !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background-color: var(--color-grey-light) !important;
+        overflow: hidden !important;
+        position: sticky !important;
+        top: 0 !important;
     }
 
     #gpk-products-widget .products-board {
         width: 100% !important;
-        height: auto !important;
+        height: 100vh !important;
+        background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a30809b91c301774f05b899_fondo.svg') !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-color: var(--color-grey-light) !important;
+        position: relative !important;
+        overflow: hidden !important;
+        transform-origin: center center !important;
+        flex-shrink: 0 !important;
         transform: none !important;
-        padding: 40px 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 50px;
-        background-color: var(--color-grey-light);
+        transition: none !important;
+        padding: 0 !important;
+        display: block !important;
     }
 
     #gpk-products-widget .bg-decor-container,
-    #gpk-products-widget .floating-pillars-container,
-    #gpk-products-widget .products-nav-footer {
+    #gpk-products-widget .floating-pillars-container {
         display: none !important;
+    }
+
+    #gpk-products-widget .products-nav-footer {
+        display: flex !important;
+        position: absolute !important;
+        bottom: 16px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        background-color: var(--color-white) !important;
+        border-radius: 40px !important;
+        padding: 6px 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+        z-index: 1000 !important;
+        width: auto !important;
+        margin: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     #gpk-products-widget .mobile-only {
@@ -2569,38 +2597,47 @@
         display: none !important;
     }
 
-    #gpk-products-widget .products-intro-pane {
-        position: static !important;
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto !important;
-        padding: 0 !important;
-        height: auto !important;
+    /* Absolute Panes Base Layout on Mobile */
+    #gpk-products-widget .products-intro-pane,
+    #gpk-products-widget .products-overview-pane,
+    #gpk-products-widget .details-pane {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 24px 20px 80px 20px !important;
+        box-sizing: border-box !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 0px !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
+        background-color: transparent !important;
+        opacity: 0 !important;
+        transform: translateY(30px) !important;
+        pointer-events: none !important;
+        transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
     }
 
-    #gpk-products-widget .intro-title {
-        font-size: 42px;
-        letter-spacing: -1px;
+    /* Slide 0: Intro Pane */
+    #gpk-products-widget .products-intro-pane {
+        overflow-y: auto !important;
+        justify-content: flex-start !important;
+        gap: 16px !important;
     }
 
-    #gpk-products-widget .intro-subtitle {
-        font-size: 16px;
-    }
-
-    #gpk-products-widget .intro-kpis-grid {
-        flex-direction: column;
-        gap: 20px;
+    #gpk-products-widget .products-board.mode-0 .products-intro-pane {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
     }
 
     #gpk-products-widget .intro-title-new {
-        font-size: 28px !important;
+        font-size: 20px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         line-height: 1.25 !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 8px !important;
         max-width: 100% !important;
         text-align: left !important;
     }
@@ -2610,33 +2647,34 @@
         background-color: var(--color-white) !important;
         border: 1px solid #e3e5e9 !important;
         border-radius: 12px !important;
-        padding: 16px !important;
+        padding: 12px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 8px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
     }
 
     #gpk-products-widget .intro-mobile-img {
-        width: 100% !important;
-        height: auto !important;
+        max-height: 130px !important;
+        width: auto !important;
         object-fit: contain !important;
         display: block !important;
         margin: 0 !important;
     }
 
     #gpk-products-widget .intro-mobile-desc {
-        font-size: 15px !important;
-        line-height: 1.5 !important;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
-        margin-bottom: 32px !important;
+        margin-bottom: 12px !important;
         text-align: left !important;
     }
 
     #gpk-products-widget .intro-kpis-grid-new {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 16px !important;
+        gap: 12px !important;
         margin-top: 0 !important;
         width: 100% !important;
     }
@@ -2645,7 +2683,7 @@
         background-color: var(--color-white) !important;
         border: 1px solid #e3e5e9 !important;
         border-radius: 8px !important;
-        padding: 24px 16px !important;
+        padding: 12px 8px !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
@@ -2656,228 +2694,250 @@
 
     #gpk-products-widget .kpi-line-new {
         order: 1 !important;
-        margin: 0 auto 12px auto !important;
-        width: 40px !important;
-        height: 3px !important;
+        margin: 0 auto 8px auto !important;
+        width: 30px !important;
+        height: 2px !important;
         background-color: var(--color-green) !important;
     }
 
     #gpk-products-widget .kpi-number-new {
         order: 2 !important;
-        font-size: 32px !important;
+        font-size: 24px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 4px !important;
         line-height: 1 !important;
     }
 
     #gpk-products-widget .kpi-label-top {
         order: 3 !important;
-        font-size: 13px !important;
+        font-size: 11px !important;
         font-weight: 700 !important;
         color: var(--color-green) !important;
         text-transform: uppercase !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 2px !important;
         line-height: 1.2 !important;
     }
 
     #gpk-products-widget .kpi-label-bottom {
         order: 4 !important;
-        font-size: 12px !important;
+        font-size: 10px !important;
         color: var(--color-grey-medium) !important;
-        line-height: 1.3 !important;
+        line-height: 1.2 !important;
     }
 
-       /* Mobile 4-Column Overview Overrides */
-       #gpk-products-widget .products-overview-pane {
-           position: static !important;
-           opacity: 1 !important;
-           transform: none !important;
-           pointer-events: auto !important;
-           padding: 0 !important;
-           height: auto !important;
-           display: flex !important;
-           flex-direction: column !important;
-           gap: 40px !important;
-           margin-top: 40px !important;
-       }
+    /* Slide 1: Overview Pane */
+    #gpk-products-widget .products-overview-pane {
+        justify-content: flex-start !important;
+        gap: 16px !important;
+    }
 
-       #gpk-products-widget .overview-header {
-           margin-bottom: 20px !important;
-           opacity: 1 !important;
-           transform: none !important;
-           text-align: left !important;
-       }
+    #gpk-products-widget .products-board.mode-1 .products-overview-pane {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
 
-       #gpk-products-widget .overview-title-new {
-           font-size: 36px !important;
-           letter-spacing: -1px !important;
-           text-align: left !important;
-       }
-
-       #gpk-products-widget .overview-grid-new {
-           position: static !important;
-           width: 100% !important;
-           display: flex !important;
-           flex-direction: column !important;
-           gap: 30px !important;
-       }
-
-       #gpk-products-widget .overview-col-new {
-           opacity: 1 !important;
-           transform: none !important;
-           background-color: var(--color-white) !important;
-           padding: 30px 24px !important;
-           border-radius: 16px !important;
-           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-           border: 1px solid rgba(227, 229, 233, 0.7) !important;
-           display: flex !important;
-           flex-direction: column !important;
-           align-items: center !important;
-           text-align: center !important;
-           transition: none !important;
-       }
-
-       #gpk-products-widget .overview-col-title {
-           font-size: 22px !important;
-           color: var(--color-grey-dark) !important;
-           margin-bottom: 12px !important;
-           padding-bottom: 12px !important;
-       }
-
-       #gpk-products-widget .overview-mobile-img {
-           display: block !important;
-           width: 180px !important;
-           height: 140px !important;
-           object-fit: contain !important;
-           margin: 0 auto 16px auto !important;
-       }
-
-       #gpk-products-widget .overview-col-desc {
-           height: auto !important;
-           -webkit-line-clamp: unset !important;
-           color: var(--color-grey-medium) !important;
-           font-size: 14px !important;
-           line-height: 1.45 !important;
-           margin-bottom: 16px !important;
-       }
-
-       #gpk-products-widget .overview-col-btn {
-           width: 100% !important;
-           max-width: 200px !important;
-           border-radius: 30px !important;
-           background-color: var(--color-green) !important;
-           color: var(--color-white) !important;
-           font-size: 14px !important;
-           font-weight: 700 !important;
-           padding: 12px 24px !important;
-           margin-top: 16px !important;
-           text-align: center !important;
-       }
-
-    /* Stacked details panes on mobile */
-    #gpk-products-widget .details-pane {
-        position: static !important;
-        width: 100% !important;
-        height: auto !important;
+    #gpk-products-widget .overview-header {
+        margin-bottom: 8px !important;
         opacity: 1 !important;
         transform: none !important;
+        text-align: left !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .overview-title-new {
+        font-size: 28px !important;
+        letter-spacing: -1px !important;
+        text-align: left !important;
+        margin: 0 !important;
+    }
+
+    /* Horizontal Swiper for Overview Cards */
+    #gpk-products-widget .overview-grid-new {
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 130px !important;
+        bottom: 80px !important;
+        width: auto !important;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        padding: 10px 20px !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    #gpk-products-widget .overview-grid-new::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    #gpk-products-widget .overview-col-new {
+        flex: 0 0 280px !important;
+        scroll-snap-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        background-color: var(--color-white) !important;
+        padding: 20px 16px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        transition: none !important;
+        height: 100% !important;
+        justify-content: space-between !important;
+        box-sizing: border-box !important;
+    }
+
+    #gpk-products-widget .overview-col-title {
+        font-size: 18px !important;
+        color: var(--color-grey-dark) !important;
+        margin-bottom: 8px !important;
+        padding-bottom: 8px !important;
+    }
+
+    #gpk-products-widget .overview-col-title::after {
+        width: 40px !important;
+        height: 2px !important;
+    }
+
+    #gpk-products-widget .overview-mobile-img {
+        display: block !important;
+        width: auto !important;
+        height: 110px !important;
+        object-fit: contain !important;
+        margin: 0 auto 12px auto !important;
+    }
+
+    #gpk-products-widget .overview-col-desc {
+        height: auto !important;
+        -webkit-line-clamp: 3 !important;
+        color: var(--color-grey-medium) !important;
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 12px !important;
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    #gpk-products-widget .overview-col-btn {
+        width: 100% !important;
+        max-width: 160px !important;
+        border-radius: 30px !important;
+        background-color: var(--color-green) !important;
+        color: var(--color-white) !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        padding: 8px 16px !important;
+        margin-top: 0 !important;
+        text-align: center !important;
+    }
+
+    /* Slide 2, 3, 4: Cajas y Empaques Detail Views */
+    #gpk-products-widget .products-board.mode-2 #pane-cajas,
+    #gpk-products-widget .products-board.mode-3 #pane-cajas,
+    #gpk-products-widget .products-board.mode-4 #pane-cajas {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
         pointer-events: auto !important;
-        padding: 0 !important;
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
     }
 
     #gpk-products-widget .pane-header-centered {
         width: 100% !important;
         text-align: left !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 12px !important;
     }
 
     #gpk-products-widget .pane-title-centered {
-        opacity: 1 !important;
-        transform: none !important;
-        font-size: 36px !important;
+        font-size: 28px !important;
         letter-spacing: -1px !important;
         text-align: left !important;
         color: var(--color-grey-medium) !important;
         margin: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
     }
 
     #gpk-products-widget .cajas-mobile-hero-container {
-        width: 100% !important;
-        background-color: var(--color-white) !important;
-        border: 1px solid #e3e5e9 !important;
-        border-radius: 12px !important;
-        padding: 16px !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        margin-bottom: 24px !important;
+        display: none !important;
     }
 
-    #gpk-products-widget .cajas-mobile-hero-img {
-        max-height: 180px !important;
-        width: auto !important;
-        object-fit: contain !important;
-        display: block !important;
-        margin: 0 !important;
-    }
-
-    /* Sub-panels mobile layout details */
+    /* Sub-panels positioning inside pane-cajas */
     #gpk-products-widget .cajas-intro-content,
     #gpk-products-widget .cajas-convencionales-content,
-    #gpk-products-widget .cajas-digital-content,
-    #gpk-products-widget .papel-intro-content,
-    #gpk-products-widget .papel-grid-content {
-        position: static !important;
-        width: 100% !important;
+    #gpk-products-widget .cajas-digital-content {
+        position: absolute !important;
+        inset: 120px 20px 80px 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        opacity: 0 !important;
+        transform: translateY(20px) !important;
+        pointer-events: none !important;
+        transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        box-sizing: border-box !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: hidden !important;
+    }
+
+    /* Slide 2: Cajas intro (Two Columns as Horizontal Swiper) */
+    #gpk-products-widget .cajas-intro-content {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        padding: 10px 20px !important;
+        scrollbar-width: none !important;
+    }
+
+    #gpk-products-widget .cajas-intro-content::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    #gpk-products-widget .products-board.mode-2 .cajas-intro-content {
         opacity: 1 !important;
-        transform: none !important;
+        transform: translateY(0) !important;
         pointer-events: auto !important;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        padding: 0 !important;
     }
 
-    #gpk-products-widget .cajas-column,
-    #gpk-products-widget .info-block-right,
-    #gpk-products-widget .info-block-left,
-    #gpk-products-widget .cajas-text-container {
-        width: 100% !important;
-        text-align: left !important;
-        align-items: flex-start !important;
-        background-color: var(--color-white);
-        padding: 24px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-    }
-
-    #gpk-products-widget .cajas-column,
-    #gpk-products-widget .cajas-text-container,
-    #gpk-products-widget .cajas-image-container {
+    #gpk-products-widget .cajas-column {
+        flex: 0 0 280px !important;
+        scroll-snap-align: center !important;
+        background-color: var(--color-white) !important;
+        padding: 24px 20px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        box-sizing: border-box !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
-    }
-
-    #gpk-products-widget .cajas-column,
-    #gpk-products-widget .cajas-text-container {
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        text-align: left !important;
     }
 
     #gpk-products-widget .cajas-column h2 {
-        font-size: 22px !important;
+        font-size: 18px !important;
         color: var(--color-grey-dark) !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 8px !important;
         text-align: left !important;
         line-height: 1.25 !important;
     }
 
     #gpk-products-widget .cajas-column p {
-        font-size: 14px !important;
+        font-size: 13px !important;
         line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
         max-width: 100% !important;
@@ -2893,12 +2953,25 @@
         border-radius: 1.5px !important;
     }
 
+    /* Slide 3: Cajas Convencionales (Vertical Stack inside Pane with Vertical Scroll) */
+    #gpk-products-widget .cajas-convencionales-content {
+        overflow-y: auto !important;
+        gap: 20px !important;
+        padding: 10px 10px 40px 10px !important;
+    }
+
+    #gpk-products-widget .products-board.mode-3 .cajas-convencionales-content {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
+
     #gpk-products-widget .cajas-image-container {
         width: 100% !important;
         background-color: var(--color-white) !important;
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
         border-radius: 12px !important;
-        padding: 16px !important;
+        padding: 12px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
@@ -2906,23 +2979,33 @@
         transform: none !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
         box-sizing: border-box !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 0 !important;
     }
 
     #gpk-products-widget .cajas-main-image {
-        max-height: 180px !important;
+        max-height: 140px !important;
         width: auto !important;
         object-fit: contain !important;
         display: block !important;
         margin: 0 !important;
     }
 
+    #gpk-products-widget .cajas-text-container {
+        width: 100% !important;
+        background-color: var(--color-white) !important;
+        padding: 20px !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+        box-sizing: border-box !important;
+    }
+
     #gpk-products-widget .cajas-detail-title {
-        font-size: 22px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         text-align: left !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 4px !important;
         line-height: 1.25 !important;
         opacity: 1 !important;
         transform: none !important;
@@ -2932,7 +3015,7 @@
         width: 60px !important;
         height: 3px !important;
         background-color: var(--color-green) !important;
-        margin: 12px 0 !important;
+        margin: 8px 0 12px 0 !important;
         opacity: 1 !important;
         transform: none !important;
         border-radius: 1.5px !important;
@@ -2940,10 +3023,10 @@
 
     #gpk-products-widget .cajas-paragraph-1,
     #gpk-products-widget .cajas-paragraph-2 {
-        font-size: 14px !important;
+        font-size: 13px !important;
         line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 8px !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
@@ -2953,221 +3036,43 @@
         margin-bottom: 0 !important;
     }
 
-    #gpk-products-widget .section-detail-title {
-        font-size: 28px;
-    }
-
-    #gpk-products-widget .laminas-cards-grid {
-        margin-left: 0 !important;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    #gpk-products-widget .papel-text-card {
-        position: static !important;
-        width: 100% !important;
-    }
-
-    #gpk-products-widget .papel-subproducts-grid {
-        grid-template-columns: 1fr !important;
-        margin-left: 0 !important;
-        gap: 20px;
-    }
-
-    /* Grabados mobile overrides */
-    #gpk-products-widget .grabados-left-content {
-        position: static !important;
-        width: 100% !important;
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-        padding: 0 !important;
-    }
-
-    #gpk-products-widget .grabados-main-title {
-        font-size: 36px !important;
-        letter-spacing: -1px !important;
-        text-align: left !important;
-        color: var(--color-grey-medium) !important;
-        margin-bottom: 16px !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-
-    #gpk-products-widget .grabados-intro-text {
-        background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        border-radius: 12px !important;
-        padding: 24px !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-        box-sizing: border-box !important;
-        width: 100% !important;
-    }
-
-    #gpk-products-widget .grabados-intro-text p {
-        font-size: 14px !important;
-        line-height: 1.45 !important;
-        color: var(--color-grey-medium) !important;
-        opacity: 1 !important;
-        transform: none !important;
-        margin-bottom: 12px !important;
-    }
-
-    #gpk-products-widget .grabados-intro-text p:last-child {
-        margin-bottom: 0 !important;
-    }
-
-    #gpk-products-widget .grabados-cards-grid-new {
-        position: static !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-        width: 100% !important;
-    }
-
-    #gpk-products-widget .grabados-green-card {
-        position: static !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: auto !important;
-        background-image: none !important;
-        background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        border-radius: 16px !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-        padding: 24px !important;
-        box-sizing: border-box !important;
-        opacity: 1 !important;
-        transform: none !important;
-        text-align: left !important;
-        align-items: flex-start !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-
-    #gpk-products-widget .grabados-card-title {
-        font-size: 18px !important;
-        font-weight: 700 !important;
-        color: var(--color-grey-dark) !important;
-        margin-bottom: 8px !important;
-        line-height: 1.25 !important;
-    }
-
-    #gpk-products-widget .grabados-card-desc {
-        font-size: 14px !important;
-        line-height: 1.45 !important;
-        color: var(--color-grey-medium) !important;
-    }
-
-    #gpk-products-widget .grabados-chat-icon {
-        position: static !important;
-        margin: 20px auto 0 !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-
-    /* Energia mobile overrides */
-    #gpk-products-widget .energia-header {
-        position: static !important;
-        width: 100% !important;
-        transform: none !important;
-        opacity: 1 !important;
-        text-align: left !important;
-        margin-bottom: 24px !important;
-        pointer-events: auto !important;
-    }
-
-    #gpk-products-widget .energia-main-title {
-        font-size: 36px !important;
-        letter-spacing: -1px !important;
-        text-align: left !important;
-        color: var(--color-grey-medium) !important;
-        margin-bottom: 12px !important;
-    }
-
-    #gpk-products-widget .energia-intro-text {
-        background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        border-radius: 12px !important;
-        padding: 24px !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-        box-sizing: border-box !important;
-        font-size: 14px !important;
-        line-height: 1.45 !important;
-        color: var(--color-grey-medium) !important;
-        text-align: left !important;
-    }
-
-    #gpk-products-widget .energia-rows {
-        position: static !important;
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
+    /* Slide 4: Cajas Digital (Vertical Stack inside Pane with Vertical Scroll) */
+    #gpk-products-widget .cajas-digital-content {
+        overflow-y: auto !important;
         gap: 20px !important;
+        padding: 10px 10px 40px 10px !important;
     }
 
-    #gpk-products-widget .energia-row {
-        position: static !important;
-        width: 100% !important;
-        height: auto !important;
-        background-image: none !important;
-        background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        border-left: 5px solid var(--color-green) !important;
-        border-radius: 12px !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-        box-sizing: border-box !important;
+    #gpk-products-widget .products-board.mode-4 .cajas-digital-content {
         opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
+        transform: translateY(0) !important;
         pointer-events: auto !important;
     }
 
-    #gpk-products-widget .energia-row-content {
-        max-width: 100% !important;
-        padding: 24px !important;
-    }
-
-    #gpk-products-widget .energia-row h3 {
-        font-size: 18px !important;
-        font-weight: 700 !important;
-        color: var(--color-grey-dark) !important;
-        margin-bottom: 8px !important;
-        line-height: 1.25 !important;
-    }
-
-    #gpk-products-widget .energia-row p {
-        font-size: 14px !important;
-        line-height: 1.45 !important;
-        color: var(--color-grey-medium) !important;
-    }
-
-    /* Mobile styles for new digital content (Screen 05) */
     #gpk-products-widget .digital-content-wrapper {
+        display: flex !important;
         flex-direction: column-reverse !important;
-        gap: 0px !important;
+        gap: 20px !important;
         align-items: stretch !important;
+        width: 100% !important;
     }
 
     #gpk-products-widget .digital-text-content {
         width: 100% !important;
         background-color: var(--color-white) !important;
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        padding: 24px !important;
+        padding: 20px !important;
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
         box-sizing: border-box !important;
     }
 
     #gpk-products-widget .digital-subtitle {
-        font-size: 22px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         text-align: left !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 4px !important;
         line-height: 1.25 !important;
         opacity: 1 !important;
         transform: none !important;
@@ -3177,7 +3082,7 @@
         width: 60px !important;
         height: 3px !important;
         background-color: var(--color-green) !important;
-        margin: 12px 0 !important;
+        margin: 8px 0 12px 0 !important;
         opacity: 1 !important;
         transform: none !important;
         border-radius: 1.5px !important;
@@ -3185,10 +3090,10 @@
 
     #gpk-products-widget .digital-paragraph-1,
     #gpk-products-widget .digital-paragraph-2 {
-        font-size: 14px !important;
+        font-size: 13px !important;
         line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 8px !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
@@ -3203,7 +3108,7 @@
         background-color: var(--color-white) !important;
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
         border-radius: 12px !important;
-        padding: 16px !important;
+        padding: 12px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
@@ -3211,94 +3116,168 @@
         transform: none !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
         box-sizing: border-box !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 0 !important;
     }
 
     #gpk-products-widget .digital-main-image {
-        max-height: 180px !important;
+        max-height: 140px !important;
         width: auto !important;
         object-fit: contain !important;
         display: block !important;
         margin: 0 !important;
     }
 
-    /* Mobile styles for new papel content (Screen 06) */
-    #gpk-products-widget .papel-hero-image {
-        position: static !important;
-        transform: none !important;
+    /* Slide 5 & 6: Papel Details Pane */
+    #gpk-products-widget .products-board.mode-5 #pane-papel,
+    #gpk-products-widget .products-board.mode-6 #pane-papel {
         opacity: 1 !important;
-        background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        border-radius: 12px !important;
-        padding: 16px !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-        box-sizing: border-box !important;
-        margin-bottom: 24px !important;
-        width: 100% !important;
-    }
-
-    #gpk-products-widget .papel-main-image {
-        max-height: 180px !important;
-        width: auto !important;
-        object-fit: contain !important;
-        display: block !important;
-        margin: 0 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
     }
 
     #gpk-products-widget .papel-shared-title {
-        position: static !important;
+        position: absolute !important;
+        left: 20px !important;
+        top: 24px !important;
         transform: none !important;
-        opacity: 1 !important;
-        font-size: 36px !important;
-        letter-spacing: -1px !important;
+        font-size: 28px !important;
         text-align: left !important;
-        color: var(--color-grey-medium) !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 8px !important;
         white-space: normal !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: auto !important;
     }
 
     #gpk-products-widget .papel-title-green-line {
         display: none !important;
     }
 
-    #gpk-products-widget .papel-text-blocks {
-        position: static !important;
+    /* Small Paper Roll Image at Top Center */
+    #gpk-products-widget .papel-hero-image {
+        position: absolute !important;
+        left: 50% !important;
+        top: 80px !important;
+        transform: translateX(-50%) !important;
+        width: 110px !important;
+        height: auto !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 8px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        margin-bottom: 0 !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    #gpk-products-widget .papel-main-image {
+        max-height: 90px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 !important;
+        filter: none !important;
+    }
+
+    /* Sub-panels positioning inside pane-papel */
+    #gpk-products-widget .papel-intro-content,
+    #gpk-products-widget .papel-grid-content {
+        position: absolute !important;
+        inset: 180px 20px 80px 20px !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 20px !important;
+        opacity: 0 !important;
+        transform: translateY(20px) !important;
+        pointer-events: none !important;
+        transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        box-sizing: border-box !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: hidden !important;
+    }
+
+    /* Slide 5: Papel Intro (Four text blocks as Horizontal Swiper) */
+    #gpk-products-widget .products-board.mode-5 #papel-intro-content {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
+
+    #gpk-products-widget .papel-text-blocks {
+        position: absolute !important;
+        inset: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        padding: 10px 20px !important;
+        width: auto !important;
+        scrollbar-width: none !important;
+    }
+
+    #gpk-products-widget .papel-text-blocks::-webkit-scrollbar {
+        display: none !important;
     }
 
     #gpk-products-widget .papel-text-block {
+        flex: 0 0 280px !important;
+        scroll-snap-align: center !important;
         position: static !important;
         width: 100% !important;
         opacity: 1 !important;
         transform: none !important;
         background-color: var(--color-white) !important;
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        padding: 24px !important;
-        border-radius: 12px !important;
+        padding: 24px 20px !important;
+        border-radius: 16px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
         box-sizing: border-box !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
     }
 
     #gpk-products-widget .papel-text-block p {
-        font-size: 14px !important;
+        font-size: 13.5px !important;
         line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
         margin: 0 !important;
     }
 
-    /* Mobile styles for new papel grid content (Screen 07) */
+    /* Slide 6: Papel Products Grid (Horizontal Swiper) */
+    #gpk-products-widget .products-board.mode-6 #papel-grid-content {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
+
     #gpk-products-widget .papel-products-grid {
-        margin-top: 0 !important;
-        grid-template-columns: 1fr !important;
-        gap: 24px !important;
+        position: absolute !important;
+        inset: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        padding: 10px 20px !important;
+        width: auto !important;
+        scrollbar-width: none !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget .papel-products-grid::-webkit-scrollbar {
+        display: none !important;
     }
 
     #gpk-products-widget .product-card {
+        flex: 0 0 280px !important;
+        scroll-snap-align: center !important;
         flex-direction: column !important;
         opacity: 1 !important;
         transform: none !important;
@@ -3306,68 +3285,76 @@
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
         border-radius: 16px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-        overflow: hidden !important;
+        overflow-y: auto !important;
         box-sizing: border-box !important;
+        height: 100% !important;
+        justify-content: flex-start !important;
     }
 
     #gpk-products-widget .product-image {
         flex: 0 0 auto !important;
         width: 100% !important;
-        height: auto !important;
+        height: 110px !important;
         background-color: transparent !important;
-        padding: 16px !important;
+        padding: 12px 12px 0 12px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
     }
 
     #gpk-products-widget .product-img {
-        max-height: 180px !important;
+        max-height: 90px !important;
         width: auto !important;
         object-fit: contain !important;
     }
 
     #gpk-products-widget .product-info {
-        padding: 24px !important;
+        padding: 16px 20px !important;
         text-align: left !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
     }
 
     #gpk-products-widget .product-name {
-        font-size: 22px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 4px !important;
     }
 
     #gpk-products-widget .product-subtitle {
-        font-size: 13px !important;
+        font-size: 12px !important;
         font-weight: 500 !important;
         color: var(--color-green) !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 8px !important;
     }
 
     #gpk-products-widget .product-desc {
-        font-size: 14px !important;
-        line-height: 1.45 !important;
+        font-size: 12.5px !important;
+        line-height: 1.4 !important;
         color: var(--color-grey-medium) !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 12px !important;
+        flex: none !important;
     }
 
     #gpk-products-widget .product-uses {
         border-top: 1px solid rgba(227, 229, 233, 0.7) !important;
-        padding-top: 16px !important;
+        padding-top: 12px !important;
         margin-left: 0 !important;
+        margin-top: auto !important;
     }
 
     #gpk-products-widget .uses-bubble {
         background-color: rgba(95, 157, 47, 0.1) !important;
         color: var(--color-green) !important;
-        font-size: 11px !important;
+        font-size: 10px !important;
         font-weight: 700 !important;
-        padding: 4px 10px !important;
+        padding: 3px 8px !important;
         border-radius: 20px !important;
         display: inline-block !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
         text-transform: uppercase !important;
         letter-spacing: 0.5px !important;
         opacity: 1 !important;
@@ -3375,39 +3362,45 @@
     }
 
     #gpk-products-widget .uses-text {
-        font-size: 13px !important;
-        line-height: 1.4 !important;
+        font-size: 11.5px !important;
+        line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
         opacity: 1 !important;
         transform: none !important;
     }
 
-    /* Mobile styles for new laminas content (Screen 08 - Mode 7) */
+    /* Slide 7: Láminas de Cartón */
+    #gpk-products-widget .products-board.mode-7 #pane-laminas {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
+
     #gpk-products-widget .laminas-intro-content {
-        position: static !important;
-        width: 100% !important;
+        position: absolute !important;
+        inset: 24px 20px 80px 20px !important;
         opacity: 1 !important;
         transform: none !important;
         pointer-events: auto !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 30px !important;
+        gap: 16px !important;
         padding: 0 !important;
     }
 
     #gpk-products-widget .laminas-main-title {
-        font-size: 36px !important;
+        font-size: 28px !important;
         letter-spacing: -1px !important;
         text-align: left !important;
         color: var(--color-grey-medium) !important;
-        margin-bottom: 24px !important;
+        margin: 0 !important;
         opacity: 1 !important;
         transform: none !important;
     }
 
     #gpk-products-widget .laminas-intro-text {
         flex-direction: column !important;
-        gap: 24px !important;
+        gap: 12px !important;
     }
 
     #gpk-products-widget .laminas-intro-left,
@@ -3415,7 +3408,7 @@
         width: 100% !important;
         background-color: var(--color-white) !important;
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        padding: 24px !important;
+        padding: 16px !important;
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
         box-sizing: border-box !important;
@@ -3423,7 +3416,7 @@
 
     #gpk-products-widget .laminas-intro-left p,
     #gpk-products-widget .laminas-intro-right p {
-        font-size: 14px !important;
+        font-size: 13px !important;
         line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
         opacity: 1 !important;
@@ -3436,16 +3429,31 @@
         display: none !important;
     }
 
+    /* Horizontal Swiper for Láminas Cards */
     #gpk-products-widget .laminas-cards-grid-new {
         display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-        width: 100% !important;
-        position: static !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        width: auto !important;
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 260px !important;
+        bottom: 80px !important;
         margin-top: 0 !important;
+        scrollbar-width: none !important;
+        padding: 10px 20px !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new::-webkit-scrollbar {
+        display: none !important;
     }
 
     #gpk-products-widget .laminas-card-new {
+        flex: 0 0 280px !important;
+        scroll-snap-align: center !important;
         flex-direction: column !important;
         opacity: 1 !important;
         transform: none !important;
@@ -3453,25 +3461,27 @@
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
         border-radius: 16px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
-        padding: 24px !important;
+        padding: 20px 16px !important;
         box-sizing: border-box !important;
         text-align: center !important;
         align-items: center !important;
+        height: 100% !important;
+        justify-content: flex-start !important;
     }
 
     #gpk-products-widget .laminas-card-image {
         width: 100% !important;
-        height: auto !important;
+        height: 100px !important;
         background-color: transparent !important;
         padding: 0 !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 8px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
     }
 
     #gpk-products-widget .laminas-card-img {
-        max-height: 180px !important;
+        max-height: 80px !important;
         width: auto !important;
         object-fit: contain !important;
     }
@@ -3479,38 +3489,272 @@
     #gpk-products-widget .laminas-card-info {
         padding: 0 !important;
         text-align: center !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
     }
 
     #gpk-products-widget .laminas-card-title {
-        font-size: 22px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
+        margin-bottom: 6px !important;
+        line-height: 1.25 !important;
+    }
+
+    #gpk-products-widget .laminas-card-desc {
+        font-size: 12.5px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
+    }
+
+    /* Slide 8: Grabados */
+    #gpk-products-widget .products-board.mode-8 #pane-grabados {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
+
+    #gpk-products-widget .grabados-left-content {
+        position: absolute !important;
+        left: 20px !important;
+        right: 20px !important;
+        top: 24px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 0 !important;
+    }
+
+    #gpk-products-widget .grabados-main-title {
+        font-size: 28px !important;
+        letter-spacing: -1px !important;
+        text-align: left !important;
+        color: var(--color-grey-medium) !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .grabados-intro-text {
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .grabados-intro-text p {
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
+        opacity: 1 !important;
+        transform: none !important;
+        margin-bottom: 8px !important;
+    }
+
+    #gpk-products-widget .grabados-intro-text p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    /* Horizontal Swiper for Grabados Cards */
+    #gpk-products-widget .grabados-cards-grid-new {
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 250px !important;
+        bottom: 80px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        width: auto !important;
+        scrollbar-width: none !important;
+        padding: 10px 20px !important;
+    }
+
+    #gpk-products-widget .grabados-cards-grid-new::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    #gpk-products-widget .grabados-green-card {
+        flex: 0 0 280px !important;
+        scroll-snap-align: center !important;
+        position: static !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: auto !important;
+        background-image: none !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        padding: 20px 16px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-align: left !important;
+        align-items: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    #gpk-products-widget .grabados-card-title {
+        font-size: 15px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         margin-bottom: 8px !important;
         line-height: 1.25 !important;
     }
 
-    #gpk-products-widget .laminas-card-desc {
-        font-size: 14px !important;
+    #gpk-products-widget .grabados-card-desc {
+        font-size: 12.5px !important;
         line-height: 1.45 !important;
         color: var(--color-grey-medium) !important;
     }
 
-    /* Mobile scroll fade-in animation system */
-    #gpk-products-widget .fade-in-on-scroll {
-        opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    #gpk-products-widget .grabados-chat-icon {
+        position: absolute !important;
+        right: 20px !important;
+        top: 24px !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+        z-index: 10 !important;
     }
 
-    #gpk-products-widget .fade-in-on-scroll.in-view {
-        opacity: 1;
-        transform: translateY(0);
+    /* Slide 9: Energía */
+    #gpk-products-widget .products-board.mode-9 #pane-energia {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
+
+    #gpk-products-widget .energia-header {
+        position: absolute !important;
+        left: 20px !important;
+        right: 20px !important;
+        top: 24px !important;
+        width: auto !important;
+        transform: none !important;
+        opacity: 1 !important;
+        text-align: left !important;
+        margin-bottom: 0 !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    #gpk-products-widget .energia-main-title {
+        font-size: 28px !important;
+        letter-spacing: -1px !important;
+        text-align: left !important;
+        color: var(--color-grey-medium) !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget .energia-intro-text {
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
+        text-align: left !important;
+        margin: 0 !important;
+    }
+
+    /* Horizontal Swiper for Energía Cards */
+    #gpk-products-widget .energia-rows {
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 250px !important;
+        bottom: 80px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        width: auto !important;
+        scrollbar-width: none !important;
+        padding: 10px 20px !important;
+    }
+
+    #gpk-products-widget .energia-rows::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    #gpk-products-widget .energia-row {
+        flex: 0 0 280px !important;
+        scroll-snap-align: center !important;
+        position: static !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-image: none !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-left: 5px solid var(--color-green) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    #gpk-products-widget .energia-row-content {
+        max-width: 100% !important;
+        padding: 20px 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        height: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    #gpk-products-widget .energia-row h3 {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
+        margin-bottom: 8px !important;
+        line-height: 1.25 !important;
+    }
+
+    #gpk-products-widget .energia-row p {
+        font-size: 12.5px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
+    }
+
+    /* General responsive helpers */
+    #gpk-products-widget .section-detail-title {
+        font-size: 28px !important;
+    }
+
+    #gpk-products-widget .fade-in-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
 
     #gpk-products-widget .mobile-only-graphic {
-        display: block !important;
-        width: 100%;
-        max-width: 240px;
-        margin: 20px auto;
+        display: none !important;
     }
 }
