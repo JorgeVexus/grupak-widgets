@@ -12,7 +12,7 @@
         document.head.appendChild(link);
     }
 
-    // 2. Fetch and inject HTML markup if root root container exists and hasn't been populated
+    // 2. Fetch and inject HTML markup if root container exists and hasn't been populated
     const container = document.getElementById("gpk-timeline-widget-root");
     if (container) {
         fetch(`${baseURL}/linea-tiempo.html`)
@@ -59,6 +59,7 @@
         if (!root) return;
 
         const board = root.querySelector("#timeline-board");
+        const tracker = root.querySelector(".timeline-scroll-tracker");
         const yearsSidebar = root.querySelector("#years-sidebar");
         const slides = root.querySelectorAll(".timeline-slide");
         const activeLine = root.querySelector("#active-line");
@@ -138,17 +139,56 @@
 
         // Slide index navigator
         function goToSlide(index) {
-          if (index < 0 || index >= milestones.length || index === currentIndex || isAnimating) {
+          if (index < 0 || index >= milestones.length) {
             return;
           }
-          
-          isAnimating = true;
+
+          if (window.innerWidth <= 768) {
+            // Mobile navigation: Update immediately
+            currentIndex = index;
+            updateTimeline();
+            return;
+          }
+
+          // Desktop: Scroll to the corresponding position in the scroll tracker
+          const rect = tracker.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const trackerTop = rect.top + scrollTop;
+          const scrollHeight = rect.height - window.innerHeight;
+
+          const totalSlides = milestones.length;
+          const targetProgress = (index + 0.5) / totalSlides;
+          const targetScrollY = trackerTop + targetProgress * scrollHeight;
+
           currentIndex = index;
           updateTimeline();
-          
-          setTimeout(() => {
-            isAnimating = false;
-          }, animationDuration);
+
+          window.scrollTo({
+            top: targetScrollY,
+            behavior: "smooth"
+          });
+        }
+
+        // Native Scroll handler for Desktop
+        function handleScroll() {
+          if (window.innerWidth <= 768) return;
+
+          const rect = tracker.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const trackerTop = rect.top + scrollTop;
+          const scrollHeight = rect.height - window.innerHeight;
+
+          const relativeScroll = scrollTop - trackerTop;
+          let progress = relativeScroll / scrollHeight;
+          progress = Math.max(0, Math.min(1, progress));
+
+          const totalSlides = milestones.length;
+          const targetSlide = Math.min(Math.floor(progress * totalSlides), totalSlides - 1);
+
+          if (targetSlide !== currentIndex) {
+            currentIndex = targetSlide;
+            updateTimeline();
+          }
         }
 
         // Apply slide visual updates and state triggers
@@ -215,32 +255,9 @@
               goToSlide(currentIndex + 1);
             }
           });
-          
-          // Desktop wheel scroll navigation (only when widget is on screen)
-          let wheelTimeout;
-          let accumulatedDelta = 0;
-          
-          document.addEventListener("wheel", (e) => {
-            if (window.innerWidth <= 768) return;
-            
-            const rect = root.getBoundingClientRect();
-            const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
-            if (!isVisible) return;
 
-            accumulatedDelta += e.deltaY;
-            clearTimeout(wheelTimeout);
-            
-            wheelTimeout = setTimeout(() => {
-              if (Math.abs(accumulatedDelta) > 40) {
-                if (accumulatedDelta > 0) {
-                  goToSlide(currentIndex + 1);
-                } else {
-                  goToSlide(currentIndex - 1);
-                }
-              }
-              accumulatedDelta = 0;
-            }, 45);
-          }, { passive: true });
+          // Bind page scroll listener for desktop
+          window.addEventListener("scroll", handleScroll, { passive: true });
 
           // Mobile Touch Swiping Support
           let touchStartX = 0;

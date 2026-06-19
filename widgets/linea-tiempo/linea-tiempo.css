@@ -29,6 +29,12 @@
 /* ==========================================================================
    Widescreen Viewport Scaling System (Figma: 1850x1028)
    ========================================================================== */
+#gpk-timeline-widget .timeline-scroll-tracker {
+  height: 1400vh; /* 14 slides * 100vh */
+  position: relative;
+  width: 100%;
+}
+
 #gpk-timeline-widget .timeline-viewport {
   width: 100%;
   height: 100vh;
@@ -37,7 +43,8 @@
   align-items: center;
   background-color: var(--color-grey-light);
   overflow: hidden;
-  position: relative;
+  position: sticky;
+  top: 0;
 }
 
 #gpk-timeline-widget .timeline-board {
@@ -713,11 +720,17 @@
    Responsive stack layout (Mobile <= 768px)
    ========================================================================== */
 @media (max-width: 768px) {
+  #gpk-timeline-widget .timeline-scroll-tracker {
+    height: auto !important;
+    position: static !important;
+  }
+
   #gpk-timeline-widget .timeline-viewport {
     height: auto;
     width: 100%;
     display: block;
     overflow: visible;
+    position: static !important;
   }
 
   #gpk-timeline-widget .timeline-board {
