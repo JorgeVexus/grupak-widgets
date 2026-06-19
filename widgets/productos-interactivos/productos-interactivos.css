@@ -2326,71 +2326,7 @@
     background-color: #73c03b;
 }
 
-/* Mobile overrides for Grabados */
-@media (max-width: 1024px) {
-    #gpk-products-widget .grabados-left-content {
-        position: static !important;
-        width: 100% !important;
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        padding: 0 !important;
-    }
-
-    #gpk-products-widget .grabados-main-title {
-        font-size: 28px !important;
-        margin-bottom: 16px !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-
-    #gpk-products-widget .grabados-intro-text p {
-        font-size: 14px !important;
-        line-height: 1.5 !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-
-    #gpk-products-widget .grabados-cards-grid-new {
-        position: static !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-    }
-
-    #gpk-products-widget .grabados-green-card {
-        position: static !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: auto !important;
-        background-image: none !important;
-        background-color: #5F9D2F !important;
-        opacity: 1 !important;
-        transform: none !important;
-        padding: 20px !important;
-        border-radius: 12px;
-        border: 1.5px dashed rgba(227, 229, 233, 0.6) !important;
-    }
-
-    #gpk-products-widget .grabados-card-title {
-        font-size: 15px !important;
-        margin-bottom: 10px !important;
-    }
-
-    #gpk-products-widget .grabados-card-desc {
-        font-size: 12px !important;
-    }
-
-    #gpk-products-widget .grabados-chat-icon {
-        position: static !important;
-        margin: 20px auto 0 !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-}
+/* Grabados mobile media query combined at the end of the file */
 
 /* ==========================================
    ENERGY & SUSTENTABILIDAD (Mode 9)
@@ -3038,12 +2974,102 @@
         gap: 20px;
     }
 
-    #gpk-products-widget .grabados-cards-grid {
-        grid-template-columns: 1fr !important;
-        margin-left: 0 !important;
-        gap: 20px;
+    /* Grabados mobile overrides */
+    #gpk-products-widget .grabados-left-content {
+        position: static !important;
+        width: 100% !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        padding: 0 !important;
     }
 
+    #gpk-products-widget .grabados-main-title {
+        font-size: 36px !important;
+        letter-spacing: -1px !important;
+        text-align: left !important;
+        color: var(--color-grey-medium) !important;
+        margin-bottom: 16px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .grabados-intro-text {
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .grabados-intro-text p {
+        font-size: 14px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
+        opacity: 1 !important;
+        transform: none !important;
+        margin-bottom: 12px !important;
+    }
+
+    #gpk-products-widget .grabados-intro-text p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    #gpk-products-widget .grabados-cards-grid-new {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .grabados-green-card {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        background-image: none !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        padding: 24px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-align: left !important;
+        align-items: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    #gpk-products-widget .grabados-card-title {
+        font-size: 18px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
+        margin-bottom: 8px !important;
+        line-height: 1.25 !important;
+    }
+
+    #gpk-products-widget .grabados-card-desc {
+        font-size: 14px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
+    }
+
+    #gpk-products-widget .grabados-chat-icon {
+        position: static !important;
+        margin: 20px auto 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Energia mobile overrides */
     #gpk-products-widget .energia-header {
         position: static !important;
         width: 100% !important;
@@ -3055,13 +3081,23 @@
     }
 
     #gpk-products-widget .energia-main-title {
-        font-size: 32px !important;
+        font-size: 36px !important;
+        letter-spacing: -1px !important;
         text-align: left !important;
+        color: var(--color-grey-medium) !important;
         margin-bottom: 12px !important;
     }
 
     #gpk-products-widget .energia-intro-text {
+        background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border-radius: 12px !important;
+        padding: 24px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
         font-size: 14px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
         text-align: left !important;
     }
 
@@ -3079,9 +3115,11 @@
         height: auto !important;
         background-image: none !important;
         background-color: var(--color-white) !important;
+        border: 1px solid rgba(227, 229, 233, 0.7) !important;
         border-left: 5px solid var(--color-green) !important;
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-sizing: border-box !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
@@ -3090,16 +3128,21 @@
 
     #gpk-products-widget .energia-row-content {
         max-width: 100% !important;
-        padding: 20px 24px !important;
+        padding: 24px !important;
     }
 
     #gpk-products-widget .energia-row h3 {
-        font-size: 16px !important;
-        margin-bottom: 4px !important;
+        font-size: 18px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-dark) !important;
+        margin-bottom: 8px !important;
+        line-height: 1.25 !important;
     }
 
     #gpk-products-widget .energia-row p {
-        font-size: 13px !important;
+        font-size: 14px !important;
+        line-height: 1.45 !important;
+        color: var(--color-grey-medium) !important;
     }
 
     /* Mobile styles for new digital content (Screen 05) */
