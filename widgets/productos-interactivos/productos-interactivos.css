@@ -3356,6 +3356,7 @@
     #gpk-products-widget .product-uses {
         border-top: 1px solid rgba(227, 229, 233, 0.7) !important;
         padding-top: 16px !important;
+        margin-left: 0 !important;
     }
 
     #gpk-products-widget .uses-bubble {
