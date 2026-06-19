@@ -559,9 +559,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
 }
 
 #gpk-timeline-widget .photo-img-1985 {
@@ -572,6 +569,9 @@
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
 }
 
 #gpk-timeline-widget .vector-img-1985 {
@@ -582,6 +582,8 @@
   height: calc(100% + 8px);
   z-index: 2;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
 /* 1985 Text (Right Side) Slide-In From Right */
@@ -602,10 +604,15 @@
   opacity: 1;
 }
 
-/* Trigger 1985 Image Movement */
-#gpk-timeline-widget .timeline-slide[data-year="1985"].active .photo-wrapper-1985 {
+/* Trigger 1985 Image Animations */
+#gpk-timeline-widget .timeline-slide[data-year="1985"].active .vector-img-1985 {
   opacity: 1;
-  transform: translateX(0);
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1985"].active .photo-img-1985 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.5s;
 }
 
 #gpk-timeline-widget .map-container {
