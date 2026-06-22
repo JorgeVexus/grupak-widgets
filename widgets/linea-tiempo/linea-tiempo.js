@@ -276,19 +276,8 @@
           }
 
           function handleSwipe() {
-            const isMobile = window.innerWidth <= 768;
-            if (!isMobile) return;
-            
-            const swipeThreshold = 55;
-            const diffX = touchEndX - touchStartX;
-            
-            if (Math.abs(diffX) > swipeThreshold) {
-              if (diffX > 0) {
-                goToSlide(currentIndex - 1);
-              } else {
-                goToSlide(currentIndex + 1);
-              }
-            }
+            // Disabled on mobile vertical scroll feed
+            return;
           }
           
           window.addEventListener("resize", () => {
