@@ -76,27 +76,6 @@
         function goToSlide(index) {
             if (index < 0 || index >= totalSlides) return;
 
-            if (window.innerWidth <= 1024) {
-                // Mobile stacked fallback: Scroll to section
-                const selectors = [
-                    "#intro-pane",
-                    "#overview-pane",
-                    "#pane-cajas",
-                    "#cajas-convencionales-content",
-                    "#cajas-digital-content",
-                    "#pane-laminas",
-                    "#pane-papel",
-                    "#papel-grid-content",
-                    "#pane-grabados",
-                    "#pane-energia"
-                ];
-                const targetEl = root.querySelector(selectors[index]);
-                if (targetEl) {
-                    targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-                return;
-            }
-
             // Desktop scroll management
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -116,8 +95,6 @@
         }
 
         function handleScroll() {
-            if (window.innerWidth <= 1024) return;
-
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const trackerTop = rect.top + scrollTop;
