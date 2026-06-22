@@ -926,6 +926,180 @@
   transition-delay: 0.5s;
 }
 
+/* 2021 Slide Animations (Staggered Stacking) */
+#gpk-timeline-widget .info-section-2021-1 {
+  position: absolute;
+  left: 200px;
+  top: 230px;
+  width: 400px;
+  height: auto;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+#gpk-timeline-widget .info-section-2021-2 {
+  position: absolute;
+  left: 680px;
+  top: 610px;
+  width: 420px;
+  height: auto;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition-delay: 0.5s;
+}
+
+#gpk-timeline-widget .image-container-2021-1 {
+  position: absolute;
+  left: 650px;
+  top: 150px;
+  width: 480px;
+  height: 330px;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transition-delay: 0.3s;
+}
+
+#gpk-timeline-widget .image-container-2021-2 {
+  position: absolute;
+  left: 200px;
+  top: 500px;
+  width: 450px;
+  height: 294px;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transition-delay: 0.7s;
+}
+
+#gpk-timeline-widget .img-2021-1,
+#gpk-timeline-widget .img-2021-2 {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Active transitions for Slide 2021 */
+#gpk-timeline-widget .timeline-slide[data-year="2021"].active .info-section-2021-1 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2021"].active .info-section-2021-2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2021"].active .image-container-2021-1 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2021"].active .image-container-2021-2 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+}
+
+/* 2023 Slide Animations */
+#gpk-timeline-widget .photo-container-2023 {
+  position: absolute;
+  left: 100px;
+  top: 415px;
+  width: 920px;
+  height: 539px;
+}
+
+#gpk-timeline-widget .photo-wrapper-2023 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#gpk-timeline-widget .photo-img-2023 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2023"] .info-section {
+  transform: translateY(80px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2023"].active .info-section {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2023"].active .photo-img-2023 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.5s;
+}
+
+/* 2024 Slide Animations (Image Top, Text Bottom) */
+#gpk-timeline-widget .photo-container-2024 {
+  position: absolute;
+  left: 0;
+  top: 150px;
+  width: 1119px;
+  height: 545px;
+}
+
+#gpk-timeline-widget .photo-wrapper-2024 {
+  position: relative;
+  width: 920px;
+  height: 539px;
+  margin: 0 auto;
+}
+
+#gpk-timeline-widget .photo-img-2024 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2024"] .info-section {
+  position: absolute;
+  left: 0;
+  top: 710px;
+  width: 950px;
+  height: auto;
+  transform: translateY(60px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition-delay: 0.2s;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2024"].active .info-section {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2024"].active .photo-img-2024 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.5s;
+}
+
 /* ==========================================================================
    Responsive stack layout (Mobile <= 768px)
    ========================================================================== */
@@ -1232,5 +1406,88 @@
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
+  }
+
+  /* Mobile Responsive for 2021 */
+  #gpk-timeline-widget .info-section-2021-1,
+  #gpk-timeline-widget .info-section-2021-2 {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    margin-bottom: 20px !important;
+  }
+
+  #gpk-timeline-widget .image-container-2021-1,
+  #gpk-timeline-widget .image-container-2021-2 {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    opacity: 1 !important;
+    clip-path: none !important;
+    margin-bottom: 24px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  #gpk-timeline-widget .img-2021-1,
+  #gpk-timeline-widget .img-2021-2 {
+    width: 100% !important;
+    max-width: 480px !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  /* Mobile Responsive for 2023 */
+  #gpk-timeline-widget .photo-container-2023 {
+    height: 300px !important;
+    left: 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  #gpk-timeline-widget .photo-wrapper-2023 {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 920 / 539;
+    margin: 0 auto;
+  }
+
+  #gpk-timeline-widget .photo-img-2023 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+
+  /* Mobile Responsive for 2024 */
+  #gpk-timeline-widget .photo-container-2024 {
+    height: 300px !important;
+    left: 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  #gpk-timeline-widget .photo-wrapper-2024 {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 920 / 539;
+    margin: 0 auto;
+  }
+
+  #gpk-timeline-widget .photo-img-2024 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+
+  #gpk-timeline-widget .timeline-slide[data-year="2024"].active {
+    display: flex !important;
+    flex-direction: column-reverse !important;
   }
 }
