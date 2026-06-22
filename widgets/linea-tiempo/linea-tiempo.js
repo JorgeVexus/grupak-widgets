@@ -238,6 +238,104 @@
           nextBtn.disabled = currentIndex === milestones.length - 1;
         }
 
+        // Mobile Scroll and Card animations handler
+        function handleMobileScroll() {
+          if (window.innerWidth > 768) return;
+
+          const slidesContainer = root.querySelector("#slides-container");
+          const mobileActiveLine = root.querySelector(".mobile-active-line");
+          if (!slidesContainer || !mobileActiveLine) return;
+
+          const rect = slidesContainer.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          const triggerPoint = viewportHeight * 0.45; // Nodes fill when they are in the upper-middle screen
+
+          const slideElements = Array.from(slides);
+          if (slideElements.length === 0) return;
+
+          const firstSlide = slideElements[0];
+          const lastSlide = slideElements[slideElements.length - 1];
+
+          const firstNodeTop = 20; // Top offset of the first node
+          const lastInfoSection = lastSlide.querySelector(".info-section") || lastSlide.querySelector(".info-section-2021-1");
+          const lastNodeTop = lastSlide.offsetTop + (lastInfoSection ? lastInfoSection.offsetTop : 0) + 15;
+
+          const totalLineLength = lastNodeTop - firstNodeTop;
+
+          const lineStartPos = rect.top + firstNodeTop;
+          const lineEndPos = rect.top + lastNodeTop;
+
+          const totalScrollableDist = lineEndPos - lineStartPos;
+          const currentScrollDist = triggerPoint - lineStartPos;
+
+          let progress = currentScrollDist / totalScrollableDist;
+          progress = Math.max(0, Math.min(1, progress));
+
+          const activeHeight = progress * totalLineLength;
+          mobileActiveLine.style.height = `${activeHeight}px`;
+
+          // Check viewport entry for each slide to trigger node-activation and card transitions
+          slideElements.forEach((slide) => {
+            const slideRect = slide.getBoundingClientRect();
+            // If the element top is above the trigger point, mark as visible/active
+            if (slideRect.top <= triggerPoint + 60) {
+              slide.classList.add("visible");
+            } else {
+              slide.classList.remove("visible");
+            }
+          });
+        }
+
+        // Mobile Scroll and Card animations handler
+        function handleMobileScroll() {
+          if (window.innerWidth > 768) return;
+
+          const slidesContainer = root.querySelector("#slides-container");
+          const mobileStaticLine = root.querySelector(".mobile-static-line");
+          const mobileActiveLine = root.querySelector(".mobile-active-line");
+          if (!slidesContainer || !mobileStaticLine || !mobileActiveLine) return;
+
+          const rect = slidesContainer.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          const triggerPoint = viewportHeight * 0.45; // Nodes fill when they are in the upper-middle screen
+
+          const slideElements = Array.from(slides);
+          if (slideElements.length === 0) return;
+
+          const firstSlide = slideElements[0];
+          const lastSlide = slideElements[slideElements.length - 1];
+
+          const firstNodeTop = 20; // Top offset of the first node
+          const lastInfoSection = lastSlide.querySelector(".info-section") || lastSlide.querySelector(".info-section-2021-1");
+          const lastNodeTop = lastSlide.offsetTop + (lastInfoSection ? lastInfoSection.offsetTop : 0) + 21; // 21px centers it on radial gradient
+
+          const totalLineLength = lastNodeTop - firstNodeTop;
+          mobileStaticLine.style.height = `${totalLineLength}px`;
+
+          const lineStartPos = rect.top + firstNodeTop;
+          const lineEndPos = rect.top + lastNodeTop;
+
+          const totalScrollableDist = lineEndPos - lineStartPos;
+          const currentScrollDist = triggerPoint - lineStartPos;
+
+          let progress = currentScrollDist / totalScrollableDist;
+          progress = Math.max(0, Math.min(1, progress));
+
+          const activeHeight = progress * totalLineLength;
+          mobileActiveLine.style.height = `${activeHeight}px`;
+
+          // Check viewport entry for each slide to trigger node-activation and card transitions
+          slideElements.forEach((slide) => {
+            const slideRect = slide.getBoundingClientRect();
+            // If the element top is above the trigger point, mark as visible/active
+            if (slideRect.top <= triggerPoint + 60) {
+              slide.classList.add("visible");
+            } else {
+              slide.classList.remove("visible");
+            }
+          });
+        }
+
         // Setup DOM event listeners
         function setupEventListeners() {
           prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
@@ -256,10 +354,16 @@
             }
           });
 
-          // Bind page scroll listener for desktop
-          window.addEventListener("scroll", handleScroll, { passive: true });
+          // Bind page scroll listener for both desktop and mobile
+          window.addEventListener("scroll", () => {
+            if (window.innerWidth > 768) {
+              handleScroll();
+            } else {
+              handleMobileScroll();
+            }
+          }, { passive: true });
 
-          // Mobile Touch Swiping Support
+          // Mobile Touch Swiping Support (Disabled for mobile vertical feed layout)
           let touchStartX = 0;
           let touchEndX = 0;
           const slidesContainer = root.querySelector("#slides-container");
@@ -276,13 +380,15 @@
           }
 
           function handleSwipe() {
-            // Disabled on mobile vertical scroll feed
             return;
           }
           
           window.addEventListener("resize", () => {
             scaleTimelineBoard();
             updateTimeline();
+            if (window.innerWidth <= 768) {
+              handleMobileScroll();
+            }
           });
         }
 
@@ -290,7 +396,30 @@
         renderSidebarYears();
         scaleTimelineBoard();
         setupEventListeners();
+
+        // Append mobile static and active line indicators if they don't exist
+        const slidesContainer = root.querySelector("#slides-container");
+        if (slidesContainer) {
+          let mobileStaticLine = slidesContainer.querySelector(".mobile-static-line");
+          if (!mobileStaticLine) {
+            mobileStaticLine = document.createElement("div");
+            mobileStaticLine.className = "mobile-static-line";
+            slidesContainer.appendChild(mobileStaticLine);
+          }
+
+          let mobileActiveLine = slidesContainer.querySelector(".mobile-active-line");
+          if (!mobileActiveLine) {
+            mobileActiveLine = document.createElement("div");
+            mobileActiveLine.className = "mobile-active-line";
+            slidesContainer.appendChild(mobileActiveLine);
+          }
+        }
         
-        setTimeout(updateTimeline, 100);
+        setTimeout(() => {
+          updateTimeline();
+          if (window.innerWidth <= 768) {
+            handleMobileScroll();
+          }
+        }, 100);
     }
 })();

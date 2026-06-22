@@ -1100,6 +1100,11 @@
   transition-delay: 0.5s;
 }
 
+/* Base style for mobile active line (hidden on desktop) */
+#gpk-timeline-widget .mobile-active-line {
+  display: none;
+}
+
 /* ==========================================================================
    Responsive stack layout (Mobile <= 768px)
    ========================================================================== */
@@ -1179,8 +1184,17 @@
     transform: none !important;
     pointer-events: auto !important;
     flex-direction: column !important;
-    padding-left: 70px !important; /* Space for year + line + node */
+    padding-left: 80px !important; /* Space for year + line + node */
     margin-bottom: 45px !important;
+    /* Default Grey Concentric Node Background, transition is handled by background-image swap */
+    background-image: radial-gradient(circle at 60px 21px, var(--color-grey-light) 6px, var(--color-white) 6px, var(--color-white) 9px, rgba(110, 110, 110, 0.3) 9px, rgba(110, 110, 110, 0.3) 11px, transparent 11px) !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+  }
+
+  #gpk-timeline-widget .timeline-slide.visible {
+    /* Active Green Concentric Node Background */
+    background-image: radial-gradient(circle at 60px 21px, var(--color-green) 6px, var(--color-white) 6px, var(--color-white) 9px, var(--color-green) 9px, var(--color-green) 11px, transparent 11px) !important;
   }
 
   /* Year Label on the Left */
@@ -1189,7 +1203,7 @@
     position: absolute;
     left: 0;
     top: 12px;
-    width: 42px;
+    width: 48px;
     text-align: right;
     font-family: var(--font-title);
     font-weight: 900;
@@ -1197,38 +1211,59 @@
     color: var(--color-green);
   }
 
-  /* Vertical Timeline Line */
-  #gpk-timeline-widget .timeline-slide::after {
-    content: '';
+  /* Static vertical timeline line on mobile */
+  #gpk-timeline-widget .mobile-static-line {
+    display: block !important;
     position: absolute;
-    left: 53px; /* Centered between year label (42px) and slide content (70px) */
-    top: 0;
-    bottom: -45px; /* Extends to next slide */
+    left: 60px;
+    top: 20px;
     width: 2px;
     background-color: var(--color-green);
     opacity: 0.25;
     z-index: 1;
   }
 
-  #gpk-timeline-widget .timeline-slide:last-child::after {
-    bottom: auto;
-    height: 25px; /* Stop line at the last node */
+  /* Active vertical timeline line on mobile */
+  #gpk-timeline-widget .mobile-active-line {
+    display: block !important;
+    position: absolute;
+    left: 60px;
+    top: 20px;
+    width: 2px;
+    height: 0;
+    background-color: var(--color-green);
+    z-index: 2;
+    transition: height 0.1s ease-out;
   }
 
-  /* Green Timeline Circle Node */
-  #gpk-timeline-widget .timeline-slide .info-section::before,
-  #gpk-timeline-widget .timeline-slide[data-year="2021"] .info-section-2021-1::before {
-    content: '';
-    position: absolute;
-    left: 48px; /* Centered on line (53px - 5px offset) to form a 12px circle */
-    top: 15px;
-    width: 12px;
-    height: 12px;
-    background-color: var(--color-green);
-    border: 3px solid var(--color-white);
-    border-radius: 50%;
-    z-index: 3;
-    box-shadow: 0 0 0 2px var(--color-green);
+  /* Default Hidden State for Card Animations on Scroll */
+  #gpk-timeline-widget .timeline-slide .info-section,
+  #gpk-timeline-widget .timeline-slide .info-section-2021-1,
+  #gpk-timeline-widget .timeline-slide .info-section-2021-2,
+  #gpk-timeline-widget .timeline-slide .illustration-section,
+  #gpk-timeline-widget .timeline-slide .image-container-2021-1,
+  #gpk-timeline-widget .timeline-slide .image-container-2021-2 {
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  /* Active Visible State for Cards (triggered via scroll viewport) */
+  #gpk-timeline-widget .timeline-slide.visible .info-section,
+  #gpk-timeline-widget .timeline-slide.visible .info-section-2021-1,
+  #gpk-timeline-widget .timeline-slide.visible .info-section-2021-2,
+  #gpk-timeline-widget .timeline-slide.visible .illustration-section,
+  #gpk-timeline-widget .timeline-slide.visible .image-container-2021-1,
+  #gpk-timeline-widget .timeline-slide.visible .image-container-2021-2 {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Slight stagger delay for illustration section inside visible slide */
+  #gpk-timeline-widget .timeline-slide.visible .illustration-section,
+  #gpk-timeline-widget .timeline-slide.visible .image-container-2021-1,
+  #gpk-timeline-widget .timeline-slide.visible .image-container-2021-2 {
+    transition-delay: 0.15s !important;
   }
 
   /* Cards content styling on mobile */
@@ -1238,8 +1273,6 @@
     position: static !important;
     width: 100% !important;
     height: auto !important;
-    opacity: 1 !important;
-    transform: none !important;
     background-color: var(--color-white) !important;
     border: 1px solid rgba(227, 229, 233, 0.8) !important;
     border-radius: 12px !important;
