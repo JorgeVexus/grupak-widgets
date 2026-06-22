@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 26 33.28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ubi">
+<rect width="26" height="26" rx="13" fill="var(--fill-0, #B5E062)"/>
+<path id="Polygon 2" d="M13 33.28L3.543 21.97H22.457L13 33.28Z" fill="var(--fill-0, #B5E062)"/>
+<g id="Container">
+<path id="Vector" d="M20.28 12.4801C20.28 17.0238 15.2395 21.7558 13.5469 23.2173C13.3892 23.3359 13.1973 23.4 13 23.4C12.8027 23.4 12.6108 23.3359 12.4531 23.2173C10.7605 21.7558 5.72 17.0238 5.72 12.4801C5.72 10.5493 6.487 8.69757 7.85226 7.33229C9.21753 5.96701 11.0692 5.2 13 5.2C14.9308 5.2 16.7825 5.96701 18.1477 7.33229C19.513 8.69757 20.28 10.5493 20.28 12.4801Z" stroke="var(--stroke-0, white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M13 15.2101C14.5077 15.2101 15.73 13.9878 15.73 12.48C15.73 10.9723 14.5077 9.75 13 9.75C11.4923 9.75 10.27 10.9723 10.27 12.48C10.27 13.9878 11.4923 15.2101 13 15.2101Z" stroke="var(--stroke-0, white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

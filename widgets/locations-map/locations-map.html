@@ -1,0 +1,82 @@
+<div id="gpk-locations-map-widget" class="locations-map-section">
+    <div class="locations-map-container" id="locationsMap">
+
+        <!-- PANEL IZQUIERDO -->
+        <aside class="locations-panel" role="complementary" aria-label="Lista de ubicaciones">
+            <header class="locations-panel-header">
+                <h1 class="locations-title">
+                    Conoce <strong class="text-green">nuestras ubicaciones</strong>
+                </h1>
+            </header>
+
+            <div class="locations-search" role="search" aria-label="Buscar ubicaciones">
+                <div class="search-wrapper">
+                    <input type="search" class="search-input" id="locationSearch" placeholder="Buscar locación"
+                        aria-label="Buscar locación" autocomplete="off">
+                    <span class="search-icon" aria-hidden="true">
+                        <img src="widgets/locations-map/images/search-icon.svg" alt="Buscar">
+                    </span>
+                </div>
+            </div>
+
+            <div class="locations-filters" role="group" aria-label="Filtrar por tipo de ubicación">
+                <p class="filters-label">Filtrar por categoría</p>
+                <div class="filters-tags" id="filterTags" role="radiogroup" aria-label="Categorías de ubicaciones">
+                    <!-- Los tags se generan dinámicamente -->
+                </div>
+            </div>
+
+            <div class="locations-list" id="locationsList" role="list" aria-label="Ubicaciones disponibles">
+                <!-- Las tarjetas se generan dinámicamente -->
+            </div>
+        </aside>
+
+        <!-- PANEL DERECHO - MAPA -->
+        <main class="map-container" role="main" aria-label="Mapa de ubicaciones">
+            <div class="map-image-wrapper" id="mapImageWrapper">
+                <!-- Imagen de mapa de fondo de Figma -->
+                <img class="map-image" id="mapImage"
+                    src="widgets/locations-map/images/map-bg.webp"
+                    alt="Mapa de ubicaciones de Grupack en México central" loading="eager">
+
+                <!-- Overlay para cerrar popup al hacer click fuera -->
+                <div class="map-overlay" id="mapOverlay" aria-hidden="true"></div>
+
+                <!-- Contenedor dinámico de pines del mapa -->
+                <div id="mapPinsContainer">
+                    <!-- Los pines se generan dinámicamente en JS -->
+                </div>
+
+                <!-- POPUP DE UBICACIÓN RESALTADA -->
+                <div class="map-popup" id="mapPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle"
+                    aria-describedby="popupAddress" tabindex="-1">
+                    <div class="popup-image-container">
+                        <img class="popup-image" id="popupImage" src="" alt="" loading="lazy">
+                    </div>
+                    <div class="popup-content">
+                        <div class="popup-header">
+                            <h2 class="popup-name" id="popupTitle"></h2>
+                            <span class="popup-category" id="popupCategory"></span>
+                        </div>
+                        <div class="popup-divider"></div>
+                        <div class="popup-detail" id="popupAddress">
+                            <img class="popup-detail-icon" src="widgets/locations-map/images/icon-address.svg" alt="Dirección" aria-hidden="true">
+                            <span class="popup-detail-text"></span>
+                        </div>
+                        <div class="popup-detail" id="popupPhone">
+                            <img class="popup-detail-icon" src="widgets/locations-map/images/icon-phone.svg" alt="Teléfono" aria-hidden="true">
+                            <span class="popup-detail-text"></span>
+                        </div>
+                        <div class="popup-hours" id="popupHours">
+                            <span class="status-dot" aria-hidden="true"></span>
+                            <span class="status-open">Abierto ahora</span>
+                            <span class="status-separator" aria-hidden="true">•</span>
+                            <span class="status-close">Cierra a las 20:00 hrs</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</div>

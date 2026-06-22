@@ -1,0 +1,819 @@
+/* ==========================================================================
+   LOCATIONS MAP WIDGET - SCOPED DESIGN SYSTEM
+   ========================================================================== */
+
+#gpk-locations-map-widget {
+    --color-green: #5F9D2F;         /* Verde Principal */
+    --color-gray: #6E6E6E;          /* Gris Principal */
+    --color-border: #E5E7EB;        /* Color Borde Cards */
+    --color-bg-search: #F3F3F5;     /* Color Fondo Buscador */
+    --color-white: #FFFFFF;
+    
+    /* Colores Categorías */
+    --color-abastecimiento: #5F9D2F;
+    --color-papel: #F76D6D;
+    --color-corporativo: #B5E062;
+    --color-corrugado: #BC4D2B;
+    
+    /* Tipografías */
+    --font-title: 'Outfit', 'Neue Haas Grotesk Display Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Sombras y Radios */
+    --radius-card: 3px;
+    --shadow-premium: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-popup: 2px 4px 12px rgba(0, 0, 0, 0.15);
+    
+    /* Animaciones */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    background-color: var(--color-white);
+    padding: 40px 20px;
+    width: 100%;
+    max-width: 1750px;
+    margin: 0 auto;
+}
+
+#gpk-locations-map-widget * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor Principal */
+#gpk-locations-map-widget .locations-map-container {
+    display: grid;
+    grid-template-columns: 442px 1fr;
+    gap: 30px;
+    align-items: start;
+    width: 100%;
+}
+
+/* ==========================================================================
+   PANEL IZQUIERDO - BÚSQUEDA Y LISTADO
+   ========================================================================== */
+
+#gpk-locations-map-widget .locations-panel {
+    display: flex;
+    flex-direction: column;
+    height: 779px;
+    overflow: hidden;
+}
+
+#gpk-locations-map-widget .locations-panel-header {
+    margin-bottom: 23px;
+}
+
+#gpk-locations-map-widget .locations-title {
+    font-family: var(--font-title);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--color-gray);
+    letter-spacing: -1px;
+}
+
+#gpk-locations-map-widget .locations-title strong.text-green {
+    font-weight: 700;
+    color: var(--color-green);
+}
+
+/* Buscador y Contenedor de Filtros */
+#gpk-locations-map-widget .locations-search {
+    width: 100%;
+    margin-bottom: 23px;
+}
+
+#gpk-locations-map-widget .search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+#gpk-locations-map-widget .search-input {
+    width: 100%;
+    background-color: var(--color-bg-search);
+    border: 2px solid transparent;
+    border-radius: var(--radius-card);
+    padding: 10px 45px 10px 17px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-gray);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+#gpk-locations-map-widget .search-input::placeholder {
+    color: var(--color-gray);
+    opacity: 0.8;
+}
+
+#gpk-locations-map-widget .search-input:focus {
+    background-color: var(--color-white);
+    border-color: var(--color-green);
+    box-shadow: 0 0 0 4px rgba(95, 157, 47, 0.1);
+}
+
+#gpk-locations-map-widget .search-icon {
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    width: 19px;
+    height: 19px;
+}
+
+#gpk-locations-map-widget .search-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Etiquetas de Filtros */
+#gpk-locations-map-widget .locations-filters {
+    margin-bottom: 23px;
+}
+
+#gpk-locations-map-widget .filters-label {
+    font-family: var(--font-title);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-gray);
+    margin-bottom: 8px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+#gpk-locations-map-widget .filters-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#gpk-locations-map-widget .filter-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-gray);
+    padding: 4px 0;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+#gpk-locations-map-widget .filter-tag:hover {
+    transform: translateY(-1px);
+    opacity: 0.8;
+}
+
+#gpk-locations-map-widget .filter-tag.active {
+    font-weight: 700;
+}
+
+#gpk-locations-map-widget .filter-tag .tag-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: box-shadow var(--transition-fast);
+}
+
+#gpk-locations-map-widget .filter-tag.active .tag-dot {
+    box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px currentColor;
+}
+
+/* Listado de Tarjetas */
+#gpk-locations-map-widget .locations-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-right: 5px;
+}
+
+/* Personalización del Scrollbar de la lista */
+#gpk-locations-map-widget .locations-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#gpk-locations-map-widget .locations-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#gpk-locations-map-widget .locations-list::-webkit-scrollbar-thumb {
+    background: rgba(110, 110, 110, 0.2);
+    border-radius: 3px;
+}
+
+#gpk-locations-map-widget .locations-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(110, 110, 110, 0.4);
+}
+
+/* Tarjeta Individual */
+#gpk-locations-map-widget .location-card {
+    display: flex;
+    align-items: start;
+    gap: 16px;
+    background-color: var(--color-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 20px 26px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    outline: none;
+    animation: cardFadeIn 0.3s ease forwards;
+    opacity: 0;
+}
+
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#gpk-locations-map-widget .location-card:hover {
+    border-color: var(--color-green);
+    background-color: rgba(95, 157, 47, 0.03);
+}
+
+#gpk-locations-map-widget .location-card.active {
+    border-color: var(--color-green);
+    background-color: rgba(95, 157, 47, 0.06);
+}
+
+/* Icono de ubicación en tarjeta */
+#gpk-locations-map-widget .card-icon-container {
+    width: 32px;
+    height: 45px;
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gpk-locations-map-widget .card-pin-bg {
+    position: absolute;
+    width: 16px;
+    height: 20px;
+    top: 2px;
+}
+
+#gpk-locations-map-widget .card-pin-circle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 7px;
+}
+
+/* Colores específicos para los pines de las tarjetas */
+#gpk-locations-map-widget .location-card.corporativo .card-icon-container {
+    color: var(--color-corporativo);
+}
+
+#gpk-locations-map-widget .location-card.planta-papel .card-icon-container {
+    color: var(--color-papel);
+}
+
+#gpk-locations-map-widget .location-card.abastecimiento .card-icon-container {
+    color: var(--color-abastecimiento);
+}
+
+/* Información de tarjeta */
+#gpk-locations-map-widget .location-info-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#gpk-locations-map-widget .location-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#gpk-locations-map-widget .location-name {
+    font-family: var(--font-title);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-gray);
+    line-height: 1.2;
+}
+
+#gpk-locations-map-widget .location-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    padding: 0 10px;
+    border-radius: var(--radius-card);
+    font-family: var(--font-title);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+#gpk-locations-map-widget .location-badge.corporativo {
+    background-color: var(--color-corporativo);
+    color: var(--color-gray);
+}
+
+#gpk-locations-map-widget .location-badge.planta-papel {
+    background-color: var(--color-papel);
+    color: var(--color-white);
+}
+
+#gpk-locations-map-widget .location-badge.abastecimiento {
+    background-color: var(--color-abastecimiento);
+    color: var(--color-white);
+}
+
+#gpk-locations-map-widget .location-address {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-gray);
+}
+
+/* Sin Resultados */
+#gpk-locations-map-widget .locations-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--color-gray);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-card);
+}
+
+#gpk-locations-map-widget .empty-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    opacity: 0.6;
+}
+
+#gpk-locations-map-widget .empty-title {
+    font-family: var(--font-title);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+#gpk-locations-map-widget .empty-desc {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+
+/* ==========================================================================
+   PANEL DERECHO - MAPA INTERACTIVO
+   ========================================================================== */
+
+#gpk-locations-map-widget .map-container {
+    height: 779px;
+    background-color: #F0F2F5;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    position: relative;
+}
+
+#gpk-locations-map-widget .map-image-wrapper {
+    position: relative;
+    width: 1233px;
+    height: 810px;
+    transform-origin: top left;
+}
+
+#gpk-locations-map-widget .map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Overlay click-out */
+#gpk-locations-map-widget .map-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: none;
+}
+
+#gpk-locations-map-widget .map-overlay.visible {
+    display: block;
+}
+
+/* Marcadores en el mapa */
+#gpk-locations-map-widget .map-pin {
+    position: absolute;
+    width: 26px;
+    height: 33px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transform: translate(-50%, -100%) scale(1);
+    transition: transform var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
+    z-index: 10;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+#gpk-locations-map-widget .map-pin.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -100%) scale(0.5);
+}
+
+#gpk-locations-map-widget .map-pin.corporativo {
+    background-image: url('widgets/locations-map/images/pin-corporativo.svg');
+    color: var(--color-corporativo);
+}
+
+#gpk-locations-map-widget .map-pin.planta-papel {
+    background-image: url('widgets/locations-map/images/pin-papel.svg');
+    color: var(--color-papel);
+}
+
+#gpk-locations-map-widget .map-pin.planta-corrugado {
+    background-image: url('widgets/locations-map/images/pin-corrugado.svg');
+    color: var(--color-corrugado);
+}
+
+#gpk-locations-map-widget .map-pin.abastecimiento {
+    background-image: url('widgets/locations-map/images/pin-abastecimiento.svg');
+    color: var(--color-abastecimiento);
+}
+
+#gpk-locations-map-widget .map-pin:hover {
+    transform: translate(-50%, -100%) scale(1.2);
+    z-index: 12;
+}
+
+#gpk-locations-map-widget .map-pin.active {
+    transform: translate(-50%, -100%) scale(1.2);
+    z-index: 100;
+}
+
+/* Pulsación para Pines Activos */
+#gpk-locations-map-widget .map-pin::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%) scale(0.5);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: currentColor;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+    transition: opacity var(--transition-fast);
+}
+
+#gpk-locations-map-widget .map-pin.active::after {
+    opacity: 1;
+    animation: pinActivePulse 2s infinite ease-out;
+}
+
+@keyframes pinActivePulse {
+    0% {
+        transform: translate(-50%, 50%) scale(0.5);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(-50%, 50%) scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Popup de Ubicación en el Mapa */
+#gpk-locations-map-widget .map-popup {
+    position: absolute;
+    width: 361px;
+    background-color: var(--color-white);
+    border-bottom: 2px solid var(--color-border);
+    border-left: 2px solid var(--color-border);
+    border-right: 2px solid var(--color-border);
+    border-radius: 3px;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+    z-index: 110;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, -100%) translateY(-15px) scale(0.95);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+    outline: none;
+}
+
+#gpk-locations-map-widget .map-popup.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -100%) translateY(-15px) scale(1);
+}
+
+/* Flecha inferior del popup */
+#gpk-locations-map-widget .map-popup::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--color-white);
+    filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.05));
+}
+
+#gpk-locations-map-widget .popup-image-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: #ECEFF1;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+#gpk-locations-map-widget .popup-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+#gpk-locations-map-widget .popup-content {
+    padding: 14px 14px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#gpk-locations-map-widget .popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+#gpk-locations-map-widget .popup-name {
+    font-family: var(--font-title);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-gray);
+    line-height: 1.2;
+    flex: 1;
+}
+
+#gpk-locations-map-widget .popup-category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    padding: 0 10px;
+    border-radius: var(--radius-card);
+    font-family: var(--font-title);
+    font-size: 12px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+#gpk-locations-map-widget .popup-category.corporativo {
+    background-color: var(--color-corporativo);
+    color: var(--color-gray);
+}
+
+#gpk-locations-map-widget .popup-category.planta-papel {
+    background-color: var(--color-papel);
+    color: var(--color-white);
+}
+
+#gpk-locations-map-widget .popup-category.abastecimiento {
+    background-color: var(--color-abastecimiento);
+    color: var(--color-white);
+}
+
+#gpk-locations-map-widget .popup-divider {
+    height: 1px;
+    background-color: var(--color-border);
+    width: 100%;
+}
+
+#gpk-locations-map-widget .popup-detail {
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    width: 100%;
+}
+
+#gpk-locations-map-widget .popup-detail-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    object-fit: contain;
+    margin-top: 1px;
+}
+
+#gpk-locations-map-widget .popup-detail-text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-gray);
+    flex: 1;
+}
+
+#gpk-locations-map-widget .popup-detail-text a {
+    color: var(--color-gray);
+    text-decoration: underline;
+    text-underline-position: from-font;
+    transition: color var(--transition-fast);
+}
+
+#gpk-locations-map-widget .popup-detail-text a:hover {
+    color: var(--color-green);
+}
+
+#gpk-locations-map-widget .popup-hours {
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-gray);
+    font-weight: 300;
+}
+
+#gpk-locations-map-widget .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-green);
+    margin-right: 8px;
+    flex-shrink: 0;
+    animation: statusDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusDotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.9); }
+}
+
+#gpk-locations-map-widget .status-open {
+    color: var(--color-green);
+    font-weight: 500;
+}
+
+#gpk-locations-map-widget .status-separator {
+    margin: 0 8px;
+}
+
+
+/* ==========================================================================
+   RESPONSIVIDAD
+   ========================================================================== */
+
+/* Pantallas grandes y medianas */
+@media (max-width: 1750px) {
+    #gpk-locations-map-widget {
+        max-width: 100%;
+    }
+}
+
+/* Contenedores escalados para pantallas menores a 1600px en el mapa */
+@media (min-width: 993px) and (max-width: 1600px) {
+    #gpk-locations-map-widget .locations-map-container {
+        grid-template-columns: 400px 1fr;
+    }
+    
+    #gpk-locations-map-widget .locations-panel {
+        height: 600px;
+    }
+    
+    #gpk-locations-map-widget .map-container {
+        height: 600px;
+    }
+    
+    #gpk-locations-map-widget .map-image-wrapper {
+        transform: scale(0.77);
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+    #gpk-locations-map-widget .locations-map-container {
+        grid-template-columns: 350px 1fr;
+    }
+    
+    #gpk-locations-map-widget .map-image-wrapper {
+        transform: scale(0.68);
+    }
+}
+
+/* Tablet (Retrato) & Móvil (Cambio a Layout Vertical Stack) */
+@media (max-width: 992px) {
+    #gpk-locations-map-widget {
+        padding: 20px 10px;
+    }
+    
+    #gpk-locations-map-widget .locations-map-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    #gpk-locations-map-widget .locations-panel {
+        height: auto;
+        max-height: 480px;
+    }
+    
+    #gpk-locations-map-widget .locations-title {
+        font-size: 32px;
+    }
+    
+    #gpk-locations-map-widget .locations-list {
+        max-height: 250px;
+    }
+    
+    #gpk-locations-map-widget .map-container {
+        height: 500px;
+    }
+    
+    #gpk-locations-map-widget .map-image-wrapper {
+        transform: scale(0.8);
+    }
+    
+    #gpk-locations-map-widget .map-popup {
+        width: 320px;
+    }
+}
+
+/* Móvil Pequeño */
+@media (max-width: 576px) {
+    #gpk-locations-map-widget .locations-title {
+        font-size: 26px;
+    }
+    
+    #gpk-locations-map-widget .filter-tag {
+        font-size: 11px;
+        gap: 6px;
+    }
+    
+    #gpk-locations-map-widget .filter-tag .tag-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    #gpk-locations-map-widget .location-card {
+        padding: 15px 18px;
+    }
+    
+    #gpk-locations-map-widget .location-name {
+        font-size: 16px;
+    }
+    
+    #gpk-locations-map-widget .location-address {
+        font-size: 12px;
+    }
+    
+    #gpk-locations-map-widget .map-container {
+        height: 400px;
+    }
+    
+    #gpk-locations-map-widget .map-image-wrapper {
+        transform: scale(0.65);
+    }
+    
+    #gpk-locations-map-widget .map-popup {
+        width: calc(100% - 24px);
+        transform: translate(-50%, -100%) translateY(-10px) scale(0.95);
+    }
+    
+    #gpk-locations-map-widget .map-popup.visible {
+        transform: translate(-50%, -100%) translateY(-10px) scale(1);
+    }
+}
+
+@media (max-width: 400px) {
+    #gpk-locations-map-widget .map-image-wrapper {
+        transform: scale(0.5);
+    }
+}
