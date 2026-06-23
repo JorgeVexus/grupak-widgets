@@ -121,8 +121,8 @@
 
 #gpk-products-widget .contour-path {
     fill: none;
-    stroke: var(--color-green);
-    stroke-width: 3; /* Highly visible premium thickness */
+    stroke: rgba(110, 110, 110, 0.5);
+    stroke-width: 1;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 8 6;
@@ -131,52 +131,52 @@
 }
 
 /* Base image state inside Slide 0 (Mode 0) */
-#gpk-products-widget .products-board.mode-0 .pillar-img {
+#gpk-products-widget .products-board.mode-0:not(.preloading) .pillar-img {
     opacity: 0;
 }
 
 /* Staggered sequential animations per column */
 
 /* 1. Caja (Cajas y empaques) */
-#gpk-products-widget .products-board.mode-0 #p-caja .contour-path {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-caja .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
     animation-delay: 0.1s, 0.1s;
 }
-#gpk-products-widget .products-board.mode-0 #p-caja .pillar-img {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-caja .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     animation-delay: 0.9s;
 }
 
 /* 2. Lámina (Hojas y láminas) */
-#gpk-products-widget .products-board.mode-0 #p-lamina .contour-path {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-lamina .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
     animation-delay: 1.1s, 1.1s;
 }
-#gpk-products-widget .products-board.mode-0 #p-lamina .pillar-img {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-lamina .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     animation-delay: 1.9s;
 }
 
 /* 3. Papel (Rollo de papel) */
-#gpk-products-widget .products-board.mode-0 #p-rollo .contour-path {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-rollo .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
     animation-delay: 2.1s, 2.1s;
 }
-#gpk-products-widget .products-board.mode-0 #p-rollo .pillar-img {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-rollo .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     animation-delay: 2.9s;
 }
 
 /* 4. Grabados (Pirámide de rodillos) */
-#gpk-products-widget .products-board.mode-0 #p-grabados .contour-path {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-grabados .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
     animation-delay: 3.1s, 3.1s;
 }
-#gpk-products-widget .products-board.mode-0 #p-grabados .pillar-img {
+#gpk-products-widget .products-board.mode-0:not(.preloading) #p-grabados .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     animation-delay: 3.9s;
 }
