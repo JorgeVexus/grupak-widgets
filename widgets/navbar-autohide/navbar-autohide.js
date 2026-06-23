@@ -38,7 +38,7 @@
     let ticking = false;
 
     function updateNavbar() {
-        const navbar = document.querySelector(".Navbar-Logo-Left");
+        const navbar = document.querySelector(".navbar-logo-left");
         if (!navbar) {
             log("Navbar NO encontrado en este tick.");
             ticking = false;
@@ -69,36 +69,16 @@
         }
     }
 
-    // ==================== INIT ====================
-    function init() {
-        injectStyles();
-
-        // Wait a tick para que Webflow termine de renderizar Symbols
-        setTimeout(() => {
-            const navbar = document.querySelector(".Navbar-Logo-Left");
-            
-            if (!navbar) {
-                log("ERROR: No se encontró el navbar con clase .Navbar-Logo-Left.");
-                log("Elementos W-NAV detectados:", document.querySelectorAll(".w-nav").length);
-                log("Todos los elementos Navbar:", document.querySelectorAll("nav").length);
-                
-                // Intentar fallback: buscar algún nav con w-nav clase
-                const fallbackNav = document.querySelector(".w-nav") || document.querySelector("nav[role='navigation']");
-                if (fallbackNav) {
-                    log("USANDO FALLBACK: aplicando autohide a elemento w-nav/nav encontrado.");
-                    applyNavbarHiding(fallbackNav);
-                    return;
-                }
-                return;
-            }
-
-            log("Navbar encontrado:", navbar);
-            applyNavbarHiding(navbar);
-        }, 200);
-    }
-
     function applyNavbarHiding(navbar) {
-        if (!navbar) return;
+        if (!navbar) {
+            log.apply(null, ["Navbar vacío, no se puede aplicar autohide."]);
+            return;
+        }
+
+        if (navbar.classList.contains("gpk-nav-autohide-enabled")) {
+            log("Navbar ya tiene gpk-nav-autohide-enabled, no se vuelve a aplicar.");
+            return;
+        }
 
         navbar.classList.add("gpk-nav-autohide-enabled");
 
@@ -114,6 +94,48 @@
         log("Listener de scroll agregado.");
     }
 
+    // ==================== INIT ====================
+    function init() {
+        injectStyles();
+
+        setTimeout(() => {
+            // Selector CORRECTO en kebab-case como sale en el DOM
+            const navbar = document.querySelector(".navbar-logo-left");
+
+            if (!navbar) {
+                log("ERROR: No se encontró el navbar con clase .navbar-logo-left.");
+
+                // Fallback más selectivo: buscar un nav fixed o un contenedor típico de navbar
+                const fixedNav = document.querySelector("nav[style*='position: fixed'], nav[style*='position:fixed']");
+                if (fixedNav) {
+                    log("USANDO FALLBACK: nav con position fixed detectado por style inline.");
+                    applyNavbarHiding(fixedNav);
+                    return;
+                }
+
+                const fallbackNav = document.querySelector(".w-nav");
+                if (fallbackNav) {
+                    log("USANDO FALLBACK: aplicando autohide a .w-nav");
+                    applyNavbarHiding(fallbackNav);
+                    return;
+                }
+
+                const navs = document.querySelectorAll("nav");
+                if (navs.length) {
+                    log("USANDO FALLBACK: seleccionando primer <nav> detectado.");
+                    applyNavbarHiding(navs[0]);
+                    return;
+                }
+
+                log("No hay fallback posible, no se encontró navbar.");
+                return;
+            }
+
+            log("Navbar encontrado en kebab-case:", navbar);
+            applyNavbarHiding(navbar);
+        }, 250);
+    }
+
     // ==================== BOOTSTRAP ====================
     log("Script cargado. Document ready state:", document.readyState);
 
@@ -123,9 +145,9 @@
         init();
     }
 
-    // Si carga asincrónico o después de Symbol renderizado, usar MutationObserver como respaldo
+    // Respaldo por si el navbar se renderiza dinámicamente
     const observer = new MutationObserver((mutations) => {
-        const navbar = document.querySelector(".Navbar-Logo-Left");
+        const navbar = document.querySelector(".navbar-logo-left");
         if (navbar && !navbar.classList.contains("gpk-nav-autohide-enabled")) {
             log("Navbar detectado tardíamente por MutationObserver, inicializando...");
             applyNavbarHiding(navbar);
