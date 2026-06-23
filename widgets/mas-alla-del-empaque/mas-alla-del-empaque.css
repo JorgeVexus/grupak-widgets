@@ -119,11 +119,12 @@
 
 .mas-alla-item-inner {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
-    padding: 15px 20px;
+    padding: 15px 30px;
     border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    min-height: 80px;
 }
 
 .mas-alla-item-num {
@@ -150,6 +151,9 @@
 
 /* Active State for Items */
 .mas-alla-item.active .mas-alla-item-inner {
+    background-image: url('images/vector svg.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     background-color: var(--mas-alla-green);
     color: white;
     transform: translateX(10px);
