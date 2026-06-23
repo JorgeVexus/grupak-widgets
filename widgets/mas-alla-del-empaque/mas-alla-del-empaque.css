@@ -1,0 +1,190 @@
+:root {
+    --mas-alla-gray: #6E6E6E;
+    --mas-alla-green: #5F9D2F;
+    --mas-alla-dark-green: #02321E;
+    --mas-alla-deep-green: #062819;
+    --mas-alla-bg-light: #F2F9E9; /* Light green background based on image */
+    --mas-alla-transparent-green: rgba(104, 189, 72, 0.8);
+    --mas-alla-watermark: rgba(2, 50, 30, 0.2);
+    --font-main: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.mas-alla-container {
+    position: relative;
+    width: 100%;
+    font-family: var(--font-main);
+    background-color: #fff;
+}
+
+.mas-alla-sticky-wrapper {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Image Section */
+.mas-alla-image-section {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    background-color: #000;
+}
+
+.mas-alla-image-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.mas-alla-slide-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    z-index: 1;
+}
+
+.mas-alla-slide-img.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Content Section */
+.mas-alla-content-section {
+    flex: 1;
+    background-color: var(--mas-alla-bg-light);
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    /* The "cut-out" effect from Figma */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 95% 90%, 95% 100%, 0% 100%);
+}
+
+.mas-alla-header {
+    margin-bottom: 50px;
+    max-width: 600px;
+}
+
+.mas-alla-badge {
+    display: inline-block;
+    background-color: var(--mas-alla-green);
+    color: white;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.mas-alla-title {
+    font-size: 48px;
+    font-weight: 900; /* Black */
+    color: var(--mas-alla-gray);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.mas-alla-title .highlight {
+    color: var(--mas-alla-green);
+}
+
+.mas-alla-subtitle {
+    font-size: 18px;
+    color: var(--mas-alla-dark-green);
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+/* Items List */
+.mas-alla-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 700px;
+}
+
+.mas-alla-item {
+    transition: transform 0.3s ease;
+}
+
+.mas-alla-item-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.mas-alla-item-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--mas-alla-watermark);
+    min-width: 40px;
+}
+
+.mas-alla-item-text strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--mas-alla-dark-green);
+    margin-bottom: 5px;
+}
+
+.mas-alla-item-text p {
+    font-size: 16px;
+    color: var(--mas-alla-dark-green);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Active State for Items */
+.mas-alla-item.active .mas-alla-item-inner {
+    background-color: var(--mas-alla-green);
+    color: white;
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.mas-alla-item.active .mas-alla-item-num {
+    color: rgba(255,255,255,0.5);
+}
+
+.mas-alla-item.active .mas-alla-item-text strong,
+.mas-alla-item.active .mas-alla-item-text p {
+    color: white;
+}
+
+/* Scroll Spacer */
+.mas-alla-scroll-spacer {
+    height: 400vh; /* 4 slides, 100vh each to trigger transition */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .mas-alla-sticky-wrapper {
+        flex-direction: column;
+        height: auto;
+        position: relative;
+    }
+    .mas-alla-image-section {
+        height: 50vh;
+    }
+    .mas-alla-content-section {
+        padding: 40px 20px;
+        clip-path: none;
+    }
+    .mas-alla-title {
+        font-size: 32px;
+    }
+}
