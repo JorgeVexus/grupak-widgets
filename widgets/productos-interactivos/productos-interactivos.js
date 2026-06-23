@@ -34,6 +34,7 @@
         let currentSlide = 0; 
         const totalSlides = 10;
         let isAnimating = false;
+        let isPreloading = true;
 
         // Scoped DOM Elements to prevent clashes
         const root = document.getElementById("gpk-products-widget");
@@ -74,6 +75,7 @@
 
         // --- Slide Controller ---
         function goToSlide(index) {
+            if (isPreloading) return; // Block direct navigation during preloading
             if (index < 0 || index >= totalSlides) return;
 
             // Desktop scroll management
@@ -95,6 +97,8 @@
         }
 
         function handleScroll() {
+            if (isPreloading) return; // Block scroll events during preloading
+            
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const trackerTop = rect.top + scrollTop;
@@ -114,7 +118,7 @@
 
         function updateUI() {
             // 1. Set mode class on board
-            board.className = `products-board mode-${currentSlide}`;
+            board.className = `products-board mode-${currentSlide}${isPreloading ? ' preloading' : ''}`;
 
             // 2. Highlight dot indicators
             const dots = dotsContainer.querySelectorAll(".dot-indicator");
@@ -198,6 +202,7 @@
 
             document.addEventListener("keydown", (e) => {
                 if (window.innerWidth <= 1024) return;
+                if (isPreloading) return; // Block key navigation during preloading
                 
                 const rect = root.getBoundingClientRect();
                 const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
@@ -218,14 +223,77 @@
             window.addEventListener("scroll", handleScroll, { passive: true });
         }
 
+        // --- Preloader Animation Timeline ---
+        function startPreloaderAnimation() {
+            const preloader = root.querySelector("#gpk-preloader");
+            if (!preloader) return;
+
+            // Step 1: Logo fades in immediately
+            preloader.classList.add("preload-step-1");
+
+            // Step 2: Zoom revertido (reverse zoom shape)
+            setTimeout(() => {
+                preloader.classList.add("preload-step-2");
+            }, 700);
+
+            // Step 3: Shape fill fades out, dashed border appears
+            setTimeout(() => {
+                preloader.classList.add("preload-step-3");
+            }, 1500);
+
+            // Step 4: Logo slides out, shape fades, board outline fades in
+            setTimeout(() => {
+                preloader.classList.add("preload-step-4");
+            }, 2100);
+
+            // Step 5: Transition to white board background
+            setTimeout(() => {
+                preloader.classList.add("preload-step-5");
+            }, 2800);
+
+            // Completion: preloader disappears, Slide 0 contents fade in, enable interactions
+            setTimeout(() => {
+                preloader.style.display = "none";
+                board.classList.remove("preloading");
+                isPreloading = false;
+                // Run scroll handler once to synchronize in case they scrolled slightly
+                handleScroll();
+            }, 3400);
+        }
+
+        // --- Intersection Observer to Trigger Preloader ---
+        function initPreloaderObserver() {
+            const preloader = root.querySelector("#gpk-preloader");
+            if (!preloader) {
+                isPreloading = false;
+                board.classList.remove("preloading");
+                return;
+            }
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            startPreloaderAnimation();
+                            observer.unobserve(root); // Run only once
+                        }
+                    });
+                }, {
+                    threshold: 0.15
+                });
+                observer.observe(root);
+            } else {
+                startPreloaderAnimation();
+            }
+        }
+
         // --- Initialize ---
         function init() {
             buildDots();
             scaleBoard();
             setupEvents();
-
-            handleScroll();
-            setTimeout(updateUI, 100);
+            initPreloaderObserver();
+            updateUI();
         }
 
         init();
