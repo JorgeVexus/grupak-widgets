@@ -1,0 +1,335 @@
+.gpk-products-section {
+    --color-primary: #5F9D2F;
+    --color-primary-hover: #73c03b;
+    --color-grey-dark: #6E6E6E;
+    --color-grey-medium: #6E6E6E;
+    --color-white: #FFFFFF;
+    
+    --font-title: inherit;
+    --font-body: inherit;
+
+    width: 100%;
+    background-color: var(--color-white);
+    padding: 100px 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: inherit;
+}
+
+.gpk-products-section * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.gpk-products-container {
+    width: 100%;
+    max-width: 1850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Título de la Sección */
+.gpk-products-header-title {
+    font-family: var(--font-title);
+    font-size: clamp(32px, 3.5vw, 60px);
+    font-weight: 800;
+    color: var(--color-grey-dark);
+    margin-bottom: 60px;
+    text-align: left;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.gpk-products-header-title .gpk-highlight {
+    color: var(--color-primary);
+    font-weight: 900;
+}
+
+/* Lista de Productos */
+.gpk-products-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+/* Item individual */
+.gpk-product-item {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: z-index 0.3s;
+    z-index: 1;
+}
+
+.gpk-product-item:hover {
+    z-index: 5;
+}
+
+/* SVG de fondo responsivo con vector-effect */
+.gpk-product-bg-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gpk-product-bg-svg path {
+    fill: var(--color-white);
+    stroke: #8C8C8C;
+    stroke-width: 1.2px;
+    /* non-scaling-stroke previene que el grosor del borde se distorsione al estirar el SVG */
+    vector-effect: non-scaling-stroke;
+    transition: fill 0.4s cubic-bezier(0.25, 1, 0.5, 1), stroke 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Contenido interno del item */
+.gpk-product-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 87px;
+    z-index: 2;
+}
+
+/* Título del Producto (e.g. Papel) */
+.gpk-product-title {
+    position: relative;
+    left: 85px; /* Compone left-[172px] con los 87px de padding del contenedor */
+    font-family: var(--font-title);
+    font-size: 50px;
+    font-weight: 900;
+    color: var(--color-grey-medium);
+    margin: 0;
+    line-height: 1;
+    transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease;
+    white-space: nowrap;
+    user-select: none;
+}
+
+/* Bloque de Información (Descripción + Link) */
+.gpk-product-info {
+    position: absolute;
+    top: 50%;
+    right: 87px;
+    transform: translateY(-45%) scale(0.98);
+    width: 45%;
+    max-width: 824px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.gpk-product-description {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--color-white);
+    margin: 0;
+}
+
+/* Saber más link */
+.gpk-saber-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-white);
+    font-family: var(--font-title);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    width: fit-content;
+    margin-top: 4px;
+    transition: opacity 0.25s ease;
+}
+
+.gpk-saber-mas:hover {
+    opacity: 0.85;
+}
+
+.gpk-arrow-svg {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.gpk-saber-mas:hover .gpk-arrow-svg {
+    transform: translateX(6px);
+}
+
+/* ==========================================================================
+   EFECTOS HOVER (Solo aplica en pantallas grandes con puntero/mouse)
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+    .gpk-product-item:hover .gpk-product-bg-svg path {
+        fill: var(--color-primary);
+        stroke: var(--color-primary);
+    }
+
+    .gpk-product-item:hover .gpk-product-title {
+        left: 0;
+        color: var(--color-white);
+    }
+
+    .gpk-product-item:hover .gpk-product-info {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* Clase activa para soporte JS (Mobile o fallback) */
+.gpk-product-item.gpk-active .gpk-product-bg-svg path {
+    fill: var(--color-primary);
+    stroke: var(--color-primary);
+}
+
+.gpk-product-item.gpk-active .gpk-product-title {
+    left: 0;
+    color: var(--color-white);
+}
+
+.gpk-product-item.gpk-active .gpk-product-info {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablet y Mobile <= 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .gpk-products-section {
+        padding: 60px 24px;
+    }
+
+    .gpk-products-header-title {
+        margin-bottom: 40px;
+    }
+
+    /* En pantallas medianas y móviles, convertimos los items en tarjetas separadas */
+    .gpk-product-item {
+        height: auto;
+        margin-bottom: 16px;
+        background-color: var(--color-white);
+        border: 1.5px solid #8C8C8C;
+        border-radius: 16px;
+        padding: 24px;
+        transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gpk-product-item:hover {
+        z-index: 1;
+    }
+
+    /* Ocultamos el SVG de fondo complejo en mobile */
+    .gpk-product-bg-svg {
+        display: none;
+    }
+
+    .gpk-product-content {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        height: auto;
+    }
+
+    .gpk-product-title {
+        position: relative;
+        left: 0 !important;
+        font-size: 32px;
+        color: var(--color-grey-dark);
+        white-space: normal;
+        transition: color 0.35s ease;
+    }
+
+    /* El bloque se convierte en un acordeón expandible */
+    .gpk-product-info {
+        position: relative;
+        top: 0;
+        right: 0;
+        transform: none !important;
+        width: 100%;
+        max-width: 100%;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        margin-top: 0;
+        gap: 16px;
+        transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, margin-top 0.4s ease;
+    }
+
+    .gpk-product-description {
+        color: var(--color-grey-medium);
+        font-size: 16px;
+        transition: color 0.35s ease;
+    }
+
+    .gpk-saber-mas {
+        color: var(--color-primary);
+        transition: color 0.35s ease;
+    }
+
+    /* Estado activo en mobile (acordeón expandido) */
+    .gpk-product-item.gpk-active {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        box-shadow: 0 10px 25px rgba(95, 157, 47, 0.18);
+    }
+
+    .gpk-product-item.gpk-active .gpk-product-title {
+        color: var(--color-white);
+    }
+
+    .gpk-product-item.gpk-active .gpk-product-description {
+        color: var(--color-white);
+    }
+
+    .gpk-product-item.gpk-active .gpk-saber-mas {
+        color: var(--color-white);
+    }
+
+    .gpk-product-item.gpk-active .gpk-product-info {
+        opacity: 1;
+        max-height: 300px; /* Suficiente altura para cualquier descripción */
+        margin-top: 16px;
+        pointer-events: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .gpk-products-section {
+        padding: 40px 16px;
+    }
+
+    .gpk-product-item {
+        padding: 20px;
+    }
+
+    .gpk-product-title {
+        font-size: 24px;
+    }
+
+    .gpk-product-description {
+        font-size: 15px;
+    }
+
+    .gpk-saber-mas {
+        font-size: 15px;
+    }
+}

@@ -74,8 +74,17 @@
         }
 
         // --- Slide Controller ---
-        function goToSlide(index) {
-            if (isPreloading) return; // Block direct navigation during preloading
+        function goToSlide(index, forceSkipPreload = false) {
+            if (isPreloading) {
+                if (forceSkipPreload) {
+                    const preloader = root.querySelector("#gpk-preloader");
+                    if (preloader) preloader.style.display = "none";
+                    board.classList.remove("preloading");
+                    isPreloading = false;
+                } else {
+                    return; // Block direct navigation during preloading
+                }
+            }
             if (index < 0 || index >= totalSlides) return;
 
             // Desktop scroll management
@@ -95,6 +104,10 @@
                 behavior: "smooth"
             });
         }
+
+        window.gpkGoToProductsSlide = function(index) {
+            goToSlide(index, true);
+        };
 
         function handleScroll() {
             if (isPreloading) return; // Block scroll events during preloading
