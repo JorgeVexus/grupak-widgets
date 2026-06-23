@@ -1,21 +1,24 @@
 (function() {
     "use strict";
 
-    const baseURL = "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
+    const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    const baseURL = isLocalhost 
+        ? "/widgets/linea-tiempo" 
+        : "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-timeline-styles")) {
         const link = document.createElement("link");
         link.id = "gpk-timeline-styles";
         link.rel = "stylesheet";
-        link.href = `${baseURL}/linea-tiempo.css`;
+        link.href = isLocalhost ? "widgets/linea-tiempo/linea-tiempo.css" : `${baseURL}/linea-tiempo.css`;
         document.head.appendChild(link);
     }
 
     // 2. Fetch and inject HTML markup if root container exists and hasn't been populated
     const container = document.getElementById("gpk-timeline-widget-root");
     if (container) {
-        fetch(`${baseURL}/linea-tiempo.html`)
+        fetch(isLocalhost ? "widgets/linea-tiempo/linea-tiempo.html" : `${baseURL}/linea-tiempo.html`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading timeline widget HTML");
                 return res.text();
@@ -26,12 +29,49 @@
             })
             .catch(err => console.error("Error loading timeline widget:", err));
     } else if (document.getElementById("gpk-timeline-widget")) {
-        // Fallback for direct integration / static pre-rendered containers
         initWidget();
     }
 
-    // Encapsulated widget controller
     function initWidget() {
+        const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        const baseURL = isLocalhost 
+            ? "/widgets/linea-tiempo" 
+            : "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
+
+        // Scoped DOM elements under the widget root
+        const root = document.getElementById("gpk-timeline-widget");
+        if (!root) return;
+
+        // Dynamically prepend baseURL to relative image sources inside the widget HTML
+        function resolveRelativeImages(containerElement) {
+            if (!containerElement) return;
+            const imgs = containerElement.querySelectorAll("img");
+            imgs.forEach(img => {
+                const src = img.getAttribute("src");
+                if (src && !src.startsWith("http") && !src.startsWith("data:")) {
+                    const cleanBase = baseURL.endsWith("/") ? baseURL.slice(0, -1) : baseURL;
+                    const cleanSrc = src.startsWith("/") ? src.slice(1) : src;
+                    if (isLocalhost) {
+                        img.src = `widgets/linea-tiempo/${cleanSrc}`;
+                    } else {
+                        img.src = `${cleanBase}/${cleanSrc}`;
+                    }
+                }
+            });
+        }
+
+        // Run image resolution
+        resolveRelativeImages(root);
+
+        // Dynamically set background vector
+        const board = root.querySelector("#timeline-board");
+        if (board) {
+          const cleanBase = baseURL.endsWith("/") ? baseURL.slice(0, -1) : baseURL;
+          const bgUrl = isLocalhost 
+            ? "widgets/linea-tiempo/images/bg%20vector.svg" 
+            : `${cleanBase}/images/bg%20vector.svg`;
+          board.style.backgroundImage = `url('${bgUrl}')`;
+        }
         // Milestones Data matching Figma design system coordinates
         const milestones = [
           { year: "1957", label: "Inicio de operaciones", top: 86 },
