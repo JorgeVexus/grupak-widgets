@@ -28,6 +28,10 @@
             .gpk-nav-autohide-enabled.gpk-nav-hidden {
                 transform: translateY(-110%) !important;
             }
+            .gpk-nav-autohide-enabled.gpk-nav-bg-white {
+                background-color: #ffffff !important;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+            }
         `;
         document.head.appendChild(style);
         log("Estilos inyectados con !important para forzar aplicación.");
@@ -49,13 +53,16 @@
 
         if (currentScrollY <= 0) {
             navbar.classList.remove("gpk-nav-hidden");
-            log("ScrollY <= 0 -> SHOW navbar");
+            navbar.classList.add("gpk-nav-bg-white");
+            log("ScrollY <= 0 -> SHOW navbar + bg white");
         } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
             navbar.classList.add("gpk-nav-hidden");
-            log("Scroll hacia ABAJO + >80px -> HIDE navbar");
+            navbar.classList.remove("gpk-nav-bg-white");
+            log("Scroll hacia ABAJO + >80px -> HIDE navbar + quitar bg");
         } else if (currentScrollY < lastScrollY) {
             navbar.classList.remove("gpk-nav-hidden");
-            log("Scroll hacia ARRIBA -> SHOW navbar");
+            navbar.classList.add("gpk-nav-bg-white");
+            log("Scroll hacia ARRIBA -> SHOW navbar + bg white");
         }
 
         lastScrollY = currentScrollY;
@@ -81,14 +88,21 @@
         }
 
         navbar.classList.add("gpk-nav-autohide-enabled");
+        navbar.classList.add("gpk-nav-bg-white");
 
         if (window.scrollY <= 0) {
             navbar.classList.remove("gpk-nav-hidden");
+            navbar.classList.add("gpk-nav-bg-white");
         } else if (window.scrollY > 80) {
             navbar.classList.add("gpk-nav-hidden");
+            navbar.classList.remove("gpk-nav-bg-white");
+        } else {
+            // Entre 0 y 80px: visible con fondo blanco
+            navbar.classList.remove("gpk-nav-hidden");
+            navbar.classList.add("gpk-nav-bg-white");
         }
 
-        log("Navbar preparado. scrollY actual:", window.scrollY, "hidden:", navbar.classList.contains("gpk-nav-hidden"));
+        log("Navbar preparado. scrollY actual:", window.scrollY, "hidden:", navbar.classList.contains("gpk-nav-hidden"), "bg-white:", navbar.classList.contains("gpk-nav-bg-white"));
 
         window.addEventListener("scroll", onScroll, { passive: true });
         log("Listener de scroll agregado.");
@@ -99,13 +113,11 @@
         injectStyles();
 
         setTimeout(() => {
-            // Selector CORRECTO en kebab-case como sale en el DOM
             const navbar = document.querySelector(".navbar-logo-left");
 
             if (!navbar) {
                 log("ERROR: No se encontró el navbar con clase .navbar-logo-left.");
 
-                // Fallback más selectivo: buscar un nav fixed o un contenedor típico de navbar
                 const fixedNav = document.querySelector("nav[style*='position: fixed'], nav[style*='position:fixed']");
                 if (fixedNav) {
                     log("USANDO FALLBACK: nav con position fixed detectado por style inline.");
@@ -145,7 +157,6 @@
         init();
     }
 
-    // Respaldo por si el navbar se renderiza dinámicamente
     const observer = new MutationObserver((mutations) => {
         const navbar = document.querySelector(".navbar-logo-left");
         if (navbar && !navbar.classList.contains("gpk-nav-autohide-enabled")) {
