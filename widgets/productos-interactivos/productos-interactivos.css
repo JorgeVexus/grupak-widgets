@@ -383,14 +383,14 @@
 }
 
 #gpk-products-widget .products-board.mode-0 #p-caja {
-    left: 720px;
+    left: 850px;
     top: 180px;
     width: 630px;
     height: 380px;
     z-index: 10;
 }
 #gpk-products-widget .products-board.mode-0 #p-lamina {
-    left: 1040px;
+    left: 1090px;
     top: 380px;
     width: 340px;
     height: 340px;
@@ -475,7 +475,7 @@
 
 #gpk-products-widget .overview-grid-new {
     position: absolute;
-    top: 590px;
+    top: 550px;
     left: 105px;
     width: 1640px;
     display: grid;
@@ -597,9 +597,9 @@
 }
 #gpk-products-widget .products-board.mode-1 #p-lamina {
     left: 525px;
-    top: 220px;
+    top: 240px;
     width: 380px;
-    height: 310px;
+    height: 270px;
     opacity: 1;
     pointer-events: auto;
 }
