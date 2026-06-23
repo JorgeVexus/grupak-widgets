@@ -14,7 +14,7 @@
   width: 100%;
   position: relative;
   font-family: var(--font-body);
-  background-color: var(--color-grey-light);
+  background-color: transparent;
   color: var(--color-grey-dark);
 }
 
@@ -41,7 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-grey-light);
+  background-color: transparent;
   overflow: hidden;
   position: sticky;
   top: 0;
@@ -50,16 +50,11 @@
 #gpk-timeline-widget .timeline-board {
   width: 1850px;
   height: 1028px;
-  background-image: url('images/bg vector.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
   background-color: transparent;
   position: relative;
   overflow: hidden;
   transform-origin: center center;
   flex-shrink: 0;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.08));
 }
 
 /* Decorative background curve */
@@ -1129,7 +1124,7 @@
     overflow: visible !important;
     position: static !important;
     padding: 0 !important;
-    background-color: var(--color-grey-light) !important;
+    background-color: transparent !important;
   }
 
   #gpk-timeline-widget .timeline-board {
@@ -1139,7 +1134,7 @@
     padding: 40px 15px 60px 15px !important;
     display: block !important;
     box-shadow: none !important;
-    background-color: var(--color-grey-light) !important;
+    background-color: transparent !important;
   }
 
   #gpk-timeline-widget .bg-vector-container {

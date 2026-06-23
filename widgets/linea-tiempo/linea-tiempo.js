@@ -63,14 +63,17 @@
         // Run image resolution
         resolveRelativeImages(root);
 
-        // Dynamically set background vector
-        const board = root.querySelector("#timeline-board");
-        if (board) {
+        // Dynamically set background vector on the viewport (100% width/height coverage)
+        const viewport = root.querySelector(".timeline-viewport");
+        if (viewport) {
           const cleanBase = baseURL.endsWith("/") ? baseURL.slice(0, -1) : baseURL;
           const bgUrl = isLocalhost 
             ? "widgets/linea-tiempo/images/bg%20vector.svg" 
             : `${cleanBase}/images/bg%20vector.svg`;
-          board.style.backgroundImage = `url('${bgUrl}')`;
+          viewport.style.backgroundImage = `url('${bgUrl}')`;
+          viewport.style.backgroundSize = "100% 100%";
+          viewport.style.backgroundRepeat = "no-repeat";
+          viewport.style.backgroundPosition = "center";
         }
         // Milestones Data matching Figma design system coordinates
         const milestones = [
