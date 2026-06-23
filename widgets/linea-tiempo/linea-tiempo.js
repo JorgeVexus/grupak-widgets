@@ -94,11 +94,6 @@
         let isAnimating = false;
         const animationDuration = 600;
 
-        // Scoped DOM elements under the widget root
-        const root = document.getElementById("gpk-timeline-widget");
-        if (!root) return;
-
-        const board = root.querySelector("#timeline-board");
         const tracker = root.querySelector(".timeline-scroll-tracker");
         const yearsSidebar = root.querySelector("#years-sidebar");
         const slides = root.querySelectorAll(".timeline-slide");
