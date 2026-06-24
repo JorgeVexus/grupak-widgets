@@ -1,0 +1,436 @@
+:root {
+    --com-bg: #ffffff;
+    --com-gray: #6e6e6e;
+    --com-gray-soft: #8a8a8a;
+    --com-green: #9ac35c;
+    --com-orange: #f15a24;
+    --com-font: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --com-ease: cubic-bezier(0.25, 1, 0.5, 1);
+    --com-dur: 760ms;
+}
+
+.com-widget {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--com-bg);
+    color: var(--com-gray);
+    font-family: var(--com-font);
+    overflow: clip;
+}
+
+.com-widget *,
+.com-widget *::before,
+.com-widget *::after {
+    box-sizing: border-box;
+}
+
+.com-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    background: var(--com-bg);
+}
+
+.com-board {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1768.5px;
+    height: 959px;
+    transform: translate(-50%, -50%) scale(var(--com-scale, 1));
+    transform-origin: center;
+}
+
+.com-media {
+    position: absolute;
+    right: 946.5px;
+    top: 0;
+    width: 822.72px;
+    height: 959px;
+    overflow: hidden;
+}
+
+.com-media-track {
+    display: flex;
+    height: 100%;
+    width: max-content;
+    transform: translateX(0);
+    transition: transform var(--com-dur) var(--com-ease);
+}
+
+.com-photo {
+    position: relative;
+    flex: 0 0 822.72px;
+    width: 822.72px;
+    height: 959px;
+    margin: 0;
+    background: #ececec;
+}
+
+.com-photo::after {
+    content: "Coloca la imagen indicada en widgets/comunidad/images";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 40px;
+    color: #9a9a9a;
+    font-size: 22px;
+    line-height: 1.25;
+    text-align: center;
+    opacity: 0;
+}
+
+.com-photo.is-missing::after {
+    opacity: 1;
+}
+
+.com-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.com-photo.is-missing img {
+    opacity: 0;
+}
+
+.com-content {
+    position: absolute;
+    left: 895px;
+    top: 0;
+    width: 874px;
+    height: 959px;
+}
+
+.com-heading {
+    position: absolute;
+    left: 0;
+    top: 249px;
+    width: 796px;
+    transition: top var(--com-dur) var(--com-ease), transform var(--com-dur) var(--com-ease);
+}
+
+.com-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 132px;
+    height: 40px;
+    margin-bottom: 22px;
+    background: var(--com-orange);
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 78%, 94% 83%, 92% 100%, 75% 100%, 75% 92%, 24% 92%, 24% 100%, 4% 100%, 4% 78%, 0 78%);
+}
+
+.com-heading h2 {
+    width: 796px;
+    margin: 0 0 16px;
+    color: var(--com-gray);
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0;
+}
+
+.com-rule {
+    display: block;
+    width: 723px;
+    height: 1px;
+    margin-bottom: 15px;
+    background-image: linear-gradient(to right, var(--com-gray) 45%, transparent 0);
+    background-size: 10px 1px;
+    opacity: 0.75;
+}
+
+.com-intro {
+    width: 736px;
+    color: var(--com-gray);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.35;
+    opacity: 1;
+    transition: opacity 420ms ease, transform var(--com-dur) var(--com-ease);
+}
+
+.com-intro p {
+    margin: 0 0 18px;
+}
+
+.com-intro p:last-child {
+    color: #5f9d2f;
+    margin-bottom: 0;
+}
+
+.com-accordion {
+    position: absolute;
+    left: -93px;
+    top: 439px;
+    width: 967px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 30px;
+    opacity: 0;
+    transform: translateY(44px);
+    transition: top var(--com-dur) var(--com-ease), gap var(--com-dur) var(--com-ease), opacity var(--com-dur) ease, transform var(--com-dur) var(--com-ease);
+}
+
+.com-panel {
+    position: relative;
+    width: 100%;
+    height: 92px;
+    overflow: hidden;
+    transition: height var(--com-dur) var(--com-ease), opacity var(--com-dur) ease;
+}
+
+.com-panel h3 {
+    position: relative;
+    width: 966.5px;
+    height: 92px;
+    margin: 0;
+    padding: 12px 32px 0 254px;
+    color: #ffffff;
+    background: var(--com-green);
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 1.35;
+    white-space: nowrap;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 13% 100%, 11% 78%, 0 78%);
+}
+
+.com-panel-copy {
+    width: 680px;
+    margin-left: 254px;
+    padding-top: 29px;
+    color: var(--com-gray);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.35;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--com-dur) ease 120ms, transform var(--com-dur) var(--com-ease) 120ms;
+}
+
+.com-panel-copy p {
+    margin: 0 0 13px;
+}
+
+.com-panel-copy strong {
+    font-weight: 700;
+}
+
+.com-state-0 .com-media-track {
+    transform: translateX(0);
+}
+
+.com-state-1 .com-media-track {
+    transform: translateX(-822.72px);
+}
+
+.com-state-2 .com-media-track {
+    transform: translateX(-1645.44px);
+}
+
+.com-state-3 .com-media-track,
+.com-state-4 .com-media-track {
+    transform: translateX(-2468.16px);
+}
+
+.com-state-1 .com-heading,
+.com-state-2 .com-heading,
+.com-state-3 .com-heading,
+.com-state-4 .com-heading {
+    top: 0;
+}
+
+.com-state-4 .com-heading {
+    transform: translateY(0);
+}
+
+.com-state-1 .com-intro,
+.com-state-2 .com-intro,
+.com-state-3 .com-intro,
+.com-state-4 .com-intro {
+    opacity: 0;
+    transform: translateY(-22px);
+    pointer-events: none;
+}
+
+.com-state-1 .com-accordion,
+.com-state-2 .com-accordion,
+.com-state-3 .com-accordion,
+.com-state-4 .com-accordion {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.com-state-1 .com-accordion {
+    top: 220px;
+    gap: 196px;
+}
+
+.com-state-1 .com-panel-social {
+    height: 337px;
+}
+
+.com-state-1 .com-panel-desarrollo,
+.com-state-1 .com-panel-educacion {
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.com-state-1 .com-panel-social .com-panel-copy {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.com-state-2 .com-accordion {
+    top: 220px;
+    gap: 30px;
+}
+
+.com-state-2 .com-panel-desarrollo {
+    height: 632px;
+}
+
+.com-state-2 .com-panel-desarrollo .com-panel-copy {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.com-state-3 .com-accordion {
+    top: 220px;
+    gap: 30px;
+}
+
+.com-state-3 .com-panel-educacion {
+    height: 511px;
+}
+
+.com-state-3 .com-panel-educacion .com-panel-copy {
+    width: 698px;
+    font-size: 15px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.com-state-4 .com-accordion {
+    top: 307px;
+    gap: 63px;
+}
+
+.com-state-4 .com-panel-copy {
+    opacity: 0;
+}
+
+.com-scroll-spacer {
+    height: 500vh;
+}
+
+@media (max-width: 900px) {
+    .com-sticky {
+        position: relative;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .com-board {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        height: auto;
+        padding: 0 18px 64px;
+        transform: none !important;
+    }
+
+    .com-media,
+    .com-content,
+    .com-heading,
+    .com-accordion,
+    .com-panel,
+    .com-panel-copy {
+        position: relative;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        width: 100%;
+        height: auto !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .com-media {
+        height: auto;
+        overflow: visible;
+        margin-bottom: 32px;
+    }
+
+    .com-media-track {
+        display: grid;
+        gap: 28px;
+        width: 100%;
+        transform: none !important;
+    }
+
+    .com-photo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 822 / 959;
+        flex-basis: auto;
+    }
+
+    .com-content {
+        height: auto;
+    }
+
+    .com-heading {
+        margin-bottom: 28px;
+    }
+
+    .com-heading h2 {
+        width: 100%;
+        font-size: clamp(32px, 10vw, 50px);
+    }
+
+    .com-rule,
+    .com-intro {
+        width: 100%;
+    }
+
+    .com-accordion {
+        display: grid;
+        gap: 24px !important;
+    }
+
+    .com-panel h3 {
+        width: 100%;
+        height: auto;
+        min-height: 70px;
+        padding: 14px 22px 14px 72px;
+        font-size: clamp(26px, 7vw, 42px);
+        white-space: normal;
+    }
+
+    .com-panel-copy {
+        margin-left: 0;
+        padding: 18px 0 0;
+        font-size: 15px !important;
+    }
+
+    .com-scroll-spacer {
+        height: 0;
+    }
+}
