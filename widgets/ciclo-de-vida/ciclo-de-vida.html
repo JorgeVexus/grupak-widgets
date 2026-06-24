@@ -1,0 +1,178 @@
+<div id="gpk-ciclo-widget" class="lifecycle-container lifecycle-state-0">
+
+  <div class="lifecycle-sticky-wrapper">
+
+    <!-- Scale board containing all fixed coordinates layout -->
+    <div class="lifecycle-board" id="lifecycle-board">
+
+      <!-- Brand Logo: Large & centered in state 0, shrinks and fades out by state 1 -->
+      <div class="lifecycle-logo-wrap">
+        <img src="images/logo-grupak.svg" class="lifecycle-logo" alt="Grupak">
+      </div>
+
+      <!-- Main Header Badge & Title (States 1-5, and fades back in on State 14) -->
+      <header class="main-header" id="main-header">
+        <div class="header-badge">
+          <svg viewBox="0 0 132 40" class="header-badge-bg">
+            <path d="M2.64102e-06 0L132 0.163367L131.968 30.9719C130.722 32.2238 129.056 33.2092 127.948 34.4414C128.004 41.1466 127.338 39.9106 119.801 39.8423L119.717 39.7977C119.457 39.4684 119.536 37.8662 119.532 37.361C114.875 37.3321 110.218 37.3347 105.561 37.3715L105.554 39.8502C97.5513 39.8541 96.951 41.4301 96.8212 34.2682C85.3937 34.1487 73.752 34.2406 62.312 34.2419L48.8102 34.2393C47.485 34.238 45.5358 34.2262 44.2554 34.1671C42.6068 34.0687 40.5649 35.7641 39.0658 35.6C37.4632 35.4255 32.5165 30.5114 31.2848 31.3052C30.8846 32.5846 31.0092 35.6998 31.0172 37.151L15.1786 37.1668C13.7613 37.1668 5.66904 37.42 4.71419 36.596C3.91943 35.911 4.18018 32.1818 4.19394 30.9667C2.83827 30.9313 1.36552 30.951 0 30.9483L2.64102e-06 0Z" fill="#5F9D2F"/>
+          </svg>
+          <span class="header-badge-text">Medio ambiente</span>
+        </div>
+        <h1 class="header-title">Conservamos los <strong>recursos naturales</strong></h1>
+      </header>
+
+      <!-- Intro paragraphs columns (States 3-5, and fades back in on State 14) -->
+      <div class="intro-container" id="intro-container">
+        <div class="intro-col" data-col="1">
+          En Grupak desarrollamos nuestras operaciones con un enfoque de producción responsable, promoviendo el uso eficiente de los recursos y la reducción de los impactos ambientales en nuestros procesos, incorporando principios de economía circular.
+        </div>
+        <div class="intro-col" data-col="2">
+          Nuestro modelo prioriza el uso de fibra reciclada, la gestión responsable del agua y los residuos, así como la eficiencia energética en la producción de papel y empaques. A través de este enfoque, recuperamos papel y cartón posconsumo, lo transformamos en nuevos productos y lo reincorporamos nuevamente al ciclo productivo.
+        </div>
+        <div class="intro-col" data-col="3">
+          La gestión ambiental de nuestras operaciones está respaldada por la certificación ISO 14001:2015 y por la certificación de cadena de custodia del Forest Stewardship Council (FSC®), que garantiza el origen responsable de los materiales que utilizamos.
+        </div>
+      </div>
+
+      <!-- Central Interactive Wheel (States 6-14) -->
+      <div class="wheel-container" id="wheel-container">
+        <div class="wheel-wrapper">
+          <img src="images/Ciclo de vida del producto.webp" alt="Ciclo de Vida del Producto Grupak" class="wheel-img" id="wheel-img">
+          <svg class="wheel-overlay-svg" id="wheel-overlay" viewBox="0 0 655 655"></svg>
+        </div>
+      </div>
+
+      <!-- Connecting dashed lines (States 7-14) -->
+      <div class="connecting-line-container">
+        <svg class="connecting-line line-01" viewBox="0 0 210 75" id="line-1">
+          <path d="M7 0V39.2617H205V75" />
+        </svg>
+        <svg class="connecting-line line-02" viewBox="0 0 208 9" id="line-2">
+          <path d="M203 4H4" />
+        </svg>
+        <svg class="connecting-line line-03" viewBox="0 0 214 40" id="line-3">
+          <path d="M2.5 4.5H205V37" />
+        </svg>
+        <svg class="connecting-line line-04" viewBox="0 0 201 94" id="line-4">
+          <path d="M65 88V53.5H186.5V3.5" />
+        </svg>
+        <svg class="connecting-line line-05" viewBox="0 0 567 47" id="line-5">
+          <path d="M137 43V12H562.5" />
+        </svg>
+        <svg class="connecting-line line-06" viewBox="0 0 480 92" id="line-6">
+          <path d="M-47 77H377.5V4H477" />
+        </svg>
+      </div>
+
+      <!-- Step Cards (States 7-14) -->
+      
+      <!-- Step 1 -->
+      <button class="step-card" data-step="1">
+        <div class="card-border-frame">
+          <svg class="ants-svg"><rect class="ants-rect" /></svg>
+        </div>
+        <div class="step-number">01</div>
+        <div class="step-divider"></div>
+        <div class="step-info">
+          <h3 class="step-title">Recuperación de fibra</h3>
+          <p class="step-description">Nosotros recolectamos de manera directa <strong>papel y cartón usados que todavía pueden aprovecharse</strong>. Esta materia prima viene de proveedores evaluados para asegurar calidad.</p>
+        </div>
+      </button>
+
+      <!-- Step 2 -->
+      <button class="step-card" data-step="2">
+        <div class="card-border-frame">
+          <svg class="ants-svg"><rect class="ants-rect" /></svg>
+        </div>
+        <div class="step-number">02</div>
+        <div class="step-divider"></div>
+        <div class="step-info">
+          <h3 class="step-title">Captación de fibra</h3>
+          <p class="step-description"><strong>Recibimos la fibra recuperada, la clasificamos y revisamos</strong> que cumpla con lo necesario para fabricar papel nuevamente.</p>
+        </div>
+      </button>
+
+      <!-- Step 3 -->
+      <button class="step-card" data-step="3">
+        <div class="card-border-frame">
+          <svg class="ants-svg"><rect class="ants-rect" /></svg>
+        </div>
+        <div class="step-number">03</div>
+        <div class="step-divider"></div>
+        <div class="step-info">
+          <h3 class="step-title">Producción de papel</h3>
+          <p class="step-description">La <strong>fibra se limpia, se procesa y se convierte en nuevo papel</strong>. Luego se seca, se enrolla y se prepara en bobinas listas para usarse.</p>
+        </div>
+      </button>
+
+      <!-- Step 4 -->
+      <button class="step-card" data-step="4">
+        <div class="card-border-frame">
+          <svg class="ants-svg"><rect class="ants-rect" /></svg>
+        </div>
+        <div class="step-number">04</div>
+        <div class="step-divider"></div>
+        <div class="step-info">
+          <h3 class="step-title">Producción de cartón</h3>
+          <p class="step-description">El <strong>papel se combina para formar el cartón corrugado</strong>. Aquí se definen sus propiedades y se fabrican en láminas o cajas según lo que necesite el cliente.</p>
+        </div>
+      </button>
+
+      <!-- Step 5 -->
+      <button class="step-card" data-step="5">
+        <div class="card-border-frame">
+          <svg class="ants-svg"><rect class="ants-rect" /></svg>
+        </div>
+        <div class="step-number">05</div>
+        <div class="step-divider"></div>
+        <div class="step-info">
+          <h3 class="step-title">Distribución</h3>
+          <p class="step-description">El papel, láminas o cajas terminadas <strong>se almacenan, se revisan y se envían a los clientes</strong> de acuerdo con sus pedidos.</p>
+        </div>
+      </button>
+
+      <!-- Step 6 -->
+      <button class="step-card" data-step="6">
+        <div class="card-border-frame">
+          <svg class="ants-svg"><rect class="ants-rect" /></svg>
+        </div>
+        <div class="step-number">06</div>
+        <div class="step-divider"></div>
+        <div class="step-info">
+          <h3 class="step-title">Uso y fin de vida</h3>
+          <p class="step-description">Los clientes usan los empaques. Después, <strong>el material puede recuperarse nuevamente para reiniciar el ciclo</strong>.</p>
+        </div>
+      </button>
+
+      <!-- Outro/Stats block (State 14) -->
+      <div class="stats-container" id="stats-container">
+        <p class="stats-text">
+          En 2025 recuperamos <strong>273,007 toneladas de cartón</strong> como materia prima. Esto nos permitió utilizar <strong>papel 100% reciclado</strong> en nuestros procesos principales, evitando la tala de <strong>4.6 millones de árboles</strong> y el uso de <strong>682,000 m3 de espacio en rellenos sanitarios</strong>, un volumen comparable con <strong>272 albercas olímpicas</strong>.
+        </p>
+      </div>
+
+      <!-- Navigation Footer (optional controls for desktop override) -->
+      <div class="footer-navigation">
+        <button class="footer-btn" id="prev-btn" aria-label="Slide anterior" disabled>
+          <svg viewBox="0 0 24 24" width="28" height="28">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="index-indicator">
+          <span id="current-slide">1</span> / <span id="total-slides">15</span>
+        </div>
+        <button class="footer-btn" id="next-btn" aria-label="Siguiente slide">
+          <svg viewBox="0 0 24 24" width="28" height="28">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Scrollable height spacer (provides 600vh height) -->
+  <div class="lifecycle-scroll-spacer"></div>
+
+</div>

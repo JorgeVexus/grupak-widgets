@@ -11,8 +11,8 @@
         window.location.hostname === "127.0.0.1";
 
     const baseURL = isLocalhost
-        ? "/widgets/ciclo de vida"
-        : "https://grupak-widgets.vercel.app/widgets/ciclo%20de%20vida";
+        ? "/widgets/ciclo-de-vida"
+        : "https://grupak-widgets.vercel.app/widgets/ciclo-de-vida";
 
     /* ── 1. Inject CSS ── */
     if (!document.getElementById("gpk-ciclo-styles")) {
@@ -20,7 +20,7 @@
         link.id   = "gpk-ciclo-styles";
         link.rel  = "stylesheet";
         link.href = isLocalhost
-            ? "widgets/ciclo de vida/ciclo-de-vida.css"
+            ? "widgets/ciclo-de-vida/ciclo-de-vida.css"
             : `${baseURL}/ciclo-de-vida.css`;
         document.head.appendChild(link);
     }
@@ -33,7 +33,7 @@
     if (root) {
         fetch(
             isLocalhost
-                ? "widgets/ciclo de vida/ciclo-de-vida.html"
+                ? "widgets/ciclo-de-vida/ciclo-de-vida.html"
                 : `${baseURL}/ciclo-de-vida.html`
         )
             .then(function (res) {
@@ -61,7 +61,7 @@
             if (!src || src.startsWith("http") || src.startsWith("data:")) return;
             var cleanSrc = src.startsWith("/") ? src.slice(1) : src;
             img.src = isLocalhost
-                ? "widgets/ciclo de vida/" + cleanSrc
+                ? "widgets/ciclo-de-vida/" + cleanSrc
                 : baseURL.replace(/\/$/, "") + "/" + cleanSrc;
         });
     }
