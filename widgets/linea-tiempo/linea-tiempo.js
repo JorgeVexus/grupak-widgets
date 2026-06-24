@@ -98,6 +98,7 @@
         const animationDuration = 600;
 
         const tracker = root.querySelector(".timeline-scroll-tracker");
+        const board = root.querySelector("#timeline-board");
         const yearsSidebar = root.querySelector("#years-sidebar");
         const slides = root.querySelectorAll(".timeline-slide");
         const activeLine = root.querySelector("#active-line");
