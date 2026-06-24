@@ -1,0 +1,311 @@
+<section id="gpk-formulario-widget" class="gpk-form-widget">
+    <div class="gpk-form-shell">
+        <div class="gpk-form-tabs" role="tablist" aria-label="Formularios Grupak">
+            <button type="button" class="gpk-form-tab is-active" data-gpk-tab="contacto" role="tab" aria-selected="true">Contacto</button>
+            <button type="button" class="gpk-form-tab" data-gpk-tab="proveedor" role="tab" aria-selected="false">Quiero ser proveedor</button>
+        </div>
+
+        <form class="gpk-form-panel is-active" data-gpk-panel="contacto" data-gpk-form="contacto" role="tabpanel">
+            <input type="hidden" name="_subject" value="Nuevo mensaje de contacto - Sitio web Grupak">
+            <input type="hidden" name="formulario" value="Contacto">
+            <input type="text" name="_gotcha" class="gpk-honeypot" tabindex="-1" autocomplete="off">
+
+            <h3 class="gpk-section-title">Datos personales</h3>
+            <div class="gpk-fields-grid">
+                <div class="gpk-field">
+                    <label for="contacto-nombre">Nombre *</label>
+                    <input id="contacto-nombre" type="text" name="nombre" required autocomplete="given-name">
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-apellido">Apellido *</label>
+                    <input id="contacto-apellido" type="text" name="apellido" required autocomplete="family-name">
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-empresa">Empresa / Razon social *</label>
+                    <input id="contacto-empresa" type="text" name="empresa" required autocomplete="organization">
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-puesto">Puesto dentro de la empresa *</label>
+                    <input id="contacto-puesto" type="text" name="puesto" required autocomplete="organization-title">
+                </div>
+                <div class="gpk-phone-row">
+                    <div class="gpk-field">
+                        <label for="contacto-telefono">Telefono principal *</label>
+                        <input id="contacto-telefono" type="tel" name="telefono_principal" required autocomplete="tel">
+                    </div>
+                    <div class="gpk-field gpk-ext-field">
+                        <label for="contacto-ext">Ext.</label>
+                        <input id="contacto-ext" type="text" name="ext">
+                    </div>
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-movil">Telefono movil *</label>
+                    <input id="contacto-movil" type="tel" name="telefono_movil" required>
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-email">Correo electronico principal *</label>
+                    <input id="contacto-email" type="email" name="correo_principal" required autocomplete="email">
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-pais">Pais *</label>
+                    <select id="contacto-pais" name="pais" required>
+                        <option value="" disabled selected>Selecciona una opcion</option>
+                        <option>Mexico</option>
+                        <option>Estados Unidos</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-email-alt">Correo electronico alternativo</label>
+                    <input id="contacto-email-alt" type="email" name="correo_alternativo">
+                </div>
+                <div class="gpk-field">
+                    <label for="contacto-estado">Estado / Provincia *</label>
+                    <select id="contacto-estado" name="estado" class="gpk-estado-select" required>
+                        <option value="" disabled selected>Selecciona una opcion</option>
+                    </select>
+                    <input type="text" name="estado" class="gpk-estado-text" placeholder="Escribe tu estado / provincia" disabled>
+                </div>
+            </div>
+
+            <h3 class="gpk-section-title">Producto de interes</h3>
+            <div class="gpk-product-grid" data-product-grid>
+                <label class="gpk-product-card">
+                    <input type="radio" name="producto_interes" value="papel">
+                    <span class="gpk-product-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>
+                    </span>
+                    <span>
+                        <strong>Rollos de papel</strong>
+                        <small>Papel kraft reciclado</small>
+                    </span>
+                </label>
+                <label class="gpk-product-card">
+                    <input type="radio" name="producto_interes" value="lamina">
+                    <span class="gpk-product-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8.2 12 13.5 22 8.2z"/><path d="m4.5 11.5-2.5 1.3L12 18.2l10-5.4-2.5-1.3"/></svg>
+                    </span>
+                    <span>
+                        <strong>Lamina de carton corrugado</strong>
+                        <small>Lamina para manufactura</small>
+                    </span>
+                </label>
+                <label class="gpk-product-card">
+                    <input type="radio" name="producto_interes" value="cajas">
+                    <span class="gpk-product-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5v10l-9 5-9-5V7z"/><path d="m3 7 9 5 9-5"/><path d="M12 12v10"/></svg>
+                    </span>
+                    <span>
+                        <strong>Cajas de carton corrugado</strong>
+                        <small>Empaques industriales</small>
+                    </span>
+                </label>
+                <label class="gpk-product-card">
+                    <input type="radio" name="producto_interes" value="grabado">
+                    <span class="gpk-product-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 11c0-1.1.6-1.9 1-2.7.3-.6.5-1.2.5-1.8a3.5 3.5 0 1 0-7 0c0 .6.2 1.2.5 1.8.4.8 1 1.6 1 2.7H8a2 2 0 0 0-2 2v2h12v-2a2 2 0 0 0-2-2z"/><path d="M5 19h14"/></svg>
+                    </span>
+                    <span>
+                        <strong>Grabado y flexografia</strong>
+                        <small>Placas e impresion</small>
+                    </span>
+                </label>
+                <label class="gpk-product-card">
+                    <input type="radio" name="producto_interes" value="impresion">
+                    <span class="gpk-product-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/></svg>
+                    </span>
+                    <span>
+                        <strong>Impresion digital (WowPak)</strong>
+                        <small>Alta resolucion</small>
+                    </span>
+                </label>
+                <label class="gpk-product-card">
+                    <input type="radio" name="producto_interes" value="seguimiento">
+                    <span class="gpk-product-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5V7l-9-5-9 5v10l9 5 2-1.1"/><path d="m3 7 9 5 9-5"/><path d="M12 12v10"/><circle cx="17.5" cy="17.5" r="3"/><path d="m19.8 19.8 2.2 2.2"/></svg>
+                    </span>
+                    <span>
+                        <strong>Seguimiento de pedido</strong>
+                        <small>Estado de orden</small>
+                    </span>
+                </label>
+            </div>
+
+            <div class="gpk-dynamic-spec" data-product-spec aria-live="polite"></div>
+
+            <div class="gpk-field gpk-bottom-field">
+                <label for="contacto-como">¿Como te enteraste de nosotros?</label>
+                <select id="contacto-como" name="como_te_enteraste">
+                    <option value="" disabled selected>Selecciona una opcion</option>
+                    <option>Busqueda en Google</option>
+                    <option>Redes sociales</option>
+                    <option>LinkedIn</option>
+                    <option>Recomendacion</option>
+                    <option>Feria o evento</option>
+                    <option>Ya soy cliente</option>
+                    <option>Otro</option>
+                </select>
+            </div>
+
+            <label class="gpk-check">
+                <input type="checkbox" name="acepta_aviso_privacidad" value="Si" required>
+                <span>He leido el Aviso de Privacidad *</span>
+            </label>
+            <p class="gpk-legal">Grupak es una empresa privada dedicada a la manufactura de Papel y Carton 100% reciclado por lo que no participa en ningun programa de apoyo economico gubernamental. Evite ser victima de fraude, no se deje enganar.</p>
+
+            <button type="submit" class="gpk-submit">Enviar mensaje</button>
+            <div class="gpk-status" role="status"></div>
+        </form>
+
+        <form class="gpk-form-panel" data-gpk-panel="proveedor" data-gpk-form="proveedor" role="tabpanel" enctype="multipart/form-data">
+            <input type="hidden" name="_subject" value="Nueva solicitud de proveedor - Sitio web Grupak">
+            <input type="hidden" name="formulario" value="Proveedor">
+            <input type="text" name="_gotcha" class="gpk-honeypot" tabindex="-1" autocomplete="off">
+
+            <p class="gpk-intro">En Grupak estamos en constante busqueda de socios comerciales que nos ayuden a cumplir con nuestra mision y alcanzar nuestra vision.</p>
+
+            <h3 class="gpk-section-title">Datos de la empresa</h3>
+            <div class="gpk-fields-grid">
+                <div class="gpk-field gpk-full">
+                    <label for="proveedor-empresa">Nombre de la empresa *</label>
+                    <input id="proveedor-empresa" type="text" name="nombre_empresa" required autocomplete="organization">
+                </div>
+                <div class="gpk-field gpk-full">
+                    <label for="proveedor-web">Pagina web</label>
+                    <input id="proveedor-web" type="url" name="pagina_web" placeholder="https://" autocomplete="url">
+                </div>
+                <div class="gpk-field gpk-full">
+                    <label for="proveedor-descripcion">Palabras clave / descripcion breve del negocio</label>
+                    <textarea id="proveedor-descripcion" name="descripcion_negocio"></textarea>
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-categoria">Categoria</label>
+                    <select id="proveedor-categoria" name="categoria">
+                        <option value="" disabled selected>Selecciona una opcion</option>
+                        <option>Materia prima</option>
+                        <option>Maquinaria y equipo</option>
+                        <option>Mantenimiento y refacciones</option>
+                        <option>Transporte y logistica</option>
+                        <option>Servicios profesionales</option>
+                        <option>Tecnologia / TI</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-especialidad">Especialidad</label>
+                    <select id="proveedor-especialidad" name="especialidad">
+                        <option value="" disabled selected>Selecciona una opcion</option>
+                        <option>Fibra / papel reciclado</option>
+                        <option>Quimicos y adhesivos</option>
+                        <option>Refacciones industriales</option>
+                        <option>Fletes y distribucion</option>
+                        <option>Consultoria</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+            </div>
+
+            <h3 class="gpk-section-title">Datos personales</h3>
+            <div class="gpk-fields-grid">
+                <div class="gpk-field">
+                    <label for="proveedor-nombre">Nombre *</label>
+                    <input id="proveedor-nombre" type="text" name="nombre" required autocomplete="given-name">
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-apellido">Apellido *</label>
+                    <input id="proveedor-apellido" type="text" name="apellido" required autocomplete="family-name">
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-puesto">Puesto dentro de la empresa *</label>
+                    <input id="proveedor-puesto" type="text" name="puesto" required autocomplete="organization-title">
+                </div>
+                <div class="gpk-phone-row">
+                    <div class="gpk-field">
+                        <label for="proveedor-telefono">Telefono principal *</label>
+                        <input id="proveedor-telefono" type="tel" name="telefono_principal" required autocomplete="tel">
+                    </div>
+                    <div class="gpk-field gpk-ext-field">
+                        <label for="proveedor-ext">Ext.</label>
+                        <input id="proveedor-ext" type="text" name="ext_principal">
+                    </div>
+                </div>
+                <div class="gpk-phone-row">
+                    <div class="gpk-field">
+                        <label for="proveedor-tel-alt">Telefono alternativo</label>
+                        <input id="proveedor-tel-alt" type="tel" name="telefono_alternativo">
+                    </div>
+                    <div class="gpk-field gpk-ext-field">
+                        <label for="proveedor-ext-alt">Ext.</label>
+                        <input id="proveedor-ext-alt" type="text" name="ext_alternativo">
+                    </div>
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-movil">Numero movil *</label>
+                    <input id="proveedor-movil" type="tel" name="numero_movil" required>
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-email">Correo electronico principal *</label>
+                    <input id="proveedor-email" type="email" name="correo_principal" required autocomplete="email">
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-pais">Pais *</label>
+                    <select id="proveedor-pais" name="pais" required>
+                        <option value="" disabled selected>Selecciona una opcion</option>
+                        <option>Mexico</option>
+                        <option>Estados Unidos</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-email-alt">Correo electronico alternativo</label>
+                    <input id="proveedor-email-alt" type="email" name="correo_alternativo">
+                </div>
+                <div class="gpk-field">
+                    <label for="proveedor-estado">Estado / Provincia *</label>
+                    <select id="proveedor-estado" name="estado" class="gpk-estado-select" required>
+                        <option value="" disabled selected>Selecciona una opcion</option>
+                    </select>
+                    <input type="text" name="estado" class="gpk-estado-text" placeholder="Escribe tu estado / provincia" disabled>
+                </div>
+                <div class="gpk-field gpk-full">
+                    <label for="proveedor-comentarios">Comentarios *</label>
+                    <textarea id="proveedor-comentarios" name="comentarios" required></textarea>
+                </div>
+                <div class="gpk-field gpk-full">
+                    <label for="proveedor-como">¿Como te enteraste de nosotros?</label>
+                    <select id="proveedor-como" name="como_te_enteraste">
+                        <option value="" disabled selected>Selecciona una opcion</option>
+                        <option>Busqueda en Google</option>
+                        <option>Redes sociales</option>
+                        <option>LinkedIn</option>
+                        <option>Recomendacion</option>
+                        <option>Feria o evento</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="gpk-field gpk-full">
+                    <label for="proveedor-archivo">Subir archivo (catalogo, presentacion comercial)</label>
+                    <input id="proveedor-archivo" type="file" name="archivo" accept=".doc,.docx,.ppt,.pptx,.pdf,.png,.jpg,.jpeg">
+                    <p class="gpk-hint">Formatos aceptados: .doc, .docx, .ppt, .pptx, .pdf, .png, .jpg</p>
+                </div>
+            </div>
+
+            <label class="gpk-check">
+                <input type="checkbox" name="acepta_aviso_privacidad" value="Si" required>
+                <span>He leido el Aviso de Privacidad *</span>
+            </label>
+            <label class="gpk-check">
+                <input type="checkbox" name="acepta_pago_150_dias" value="Si">
+                <span>Entiendo y acepto que Grupak paga a 150 dias</span>
+            </label>
+            <label class="gpk-check gpk-last-check">
+                <input type="checkbox" name="acepta_factoraje" value="Si">
+                <span>Entiendo y acepto que Grupak paga mediante factoraje</span>
+            </label>
+
+            <button type="submit" class="gpk-submit">Enviar solicitud</button>
+            <div class="gpk-status" role="status"></div>
+        </form>
+    </div>
+</section>
