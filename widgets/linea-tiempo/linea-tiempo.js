@@ -5,20 +5,21 @@
     const baseURL = isLocalhost 
         ? "/widgets/linea-tiempo" 
         : "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
+    const assetVersion = document.currentScript ? new URL(document.currentScript.src).search : "";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-timeline-styles")) {
         const link = document.createElement("link");
         link.id = "gpk-timeline-styles";
         link.rel = "stylesheet";
-        link.href = isLocalhost ? "widgets/linea-tiempo/linea-tiempo.css" : `${baseURL}/linea-tiempo.css`;
+        link.href = isLocalhost ? "widgets/linea-tiempo/linea-tiempo.css" : `${baseURL}/linea-tiempo.css${assetVersion}`;
         document.head.appendChild(link);
     }
 
     // 2. Fetch and inject HTML markup if root container exists and hasn't been populated
     const container = document.getElementById("gpk-timeline-widget-root");
     if (container) {
-        fetch(isLocalhost ? "widgets/linea-tiempo/linea-tiempo.html" : `${baseURL}/linea-tiempo.html`)
+        fetch(isLocalhost ? "widgets/linea-tiempo/linea-tiempo.html" : `${baseURL}/linea-tiempo.html${assetVersion}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading timeline widget HTML");
                 return res.text();
@@ -63,18 +64,7 @@
         // Run image resolution
         resolveRelativeImages(root);
 
-        // Dynamically set background vector on the viewport (100% width/height coverage)
-        const viewport = root.querySelector(".timeline-viewport");
-        if (viewport) {
-          const cleanBase = baseURL.endsWith("/") ? baseURL.slice(0, -1) : baseURL;
-          const bgUrl = isLocalhost 
-            ? "widgets/linea-tiempo/images/bg%20vector.svg" 
-            : `${cleanBase}/images/bg%20vector.svg`;
-          viewport.style.backgroundImage = `url('${bgUrl}')`;
-          viewport.style.backgroundSize = "100% 100%";
-          viewport.style.backgroundRepeat = "no-repeat";
-          viewport.style.backgroundPosition = "center";
-        }
+        // Background shape and curve are inline SVGs in the widget markup to preserve Figma proportions.
         // Milestones Data matching Figma design system coordinates
         const milestones = [
           { year: "1957", label: "Inicio de operaciones", top: 86 },
