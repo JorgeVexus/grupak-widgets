@@ -16,8 +16,11 @@
         const style = document.createElement("style");
         style.id = "gpk-nav-autohide-styles";
         style.textContent = `
-            .gpk-nav-autohide-enabled {
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+            .gpk-nav-autohide-enabled,
+            .navbar-logo-left.gpk-nav-autohide-enabled,
+            .w-nav.gpk-nav-autohide-enabled,
+            nav.gpk-nav-autohide-enabled {
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, box-shadow 0.3s ease !important;
                 will-change: transform;
                 position: fixed !important;
                 top: 0 !important;
@@ -27,16 +30,22 @@
                 background-color: transparent !important;
                 box-shadow: none !important;
             }
-            .gpk-nav-autohide-enabled.gpk-nav-hidden {
+            .gpk-nav-autohide-enabled.gpk-nav-hidden,
+            .navbar-logo-left.gpk-nav-autohide-enabled.gpk-nav-hidden,
+            .w-nav.gpk-nav-autohide-enabled.gpk-nav-hidden,
+            nav.gpk-nav-autohide-enabled.gpk-nav-hidden {
                 transform: translateY(-110%) !important;
             }
-            .gpk-nav-autohide-enabled.gpk-nav-bg-white {
+            .gpk-nav-autohide-enabled.gpk-nav-bg-white,
+            .navbar-logo-left.gpk-nav-autohide-enabled.gpk-nav-bg-white,
+            .w-nav.gpk-nav-autohide-enabled.gpk-nav-bg-white,
+            nav.gpk-nav-autohide-enabled.gpk-nav-bg-white {
                 background-color: #ffffff !important;
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
             }
         `;
         document.head.appendChild(style);
-        log("Estilos inyectados con !important para forzar aplicación.");
+        log("Estilos inyectados con alta especificidad e !important.");
     }
 
     // ==================== SCROLL LOGIC ====================
