@@ -63,7 +63,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    transition: z-index 0.3s;
+    transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.3s;
     z-index: 1;
 }
 
@@ -219,117 +219,174 @@
         margin-bottom: 40px;
     }
 
-    /* En pantallas medianas y móviles, convertimos los items en tarjetas separadas */
+    /* Mantener el diseño de desktop (SVG de fondo y items conectados) */
     .gpk-product-item {
-        height: auto;
-        margin-bottom: 16px;
-        background-color: var(--color-white);
-        border: 1.5px solid #8C8C8C;
-        border-radius: 16px;
-        padding: 24px;
-        transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        height: 130px;
+        margin-bottom: 0;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.3s;
     }
 
-    .gpk-product-item:hover {
-        z-index: 1;
-    }
-
-    /* Ocultamos el SVG de fondo complejo en mobile */
     .gpk-product-bg-svg {
-        display: none;
+        display: block;
     }
 
     .gpk-product-content {
-        padding: 0;
+        padding: 0 40px;
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
-        height: auto;
+        height: 100%;
     }
 
     .gpk-product-title {
         position: relative;
-        left: 0 !important;
-        font-size: 32px;
-        color: var(--color-grey-dark);
-        white-space: normal;
-        transition: color 0.35s ease;
+        left: 40px !important;
+        font-size: 28px;
+        color: var(--color-grey-medium);
+        white-space: nowrap;
+        transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease, font-size 0.4s ease, margin-bottom 0.4s ease;
     }
 
-    /* El bloque se convierte en un acordeón expandible */
+    /* El bloque de información se posiciona de forma absoluta a la derecha en landscape */
+    .gpk-product-info {
+        position: absolute;
+        top: 50%;
+        right: 40px;
+        transform: translateY(-50%) scale(0.98);
+        width: 50%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gpk-product-description {
+        color: var(--color-white);
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .gpk-saber-mas {
+        color: var(--color-white);
+        font-size: 14px;
+        margin-top: 2px;
+    }
+
+    /* Estado activo en tablet (acordeón expandido) */
+    .gpk-product-item.gpk-active {
+        height: 180px;
+        z-index: 5;
+    }
+
+    .gpk-product-item.gpk-active .gpk-product-title {
+        left: 0 !important;
+        color: var(--color-white);
+        font-size: 32px;
+        white-space: normal;
+        width: 35%;
+    }
+
+    .gpk-product-item.gpk-active .gpk-product-info {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+        pointer-events: auto;
+    }
+}
+
+/* En tablets verticales y móviles (<= 768px), pasamos a diseño stacked para evitar colisiones */
+@media (max-width: 768px) {
+    .gpk-product-content {
+        padding: 20px 40px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .gpk-product-title {
+        left: 40px !important;
+        font-size: 24px;
+    }
+
     .gpk-product-info {
         position: relative;
         top: 0;
         right: 0;
         transform: none !important;
         width: 100%;
-        max-width: 100%;
-        opacity: 0;
         max-height: 0;
+        opacity: 0;
         overflow: hidden;
         margin-top: 0;
-        gap: 16px;
         transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, margin-top 0.4s ease;
     }
 
-    .gpk-product-description {
-        color: var(--color-grey-medium);
-        font-size: 16px;
-        transition: color 0.35s ease;
-    }
-
-    .gpk-saber-mas {
-        color: var(--color-primary);
-        transition: color 0.35s ease;
-    }
-
-    /* Estado activo en mobile (acordeón expandido) */
     .gpk-product-item.gpk-active {
-        background-color: var(--color-primary);
-        border-color: var(--color-primary);
-        box-shadow: 0 10px 25px rgba(95, 157, 47, 0.18);
+        height: 240px;
     }
 
     .gpk-product-item.gpk-active .gpk-product-title {
-        color: var(--color-white);
-    }
-
-    .gpk-product-item.gpk-active .gpk-product-description {
-        color: var(--color-white);
-    }
-
-    .gpk-product-item.gpk-active .gpk-saber-mas {
-        color: var(--color-white);
+        left: 0 !important;
+        font-size: 28px;
+        width: 100%;
+        margin-bottom: 12px;
     }
 
     .gpk-product-item.gpk-active .gpk-product-info {
         opacity: 1;
-        max-height: 300px; /* Suficiente altura para cualquier descripción */
-        margin-top: 16px;
+        max-height: 160px;
+        margin-top: 8px;
         pointer-events: auto;
     }
 }
 
+/* Ajustes finos para celulares muy pequeños (<= 576px) */
 @media (max-width: 576px) {
     .gpk-products-section {
         padding: 40px 16px;
     }
 
     .gpk-product-item {
-        padding: 20px;
+        height: 110px;
+    }
+
+    .gpk-product-item.gpk-active {
+        height: 260px; /* Asegura suficiente espacio para descripciones largas */
+    }
+
+    .gpk-product-content {
+        padding: 16px 24px;
     }
 
     .gpk-product-title {
-        font-size: 24px;
+        left: 20px !important;
+        font-size: 20px;
+    }
+
+    .gpk-product-item.gpk-active .gpk-product-title {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+
+    .gpk-product-info {
+        gap: 6px;
     }
 
     .gpk-product-description {
-        font-size: 15px;
+        font-size: 11px;
+        line-height: 1.35;
     }
 
     .gpk-saber-mas {
-        font-size: 15px;
+        font-size: 12px;
+        margin-top: 0;
     }
 }
