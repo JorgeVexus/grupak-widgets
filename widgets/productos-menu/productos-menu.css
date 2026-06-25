@@ -108,7 +108,7 @@
     position: relative;
     left: 85px; /* Compone left-[172px] con los 87px de padding del contenedor */
     font-family: var(--font-title);
-    font-size: 50px;
+    font-size: clamp(50px, 5vw, 95px);
     font-weight: 900;
     color: var(--color-grey-medium);
     margin: 0;
