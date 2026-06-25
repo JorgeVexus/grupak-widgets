@@ -127,6 +127,9 @@
                 currentSlide = targetSlide;
                 updateUI();
             }
+            
+            // Update scroll-driven text blocks on desktop
+            updatePaperTextBlocksOnScroll(progress);
         }
 
         function updateUI() {
@@ -162,43 +165,57 @@
             prevBtn.disabled = currentSlide === 0;
             nextBtn.disabled = currentSlide === totalSlides - 1;
 
-            // 4. Manage papel text block color animation (Mode 5)
-            if (currentSlide === 5) {
-                activatePaperTextBlocks(root);
-            } else {
-                // Remove active class when leaving mode 5
+            // 4. Clean up papel text blocks when leaving mode 5 (if desktop, handled by scroll; on mobile, kept static)
+            if (currentSlide !== 5) {
                 const textBlocks = root.querySelectorAll(".papel-text-block");
-                textBlocks.forEach(block => block.classList.remove("active"));
+                textBlocks.forEach(block => {
+                    block.classList.remove("revealed");
+                    block.classList.remove("active");
+                });
             }
         }
 
-        // --- Papel text block color animation (Mode 5) ---
-        let papelAnimationTimeouts = [];
-        function activatePaperTextBlocks(root) {
-            // Clear any existing timeouts
-            papelAnimationTimeouts.forEach(t => clearTimeout(t));
-            papelAnimationTimeouts = [];
-
+        // --- Scroll-driven Papel text blocks (Mode 5) ---
+        function updatePaperTextBlocksOnScroll(progress) {
+            if (window.innerWidth <= 1024) return;
             const textBlocks = root.querySelectorAll(".papel-text-block");
-            const order = [
-                { selector: ".papel-text-block.tl", delay: 400 },
-                { selector: ".papel-text-block.bl", delay: 1200 },
-                { selector: ".papel-text-block.tr", delay: 2000 },
-                { selector: ".papel-text-block.br", delay: 2800 }
-            ];
-
-            order.forEach((item, index) => {
-                const block = root.querySelector(item.selector);
-                if (block) {
-                    const timeout = setTimeout(() => {
-                        // Remove active from all
-                        textBlocks.forEach(b => b.classList.remove("active"));
-                        // Add active to current
-                        block.classList.add("active");
-                    }, item.delay);
-                    papelAnimationTimeouts.push(timeout);
+            
+            if (currentSlide === 5) {
+                const localProgress = (progress - 0.5) / 0.1;
+                
+                const tlBlock = root.querySelector(".papel-text-block.tl");
+                const blBlock = root.querySelector(".papel-text-block.bl");
+                const trBlock = root.querySelector(".papel-text-block.tr");
+                const brBlock = root.querySelector(".papel-text-block.br");
+                
+                if (tlBlock) {
+                    tlBlock.classList.add("revealed");
+                    tlBlock.classList.toggle("active", localProgress < 0.25);
                 }
-            });
+                
+                if (blBlock) {
+                    const isRevealed = localProgress >= 0.25;
+                    blBlock.classList.toggle("revealed", isRevealed);
+                    blBlock.classList.toggle("active", isRevealed && localProgress < 0.5);
+                }
+                
+                if (trBlock) {
+                    const isRevealed = localProgress >= 0.5;
+                    trBlock.classList.toggle("revealed", isRevealed);
+                    trBlock.classList.toggle("active", isRevealed && localProgress < 0.75);
+                }
+                
+                if (brBlock) {
+                    const isRevealed = localProgress >= 0.75;
+                    brBlock.classList.toggle("revealed", isRevealed);
+                    brBlock.classList.toggle("active", isRevealed);
+                }
+            } else {
+                textBlocks.forEach(block => {
+                    block.classList.remove("revealed");
+                    block.classList.remove("active");
+                });
+            }
         }
 
         // --- Setup Events ---

@@ -1784,29 +1784,16 @@
     transition-delay: 0.2s;
 }
 
-/* Sequential entrance of text blocks: tl (1) -> bl (2) -> tr (3) -> br (4) - SLOWER */
-#gpk-products-widget .products-board.mode-5 .papel-text-block.tl {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.4s;
+/* Controlled by JS and scroll inside Mode 5 */
+#gpk-products-widget .products-board.mode-5 .papel-text-block {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s ease;
 }
 
-#gpk-products-widget .products-board.mode-5 .papel-text-block.bl {
+#gpk-products-widget .products-board.mode-5 .papel-text-block.revealed {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 1.2s;
-}
-
-#gpk-products-widget .products-board.mode-5 .papel-text-block.tr {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 2.0s;
-}
-
-#gpk-products-widget .products-board.mode-5 .papel-text-block.br {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 2.8s;
 }
 
 /* Color animation: current text is GREEN, previous turns BLACK */
