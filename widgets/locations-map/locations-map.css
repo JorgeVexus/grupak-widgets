@@ -154,6 +154,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    padding-left: 4px; /* Evita que el box-shadow del primer tag se corte a la izquierda */
 }
 
 #gpk-locations-map-widget .filter-tag {
@@ -545,6 +546,25 @@
     filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.05));
 }
 
+/* Posicionamiento del popup cuando está debajo del pin (para evitar cortes en la parte superior) */
+#gpk-locations-map-widget .map-popup.popup-below {
+    transform: translate(-50%, 0) translateY(15px) scale(0.95);
+    border-top: 2px solid var(--color-border);
+}
+
+#gpk-locations-map-widget .map-popup.popup-below.visible {
+    transform: translate(-50%, 0) translateY(15px) scale(1);
+}
+
+/* Invertir la flecha para que apunte hacia arriba */
+#gpk-locations-map-widget .map-popup.popup-below::after {
+    bottom: auto;
+    top: -10px;
+    border-top: none;
+    border-bottom: 10px solid var(--color-white);
+    filter: drop-shadow(0 -2px 1px rgba(0, 0, 0, 0.05));
+}
+
 #gpk-locations-map-widget .popup-image-container {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -809,6 +829,14 @@
     
     #gpk-locations-map-widget .map-popup.visible {
         transform: translate(-50%, -100%) translateY(-10px) scale(1);
+    }
+
+    #gpk-locations-map-widget .map-popup.popup-below {
+        transform: translate(-50%, 0) translateY(10px) scale(0.95);
+    }
+
+    #gpk-locations-map-widget .map-popup.popup-below.visible {
+        transform: translate(-50%, 0) translateY(10px) scale(1);
     }
 }
 

@@ -526,6 +526,14 @@
                 elements.mapPopup.style.top = pinEl.style.top;
             }
 
+            // Si el pin está muy arriba (menos del 35% del contenedor), colocar el popup debajo
+            const pinTopPercent = parseFloat(location.pinTop);
+            if (!isNaN(pinTopPercent) && pinTopPercent < 35) {
+                elements.mapPopup.classList.add('popup-below');
+            } else {
+                elements.mapPopup.classList.remove('popup-below');
+            }
+
             // Mostrar Popup
             elements.mapPopup.classList.add('visible');
             elements.mapOverlay.classList.add('visible');
@@ -538,6 +546,7 @@
             if (!elements.mapPopup) return;
 
             elements.mapPopup.classList.remove('visible');
+            elements.mapPopup.classList.remove('popup-below');
             elements.mapOverlay.classList.remove('visible');
 
             // Quitar estado activo en tarjetas y pines
