@@ -2354,8 +2354,8 @@
 #gpk-products-widget .energia-main-title {
     font-family: var(--font-title);
     font-size: 50px;
-    font-weight: 900;
-    color: #6e6e6e;
+    font-weight: 700 !important;
+    color: var(--color-green) !important;
     letter-spacing: -1.2px;
     margin: 0 0 16px 0;
     line-height: 1.1;
@@ -2369,8 +2369,14 @@
 }
 
 #gpk-products-widget .energia-intro-text strong {
-    font-weight: 700;
-    color: var(--color-grey-dark);
+    font-weight: 700 !important;
+    color: var(--color-grey-medium) !important;
+}
+
+#gpk-products-widget #pane-energia strong,
+#gpk-products-widget #pane-energia b {
+    font-weight: 700 !important;
+    color: var(--color-grey-medium) !important;
 }
 
 /* Cards layout & diagonal placement */
@@ -2439,8 +2445,8 @@
 #gpk-products-widget .energia-row h3 {
     font-family: var(--font-title);
     font-size: 18px;
-    font-weight: 700;
-    color: #6e6e6e;
+    font-weight: 700 !important;
+    color: var(--color-green) !important;
     margin: 0 0 6px 0;
     line-height: 1.2;
 }
@@ -2448,7 +2454,7 @@
 #gpk-products-widget .energia-row p {
     font-size: 13px;
     line-height: 1.5;
-    color: var(--color-grey-dark);
+    color: var(--color-grey-medium) !important;
     margin: 0;
 }
 
@@ -3496,7 +3502,8 @@
         font-size: 24px !important;
         letter-spacing: -0.5px !important;
         text-align: left !important;
-        color: var(--color-grey-medium) !important;
+        color: var(--color-green) !important;
+        font-weight: 700 !important;
         margin-bottom: 8px !important;
     }
 
@@ -3545,7 +3552,7 @@
     #gpk-products-widget .energia-row h3 {
         font-size: 13px !important;
         font-weight: 700 !important;
-        color: var(--color-grey-dark) !important;
+        color: var(--color-green) !important;
         margin-bottom: 6px !important;
         line-height: 1.25 !important;
     }
