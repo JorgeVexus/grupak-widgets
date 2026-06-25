@@ -746,14 +746,7 @@
    Right Scrollbar Indicator (Figma: left-[1803px] w-[15px])
    ========================================================================== */
 #gpk-timeline-widget .timeline-scrollbar-indicator {
-  position: absolute;
-  left: 1803px;
-  width: 15px;
-  height: 124px;
-  background-color: var(--color-green);
-  border-radius: 10px;
-  z-index: 5;
-  transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none !important;
 }
 
 /* ==========================================================================
