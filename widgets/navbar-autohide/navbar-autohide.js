@@ -17,13 +17,15 @@
         style.id = "gpk-nav-autohide-styles";
         style.textContent = `
             .gpk-nav-autohide-enabled {
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, box-shadow 0.3s ease;
                 will-change: transform;
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
                 right: 0 !important;
                 z-index: 99999 !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
             }
             .gpk-nav-autohide-enabled.gpk-nav-hidden {
                 transform: translateY(-110%) !important;
@@ -53,8 +55,8 @@
 
         if (currentScrollY <= 0) {
             navbar.classList.remove("gpk-nav-hidden");
-            navbar.classList.add("gpk-nav-bg-white");
-            log("ScrollY <= 0 -> SHOW navbar + bg white");
+            navbar.classList.remove("gpk-nav-bg-white");
+            log("ScrollY <= 0 -> SHOW navbar + transparent bg");
         } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
             navbar.classList.add("gpk-nav-hidden");
             navbar.classList.remove("gpk-nav-bg-white");
@@ -88,18 +90,17 @@
         }
 
         navbar.classList.add("gpk-nav-autohide-enabled");
-        navbar.classList.add("gpk-nav-bg-white");
 
         if (window.scrollY <= 0) {
             navbar.classList.remove("gpk-nav-hidden");
-            navbar.classList.add("gpk-nav-bg-white");
+            navbar.classList.remove("gpk-nav-bg-white");
         } else if (window.scrollY > 80) {
             navbar.classList.add("gpk-nav-hidden");
             navbar.classList.remove("gpk-nav-bg-white");
         } else {
-            // Entre 0 y 80px: visible con fondo blanco
+            // Entre 0 y 80px: visible y transparente
             navbar.classList.remove("gpk-nav-hidden");
-            navbar.classList.add("gpk-nav-bg-white");
+            navbar.classList.remove("gpk-nav-bg-white");
         }
 
         log("Navbar preparado. scrollY actual:", window.scrollY, "hidden:", navbar.classList.contains("gpk-nav-hidden"), "bg-white:", navbar.classList.contains("gpk-nav-bg-white"));
