@@ -30,6 +30,10 @@
                 background-color: transparent !important;
                 box-shadow: none !important;
             }
+            .gpk-nav-autohide-enabled .nav-link,
+            .gpk-nav-autohide-enabled .w-nav-link {
+                transition: color 0.3s ease !important;
+            }
             .gpk-nav-autohide-enabled.gpk-nav-hidden,
             .navbar-logo-left.gpk-nav-autohide-enabled.gpk-nav-hidden,
             .w-nav.gpk-nav-autohide-enabled.gpk-nav-hidden,
@@ -42,6 +46,10 @@
             nav.gpk-nav-autohide-enabled.gpk-nav-bg-white {
                 background-color: #ffffff !important;
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+            }
+            .gpk-nav-autohide-enabled.gpk-nav-bg-white .nav-link,
+            .gpk-nav-autohide-enabled.gpk-nav-bg-white .w-nav-link {
+                color: #062819 !important;
             }
         `;
         document.head.appendChild(style);
