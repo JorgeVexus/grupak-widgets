@@ -12,6 +12,16 @@
         document.head.appendChild(link);
     }
 
+    // Helper function to resolve relative image paths to absolute Vercel paths
+    function resolveImagePath(path) {
+        if (!path) return "";
+        if (path.startsWith("http") || path.startsWith("//") || path.startsWith("data:")) {
+            return path;
+        }
+        const relativePart = path.replace("widgets/locations-map/", "");
+        return `${baseURL}/${relativePart}`;
+    }
+
     // 2. Fetch and inject HTML markup if root container exists and hasn't been populated
     const container = document.getElementById("gpk-locations-widget-root");
     if (container) {
@@ -22,6 +32,15 @@
             })
             .then(html => {
                 container.innerHTML = html;
+                // Resolve relative image paths in the fetched HTML
+                const imgs = container.querySelectorAll("img");
+                imgs.forEach(img => {
+                    const src = img.getAttribute("src");
+                    if (src && !src.startsWith("http") && !src.startsWith("//") && !src.startsWith("data:")) {
+                        const relativePart = src.replace("widgets/locations-map/", "");
+                        img.src = `${baseURL}/${relativePart}`;
+                    }
+                });
                 initWidget();
             })
             .catch(err => console.error("Error loading locations widget:", err));
@@ -479,14 +498,24 @@
             // Telefono con enlace
             elements.popupPhone.innerHTML = `<a href="tel:+52${location.phone.replace(/\s/g, '')}">${escapeHtml(location.phone)}</a>`;
 
+            // Helper to resolve images inside initWidget scope
+            function resolveImagePath(path) {
+                if (!path) return "";
+                if (path.startsWith("http") || path.startsWith("//") || path.startsWith("data:")) {
+                    return path;
+                }
+                const relativePart = path.replace("widgets/locations-map/", "");
+                return `https://grupak-widgets.vercel.app/widgets/locations-map/${relativePart}`;
+            }
+
             // Imagen
             if (elements.popupImage) {
-                elements.popupImage.src = location.imageUrl;
+                elements.popupImage.src = resolveImagePath(location.imageUrl);
                 elements.popupImage.alt = `Planta ${location.name}`;
                 
                 // Fallback si la imagen falla
                 elements.popupImage.onerror = () => {
-                    elements.popupImage.src = 'widgets/locations-map/images/dji-aerial.webp';
+                    elements.popupImage.src = resolveImagePath('widgets/locations-map/images/dji-aerial.webp');
                 };
             }
 

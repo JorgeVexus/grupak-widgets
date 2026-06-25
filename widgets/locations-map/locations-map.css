@@ -442,22 +442,22 @@
 }
 
 #gpk-locations-map-widget .map-pin.corporativo {
-    background-image: url('widgets/locations-map/images/pin-corporativo.svg');
+    background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-corporativo.svg');
     color: var(--color-corporativo);
 }
 
 #gpk-locations-map-widget .map-pin.planta-papel {
-    background-image: url('widgets/locations-map/images/pin-papel.svg');
+    background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-papel.svg');
     color: var(--color-papel);
 }
 
 #gpk-locations-map-widget .map-pin.planta-corrugado {
-    background-image: url('widgets/locations-map/images/pin-corrugado.svg');
+    background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-corrugado.svg');
     color: var(--color-corrugado);
 }
 
 #gpk-locations-map-widget .map-pin.abastecimiento {
-    background-image: url('widgets/locations-map/images/pin-abastecimiento.svg');
+    background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-abastecimiento.svg');
     color: var(--color-abastecimiento);
 }
 
