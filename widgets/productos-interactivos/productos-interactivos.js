@@ -40,11 +40,18 @@
         const root = document.getElementById("gpk-products-widget");
         if (!root) return;
 
-        const board = root.querySelector("#products-board");
+                const board = root.querySelector("#products-board");
         const tracker = root.querySelector(".products-scroll-tracker");
         const prevBtn = root.querySelector("#p-prev-btn");
         const nextBtn = root.querySelector("#p-next-btn");
         const dotsContainer = root.querySelector("#footer-dots");
+
+        // Dynamically set logo src to support both local preview and production
+        const logo = board ? board.querySelector(".preloader-logo") : null;
+        if (logo) {
+            const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+            logo.src = isLocal ? "widgets/productos-interactivos/logoGrupak.svg" : `${baseURL}/logoGrupak.svg`;
+        }
 
         // --- Dot Indicators Builder ---
         function buildDots() {

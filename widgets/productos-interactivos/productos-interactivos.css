@@ -136,6 +136,12 @@
     font-weight: 700 !important;
 }
 
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
 #gpk-products-widget .text-green {
     font-weight: 700 !important;
 }
