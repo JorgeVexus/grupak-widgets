@@ -573,14 +573,15 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 #gpk-timeline-widget .photo-img-1985 {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 15px;
+  left: 20px;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   z-index: 1;
   opacity: 0;
@@ -590,11 +591,11 @@
 
 #gpk-timeline-widget .vector-img-1985 {
   position: absolute;
-  top: -4px;
-  left: -4px;
-  width: calc(100% + 8px);
-  height: calc(100% + 8px);
-  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s ease;
@@ -647,10 +648,10 @@
 
 #gpk-timeline-widget .photo-img-2003 {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 1024px;
-  height: 485px;
+  top: 20px;
+  left: 50px;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   z-index: 1;
   opacity: 0;
@@ -885,14 +886,15 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 #gpk-timeline-widget .photo-img-2015 {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 20px;
+  left: 50px;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   z-index: 1;
   opacity: 0;
@@ -981,12 +983,33 @@
   transition-delay: 0.7s;
 }
 
+#gpk-timeline-widget .img-wrapper-2021-1,
+#gpk-timeline-widget .img-wrapper-2021-2 {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
 #gpk-timeline-widget .img-2021-1,
 #gpk-timeline-widget .img-2021-2 {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  display: block;
+}
+
+#gpk-timeline-widget .vector-2021-1,
+#gpk-timeline-widget .vector-2021-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: block;
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Active transitions for Slide 2021 */
@@ -1023,19 +1046,32 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 #gpk-timeline-widget .photo-img-2023 {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 20px;
+  left: 50px;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   z-index: 1;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+#gpk-timeline-widget .vector-img-2023 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2023"] .info-section {
@@ -1055,6 +1091,10 @@
   transition-delay: 0.5s;
 }
 
+#gpk-timeline-widget .timeline-slide[data-year="2023"].active .vector-img-2023 {
+  opacity: 1;
+}
+
 /* 2024 Slide Animations (Image Top, Text Bottom) */
 #gpk-timeline-widget .photo-container-2024 {
   position: absolute;
@@ -1066,22 +1106,34 @@
 
 #gpk-timeline-widget .photo-wrapper-2024 {
   position: relative;
-  width: 920px;
-  height: 539px;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 #gpk-timeline-widget .photo-img-2024 {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 30px;
+  left: 110px;
+  width: 80%;
+  height: 85%;
   object-fit: cover;
   z-index: 1;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+#gpk-timeline-widget .vector-img-2024 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2024"] .info-section {
@@ -1105,6 +1157,10 @@
   opacity: 1;
   clip-path: inset(0 0% 0 0);
   transition-delay: 0.5s;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2024"].active .vector-img-2024 {
+  opacity: 1;
 }
 
 /* Base style for mobile active line (hidden on desktop) */
