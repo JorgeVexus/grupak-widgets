@@ -34,7 +34,7 @@
         let currentSlide = 0; 
         const totalSlides = 10;
         let isAnimating = false;
-        let isPreloading = true;
+        let isPreloading = false;
 
         // Scoped DOM Elements to prevent clashes
         const root = document.getElementById("gpk-products-widget");
@@ -71,20 +71,11 @@
             const scaleY = window.innerHeight / 1030;
             const scale = Math.min(scaleX, scaleY, 1);
             board.style.setProperty('--board-scale', scale);
+            board.style.transform = `scale(${scale})`;
         }
 
         // --- Slide Controller ---
-        function goToSlide(index, forceSkipPreload = false) {
-            if (isPreloading) {
-                if (forceSkipPreload) {
-                    const preloader = root.querySelector("#gpk-preloader");
-                    if (preloader) preloader.style.display = "none";
-                    board.classList.remove("preloading");
-                    isPreloading = false;
-                } else {
-                    return; // Block direct navigation during preloading
-                }
-            }
+        function goToSlide(index) {
             if (index < 0 || index >= totalSlides) return;
 
             // Desktop scroll management
@@ -106,12 +97,10 @@
         }
 
         window.gpkGoToProductsSlide = function(index) {
-            goToSlide(index, true);
+            goToSlide(index);
         };
 
         function handleScroll() {
-            if (isPreloading) return; // Block scroll events during preloading
-            
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const trackerTop = rect.top + scrollTop;
@@ -120,6 +109,9 @@
             const relativeScroll = scrollTop - trackerTop;
             let progress = relativeScroll / scrollHeight;
             progress = Math.max(0, Math.min(1, progress));
+
+            // Run preloader scroll animation
+            updatePreloaderOnScroll(progress);
 
             const targetSlide = Math.min(Math.floor(progress * totalSlides), totalSlides - 1);
 
@@ -134,7 +126,7 @@
 
         function updateUI() {
             // 1. Set mode class on board
-            board.className = `products-board mode-${currentSlide}${isPreloading ? ' preloading' : ''}`;
+            board.className = `products-board mode-${currentSlide}`;
 
             // 2. Highlight dot indicators
             const dots = dotsContainer.querySelectorAll(".dot-indicator");
@@ -232,7 +224,6 @@
 
             document.addEventListener("keydown", (e) => {
                 if (window.innerWidth <= 1024) return;
-                if (isPreloading) return; // Block key navigation during preloading
                 
                 const rect = root.getBoundingClientRect();
                 const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
@@ -253,67 +244,163 @@
             window.addEventListener("scroll", handleScroll, { passive: true });
         }
 
-        // --- Preloader Animation Timeline ---
-        function startPreloaderAnimation() {
+        // --- Scroll-driven Preloader Updates ---
+        function updatePreloaderOnScroll(progress) {
             const preloader = root.querySelector("#gpk-preloader");
             if (!preloader) return;
 
-            // Step 1: Logo fades in immediately
-            preloader.classList.add("preload-step-1");
+            // Preloader animation range: 0% to 8% of scroll progress
+            const preloaderLimit = 0.08;
+            const p = Math.min(progress / preloaderLimit, 1);
 
-            // Step 2: Zoom revertido (reverse zoom shape)
-            setTimeout(() => {
-                preloader.classList.add("preload-step-2");
-            }, 700);
+            // Select elements
+            const whiteBg = preloader.querySelector(".preloader-white-bg");
+            const shapeContainer = preloader.querySelector(".preloader-shape-container");
+            const fillPath = preloader.querySelector(".shape-fill-path");
+            const strokePath = preloader.querySelector(".shape-stroke-path");
+            const logo = preloader.querySelector(".preloader-logo");
+            const boardOutline = preloader.querySelector(".preloader-board-outline");
 
-            // Step 3: Shape fill fades out, dashed border appears
-            setTimeout(() => {
-                preloader.classList.add("preload-step-3");
-            }, 1500);
-
-            // Step 4: Logo slides out, shape fades, board outline fades in
-            setTimeout(() => {
-                preloader.classList.add("preload-step-4");
-            }, 2100);
-
-            // Step 5: Transition to white board background
-            setTimeout(() => {
-                preloader.classList.add("preload-step-5");
-            }, 2800);
-
-            // Completion: preloader disappears, Slide 0 contents fade in, enable interactions
-            setTimeout(() => {
-                preloader.style.display = "none";
-                board.classList.remove("preloading");
-                isPreloading = false;
-                // Run scroll handler once to synchronize in case they scrolled slightly
-                handleScroll();
-            }, 3400);
-        }
-
-        // --- Intersection Observer to Trigger Preloader ---
-        function initPreloaderObserver() {
-            const preloader = root.querySelector("#gpk-preloader");
-            if (!preloader) {
-                isPreloading = false;
-                board.classList.remove("preloading");
-                return;
+            // --- STAGED SCROLL ANIMATION ---
+            
+            // 1. Stage 1: Logo fades in and scales slightly (p: 0 to 0.15)
+            let logoOpacity = 0;
+            let logoScale = 0.9;
+            if (p <= 0.15) {
+                const step = p / 0.15;
+                logoOpacity = step;
+                logoScale = 0.9 + 0.1 * step;
+            } else if (p <= 0.6) {
+                logoOpacity = 1;
+                logoScale = 1.0;
+            } else if (p <= 0.85) {
+                const step = (p - 0.6) / 0.25;
+                logoOpacity = 1 - step;
+                logoScale = 1.0;
             }
 
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            startPreloaderAnimation();
-                            observer.unobserve(root); // Run only once
-                        }
-                    });
-                }, {
-                    threshold: 0
-                });
-                observer.observe(root);
+            // Logo translateY displacement (Stage 4, p: 0.6 to 0.85)
+            let logoTranslateY = 0;
+            if (p > 0.6 && p <= 0.85) {
+                const step = (p - 0.6) / 0.25;
+                logoTranslateY = step * -80; // slides up by 80px
+            } else if (p > 0.85) {
+                logoTranslateY = -80;
+            }
+
+            if (logo) {
+                logo.style.opacity = logoOpacity;
+                logo.style.transform = `scale(${logoScale}) translateY(${logoTranslateY}px)`;
+            }
+
+            // 2. Stage 2: Shape container zooms down and white bg fades in (p: 0.15 to 0.4)
+            let shapeScale = 5;
+            let whiteBgOpacity = 0;
+            if (p > 0.15 && p <= 0.4) {
+                const step = (p - 0.15) / 0.25;
+                shapeScale = 5 - 4 * step; // goes from 5 to 1
+                whiteBgOpacity = step;
+            } else if (p > 0.4) {
+                shapeScale = 1.0;
+                whiteBgOpacity = 1.0;
+            }
+
+            // Shape container fades and scales slightly during Stage 4 (p: 0.6 to 0.85)
+            let shapeOpacity = 1;
+            if (p > 0.6 && p <= 0.85) {
+                const step = (p - 0.6) / 0.25;
+                shapeOpacity = 1 - step;
+                shapeScale = 1.0 + 0.1 * step; // scales up to 1.1
+            } else if (p > 0.85) {
+                shapeOpacity = 0;
+                shapeScale = 1.1;
+            }
+
+            if (shapeContainer) {
+                shapeContainer.style.opacity = shapeOpacity;
+                shapeContainer.style.transform = `translate(-50%, -50%) scale(${shapeScale})`;
+            }
+
+            if (whiteBg) {
+                // White bg fades out in Stage 4 (p: 0.6 to 0.85)
+                let finalWhiteBgOpacity = whiteBgOpacity;
+                if (p > 0.6 && p <= 0.85) {
+                    const step = (p - 0.6) / 0.25;
+                    finalWhiteBgOpacity = 1 - step;
+                } else if (p > 0.85) {
+                    finalWhiteBgOpacity = 0;
+                }
+                whiteBg.style.opacity = finalWhiteBgOpacity;
+            }
+
+            // 3. Stage 3: Shape fill path fades out and stroke path (dashed border) fades in (p: 0.4 to 0.6)
+            let fillOpacity = 1;
+            let strokeOpacity = 0;
+            if (p > 0.4 && p <= 0.6) {
+                const step = (p - 0.4) / 0.2;
+                fillOpacity = 1 - step;
+                strokeOpacity = step;
+            } else if (p > 0.6) {
+                fillOpacity = 0;
+                strokeOpacity = 1;
+            }
+
+            if (fillPath) {
+                fillPath.style.opacity = fillOpacity;
+            }
+            if (strokePath) {
+                strokePath.style.opacity = strokeOpacity;
+            }
+
+            // 4. Stage 4: Board outline fades in (p: 0.6 to 0.85)
+            let outlineOpacity = 0;
+            if (p > 0.6 && p <= 0.85) {
+                const step = (p - 0.6) / 0.25;
+                outlineOpacity = step;
+            } else if (p > 0.85) {
+                outlineOpacity = 1.0;
+            }
+
+            // 5. Stage 5: Preloader itself fades out and pointer events disabled (p: 0.85 to 1.0)
+            let preloaderOpacity = 1;
+            let finalOutlineOpacity = outlineOpacity;
+            if (p >= 0.85) {
+                const step = (p - 0.85) / 0.15;
+                preloaderOpacity = 1 - step;
+                preloader.style.pointerEvents = step >= 0.8 ? "none" : "auto";
+                finalOutlineOpacity = 1 - step; // Board outline also fades out
             } else {
-                startPreloaderAnimation();
+                preloader.style.pointerEvents = "auto";
+            }
+
+            preloader.style.opacity = preloaderOpacity;
+
+            if (boardOutline) {
+                boardOutline.style.opacity = finalOutlineOpacity;
+            }
+
+            // --- CROSS-FADE BOARD CONTENT ---
+            // Fade in Slide 0 contents (Intro pane, pillars, nav footer) as the preloader fades out.
+            // When progress is <= 0.08 (preloader range), we manually interpolate opacity.
+            // When progress is > 0.08, we CLEAR the inline style opacity so standard slide transitions work.
+            const introPane = board.querySelector(".products-intro-pane");
+            const pillarsContainer = board.querySelector(".floating-pillars-container");
+            const navFooter = board.querySelector(".products-nav-footer");
+
+            if (progress <= 0.08) {
+                // Intro pane and other Slide 0 content fades in between preloader progress 0.6 to 0.85
+                let contentOpacity = 0;
+                if (p > 0.6) {
+                    contentOpacity = Math.min((p - 0.6) / 0.25, 1);
+                }
+                if (introPane) introPane.style.opacity = contentOpacity;
+                if (pillarsContainer) pillarsContainer.style.opacity = contentOpacity;
+                if (navFooter) navFooter.style.opacity = contentOpacity;
+            } else {
+                // Clear inline opacity so the stylesheet classes (.mode-0, etc.) control them!
+                if (introPane) introPane.style.opacity = "";
+                if (pillarsContainer) pillarsContainer.style.opacity = "";
+                if (navFooter) navFooter.style.opacity = "";
             }
         }
 
@@ -322,7 +409,8 @@
             buildDots();
             scaleBoard();
             setupEvents();
-            initPreloaderObserver();
+            updatePreloaderOnScroll(0);
+            board.classList.remove("preloading");
             updateUI();
         }
 

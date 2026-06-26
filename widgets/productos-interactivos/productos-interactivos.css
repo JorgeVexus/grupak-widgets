@@ -34,6 +34,112 @@
     font-weight: 700 !important;
 }
 
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget strong,
+#gpk-products-widget b,
+#gpk-products-widget .text-bold {
+    font-weight: 700 !important;
+}
+
+#gpk-products-widget .text-green {
+    font-weight: 700 !important;
+}
+
 #gpk-products-widget .mobile-only-graphic {
     display: none !important;
 }
@@ -74,7 +180,6 @@
     transform-origin: center center;
     flex-shrink: 0;
     transform: scale(var(--board-scale, 1));
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Board background overlay */
@@ -263,18 +368,19 @@
 
 #gpk-products-widget .intro-title-new {
     font-family: var(--font-title);
-    font-size: 22px;
-    font-weight: 500;
-    color: #7E7E7E;
-    line-height: 1.45;
+    font-size: 26px;
+    font-weight: 400;
+    color: #8C8C8C;
+    line-height: 56px;
     letter-spacing: -0.2px;
     margin-bottom: 40px;
-    max-width: 660px;
+    max-width: 850px;
 }
 
 #gpk-products-widget .intro-title-new .text-green {
     color: var(--color-green);
-    font-weight: 700;
+    font-size: 38px;
+    font-weight: 700 !important;
 }
 
 #gpk-products-widget .intro-kpis-grid-new {
@@ -285,6 +391,8 @@
 #gpk-products-widget .kpi-item-new {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: 150px;
 }
 
@@ -301,13 +409,13 @@
     width: 80px;
     height: 3px;
     background-color: var(--color-green);
-    margin-bottom: 12px;
+    margin: 0 auto 12px auto;
 }
 
 #gpk-products-widget .kpi-label-top {
     font-family: var(--font-title);
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 700 !important;
     color: var(--color-grey-dark);
     margin-bottom: 4px;
 }
@@ -439,7 +547,7 @@
 #gpk-products-widget .products-overview-pane {
     position: absolute;
     inset: 0;
-    padding: 140px 100px 100px 100px;
+    padding: 100px 100px 100px 100px;
     z-index: 20;
     pointer-events: none;
     opacity: 0;
@@ -480,8 +588,8 @@
 
 #gpk-products-widget .overview-title-new {
     font-family: var(--font-title);
-    font-size: 50px;
-    font-weight: 900;
+    font-size: 96px;
+    font-weight: 500 !important;
     color: #6e6e6e;
     letter-spacing: -1.5px;
     line-height: 1.1;
@@ -489,6 +597,7 @@
 
 #gpk-products-widget .overview-title-new .text-green {
     color: var(--color-green);
+    font-weight: 900 !important;
 }
 
 #gpk-products-widget .overview-grid-new {
@@ -734,7 +843,7 @@
 #gpk-products-widget .details-pane {
     position: absolute;
     inset: 0;
-    padding: 160px 100px 100px 100px;
+    padding: 100px 100px 100px 100px;
     z-index: 20;
     pointer-events: none;
     opacity: 0;
@@ -750,8 +859,8 @@
 
 #gpk-products-widget .pane-title-centered {
     font-family: var(--font-title);
-    font-size: 50px;
-    font-weight: 900;
+    font-size: 96px;
+    font-weight: 500 !important;
     color: #6e6e6e;
     letter-spacing: -1.5px;
     text-align: center;
@@ -861,7 +970,7 @@
 #gpk-products-widget .cajas-intro-content,
 #gpk-products-widget .cajas-digital-content {
     position: absolute;
-    inset: 160px 100px 100px 100px;
+    inset: 280px 100px 100px 100px;
     display: flex;
     opacity: 0;
     transform: translateY(20px);
@@ -895,7 +1004,7 @@
 }
 
 #gpk-products-widget .cajas-column {
-    width: 520px;
+    width: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1080,22 +1189,24 @@
 
 /* Mode 4 Layout: Text content on left, image on right */
 #gpk-products-widget .cajas-digital-content {
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 
 #gpk-products-widget .digital-content-wrapper {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 80px;
+    width: 1400px;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
 }
 
 #gpk-products-widget .digital-text-content {
-    width: 48%;
+    width: 450px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+    margin-top: -60px;
 }
 
 #gpk-products-widget .digital-subtitle {
@@ -1141,10 +1252,11 @@
 }
 
 #gpk-products-widget .digital-image-container {
-    width: 48%;
+    width: 680px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    flex-shrink: 0;
     opacity: 0;
     transform: translateY(120px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1152,7 +1264,7 @@
 
 #gpk-products-widget .digital-main-image {
     max-width: 100%;
-    max-height: 580px;
+    max-height: 650px;
     object-fit: contain;
 }
 
@@ -1211,7 +1323,7 @@
 #gpk-products-widget .products-board.mode-2 #pillars-container #p-caja {
     left: 50%;
     top: 547px;
-    width: 640px;
+    width: 780px;
     height: 640px;
     transform: translate(-50%, -50%);
     opacity: 1;
@@ -1461,13 +1573,13 @@
 
 /* Title at top - LEFT ALIGNED, simple vertical layout */
 #gpk-products-widget .laminas-title-wrapper {
-    margin-bottom: 40px;
+    margin-bottom: 0px;
 }
 
 #gpk-products-widget .laminas-main-title {
     font-family: var(--font-title);
-    font-size: 50px;
-    font-weight: 900;
+    font-size: 96px;
+    font-weight: 500 !important;
     color: var(--color-grey-medium);
     letter-spacing: -1.2px;
     line-height: 1.1;
@@ -1476,13 +1588,14 @@
 
 #gpk-products-widget .laminas-main-title .text-green {
     color: var(--color-green);
+    font-weight: 900 !important;
 }
 
 /* Intro text - two columns */
 #gpk-products-widget .laminas-intro-content {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 25px;
 }
 
 #gpk-products-widget .laminas-intro-text {
@@ -1500,6 +1613,7 @@
     font-size: 17px;
     line-height: 1.6;
     color: var(--color-grey-medium);
+    max-width: 660px;
     opacity: 0;
     transform: translateY(60px);
     transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1), transform 1.0s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1563,7 +1677,7 @@
 
 #gpk-products-widget .laminas-card-img {
     width: 100%;
-    max-height: 200px;
+    max-height: 260px;
     object-fit: contain;
     border: none;
     border-radius: 8px;
@@ -1595,6 +1709,8 @@
     font-size: 14px;
     line-height: 1.5;
     color: var(--color-grey-dark);
+    max-width: 280px;
+    margin: 0 auto;
 }
 
 /* ==========================================
@@ -1683,8 +1799,8 @@
     top: 100px;
     transform: translateY(30px) translateX(-50%);
     font-family: var(--font-title);
-    font-size: 56px;
-    font-weight: 900;
+    font-size: 96px;
+    font-weight: 500 !important;
     color: var(--color-grey-medium);
     letter-spacing: -1.5px;
     margin: 0;
@@ -1713,7 +1829,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -30%);
-    width: 480px;
+    width: 620px;
     height: auto;
     z-index: 10;
     opacity: 0;
@@ -1748,6 +1864,7 @@
 #gpk-products-widget .papel-text-block {
     position: absolute;
     width: 380px;
+    text-align: center;
     opacity: 0;
     transform: translateY(80px);
     transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1), transform 1.0s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s ease;
@@ -1771,7 +1888,7 @@
     transform: translateY(0) translateX(-50%);
     left: 50%;
     top: 100px;
-    font-size: 56px;
+    font-size: 96px;
     transition-delay: 0.1s;
 }
 
@@ -1779,7 +1896,7 @@
     opacity: 1;
     left: 50%;
     top: 50%;
-    width: 480px;
+    width: 620px;
     transform: translate(-50%, -50%);
     transition-delay: 0.2s;
 }
@@ -1809,7 +1926,7 @@
 /* Transition to top-left when entering Mode 6 */
 #gpk-products-widget .products-board.mode-6 .papel-hero-image {
     opacity: 1;
-    left: 270px;
+    left: 380px;
     top: 130px;
     width: 160px;
     transform: translate(0, 0);
@@ -1824,8 +1941,8 @@
     opacity: 1;
     transform: translateY(0) translateX(0);
     left: 100px;
-    top: 160px;
-    font-size: 48px;
+    top: 100px;
+    font-size: 96px;
     pointer-events: auto;
 }
 
@@ -1901,7 +2018,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    margin-top: 90px;
+    margin-top: 140px;
 }
 
 /* Product cards - Glassmorphism style, no solid white background */
@@ -1958,16 +2075,16 @@
 
 #gpk-products-widget .product-name {
     font-family: var(--font-title);
-    font-size: 19px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 900 !important;
     color: var(--color-green);
     margin-bottom: 4px;
     line-height: 1.2;
 }
 
 #gpk-products-widget .product-subtitle {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 700 !important;
     color: var(--color-grey-medium);
     margin-bottom: 10px;
 }
@@ -1984,18 +2101,18 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(227, 229, 233, 0.4);
-    margin-left: -50px;
+    border-top: none;
+    padding-top: 0;
+    margin-left: -26px;
 }
 
 #gpk-products-widget .uses-bubble {
-    background-color: var(--color-green);
-    color: var(--color-white);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 20px;
+    background-color: transparent;
+    color: var(--color-grey-medium);
+    font-size: 14px;
+    font-weight: 700 !important;
+    padding: 0;
+    border-radius: 0;
     width: fit-content;
     display: inline-block;
     transform: translateX(-20px);
@@ -2041,11 +2158,13 @@
 /* Card 3 (BL) -> from bottom-left corner */
 #gpk-products-widget .products-board.mode-6 .product-card[data-index="3"] { 
     transition-delay: 0.6s; 
+    margin-left: 100px;
 }
 
 /* Card 4 (BR) -> from bottom-right corner */
 #gpk-products-widget .products-board.mode-6 .product-card[data-index="4"] { 
     transition-delay: 0.7s; 
+    margin-left: 100px;
 }
 
 /* Card initial positions (Mode 5 corner positions) */
@@ -2157,7 +2276,7 @@
 #gpk-products-widget .grabados-left-content {
     position: absolute;
     left: 100px;
-    top: 160px;
+    top: 100px;
     width: 1100px; /* Wider so paragraphs do not compress */
     display: flex;
     flex-direction: column;
@@ -2171,8 +2290,8 @@
 /* Main title */
 #gpk-products-widget .grabados-main-title {
     font-family: var(--font-title);
-    font-size: 50px;
-    font-weight: 900;
+    font-size: 96px;
+    font-weight: 500 !important;
     color: var(--color-grey-medium);
     letter-spacing: -1.2px;
     line-height: 1.1;
@@ -2231,7 +2350,9 @@
     padding: 28px 36px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     box-sizing: border-box;
     opacity: 0;
     transform: translateY(100px);
@@ -2253,7 +2374,7 @@
 #gpk-products-widget .grabados-card-title {
     font-family: var(--font-title);
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 900 !important;
     line-height: 1.25;
     margin: 0 0 16px 0;
     text-transform: uppercase;
@@ -2340,8 +2461,8 @@
 
 #gpk-products-widget .energia-main-title {
     font-family: var(--font-title);
-    font-size: 50px;
-    font-weight: 700 !important;
+    font-size: 96px;
+    font-weight: 900 !important;
     color: var(--color-green) !important;
     letter-spacing: -1.2px;
     margin: 0 0 16px 0;
@@ -2427,6 +2548,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 6px;
 }
 
 #gpk-products-widget .energia-row h3 {
@@ -2434,12 +2556,12 @@
     font-size: 18px;
     font-weight: 700 !important;
     color: var(--color-green) !important;
-    margin: 0 0 6px 0;
+    margin: 0;
     line-height: 1.2;
 }
 
 #gpk-products-widget .energia-row p {
-    font-size: 13px;
+    font-size: 16px;
     line-height: 1.5;
     color: var(--color-grey-medium) !important;
     margin: 0;
@@ -2608,6 +2730,16 @@
         margin-bottom: 16px !important;
         max-width: 100% !important;
         text-align: left !important;
+    }
+
+    #gpk-products-widget .intro-title-new .text-green {
+        font-size: inherit !important;
+        font-weight: inherit !important;
+    }
+
+    #gpk-products-widget .overview-title-new .text-green,
+    #gpk-products-widget .laminas-main-title .text-green {
+        font-weight: inherit !important;
     }
 
     #gpk-products-widget .intro-mobile-img-container {
@@ -3151,6 +3283,7 @@
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
         box-sizing: border-box !important;
+        text-align: left !important;
     }
 
     #gpk-products-widget .papel-text-block p {
@@ -3184,6 +3317,7 @@
         overflow: hidden !important;
         box-sizing: border-box !important;
         justify-content: space-between !important;
+        margin-left: 0 !important;
     }
 
     #gpk-products-widget .product-image {
@@ -3371,8 +3505,9 @@
     }
 
     #gpk-products-widget .laminas-card-desc {
-        font-size: 11px !important;
+        font-size: 10px !important;
         line-height: 1.35 !important;
+        max-width: none !important;
         color: var(--color-grey-medium) !important;
     }
 
@@ -3579,7 +3714,6 @@
     height: 100%;
     z-index: 100;
     background-color: var(--color-grey-light, #d9d9d9);
-    transition: background-color 0.8s ease, opacity 0.6s ease;
     pointer-events: auto;
     display: flex;
     justify-content: center;
@@ -3597,7 +3731,6 @@
     background-color: var(--color-white, #ffffff);
     opacity: 0;
     z-index: 1;
-    transition: opacity 0.8s ease;
     pointer-events: none;
 }
 
@@ -3611,7 +3744,6 @@
     transform: translate(-50%, -50%) scale(5);
     transform-origin: center center;
     z-index: 10;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3631,14 +3763,12 @@
 #gpk-products-widget .shape-fill-path {
     fill: var(--color-grey-light, #d9d9d9);
     opacity: 1;
-    transition: opacity 0.6s ease;
 }
 
 /* SVG Stroke Path */
 #gpk-products-widget .shape-stroke-path {
     stroke: var(--color-grey-medium, #6E6E6E);
     opacity: 0;
-    transition: opacity 0.6s ease;
 }
 
 /* Preloader Logo */
@@ -3648,8 +3778,6 @@
     max-width: 420px;
     height: auto;
     opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Board outline overlay */
@@ -3665,57 +3793,6 @@
     background-position: center;
     opacity: 0;
     z-index: 5;
-    transition: opacity 0.6s ease;
-    pointer-events: none;
-}
-
-/* Step 1: Logo fades in */
-#gpk-products-widget .gpk-preloader.preload-step-1 .preloader-logo {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Step 2: Zoom out, BG transparent, White BG overlay in */
-#gpk-products-widget .gpk-preloader.preload-step-2 {
-    background-color: transparent;
-}
-#gpk-products-widget .gpk-preloader.preload-step-2 .preloader-white-bg {
-    opacity: 1;
-}
-#gpk-products-widget .gpk-preloader.preload-step-2 .preloader-shape-container {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* Step 3: Shape fill fades out, dashed border fades in */
-#gpk-products-widget .gpk-preloader.preload-step-3 .shape-fill-path {
-    opacity: 0;
-}
-#gpk-products-widget .gpk-preloader.preload-step-3 .shape-stroke-path {
-    opacity: 1;
-}
-
-/* Step 4: Logo slides out, shape container fades and scales slightly, board outline fades in, white bg fades out */
-#gpk-products-widget .gpk-preloader.preload-step-4 .preloader-logo {
-    opacity: 0;
-    transform: translateY(-80px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-#gpk-products-widget .gpk-preloader.preload-step-4 .preloader-shape-container {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1.1);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-#gpk-products-widget .gpk-preloader.preload-step-4 .preloader-white-bg {
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
-#gpk-products-widget .gpk-preloader.preload-step-4 .preloader-board-outline {
-    opacity: 1;
-}
-
-/* Step 5: Preloader itself fades out */
-#gpk-products-widget .gpk-preloader.preload-step-5 {
-    opacity: 0;
     pointer-events: none;
 }
 
@@ -3732,7 +3809,7 @@
 #gpk-products-widget .products-intro-pane,
 #gpk-products-widget .floating-pillars-container,
 #gpk-products-widget .products-nav-footer {
-    transition: opacity 0.8s ease;
+    transition: opacity 0.5s ease;
 }
 
 /* Responsive overrides for preloader shape */
