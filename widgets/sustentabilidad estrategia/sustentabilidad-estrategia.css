@@ -165,6 +165,7 @@
 .sust-state-4 .sust-text-panel {
     opacity: 1;
     pointer-events: auto;
+    top: 37%;
 }
 
 .sust-para {
@@ -242,10 +243,10 @@
 
 /* State 4: slide to right half */
 .sust-state-4 .sust-diagram-area {
-    left: 72%;
-    top: 50%;
-    width: min(47vw, 640px);
-    height: min(78vh, 820px);
+    left: 73.5%;
+    top: 51%;
+    width: min(53vw, 760px);
+    height: min(84vh, 880px);
 }
 
 /* Frame images — stacked, crossfade via opacity */
@@ -290,8 +291,12 @@
 
     .sust-text-panel {
         left: 4.5%;
-        top: 16%;
+        top: 40%;
         width: 42%;
+    }
+
+    .sust-state-4 .sust-text-panel {
+        top: 40%;
     }
 
     .sust-para {
@@ -316,8 +321,8 @@
 
     .sust-state-4 .sust-diagram-area {
         left: 73%;
-        width: min(45vw, 520px);
-        height: min(72vh, 620px);
+        width: min(48vw, 580px);
+        height: min(76vh, 660px);
     }
 }
 
@@ -331,7 +336,11 @@
     }
 
     .sust-text-panel {
-        top: 14%;
+        top: 40%;
+    }
+
+    .sust-state-4 .sust-text-panel {
+        top: 40%;
     }
 
     .sust-para {
@@ -360,7 +369,9 @@
     }
 
     .sust-state-4 .sust-diagram-area {
-        height: min(70vh, 540px);
+        top: 52%;
+        width: min(48vw, 560px);
+        height: min(74vh, 560px);
     }
 }
 
@@ -376,6 +387,7 @@
         position: relative;
         height: auto;
         min-height: 100dvh;
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -417,6 +429,8 @@
     .sust-text-panel {
         order: 3;
         margin: 0;
+        width: auto !important;
+        align-self: stretch;
         max-width: 680px;
     }
 
