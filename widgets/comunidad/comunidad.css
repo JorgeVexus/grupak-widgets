@@ -412,7 +412,7 @@
     }
 
     .com-heading {
-        margin-bottom: clamp(28px, 9vw, 46px);
+        margin-bottom: clamp(16px, 4vw, 24px);
     }
 
     .com-heading h2 {
@@ -427,6 +427,7 @@
     }
 
     .com-intro {
+        display: none;
         font-size: clamp(15px, 4vw, 17px);
         line-height: 1.45;
     }
