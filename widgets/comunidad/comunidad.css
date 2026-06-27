@@ -29,8 +29,8 @@
     position: sticky;
     top: 0;
     width: 100%;
-    height: 100vh;
-    min-height: 700px;
+    height: 100dvh;
+    min-height: min(700px, 100dvh);
     overflow: hidden;
     background: var(--com-bg);
 }
@@ -52,6 +52,7 @@
     width: 822.72px;
     height: 959px;
     overflow: hidden;
+    z-index: 3;
 }
 
 .com-media-track {
@@ -106,6 +107,7 @@
     top: 0;
     width: 874px;
     height: 959px;
+    z-index: 2;
 }
 
 .com-heading {
@@ -190,6 +192,10 @@
     height: 92px;
     overflow: hidden;
     transition: height var(--com-dur) var(--com-ease), opacity var(--com-dur) ease;
+}
+
+.com-panel-media {
+    display: none;
 }
 
 .com-panel h3 {
@@ -338,6 +344,11 @@
 }
 
 @media (max-width: 900px) {
+    .com-widget {
+        min-height: 0;
+        overflow: visible;
+    }
+
     .com-sticky {
         position: relative;
         height: auto;
@@ -351,7 +362,7 @@
         top: auto;
         width: 100%;
         height: auto;
-        padding: 0 18px 64px;
+        padding: clamp(26px, 7vw, 48px) clamp(18px, 6vw, 32px) 64px;
         transform: none !important;
     }
 
@@ -368,40 +379,46 @@
         width: 100%;
         height: auto !important;
         opacity: 1 !important;
-        transform: none !important;
     }
 
     .com-media {
         height: auto;
         overflow: visible;
-        margin-bottom: 32px;
+        margin-bottom: clamp(24px, 8vw, 42px);
     }
 
     .com-media-track {
-        display: grid;
-        gap: 28px;
+        display: block;
         width: 100%;
         transform: none !important;
     }
 
     .com-photo {
+        display: none;
         width: 100%;
         height: auto;
-        aspect-ratio: 822 / 959;
         flex-basis: auto;
+    }
+
+    .com-photo-0 {
+        display: block;
+        aspect-ratio: 822 / 959;
+        max-height: 72dvh;
     }
 
     .com-content {
         height: auto;
+        transform: none !important;
     }
 
     .com-heading {
-        margin-bottom: 28px;
+        margin-bottom: clamp(28px, 9vw, 46px);
     }
 
     .com-heading h2 {
         width: 100%;
         font-size: clamp(32px, 10vw, 50px);
+        line-height: 1.14;
     }
 
     .com-rule,
@@ -409,17 +426,40 @@
         width: 100%;
     }
 
+    .com-intro {
+        font-size: clamp(15px, 4vw, 17px);
+        line-height: 1.45;
+    }
+
     .com-accordion {
         display: grid;
-        gap: 24px !important;
+        gap: clamp(28px, 9vw, 48px) !important;
+    }
+
+    .com-panel-media {
+        display: block;
+        width: 100%;
+        margin: 0 0 16px;
+        aspect-ratio: 16 / 11;
+        overflow: hidden;
+    }
+
+    .com-panel-media img,
+    .com-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 
     .com-panel h3 {
         width: 100%;
         height: auto;
         min-height: 70px;
-        padding: 14px 22px 14px 72px;
+        padding: 14px clamp(18px, 6vw, 28px) 14px clamp(52px, 14vw, 72px);
         font-size: clamp(26px, 7vw, 42px);
+        line-height: 1.12;
         white-space: normal;
     }
 
@@ -427,9 +467,34 @@
         margin-left: 0;
         padding: 18px 0 0;
         font-size: 15px !important;
+        line-height: 1.45;
     }
 
     .com-scroll-spacer {
         height: 0;
+    }
+
+    .com-mobile-ready .com-media,
+    .com-mobile-ready .com-heading,
+    .com-mobile-ready .com-panel {
+        opacity: 0 !important;
+        transform: translate3d(0, 26px, 0) scale(.985) !important;
+        transition: opacity 640ms ease, transform 760ms var(--com-ease);
+    }
+
+    .com-mobile-ready .com-panel-media img,
+    .com-mobile-ready .com-photo-0 img {
+        transform: scale(1.035);
+        transition: transform 960ms var(--com-ease);
+    }
+
+    .com-mobile-ready .com-mobile-in {
+        opacity: 1 !important;
+        transform: translate3d(0, 0, 0) scale(1) !important;
+    }
+
+    .com-mobile-ready .com-mobile-in .com-panel-media img,
+    .com-mobile-ready .com-mobile-in.com-media .com-photo-0 img {
+        transform: scale(1);
     }
 }

@@ -75,11 +75,13 @@
         var spacer = widget.querySelector(".com-scroll-spacer");
         var currentState = -1;
         var stateCount = 5;
+        var mobileQuery = window.matchMedia("(max-width: 900px)");
+        var mobileRevealObserver = null;
 
         if (!board || !spacer) return;
 
         function scaleBoard() {
-            if (window.matchMedia("(max-width: 900px)").matches) {
+            if (mobileQuery.matches) {
                 board.style.removeProperty("--com-scale");
                 return;
             }
@@ -103,6 +105,11 @@
         }
 
         function handleScroll() {
+            if (mobileQuery.matches) {
+                applyState(stateCount - 1);
+                return;
+            }
+
             var rect = spacer.getBoundingClientRect();
             var vh = window.innerHeight;
             var distance = Math.max(rect.height - vh, 1);
@@ -110,16 +117,60 @@
             applyState(progressToState(progress));
         }
 
+        function setupMobileReveal() {
+            if (mobileRevealObserver) {
+                mobileRevealObserver.disconnect();
+                mobileRevealObserver = null;
+            }
+
+            widget.classList.toggle("com-mobile-ready", mobileQuery.matches);
+
+            if (!mobileQuery.matches || !("IntersectionObserver" in window)) {
+                widget.querySelectorAll(".com-mobile-in").forEach(function (node) {
+                    node.classList.remove("com-mobile-in");
+                });
+                return;
+            }
+
+            var revealItems = Array.prototype.slice.call(
+                widget.querySelectorAll(".com-media, .com-heading, .com-panel")
+            );
+
+            mobileRevealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("com-mobile-in");
+                        mobileRevealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: "0px 0px -12% 0px",
+                threshold: 0.16
+            });
+
+            revealItems.forEach(function (item, index) {
+                item.style.transitionDelay = Math.min(index * 90, 360) + "ms";
+                mobileRevealObserver.observe(item);
+            });
+        }
+
+        function handleResize() {
+            scaleBoard();
+            handleScroll();
+            setupMobileReveal();
+        }
+
         var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
                     window.addEventListener("scroll", handleScroll, { passive: true });
-                    window.addEventListener("resize", scaleBoard, { passive: true });
+                    window.addEventListener("resize", handleResize, { passive: true });
                     handleScroll();
                     scaleBoard();
+                    setupMobileReveal();
                 } else {
                     window.removeEventListener("scroll", handleScroll);
-                    window.removeEventListener("resize", scaleBoard);
+                    window.removeEventListener("resize", handleResize);
                 }
             });
         }, { threshold: 0.02 });
@@ -127,5 +178,6 @@
         observer.observe(widget);
         applyState(0);
         scaleBoard();
+        setupMobileReveal();
     }
 })();
