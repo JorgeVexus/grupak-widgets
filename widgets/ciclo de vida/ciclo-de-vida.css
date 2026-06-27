@@ -301,7 +301,7 @@
   text-align: left;
   cursor: pointer;
   outline: none;
-  z-index: 7;
+  z-index: 9;
   opacity: 0;
   pointer-events: none;
   transform: scale(0.95);
@@ -405,6 +405,7 @@
   opacity: 0;
   transition: opacity 0.5s ease;
   z-index: -1;
+  display: none !important;
 }
 
 .step-card.active .card-border-frame {
@@ -440,10 +441,25 @@
 
 /* Card visibility triggers per state */
 .lifecycle-state-7 .step-card[data-step="1"],
+.lifecycle-state-8 .step-card[data-step="1"],
 .lifecycle-state-8 .step-card[data-step="2"],
+.lifecycle-state-9 .step-card[data-step="1"],
+.lifecycle-state-9 .step-card[data-step="2"],
 .lifecycle-state-9 .step-card[data-step="3"],
+.lifecycle-state-10 .step-card[data-step="1"],
+.lifecycle-state-10 .step-card[data-step="2"],
+.lifecycle-state-10 .step-card[data-step="3"],
 .lifecycle-state-10 .step-card[data-step="4"],
+.lifecycle-state-11 .step-card[data-step="1"],
+.lifecycle-state-11 .step-card[data-step="2"],
+.lifecycle-state-11 .step-card[data-step="3"],
+.lifecycle-state-11 .step-card[data-step="4"],
 .lifecycle-state-11 .step-card[data-step="5"],
+.lifecycle-state-12 .step-card[data-step="1"],
+.lifecycle-state-12 .step-card[data-step="2"],
+.lifecycle-state-12 .step-card[data-step="3"],
+.lifecycle-state-12 .step-card[data-step="4"],
+.lifecycle-state-12 .step-card[data-step="5"],
 .lifecycle-state-12 .step-card[data-step="6"] {
   opacity: 1;
   pointer-events: auto;
@@ -463,7 +479,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 4;
+  z-index: 8;
   pointer-events: none;
 }
 
@@ -475,20 +491,27 @@
 }
 
 /* Positions (Normal View: States 7-13) */
-.connecting-line.line-01 { left: 722px; top: 169px; width: 210px; height: 75px; }
-.connecting-line.line-02 { left: 1186px; top: 451px; width: 208px; height: 9px; }
-.connecting-line.line-03 { left: 1180px; top: 692px; width: 214px; height: 40px; }
-.connecting-line.line-04 { left: 751px; top: 821px; width: 201px; height: 94px; }
-.connecting-line.line-05 { left: 102px; top: 682px; width: 567px; height: 47px; }
-.connecting-line.line-06 { left: 204px; top: 412px; width: 480px; height: 92px; }
+/* line-01: exits below the "01" number, runs down to top of wheel */
+.connecting-line.line-01 { left: 679px; top: 110px; width: 4px; height: 148px; }
+/* line-02: exits right side of "02" number, runs left to wheel */
+.connecting-line.line-02 { left: 1197px; top: 431px; width: 60px; height: 4px; }
+/* line-03: exits right side of "03" number, runs left-down to wheel */
+.connecting-line.line-03 { left: 1194px; top: 772px; width: 60px; height: 60px; }
+/* line-04: exits below "04" number, runs up to wheel bottom */
+.connecting-line.line-04 { left: 876px; top: 827px; width: 4px; height: 90px; }
+/* line-05: exits right side of "05" text block, runs right to wheel */
+.connecting-line.line-05 { left: 547px; top: 762px; width: 105px; height: 4px; }
+/* line-06: exits right side of "06" text block, runs right-down to wheel */
+/* line-06: container starts at the card (left:65), full width to wheel right point */
+.connecting-line.line-06 { left: 65px; top: 412px; width: 619px; height: 92px; }
 
 /* Shifted Positions (State 14) */
-.lifecycle-state-14 .connecting-line.line-01 { left: 722px; top: -31px; }
-.lifecycle-state-14 .connecting-line.line-02 { left: 1186px; top: 251px; }
-.lifecycle-state-14 .connecting-line.line-03 { left: 1180px; top: 492px; }
-.lifecycle-state-14 .connecting-line.line-04 { left: 751px; top: 621px; }
-.lifecycle-state-14 .connecting-line.line-05 { left: 102px; top: 482px; }
-.lifecycle-state-14 .connecting-line.line-06 { left: 204px; top: 212px; }
+.lifecycle-state-14 .connecting-line.line-01 { left: 679px; top: -90px; }
+.lifecycle-state-14 .connecting-line.line-02 { left: 1197px; top: 231px; }
+.lifecycle-state-14 .connecting-line.line-03 { left: 1194px; top: 572px; }
+.lifecycle-state-14 .connecting-line.line-04 { left: 876px; top: 627px; }
+.lifecycle-state-14 .connecting-line.line-05 { left: 547px; top: 562px; }
+.lifecycle-state-14 .connecting-line.line-06 { left: 547px; top: 213px; }
 
 .connecting-line path {
   stroke: var(--color-grey-medium);
@@ -500,10 +523,25 @@
 
 /* Active line highlights on slide states */
 .lifecycle-state-7 #line-1,
+.lifecycle-state-8 #line-1,
 .lifecycle-state-8 #line-2,
+.lifecycle-state-9 #line-1,
+.lifecycle-state-9 #line-2,
 .lifecycle-state-9 #line-3,
+.lifecycle-state-10 #line-1,
+.lifecycle-state-10 #line-2,
+.lifecycle-state-10 #line-3,
 .lifecycle-state-10 #line-4,
+.lifecycle-state-11 #line-1,
+.lifecycle-state-11 #line-2,
+.lifecycle-state-11 #line-3,
+.lifecycle-state-11 #line-4,
 .lifecycle-state-11 #line-5,
+.lifecycle-state-12 #line-1,
+.lifecycle-state-12 #line-2,
+.lifecycle-state-12 #line-3,
+.lifecycle-state-12 #line-4,
+.lifecycle-state-12 #line-5,
 .lifecycle-state-12 #line-6 {
   opacity: 1;
 }
@@ -517,7 +555,7 @@
   stroke: var(--color-green);
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: drawLine 1s forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: drawLine 0.8s forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .lifecycle-state-13 .connecting-line,

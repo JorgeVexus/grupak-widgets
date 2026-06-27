@@ -20,7 +20,7 @@
         link.id   = "gpk-ciclo-styles";
         link.rel  = "stylesheet";
         link.href = isLocalhost
-            ? "widgets/ciclo-de-vida/ciclo-de-vida.css"
+            ? "widgets/ciclo-de-vida/ciclo-de-vida.css?v=" + new Date().getTime()
             : `${baseURL}/ciclo-de-vida.css`;
         document.head.appendChild(link);
     }

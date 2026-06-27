@@ -3,7 +3,7 @@
     --mas-alla-green: #5F9D2F;
     --mas-alla-dark-green: #02321E;
     --mas-alla-deep-green: #062819;
-    --mas-alla-bg-light: #F2F9E9; /* Light green background based on image */
+    --mas-alla-bg-light: #F2F9E9;
     --mas-alla-transparent-green: rgba(104, 189, 72, 0.8);
     --mas-alla-watermark: rgba(2, 50, 30, 0.2);
     --font-main: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -70,8 +70,14 @@
     min-height: 100%;
     height: 100%;
     box-sizing: border-box;
-    /* The "cut-out" effect from Figma */
     clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 95% 90%, 95% 100%, 0% 100%);
+    /* Allow internal scroll on very short viewports */
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.mas-alla-content-section::-webkit-scrollbar {
+    display: none;
 }
 
 .mas-alla-divider {
@@ -93,6 +99,7 @@
 .mas-alla-header {
     margin-bottom: 40px;
     max-width: 796px;
+    flex-shrink: 0;
 }
 
 .mas-alla-badge {
@@ -108,7 +115,7 @@
 
 .mas-alla-title {
     font-size: clamp(36px, 4.2vw, 80px);
-    font-weight: 400; /* Roman by default */
+    font-weight: 400;
     color: var(--mas-alla-gray);
     line-height: 1.05;
     margin-bottom: 20px;
@@ -116,7 +123,7 @@
 }
 
 .mas-alla-title .highlight {
-    font-weight: 900; /* Black */
+    font-weight: 900;
     color: var(--mas-alla-green);
 }
 
@@ -134,6 +141,7 @@
     gap: 22px;
     max-width: 699px;
     position: relative;
+    flex-shrink: 0;
 }
 
 .mas-alla-item {
@@ -187,7 +195,9 @@
     transition: color 0.4s ease;
 }
 
-/* --- Responsive & Desktop Cascading Indents --- */
+/* ==========================================================================
+   DESKTOP — Cascading Indents & Active States
+   ========================================================================== */
 @media (min-width: 1025px) {
     .mas-alla-item-inner {
         grid-template-columns: 160px 1fr;
@@ -196,7 +206,6 @@
         box-shadow: none !important;
     }
 
-    /* Hidden State default placement */
     .mas-alla-item.gpk-hidden {
         opacity: 0;
         pointer-events: none;
@@ -206,7 +215,6 @@
     .mas-alla-item.gpk-hidden[data-index="2"] { transform: translate(146px, 30px); }
     .mas-alla-item.gpk-hidden[data-index="3"] { transform: translate(221px, 30px); }
 
-    /* Active State (Dark Green) */
     .mas-alla-item.gpk-active {
         opacity: 1;
         pointer-events: auto;
@@ -219,7 +227,7 @@
     .mas-alla-item.gpk-active .mas-alla-item-inner {
         background-image: url('images/vector_active.svg');
         color: #FFFFFF;
-        box-shadow: none !important; /* Removed premium shadow as requested */
+        box-shadow: none !important;
     }
     .mas-alla-item.gpk-active .mas-alla-item-num {
         color: rgba(255, 255, 255, 0.4);
@@ -229,7 +237,6 @@
         color: #FFFFFF;
     }
 
-    /* Inactive State (Light Green) */
     .mas-alla-item.gpk-inactive {
         opacity: 1;
         pointer-events: auto;
@@ -253,17 +260,59 @@
     }
 }
 
-/* Scroll Spacer */
-.mas-alla-scroll-spacer {
-    height: 400vh; /* 4 slides, 100vh each to trigger transition */
+/* ==========================================================================
+   DESKTOP SHORT VIEWPORT FIX — pantallas ≤ 780px de alto (laptops)
+   ========================================================================== */
+@media (min-width: 1025px) and (max-height: 780px) {
+    .mas-alla-content-section {
+        padding: 28px 60px 28px 40px;
+        justify-content: flex-start;
+    }
+    .mas-alla-header {
+        margin-bottom: 16px;
+    }
+    .mas-alla-title {
+        font-size: clamp(26px, 3vw, 52px);
+        margin-bottom: 10px;
+    }
+    .mas-alla-subtitle {
+        font-size: 14px;
+        line-height: 1.35;
+    }
+    .mas-alla-items-container {
+        gap: 10px;
+    }
+    .mas-alla-item-inner {
+        min-height: 70px;
+        padding: 10px 32px 10px 20px;
+    }
+    .mas-alla-item-text strong {
+        font-size: 17px;
+    }
+    .mas-alla-item-text p {
+        font-size: 14px;
+    }
+    .mas-alla-item-num {
+        font-size: 24px;
+    }
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+/* ==========================================================================
+   SCROLL SPACER
+   ========================================================================== */
+.mas-alla-scroll-spacer {
+    height: 400vh;
+}
+
+/* ==========================================================================
+   TABLET — 769px a 1024px
+   ========================================================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
     .mas-alla-sticky-wrapper {
         flex-direction: column;
         height: auto;
         position: relative;
+        overflow: visible;
     }
     .mas-alla-image-section {
         width: 100%;
@@ -271,14 +320,17 @@
     }
     .mas-alla-content-section {
         width: 100%;
-        padding: 40px 24px;
+        padding: 40px 32px;
         clip-path: none;
+        height: auto;
+        overflow: visible;
+        justify-content: flex-start;
     }
     .mas-alla-title {
         font-size: 36px;
     }
     .mas-alla-divider {
-        display: none; /* Hide progress bar on mobile */
+        display: none;
     }
     .mas-alla-item {
         opacity: 1 !important;
@@ -288,12 +340,11 @@
     }
     .mas-alla-item-inner {
         background-image: url('images/vector svg.svg') !important;
-        color: var(--mas-alla-dark-green) !important;
+        grid-template-columns: 80px 1fr;
+        padding: 14px 24px;
     }
-    /* Let the active index one be dark green in mobile too */
     .mas-alla-item.gpk-active .mas-alla-item-inner {
         background-image: url('images/vector_active.svg') !important;
-        color: #FFFFFF !important;
     }
     .mas-alla-item.gpk-active .mas-alla-item-num {
         color: rgba(255, 255, 255, 0.4) !important;
@@ -302,5 +353,175 @@
     .mas-alla-item.gpk-active .mas-alla-item-text p {
         color: #FFFFFF !important;
     }
+    .mas-alla-scroll-spacer {
+        height: 0;
+    }
 }
 
+/* ==========================================================================
+   MOBILE — ≤ 768px — CAROUSEL TÁCTIL
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Keep sticky + 100vh: scroll drives the carousel, swipe is bonus */
+    .mas-alla-sticky-wrapper {
+        flex-direction: column;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow: hidden;
+    }
+
+    .mas-alla-image-section {
+        width: 100%;
+        height: 42vh;
+        flex: none;
+    }
+
+    .mas-alla-content-section {
+        width: 100%;
+        flex: 1;
+        padding: 18px 20px 12px;
+        clip-path: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow: hidden;
+        height: auto;
+    }
+
+    .mas-alla-header {
+        margin-bottom: 10px;
+        flex-shrink: 0;
+    }
+
+    .mas-alla-badge {
+        font-size: 12px;
+        padding: 4px 12px;
+        margin-bottom: 10px;
+    }
+
+    .mas-alla-title {
+        font-size: 26px;
+        margin-bottom: 6px;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+    }
+
+    .mas-alla-subtitle {
+        font-size: 13px;
+        line-height: 1.35;
+        /* Show truncated on mobile */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Carousel container — clips slides */
+    .mas-alla-items-container {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        gap: 0;
+        max-width: 100%;
+        min-height: 100px;
+    }
+
+    /* Each item = a carousel slide */
+    .mas-alla-item {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        margin-bottom: 0;
+        pointer-events: none !important;
+    }
+
+    .mas-alla-item.gpk-active {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+    }
+
+    .mas-alla-item.gpk-inactive {
+        opacity: 0 !important;
+        transform: translateX(-100%) !important;
+        pointer-events: none !important;
+    }
+
+    .mas-alla-item.gpk-hidden {
+        opacity: 0 !important;
+        transform: translateX(100%) !important;
+        pointer-events: none !important;
+    }
+
+    /* Item inner — mobile sizing */
+    .mas-alla-item-inner {
+        grid-template-columns: 50px 1fr !important;
+        column-gap: 12px;
+        padding: 14px 16px !important;
+        min-height: auto;
+        background-image: url('images/vector svg.svg') !important;
+    }
+
+    .mas-alla-item.gpk-active .mas-alla-item-inner {
+        background-image: url('images/vector_active.svg') !important;
+    }
+    .mas-alla-item.gpk-active .mas-alla-item-num {
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
+    .mas-alla-item.gpk-active .mas-alla-item-text strong,
+    .mas-alla-item.gpk-active .mas-alla-item-text p {
+        color: #FFFFFF !important;
+    }
+
+    .mas-alla-item-num {
+        font-size: 24px;
+    }
+
+    .mas-alla-item-text strong {
+        font-size: 17px;
+    }
+
+    .mas-alla-item-text p {
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+    /* --- Dots navigation --- */
+    .mas-alla-dots {
+        display: flex;
+        gap: 7px;
+        justify-content: center;
+        padding: 10px 0 4px;
+        flex-shrink: 0;
+    }
+
+    .mas-alla-dot {
+        height: 6px;
+        width: 6px;
+        border-radius: 3px;
+        background: rgba(2, 50, 30, 0.2);
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease, width 0.3s ease;
+        padding: 0;
+    }
+
+    .mas-alla-dot.active {
+        background: var(--mas-alla-green);
+        width: 20px;
+    }
+
+    .mas-alla-divider {
+        display: none;
+    }
+
+    /* Scroll spacer stays at 400vh to drive carousel via scroll */
+    .mas-alla-scroll-spacer {
+        height: 400vh;
+    }
+}
