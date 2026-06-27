@@ -1052,8 +1052,8 @@
 #gpk-timeline-widget .photo-img-2023 {
   position: absolute;
   top: 20px;
-  left: 50px;
-  width: 90%;
+  left: 21px;
+  width: 95%;
   height: 90%;
   object-fit: cover;
   z-index: 1;
@@ -1417,6 +1417,7 @@
   #gpk-timeline-widget .img-2021-2,
   #gpk-timeline-widget .map-zoom-1957 {
     position: relative !important;
+    left: 0 !important;
     display: block !important;
     width: 100% !important;
     height: auto !important;
