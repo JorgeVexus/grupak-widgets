@@ -4,7 +4,7 @@
 #gpk-timeline-widget {
   --color-green: #5F9D2F;
   --color-green-light: #73c03b;
-  --color-grey-dark: #222222;
+  --color-grey-dark: #6E6E6E;
   --color-grey-medium: #6E6E6E;
   --color-grey-light: #E3E5E9;
   --color-white: #FFFFFF;
@@ -342,7 +342,7 @@
 }
 
 #gpk-timeline-widget .text-black {
-  color: #000000;
+  color: var(--color-grey-medium);
 }
 
 /* Image section configurations (Figma: left-[636px] top-[414px] w-[1119px] h-[531px]) */
