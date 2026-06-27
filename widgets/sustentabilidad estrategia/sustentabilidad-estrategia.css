@@ -434,6 +434,7 @@
         width: auto !important;
         align-self: stretch;
         max-width: 680px;
+        padding-inline: clamp(16px, 5vw, 26px) !important;
     }
 
     .sust-para,
@@ -450,6 +451,7 @@
         justify-content: stretch;
         gap: 14px 18px;
         margin-top: 18px;
+        padding-inline: clamp(4px, 1.5vw, 8px);
     }
 
     .sust-com {
