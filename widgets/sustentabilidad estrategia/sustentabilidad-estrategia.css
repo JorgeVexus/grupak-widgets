@@ -16,6 +16,7 @@
 .sust-container {
     position: relative;
     width: 100%;
+    overflow-x: clip;
     background: #fff;
     font-family: var(--sust-font);
 }
@@ -24,7 +25,8 @@
 .sust-sticky-wrapper {
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: 100dvh;
+    min-height: 640px;
     width: 100%;
     overflow: hidden;
 }
@@ -55,7 +57,7 @@
 }
 
 .sust-title {
-    font-size: clamp(22px, 2.5vw, 48px);
+    font-size: clamp(22px, 2.35vw, 48px);
     font-weight: 400;
     color: var(--sust-gray);
     line-height: 1.15;
@@ -152,9 +154,8 @@
     left: 4%;
     top: 18%;
     width: 40%;
-    /* Ensure the text panel doesn't overflow the viewport bottom */
-    max-height: 76vh;
-    overflow: hidden;
+    max-height: none;
+    overflow: visible;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.6s ease 0.25s; /* slight delay so layout settles first */
@@ -167,14 +168,14 @@
 }
 
 .sust-para {
-    font-size: clamp(12px, 0.88vw, 15px);
+    font-size: clamp(11px, 0.82vw, 15px);
     color: var(--sust-gray);
     line-height: 1.5;
     margin: 0 0 16px 0;
 }
 
 .sust-para--sm {
-    font-size: clamp(11px, 0.78vw, 13px);
+    font-size: clamp(10.5px, 0.72vw, 13px);
     margin-top: 16px;
     margin-bottom: 10px;
 }
@@ -182,7 +183,7 @@
 /* Commissions row */
 .sust-comisiones {
     display: flex;
-    gap: clamp(12px, 1.8vw, 28px);
+    gap: clamp(10px, 1.45vw, 28px);
     align-items: flex-start;
     flex-wrap: wrap;
 }
@@ -243,8 +244,8 @@
 .sust-state-4 .sust-diagram-area {
     left: 72%;
     top: 50%;
-    width: min(50vw, 640px);
-    height: min(82vh, 820px);
+    width: min(47vw, 640px);
+    height: min(78vh, 820px);
 }
 
 /* Frame images — stacked, crossfade via opacity */
@@ -273,18 +274,114 @@
     height: 400vh;
 }
 
+@media (min-width: 901px) and (max-width: 1280px) {
+    .sust-sticky-wrapper {
+        min-height: 680px;
+    }
+
+    .sust-title {
+        font-size: clamp(24px, 2.6vw, 34px);
+    }
+
+    .sust-state-4 .sust-title-block {
+        left: 4.5%;
+        width: 43%;
+    }
+
+    .sust-text-panel {
+        left: 4.5%;
+        top: 16%;
+        width: 42%;
+    }
+
+    .sust-para {
+        font-size: clamp(10.5px, 1.05vw, 13px);
+        line-height: 1.38;
+        margin-bottom: 10px;
+    }
+
+    .sust-para--sm {
+        font-size: clamp(10px, 0.95vw, 12px);
+        margin-top: 10px;
+        margin-bottom: 8px;
+    }
+
+    .sust-comisiones {
+        gap: 10px 14px;
+    }
+
+    .sust-com-name {
+        font-size: clamp(10.5px, 1.1vw, 13px);
+    }
+
+    .sust-state-4 .sust-diagram-area {
+        left: 73%;
+        width: min(45vw, 520px);
+        height: min(72vh, 620px);
+    }
+}
+
+@media (min-width: 901px) and (max-height: 760px) {
+    .sust-sticky-wrapper {
+        min-height: 620px;
+    }
+
+    .sust-state-4 .sust-title-block {
+        top: 5%;
+    }
+
+    .sust-text-panel {
+        top: 14%;
+    }
+
+    .sust-para {
+        font-size: clamp(10px, 0.72vw, 12px);
+        line-height: 1.32;
+        margin-bottom: 8px;
+    }
+
+    .sust-para--sm {
+        font-size: clamp(9.5px, 0.68vw, 11px);
+        margin-top: 8px;
+        margin-bottom: 6px;
+    }
+
+    .sust-comisiones {
+        gap: 8px 12px;
+    }
+
+    .sust-com-label,
+    .sust-com-sub {
+        font-size: 9px;
+    }
+
+    .sust-com-name {
+        font-size: clamp(10px, 0.78vw, 12px);
+    }
+
+    .sust-state-4 .sust-diagram-area {
+        height: min(70vh, 540px);
+    }
+}
+
 /* =====================================================================
    MOBILE — static stacked layout, no scroll animation
    ===================================================================== */
 @media (max-width: 900px) {
+    .sust-container {
+        overflow-x: hidden;
+    }
+
     .sust-sticky-wrapper {
         position: relative;
         height: auto;
-        min-height: 0;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 48px 24px 40px;
+        gap: clamp(20px, 6vw, 34px);
+        padding: clamp(38px, 9vw, 64px) clamp(18px, 6vw, 30px) 48px;
+        overflow: visible;
     }
 
     /* Reset all absolute positioning */
@@ -301,7 +398,6 @@
         padding: 0 !important;
         pointer-events: auto !important;
         text-align: center !important;
-        transition: none !important;
     }
 
     /* Hide logo on mobile (static layout shows frame 3 directly) */
@@ -310,28 +406,56 @@
     }
 
     .sust-title {
-        font-size: clamp(22px, 5vw, 36px);
+        max-width: 11ch;
+        margin: 0 auto;
+        font-size: clamp(34px, 11vw, 52px);
+        line-height: 1.04;
         white-space: normal;
         text-align: center;
     }
 
     .sust-text-panel {
-        margin: 24px 0;
+        order: 3;
+        margin: 0;
+        max-width: 680px;
     }
 
     .sust-para,
     .sust-para--sm {
-        font-size: 14px;
+        font-size: clamp(14px, 4vw, 16px);
+        line-height: 1.45;
         text-align: left;
+        margin-bottom: 14px;
     }
 
     .sust-comisiones {
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+        gap: 14px 18px;
+        margin-top: 18px;
+    }
+
+    .sust-com {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .sust-com-label,
+    .sust-com-sub {
+        font-size: 11px;
+    }
+
+    .sust-com-name {
+        font-size: clamp(14px, 4.2vw, 18px);
+        line-height: 1.18;
     }
 
     .sust-diagram-area {
-        height: 60vw !important;
-        max-height: 420px;
+        order: 2;
+        width: min(88vw, 520px) !important;
+        height: min(78vw, 500px) !important;
+        max-height: 500px;
         margin: 0 auto;
     }
 
@@ -346,5 +470,38 @@
 
     .sust-scroll-spacer {
         height: 0;
+    }
+
+    .sust-mobile-ready .sust-title-block,
+    .sust-mobile-ready .sust-diagram-area,
+    .sust-mobile-ready .sust-para,
+    .sust-mobile-ready .sust-com {
+        opacity: 0 !important;
+        transform: translate3d(0, 24px, 0) !important;
+        transition: opacity 620ms ease, transform 760ms var(--sust-ease) !important;
+    }
+
+    .sust-mobile-ready .sust-diagram-area {
+        transform: translate3d(0, 18px, 0) scale(.96) !important;
+    }
+
+    .sust-mobile-ready .sust-mobile-in {
+        opacity: 1 !important;
+        transform: translate3d(0, 0, 0) !important;
+    }
+
+    .sust-mobile-ready .sust-diagram-area.sust-mobile-in {
+        transform: translate3d(0, 0, 0) scale(1) !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .sust-comisiones {
+        grid-template-columns: 1fr;
+    }
+
+    .sust-diagram-area {
+        width: min(92vw, 380px) !important;
+        height: min(86vw, 360px) !important;
     }
 }
