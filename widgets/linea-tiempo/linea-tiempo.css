@@ -189,9 +189,11 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-#gpk-timeline-widget .year-item:hover .year-badge {
-  background-color: var(--color-green-light);
-  transform: scale(1.1);
+/* Hover sobre un año INACTIVO: se oculta el badge pequeño para dar paso a la tarjeta con el título */
+#gpk-timeline-widget .year-item:not(.selected):hover .year-badge {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
 }
 
 /* Selected expanded card container (Figma: left-[10px] top-[1.5px] w-[174px] h-[53px]) */
@@ -207,51 +209,63 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* State shifts */
-#gpk-timeline-widget .year-item.selected .year-badge {
-  opacity: 0;
-  transform: scale(0.8);
-  pointer-events: none;
-}
-
-#gpk-timeline-widget .year-item.selected .year-item-card {
+/* Mostrar la tarjeta (título con fondo gris + fecha pequeña) SOLO al hacer hover en un año inactivo */
+#gpk-timeline-widget .year-item:not(.selected):hover .year-item-card {
   opacity: 1;
   pointer-events: auto;
   transform: scale(1);
 }
 
-/* Card components */
+/* Año ACTIVO: solo se ve la fecha, en grande y con borde punteado */
+#gpk-timeline-widget .year-item.selected .year-badge {
+  opacity: 1;
+  left: 10px;
+  width: 174px;
+  height: 44px;
+  bottom: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 26px;
+  border-radius: 6px;
+  outline: 2px dashed var(--color-green);
+  outline-offset: 3px;
+  box-shadow: 0 6px 14px rgba(95, 157, 47, 0.25);
+}
+
+/* El título NO se muestra para el año activo */
+#gpk-timeline-widget .year-item.selected .year-item-card {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+/* Card components — tarjeta de HOVER: caja gris con el título + fecha pequeña arriba a la derecha */
 #gpk-timeline-widget .card-border {
-  position: absolute;
-  inset: 0;
-  border: 2px dashed var(--color-green);
-  background-color: var(--color-white);
-  border-radius: 4px;
-  z-index: 1;
+  display: none;
 }
 
 #gpk-timeline-widget .card-label-bg {
   position: absolute;
-  left: 3px;
-  top: 11.5px;
-  width: 168px;
-  height: 30px;
+  left: 0;
+  top: 12px;
+  width: 174px;
+  height: 40px;
   background-color: var(--color-grey-light);
   border-radius: 4px;
   z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding-right: 8px;
+  justify-content: flex-start;
+  padding: 0 44px 0 12px;
 }
 
 #gpk-timeline-widget .card-label-text {
   font-family: var(--font-title);
   font-weight: 600;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-grey-dark);
-  width: 90px;
-  text-align: right;
+  width: 100%;
+  text-align: left;
   line-height: 1.2;
   white-space: normal;
   display: -webkit-box;
@@ -262,10 +276,11 @@
 
 #gpk-timeline-widget .card-badge {
   position: absolute;
-  left: 4px;
-  top: 4px;
-  width: 70px;
-  height: 45px;
+  top: 0;
+  right: 0;
+  left: auto;
+  width: 50px;
+  height: 24px;
   background-color: var(--color-green);
   border-radius: 5px;
   z-index: 3;
@@ -278,7 +293,7 @@
 #gpk-timeline-widget .card-badge-text {
   font-family: var(--font-title);
   font-weight: 900;
-  font-size: 18px;
+  font-size: 13px;
   color: var(--color-white);
 }
 
