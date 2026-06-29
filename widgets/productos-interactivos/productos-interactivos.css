@@ -3028,23 +3028,27 @@
         position: static !important;
         transform: none !important;
         opacity: 1 !important;
-        background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        border-radius: 12px !important;
-        padding: 12px !important;
+        background-color: #ffffff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 0 !important;
+        padding: 8px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        box-shadow: none !important;
         box-sizing: border-box !important;
-        margin-bottom: 12px !important;
-        width: 100% !important;
+        margin: 0 auto 18px auto !important;
+        width: calc(100% - 64px - 3%) !important;
+        max-width: 320px !important;
+        aspect-ratio: 1.14 / 1 !important;
         height: auto !important;
+        overflow: hidden !important;
     }
 
     #gpk-products-widget .cajas-mobile-hero-img {
-        max-height: 90px !important;
-        width: auto !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
         object-fit: contain !important;
         display: block !important;
         margin: 0 !important;
@@ -3093,16 +3097,16 @@
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
     }
 
-    /* Slide 2: Cajas Intro side-by-side 2-column layout */
+    /* Slide 2: Cajas Intro single-column mobile layout */
     #gpk-products-widget .cajas-intro-content {
-        flex-direction: row !important;
-        gap: 12px !important;
+        flex-direction: column !important;
+        gap: 10px !important;
         display: none !important;
     }
 
     #gpk-products-widget .cajas-intro-content .cajas-column {
-        width: calc(50% - 6px) !important;
-        flex: 1 !important;
+        width: 100% !important;
+        flex: 0 0 auto !important;
         padding: 16px 12px !important;
     }
 
