@@ -92,7 +92,7 @@
 /* State 4: title shifts left */
 .sust-state-4 .sust-title-block {
     opacity: 1;
-    top: 7%;
+    top: 25%;
     left: 4%;
     width: 44%;
     padding: 0 2% 0 0;
