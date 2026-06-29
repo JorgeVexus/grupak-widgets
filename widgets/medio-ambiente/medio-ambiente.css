@@ -36,7 +36,11 @@
 }
 
 .ma-board {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -925px; /* -1850px / 2 */
+  margin-top: -540px;  /* -1080px / 2 */
   width: 1850px;
   height: 1080px;
   flex: 0 0 auto;
@@ -528,6 +532,11 @@
   }
 
   .ma-board {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-left: 0;
+    margin-top: 0;
     width: 100%;
     height: auto;
     min-height: 100dvh;
