@@ -3760,6 +3760,86 @@
         color: var(--color-grey-medium) !important;
     }
 
+    /* Final mobile layout pass: single-column content and shared image treatment */
+    #gpk-products-widget .cajas-convencionales-content,
+    #gpk-products-widget .digital-content-wrapper,
+    #gpk-products-widget .papel-text-blocks,
+    #gpk-products-widget .papel-products-grid,
+    #gpk-products-widget .laminas-intro-text,
+    #gpk-products-widget .laminas-cards-grid-new,
+    #gpk-products-widget .grabados-cards-grid-new {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .cajas-convencionales-content .cajas-image-container,
+    #gpk-products-widget .digital-image-container,
+    #gpk-products-widget .papel-hero-image {
+        width: calc(100% - 64px - 3%) !important;
+        max-width: 320px !important;
+        margin: 0 auto 18px auto !important;
+        background-color: #ffffff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 0 !important;
+        padding: 8px !important;
+        box-shadow: none !important;
+        aspect-ratio: 1.14 / 1 !important;
+        height: auto !important;
+        overflow: hidden !important;
+    }
+
+    #gpk-products-widget .cajas-main-image,
+    #gpk-products-widget .digital-main-image,
+    #gpk-products-widget .papel-main-image {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget .cajas-convencionales-content .cajas-text-container,
+    #gpk-products-widget .digital-text-content,
+    #gpk-products-widget .laminas-intro-left,
+    #gpk-products-widget .laminas-intro-right,
+    #gpk-products-widget .laminas-card-new,
+    #gpk-products-widget .grabados-green-card,
+    #gpk-products-widget .product-card,
+    #gpk-products-widget .papel-text-block {
+        width: 100% !important;
+        flex: 0 0 auto !important;
+    }
+
+    #gpk-products-widget .laminas-card-image,
+    #gpk-products-widget .product-image {
+        width: calc(100% - 64px - 3%) !important;
+        max-width: 320px !important;
+        margin: 0 auto 12px auto !important;
+        background-color: #ffffff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 0 !important;
+        padding: 8px !important;
+        box-shadow: none !important;
+        aspect-ratio: 1.14 / 1 !important;
+        height: auto !important;
+        overflow: hidden !important;
+    }
+
+    #gpk-products-widget .laminas-card-img,
+    #gpk-products-widget .product-img {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        object-fit: contain !important;
+    }
+
+    #gpk-products-widget .products-board:not(.mode-3) .cajas-convencionales-content {
+        display: none !important;
+    }
+
     /* Final mobile surface pass: keep all slides aligned with Slide 0 */
     #gpk-products-widget .overview-col-new,
     #gpk-products-widget .cajas-mobile-hero-container,
