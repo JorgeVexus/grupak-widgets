@@ -3178,12 +3178,15 @@
     }
 
     #gpk-products-widget .cajas-detail-title {
-        font-size: 15px !important;
+        font-size: 16px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         text-align: left !important;
-        margin-bottom: 6px !important;
-        line-height: 1.25 !important;
+        margin-bottom: 10px !important;
+        line-height: 1.3 !important;
+        letter-spacing: 0 !important;
+        word-spacing: 0.08em !important;
+        text-wrap: balance !important;
         opacity: 1 !important;
         transform: none !important;
     }
