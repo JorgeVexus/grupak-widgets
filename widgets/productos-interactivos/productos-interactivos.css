@@ -1062,7 +1062,8 @@
     inset: 160px 100px 100px 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: clamp(70px, 8vw, 150px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1085,7 +1086,9 @@
 }
 
 #gpk-products-widget .cajas-text-container {
-    width: 46%;
+    width: 25%;
+    max-width: 25%;
+    flex: 0 0 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1112,7 +1115,7 @@
 }
 
 #gpk-products-widget .cajas-green-line {
-    width: 140px;
+    width: 258px;
     height: 4px;
     background-color: var(--color-green);
     margin: 10px auto 24px auto;
@@ -1235,7 +1238,7 @@
 }
 
 #gpk-products-widget .digital-green-line {
-    width: 140px;
+    width: 258px;
     height: 4px;
     background-color: var(--color-green);
     margin: 0 auto 24px auto;
@@ -2091,7 +2094,7 @@
 
 #gpk-products-widget .product-name {
     font-family: var(--font-title);
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 900 !important;
     color: var(--color-green);
     margin-bottom: 4px;
@@ -2099,14 +2102,14 @@
 }
 
 #gpk-products-widget .product-subtitle {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 700 !important;
     color: var(--color-grey-medium);
     margin-bottom: 10px;
 }
 
 #gpk-products-widget .product-desc {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--color-grey-dark);
     margin-bottom: 8px;
@@ -2125,7 +2128,7 @@
 #gpk-products-widget .uses-bubble {
     background-color: transparent;
     color: var(--color-grey-medium);
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 700 !important;
     padding: 0;
     border-radius: 0;
@@ -2137,7 +2140,7 @@
 }
 
 #gpk-products-widget .uses-text {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--color-grey-medium);
     opacity: 0;
@@ -2569,7 +2572,7 @@
 
 #gpk-products-widget .energia-row h3 {
     font-family: var(--font-title);
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 700 !important;
     color: var(--color-green) !important;
     margin: 0;
