@@ -3,7 +3,8 @@
 
     var isLocalhost =
         window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1";
+        window.location.hostname === "127.0.0.1" ||
+        window.location.protocol === "file:";
 
     var baseURL = isLocalhost
         ? "/widgets/comunidad"
@@ -19,31 +20,39 @@
         document.head.appendChild(link);
     }
 
-    var root =
-        document.getElementById("gpk-comunidad-widget-root") ||
-        document.getElementById("grupak-comunidad-root");
+    function start() {
+        var root =
+            document.getElementById("gpk-comunidad-widget-root") ||
+            document.getElementById("grupak-comunidad-root");
 
-    if (root) {
-        fetch(
-            isLocalhost
-                ? "widgets/comunidad/comunidad.html"
-                : baseURL + "/comunidad.html"
-        )
-            .then(function (res) {
-                if (!res.ok) throw new Error("Error loading Comunidad widget HTML");
-                return res.text();
-            })
-            .then(function (html) {
-                root.innerHTML = html;
-                resolveImages(root);
-                initWidget();
-            })
-            .catch(function (err) {
-                console.error("[gpk-comunidad]", err);
-            });
-    } else if (document.getElementById("gpk-comunidad-widget")) {
-        resolveImages(document.getElementById("gpk-comunidad-widget"));
-        initWidget();
+        if (root) {
+            fetch(
+                isLocalhost
+                    ? "widgets/comunidad/comunidad.html"
+                    : baseURL + "/comunidad.html"
+            )
+                .then(function (res) {
+                    if (!res.ok) throw new Error("Error loading Comunidad widget HTML");
+                    return res.text();
+                })
+                .then(function (html) {
+                    root.innerHTML = html;
+                    resolveImages(root);
+                    initWidget();
+                })
+                .catch(function (err) {
+                    console.error("[gpk-comunidad]", err);
+                });
+        } else if (document.getElementById("gpk-comunidad-widget")) {
+            resolveImages(document.getElementById("gpk-comunidad-widget"));
+            initWidget();
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
     }
 
     function resolveImages(container) {
@@ -173,7 +182,7 @@
                     window.removeEventListener("resize", handleResize);
                 }
             });
-        }, { threshold: 0.02 });
+        }, { threshold: 0 });
 
         observer.observe(widget);
         applyState(0);
