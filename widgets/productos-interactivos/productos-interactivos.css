@@ -2732,6 +2732,8 @@
     /* Slide 0: Intro */
     #gpk-products-widget .products-intro-pane {
         padding: 12px 8px 22px 3% !important;
+        justify-content: space-between !important;
+        gap: 14px !important;
     }
 
     #gpk-products-widget .products-board.mode-0 .products-nav-footer {
@@ -2888,6 +2890,11 @@
         padding: 0 !important;
         overflow: visible !important;
         align-items: stretch !important;
+    }
+
+    #gpk-products-widget .products-overview-pane {
+        justify-content: flex-start !important;
+        gap: 12px !important;
     }
 
     #gpk-products-widget .overview-col-new {
