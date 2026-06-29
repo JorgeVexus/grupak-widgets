@@ -2640,7 +2640,7 @@
    ========================================================================== */
 @media (max-width: 1024px) {
     #gpk-products-widget {
-        background-color: var(--color-grey-light);
+        background-color: #f7f8f7;
     }
 
     #gpk-products-widget .products-scroll-tracker {
@@ -2664,7 +2664,7 @@
         height: 100% !important;
         transform: none !important;
         padding: 0 !important;
-        background-color: var(--color-grey-light) !important;
+        background-color: #f7f8f7 !important;
         overflow: hidden !important;
         position: relative !important;
         display: block !important;
@@ -2713,7 +2713,7 @@
         inset: 0 !important;
         width: 100% !important;
         height: 100% !important;
-        background-color: var(--color-grey-light) !important;
+        background-color: #f7f8f7 !important;
         box-sizing: border-box !important;
         padding: 14px 14px 64px 14px !important;
         display: flex !important;
@@ -2728,19 +2728,30 @@
     }
 
     /* Slide 0: Intro */
+    #gpk-products-widget .products-intro-pane {
+        padding: 12px 8px 22px 0 !important;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .products-nav-footer {
+        display: none !important;
+    }
+
     #gpk-products-widget .intro-title-new {
-        font-size: 17px !important;
+        font-size: 13px !important;
         font-weight: 700 !important;
-        color: var(--color-grey-dark) !important;
-        line-height: 1.25 !important;
-        margin-bottom: 10px !important;
-        max-width: 100% !important;
+        color: #0f2d17 !important;
+        line-height: 1.16 !important;
+        margin: 0 0 14px 0 !important;
+        max-width: 172px !important;
         text-align: left !important;
+        letter-spacing: 0 !important;
+        text-wrap: balance !important;
     }
 
     #gpk-products-widget .intro-title-new .text-green {
         font-size: inherit !important;
         font-weight: inherit !important;
+        color: #0f6f24 !important;
     }
 
     #gpk-products-widget .overview-title-new .text-green,
@@ -2749,88 +2760,103 @@
     }
 
     #gpk-products-widget .intro-mobile-img-container {
-        width: 100% !important;
-        background-color: var(--color-white) !important;
-        border: none !important;
-        border-radius: 12px !important;
+        width: calc(100% - 16px) !important;
+        background-color: #ffffff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 0 !important;
         padding: 8px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        margin-bottom: 12px !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+        margin: 0 8px 12px 8px !important;
+        box-shadow: none !important;
+        aspect-ratio: 1.14 / 1 !important;
+        overflow: hidden !important;
     }
 
     #gpk-products-widget .intro-mobile-img {
-        max-height: 150px !important;
-        width: auto !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
         max-width: 100% !important;
-        object-fit: contain !important;
+        object-fit: cover !important;
         display: block !important;
         margin: 0 !important;
     }
 
     #gpk-products-widget .intro-mobile-desc {
-        font-size: 12px !important;
-        line-height: 1.38 !important;
-        color: var(--color-grey-medium) !important;
-        margin-bottom: 14px !important;
+        font-size: 7px !important;
+        line-height: 1.52 !important;
+        color: #3d3d3d !important;
+        margin: 0 0 8px 0 !important;
+        max-width: 168px !important;
         text-align: left !important;
+    }
+
+    #gpk-products-widget .intro-mobile-desc::after {
+        content: "" !important;
+        display: block !important;
+        width: 24px !important;
+        height: 2px !important;
+        background-color: var(--color-green) !important;
+        margin-top: 8px !important;
     }
 
     #gpk-products-widget .intro-kpis-grid-new {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
+        gap: 9px 7px !important;
         margin-top: 0 !important;
         width: 100% !important;
+        padding: 0 1px 0 0 !important;
     }
 
     #gpk-products-widget .kpi-item-new {
         background-color: var(--color-white) !important;
-        border: 1px solid #e3e5e9 !important;
-        border-radius: 8px !important;
-        padding: 10px 8px !important;
+        border: 1px solid #dddddd !important;
+        border-radius: 3px !important;
+        padding: 11px 5px 9px 5px !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         text-align: center !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01) !important;
+        box-shadow: none !important;
         width: 100% !important;
+        min-height: 64px !important;
     }
 
     #gpk-products-widget .kpi-line-new {
         order: 2 !important;
-        margin: 0 auto 5px auto !important;
-        width: 34px !important;
-        height: 2px !important;
+        margin: 2px auto 4px auto !important;
+        width: 24px !important;
+        height: 1px !important;
         background-color: var(--color-green) !important;
     }
 
     #gpk-products-widget .kpi-number-new {
         order: 1 !important;
-        font-size: 23px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
-        color: var(--color-grey-dark) !important;
-        margin-bottom: 4px !important;
+        color: #3f3f3f !important;
+        margin-bottom: 0 !important;
         line-height: 1 !important;
     }
 
     #gpk-products-widget .kpi-label-top {
         order: 3 !important;
-        font-size: 11px !important;
+        font-size: 7px !important;
         font-weight: 700 !important;
         color: var(--color-green) !important;
         text-transform: uppercase !important;
-        margin-bottom: 2px !important;
+        margin-bottom: 1px !important;
         line-height: 1.2 !important;
     }
 
     #gpk-products-widget .kpi-label-bottom {
         order: 4 !important;
-        font-size: 10px !important;
+        font-size: 7px !important;
         color: var(--color-grey-medium) !important;
-        line-height: 1.3 !important;
+        line-height: 1.2 !important;
     }
 
     /* Slide 1: Overview */
