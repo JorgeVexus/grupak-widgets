@@ -3070,6 +3070,15 @@
         transform: none !important;
     }
 
+    #gpk-products-widget .products-board.mode-4 .pane-title-centered {
+        display: block !important;
+        position: relative !important;
+        z-index: 2 !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+
     #gpk-products-widget .cajas-column,
     #gpk-products-widget .info-block-right,
     #gpk-products-widget .info-block-left,
@@ -3802,6 +3811,14 @@
         object-fit: contain !important;
         display: block !important;
         margin: 0 !important;
+    }
+
+    #gpk-products-widget .digital-image-container {
+        order: 1 !important;
+    }
+
+    #gpk-products-widget .digital-text-content {
+        order: 2 !important;
     }
 
     #gpk-products-widget .cajas-convencionales-content .cajas-text-container,
