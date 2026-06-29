@@ -2678,7 +2678,7 @@
     }
 
     #gpk-products-widget .products-nav-footer {
-        display: flex !important;
+        display: none !important;
         position: absolute !important;
         bottom: 16px !important;
         left: 50% !important;
@@ -2717,7 +2717,7 @@
         height: 100% !important;
         background-color: #f7f8f7 !important;
         box-sizing: border-box !important;
-        padding: 14px 14px 64px 14px !important;
+        padding: 12px 8px 22px 3% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
@@ -2880,11 +2880,14 @@
     #gpk-products-widget .overview-grid-new {
         position: static !important;
         width: 100% !important;
+        flex: 1 1 auto !important;
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
         gap: 12px !important;
         padding: 0 !important;
         overflow: visible !important;
+        align-items: stretch !important;
     }
 
     #gpk-products-widget .overview-col-new {
@@ -2901,7 +2904,8 @@
         text-align: center !important;
         transition: none !important;
         width: 100% !important;
-        height: auto !important;
+        height: 100% !important;
+        min-height: 0 !important;
         box-sizing: border-box !important;
         justify-content: space-between !important;
     }
@@ -2951,6 +2955,30 @@
         margin-top: 4px !important;
         text-align: center !important;
         min-width: auto !important;
+    }
+
+    /* Mobile baseline: mirror Slide 0's flatter cards and image frames */
+    #gpk-products-widget .overview-col-new,
+    #gpk-products-widget .cajas-mobile-hero-container,
+    #gpk-products-widget .cajas-column,
+    #gpk-products-widget .info-block-right,
+    #gpk-products-widget .info-block-left,
+    #gpk-products-widget .cajas-text-container,
+    #gpk-products-widget .cajas-image-container,
+    #gpk-products-widget .digital-image-container,
+    #gpk-products-widget .papel-hero-image,
+    #gpk-products-widget .papel-text-block,
+    #gpk-products-widget .product-card,
+    #gpk-products-widget .laminas-intro-left,
+    #gpk-products-widget .laminas-intro-right,
+    #gpk-products-widget .laminas-card-new,
+    #gpk-products-widget .grabados-intro-text,
+    #gpk-products-widget .grabados-green-card,
+    #gpk-products-widget .energia-intro-text,
+    #gpk-products-widget .energia-row {
+        border: 1px solid #dedede !important;
+        border-radius: 3px !important;
+        box-shadow: none !important;
     }
 
     /* Sub-panels mobile layout details (Display-switched normal flow slides inside parent) */
@@ -3719,6 +3747,30 @@
         font-size: 11px !important;
         line-height: 1.35 !important;
         color: var(--color-grey-medium) !important;
+    }
+
+    /* Final mobile surface pass: keep all slides aligned with Slide 0 */
+    #gpk-products-widget .overview-col-new,
+    #gpk-products-widget .cajas-mobile-hero-container,
+    #gpk-products-widget .cajas-column,
+    #gpk-products-widget .info-block-right,
+    #gpk-products-widget .info-block-left,
+    #gpk-products-widget .cajas-text-container,
+    #gpk-products-widget .cajas-image-container,
+    #gpk-products-widget .digital-image-container,
+    #gpk-products-widget .papel-hero-image,
+    #gpk-products-widget .papel-text-block,
+    #gpk-products-widget .product-card,
+    #gpk-products-widget .laminas-intro-left,
+    #gpk-products-widget .laminas-intro-right,
+    #gpk-products-widget .laminas-card-new,
+    #gpk-products-widget .grabados-intro-text,
+    #gpk-products-widget .grabados-green-card,
+    #gpk-products-widget .energia-intro-text,
+    #gpk-products-widget .energia-row {
+        border: 1px solid #dedede !important;
+        border-radius: 3px !important;
+        box-shadow: none !important;
     }
 
     /* General helper classes */
