@@ -12,16 +12,6 @@
         document.head.appendChild(link);
     }
 
-    // Helper function to resolve relative image paths to absolute Vercel paths
-    function resolveImagePath(path) {
-        if (!path) return "";
-        if (path.startsWith("http") || path.startsWith("//") || path.startsWith("data:")) {
-            return path;
-        }
-        const relativePart = path.replace("widgets/locations-map/", "");
-        return `${baseURL}/${relativePart}`;
-    }
-
     // 2. Fetch and inject HTML markup if root container exists and hasn't been populated
     const container = document.getElementById("gpk-locations-widget-root");
     if (container) {
@@ -51,118 +41,160 @@
 
     // Encapsulated widget controller
     function initWidget() {
+        // Resuelve rutas relativas de imágenes a rutas absolutas en Vercel
+        function resolveImagePath(path) {
+            if (!path) return "";
+            if (path.startsWith("http") || path.startsWith("//") || path.startsWith("data:")) {
+                return path;
+            }
+            const relativePart = path.replace("widgets/locations-map/", "");
+            return `${baseURL}/${relativePart}`;
+        }
+
         // ==========================================================================
-        // DATOS DE UBICACIONES
+        // DATOS DE UBICACIONES (coordenadas geográficas reales)
         // ==========================================================================
         const locationsData = [
             {
                 id: 'corporativo-cdmx',
-                name: 'Corporativo CDMX',
+                name: 'Corporativo',
                 category: 'Corporativo',
                 categoryClass: 'corporativo',
-                address: 'Av. Insurgentes Sur 1971, Piso 11, Col. Guadalupe Inn, Álvaro Obregón, 01020, Ciudad de México',
+                address: 'Lago Zúrich 245, Edificio Zúrich, piso 7, Ampliación Granada, C.P. 11529, Ciudad de México',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/corporativo-cdmx.webp',
-                pinTop: '52%',
-                pinLeft: '44%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Lago+Zurich+245+Edificio+Zurich+Piso+7+Ampliacion+Granada+11529+Ciudad+de+Mexico',
+                lat: 19.4360,
+                lng: -99.2030
+            },
+            {
+                id: 'planta-toluca',
+                name: 'Planta Toluca',
+                category: 'Planta',
+                categoryClass: 'planta-papel',
+                address: 'Calle Cuatro Norte 302, Parque Industrial Toluca 2000, C.P. 50200 Toluca de Lerdo, Estado de México.',
+                phone: '55 2581 0700',
+                imageUrl: 'widgets/locations-map/images/planta-toluca.webp',
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Calle+Cuatro+Norte+302+Parque+Industrial+Toluca+2000+50200+Toluca+Estado+de+Mexico',
+                lat: 19.3071,
+                lng: -99.6575
             },
             {
                 id: 'planta-cuernavaca',
                 name: 'Planta Cuernavaca',
-                category: 'Planta papel',
+                category: 'Planta',
                 categoryClass: 'planta-papel',
-                address: 'Av. Atlacomulco 117 A, Chapultepec, C.P. 62450, Cuernavaca, Morelos',
+                address: 'Av. Atlacomulco 117 A, Chapultepec, C.P. 62450, Cuernavaca, Morelos.',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/planta-cuernavaca.webp',
-                pinTop: '70.86%',
-                pinLeft: '22.87%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Av+Atlacomulco+117+A+Chapultepec+62450+Cuernavaca+Morelos',
+                lat: 18.9317,
+                lng: -99.2381
             },
             {
                 id: 'planta-hidalgo',
                 name: 'Planta Hidalgo',
-                category: 'Planta papel',
+                category: 'Planta',
                 categoryClass: 'planta-papel',
-                address: 'Carretera Federal Pachuca CD. Sahagún tramo Cd. Sahagún Emiliano Zapata Km. 20, Emiliano Zapata, C.P. 43960, Hidalgo',
+                address: 'Carretera Federal Pachuca CD. Sahagún tramo Cd. Sahagún Emiliano Zapata Km. 20, Emiliano Zapata, C.P. 43960, Hidalgo.',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/planta-hidalgo.webp',
-                pinTop: '15.79%',
-                pinLeft: '53.69%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carretera+Federal+Pachuca+Ciudad+Sahagun+Tramo+Ciudad+Sahagun+Emiliano+Zapata+Km+20+43960+Hidalgo',
+                lat: 19.8440,
+                lng: -98.6020
+            },
+            {
+                id: 'empaques-digital',
+                name: 'Empaques digital',
+                category: 'Planta',
+                categoryClass: 'planta-papel',
+                address: 'Carretera Federal Pachuca CD. Sahagún tramo Cd. Sahagún Emiliano Zapata Km. 20, Emiliano Zapata, C.P. 43960, Hidalgo.',
+                phone: '55 2581 0700',
+                imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carretera+Federal+Pachuca+Ciudad+Sahagun+Tramo+Ciudad+Sahagun+Emiliano+Zapata+Km+20+43960+Hidalgo',
+                lat: 19.8443,
+                lng: -98.6020
             },
             {
                 id: 'abastecimiento-cdmx',
-                name: 'Abastecimiento CDMX',
+                name: 'Abastecimientos CDMX',
                 category: 'Abastecimiento',
                 categoryClass: 'abastecimiento',
                 address: 'Calle Prol. José López Bonaga, fracción 1 No. Ext 57 Manzana única Int. 24B, San Lorenzo Tetlixtac, Coacalco de Berriozábal Edo. de Méx. C.P. 55718',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
-                pinTop: '45%',
-                pinLeft: '48%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Prolongacion+Jose+Lopez+Bonaga+57+San+Lorenzo+Tetlixtac+55718+Coacalco+Estado+de+Mexico',
+                lat: 19.6268,
+                lng: -99.1073
             },
             {
                 id: 'abastecimiento-puebla',
-                name: 'Abastecimiento Puebla',
+                name: 'Abastecimientos Puebla',
                 category: 'Abastecimiento',
                 categoryClass: 'abastecimiento',
-                address: 'Resurrección Oriente No. 17, Col. Industrial Resurrección C.P. 72228 Puebla, Puebla',
+                address: 'Resurrección Oriente No. 17, Col. Industrial Resurrección C.P. 72228 Puebla, Puebla.',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
-                pinTop: '81.77%',
-                pinLeft: '75.99%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Resurreccion+Oriente+17+Industrial+Resurreccion+72228+Puebla+Puebla',
+                lat: 19.0465,
+                lng: -98.1547
             },
             {
-                id: 'abastecimiento-cuatitan',
-                name: 'Abastecimiento Cuatitán',
+                id: 'abastecimiento-cuautitlan',
+                name: 'Abastecimientos Cuautitlán',
                 category: 'Abastecimiento',
                 categoryClass: 'abastecimiento',
-                address: 'Ebanistas 10, Industrial Xhala, C.P. 54714 Cuautitlán Izcalli; Edo. de México',
+                address: 'Ebanistas 10, Industrial Xhala, C.P. 54714 Cuautitlán Izcalli; Edo. de México.',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
-                pinTop: '38%',
-                pinLeft: '42%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ebanistas+10+Industrial+Xhala+54714+Cuautitlan+Izcalli+Estado+de+Mexico',
+                lat: 19.6452,
+                lng: -99.2148
             },
             {
                 id: 'abastecimiento-queretaro',
-                name: 'Abastecimiento Querétaro',
+                name: 'Abastecimientos Querétaro',
                 category: 'Abastecimiento',
                 categoryClass: 'abastecimiento',
                 address: 'Acceso II 4, Parque Industrial Benito Juárez, C.P. 76120 Querétaro, Qro.',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
-                pinTop: '28%',
-                pinLeft: '22%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Acceso+II+4+Parque+Industrial+Benito+Juarez+76120+Queretaro+Queretaro',
+                lat: 20.5975,
+                lng: -100.4148
             },
             {
                 id: 'abastecimiento-slp',
-                name: 'Abastecimiento San Luis Potosí',
+                name: 'Abastecimientos San Luis Potosí',
                 category: 'Abastecimiento',
                 categoryClass: 'abastecimiento',
                 address: 'Carretera 57, 3990 Blvr. San Luis, Industrial San Luis, 78395 San Luis, S.L.P.',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
-                pinTop: '14.89%',
-                pinLeft: '4.22%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carretera+57+3990+Boulevard+San+Luis+Industrial+San+Luis+78395+San+Luis+Potosi',
+                lat: 22.0915,
+                lng: -100.9672
             },
             {
                 id: 'abastecimiento-toluca',
-                name: 'Abastecimiento Toluca',
+                name: 'Abastecimientos Toluca',
                 category: 'Abastecimiento',
                 categoryClass: 'abastecimiento',
                 address: 'Calle San Antonio No. 36. Colonia Reforma, San Mateo Atenco. Edo de Mex. CP 52120',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/planta-toluca.webp',
-                pinTop: '48.4%',
-                pinLeft: '12.49%'
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Calle+San+Antonio+36+Colonia+Reforma+San+Mateo+Atenco+52120+Estado+de+Mexico',
+                lat: 19.2718,
+                lng: -99.5384
             }
         ];
 
-        // Categorías para filtros
+        // Categorías para filtros (una sola categoría de planta)
         const categories = [
             { id: 'all', name: 'Todas', color: '#6E6E6E' },
             { id: 'abastecimiento', name: 'Abastecimientos', color: '#5F9D2F' },
-            { id: 'planta-papel', name: 'Planta papel', color: '#F76D6D' },
-            { id: 'corporativo', name: 'Corporativo', color: '#B5E062' },
-            { id: 'planta-corrugado', name: 'Planta corrugado y conversión', color: '#BC4D2B' }
+            { id: 'planta-papel', name: 'Plantas', color: '#F76D6D' },
+            { id: 'corporativo', name: 'Corporativo', color: '#B5E062' }
         ];
 
         // ==========================================================================
@@ -175,21 +207,16 @@
             filteredLocations: [...locationsData]
         };
 
-        // Elementos DOM
         const elements = {
             searchInput: null,
             filterTags: null,
             locationsList: null,
-            mapPinsContainer: null,
-            mapPopup: null,
-            mapOverlay: null,
-            popupImage: null,
-            popupTitle: null,
-            popupCategory: null,
-            popupAddress: null,
-            popupPhone: null,
-            popupHours: null
+            mapEl: null
         };
+
+        // Mapa Leaflet y marcadores (id -> L.marker)
+        let map = null;
+        const markers = {};
 
         // ==========================================================================
         // INICIALIZACIÓN
@@ -197,36 +224,168 @@
         function init() {
             cacheElements();
             renderFilterTags();
-            renderMapPins();
             renderLocationsList();
             bindEvents();
+            loadLeaflet(initMap);
 
-            // Seleccionar la primera ubicación por defecto al cargar
-            if (locationsData.length > 0) {
-                selectLocation(locationsData[0].id, false);
-            }
-
-            console.log('🗺️ Scoped Locations Map Widget inicializado');
+            console.log('🗺️ Locations Map Widget (Leaflet) inicializado');
         }
 
         function cacheElements() {
             elements.searchInput = document.getElementById('locationSearch');
             elements.filterTags = document.getElementById('filterTags');
             elements.locationsList = document.getElementById('locationsList');
-            elements.mapPinsContainer = document.getElementById('mapPinsContainer');
-            elements.mapPopup = document.getElementById('mapPopup');
-            elements.mapOverlay = document.getElementById('mapOverlay');
-            
-            elements.popupImage = document.getElementById('popupImage');
-            elements.popupTitle = document.getElementById('popupTitle');
-            elements.popupCategory = document.getElementById('popupCategory');
-            elements.popupAddress = document.getElementById('popupAddress').querySelector('.popup-detail-text');
-            elements.popupPhone = document.getElementById('popupPhone').querySelector('.popup-detail-text');
-            elements.popupHours = document.getElementById('popupHours');
+            elements.mapEl = document.getElementById('gpkMap');
         }
 
+        // ==========================================================================
+        // CARGA DINÁMICA DE LEAFLET (CSS + JS desde CDN)
+        // ==========================================================================
+        function loadLeaflet(callback) {
+            if (window.L && window.L.map) {
+                callback();
+                return;
+            }
+
+            if (!document.getElementById('gpk-leaflet-css')) {
+                const link = document.createElement('link');
+                link.id = 'gpk-leaflet-css';
+                link.rel = 'stylesheet';
+                link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                document.head.appendChild(link);
+            }
+
+            let script = document.getElementById('gpk-leaflet-js');
+            if (script) {
+                // Ya se está cargando desde otra instancia: esperar al evento load
+                script.addEventListener('load', callback);
+                return;
+            }
+
+            script = document.createElement('script');
+            script.id = 'gpk-leaflet-js';
+            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            script.onload = callback;
+            script.onerror = () => console.error('No se pudo cargar Leaflet desde el CDN');
+            document.head.appendChild(script);
+        }
+
+        // ==========================================================================
+        // INICIALIZACIÓN DEL MAPA Y MARCADORES
+        // ==========================================================================
+        function initMap() {
+            if (!elements.mapEl || typeof L === 'undefined') return;
+
+            map = L.map(elements.mapEl, {
+                scrollWheelZoom: false, // evita atrapar el scroll de la página
+                zoomControl: true,
+                attributionControl: true
+            }).setView([19.8, -99.3], 7);
+
+            // Capa de teselas CARTO claro (minimalista, combina con el diseño)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                maxZoom: 19,
+                subdomains: 'abcd',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            }).addTo(map);
+
+            // Crear un marcador por cada ubicación
+            locationsData.forEach(loc => {
+                const icon = L.divIcon({
+                    className: `gpk-map-pin-wrap ${loc.categoryClass}`,
+                    html: `<span class="gpk-map-pin ${loc.categoryClass}"></span>`,
+                    iconSize: [26, 33],
+                    iconAnchor: [13, 33],
+                    popupAnchor: [0, -30]
+                });
+
+                const marker = L.marker([loc.lat, loc.lng], {
+                    icon: icon,
+                    title: loc.name,
+                    riseOnHover: true,
+                    keyboard: true
+                });
+
+                marker.bindPopup(buildPopupHtml(loc), {
+                    className: 'gpk-popup',
+                    maxWidth: 340,
+                    minWidth: 320,
+                    autoPanPadding: [24, 24],
+                    closeButton: true
+                });
+
+                marker.on('popupopen', () => onPopupOpen(loc.id));
+                marker.on('popupclose', () => onPopupClose(loc.id));
+
+                markers[loc.id] = marker;
+                marker.addTo(map);
+            });
+
+            // Ajustar la vista para que se vean todos los marcadores
+            fitToVisible();
+
+            // Recalcular tamaño tras el render inicial y en cada resize
+            setTimeout(() => { if (map) map.invalidateSize(); }, 250);
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => { if (map) map.invalidateSize(); }, 200);
+            });
+        }
+
+        // Construye el HTML del popup (mismo diseño/información que el original)
+        function buildPopupHtml(loc) {
+            const phoneClean = loc.phone.replace(/\s/g, '');
+            const img = resolveImagePath(loc.imageUrl);
+            const fallback = resolveImagePath('widgets/locations-map/images/dji-aerial.webp');
+            const addressIcon = resolveImagePath('widgets/locations-map/images/icon-address.svg');
+            const phoneIcon = resolveImagePath('widgets/locations-map/images/icon-phone.svg');
+            const mapUrl = loc.mapUrl || `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`;
+
+            return `
+                <div class="popup-image-container">
+                    <img class="popup-image" src="${img}" alt="${escapeHtml(loc.name)}" loading="lazy"
+                         onerror="this.onerror=null;this.src='${fallback}';">
+                </div>
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <h2 class="popup-name">${escapeHtml(loc.name)}</h2>
+                        <span class="popup-category ${loc.categoryClass}">${escapeHtml(loc.category)}</span>
+                    </div>
+                    <div class="popup-divider"></div>
+                    <div class="popup-detail">
+                        <img class="popup-detail-icon" src="${addressIcon}" alt="Dirección" aria-hidden="true">
+                        <span class="popup-detail-text"><a href="${mapUrl}" target="_blank" rel="noopener noreferrer" aria-label="Ver ${escapeHtml(loc.name)} en Google Maps">${escapeHtml(loc.address)}</a></span>
+                    </div>
+                    <div class="popup-detail">
+                        <img class="popup-detail-icon" src="${phoneIcon}" alt="Teléfono" aria-hidden="true">
+                        <span class="popup-detail-text"><a href="tel:+52${phoneClean}">${escapeHtml(loc.phone)}</a></span>
+                    </div>
+                    <div class="popup-hours">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span class="status-open">Abierto ahora</span>
+                        <span class="status-separator" aria-hidden="true">•</span>
+                        <span class="status-close">Cierra a las 20:00 hrs</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Ajusta la vista a los marcadores actualmente visibles
+        function fitToVisible() {
+            if (!map) return;
+            const visible = Object.values(markers).filter(m => map.hasLayer(m));
+            if (!visible.length) return;
+            const group = L.featureGroup(visible);
+            map.fitBounds(group.getBounds(), { padding: [50, 50], maxZoom: 10 });
+        }
+
+        // ==========================================================================
+        // EVENTOS
+        // ==========================================================================
         function bindEvents() {
-            // Evento Buscador (Debounce 150ms)
+            // Buscador (Debounce 150ms)
             if (elements.searchInput) {
                 let searchDebounce;
                 elements.searchInput.addEventListener('input', (e) => {
@@ -247,72 +406,40 @@
                 });
             }
 
-            // Filtros Categorías (Delegación)
+            // Filtros de categoría (delegación)
             if (elements.filterTags) {
                 elements.filterTags.addEventListener('click', (e) => {
                     const tag = e.target.closest('.filter-tag');
-                    if (tag) {
-                        const filterId = tag.dataset.filter;
-                        setActiveFilter(filterId);
-                    }
+                    if (tag) setActiveFilter(tag.dataset.filter);
                 });
             }
 
-            // Listado de Tarjetas (Delegación)
+            // Listado de tarjetas (delegación)
             if (elements.locationsList) {
                 elements.locationsList.addEventListener('click', (e) => {
                     const card = e.target.closest('.location-card');
-                    if (card) {
-                        const locationId = card.dataset.locationId;
-                        selectLocation(locationId, true);
-                    }
+                    if (card) selectLocation(card.dataset.locationId);
                 });
 
-                // Accesibilidad teclado
                 elements.locationsList.addEventListener('keydown', (e) => {
                     const card = e.target.closest('.location-card');
                     if (card && (e.key === 'Enter' || e.key === ' ')) {
                         e.preventDefault();
-                        const locationId = card.dataset.locationId;
-                        selectLocation(locationId, true);
+                        selectLocation(card.dataset.locationId);
                     }
                 });
             }
-
-            // Pines del Mapa (Delegación)
-            if (elements.mapPinsContainer) {
-                elements.mapPinsContainer.addEventListener('click', (e) => {
-                    const pin = e.target.closest('.map-pin');
-                    if (pin) {
-                        const locationId = pin.dataset.locationId;
-                        selectLocation(locationId, true);
-                    }
-                });
-            }
-
-            // Cerrar Popup
-            if (elements.mapOverlay) {
-                elements.mapOverlay.addEventListener('click', closePopup);
-            }
-
-            // Escape para cerrar
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && elements.mapPopup && elements.mapPopup.classList.contains('visible')) {
-                    closePopup();
-                }
-            });
         }
 
         // ==========================================================================
         // RENDERIZADO DE COMPONENTES DOM
         // ==========================================================================
-
         function renderFilterTags() {
             if (!elements.filterTags) return;
 
             elements.filterTags.innerHTML = categories.map(cat => `
-                <button 
-                    class="filter-tag ${cat.id === 'all' ? 'active' : ''}" 
+                <button
+                    class="filter-tag ${cat.id === 'all' ? 'active' : ''}"
                     data-filter="${cat.id}"
                     style="color: ${cat.color};"
                     role="radio"
@@ -320,22 +447,6 @@
                 >
                     <span class="tag-dot" style="background-color: ${cat.color};"></span>
                     <span>${cat.name}</span>
-                </button>
-            `).join('');
-        }
-
-        function renderMapPins() {
-            if (!elements.mapPinsContainer) return;
-
-            elements.mapPinsContainer.innerHTML = locationsData.map(loc => `
-                <button 
-                    class="map-pin ${loc.categoryClass}" 
-                    id="pin-${loc.id}" 
-                    data-location-id="${loc.id}" 
-                    style="top: ${loc.pinTop}; left: ${loc.pinLeft};"
-                    aria-label="${loc.name}"
-                    tabindex="0"
-                >
                 </button>
             `).join('');
         }
@@ -355,8 +466,8 @@
             }
 
             elements.locationsList.innerHTML = state.filteredLocations.map((loc, index) => `
-                <article 
-                    class="location-card ${loc.id === state.activeLocationId ? 'active' : ''} ${loc.categoryClass}" 
+                <article
+                    class="location-card ${loc.id === state.activeLocationId ? 'active' : ''} ${loc.categoryClass}"
                     data-location-id="${loc.id}"
                     role="listitem"
                     tabindex="0"
@@ -397,7 +508,7 @@
             // 2. Filtrar por búsqueda de texto
             if (state.searchQuery) {
                 const query = state.searchQuery;
-                filtered = filtered.filter(loc => 
+                filtered = filtered.filter(loc =>
                     loc.name.toLowerCase().includes(query) ||
                     loc.category.toLowerCase().includes(query) ||
                     loc.address.toLowerCase().includes(query)
@@ -407,23 +518,24 @@
             state.filteredLocations = filtered;
             renderLocationsList();
             updatePinsVisibility();
-
-            // Si la ubicación seleccionada se filtró, cerrar el popup
-            if (state.activeLocationId && !filtered.find(loc => loc.id === state.activeLocationId)) {
-                closePopup();
-            }
         }
 
+        // Muestra/oculta los marcadores del mapa según el filtrado actual
         function updatePinsVisibility() {
+            if (!map) return;
+
             locationsData.forEach(loc => {
-                const pinEl = document.getElementById(`pin-${loc.id}`);
-                if (!pinEl) return;
-                
+                const marker = markers[loc.id];
+                if (!marker) return;
+
                 const isVisible = state.filteredLocations.some(fLoc => fLoc.id === loc.id);
                 if (isVisible) {
-                    pinEl.classList.remove('hidden');
+                    if (!map.hasLayer(marker)) marker.addTo(map);
                 } else {
-                    pinEl.classList.add('hidden');
+                    if (map.hasLayer(marker)) {
+                        if (state.activeLocationId === loc.id) marker.closePopup();
+                        map.removeLayer(marker);
+                    }
                 }
             });
         }
@@ -431,7 +543,6 @@
         function setActiveFilter(filterId) {
             state.activeFilter = filterId;
 
-            // Actualizar estados visuales de los tags
             const tags = elements.filterTags.querySelectorAll('.filter-tag');
             tags.forEach(tag => {
                 const isActive = tag.dataset.filter === filterId;
@@ -440,130 +551,75 @@
             });
 
             applyFilters();
+            fitToVisible();
         }
 
         // ==========================================================================
-        // SELECCIÓN Y COMPORTAMIENTO INTERACTIVO
+        // SELECCIÓN E INTERACCIÓN
         // ==========================================================================
-        function selectLocation(locationId, triggerScroll = true) {
+        function selectLocation(locationId) {
             const location = locationsData.find(loc => loc.id === locationId);
             if (!location) return;
 
-            state.activeLocationId = locationId;
+            const marker = markers[locationId];
+            if (map && marker) {
+                if (!map.hasLayer(marker)) marker.addTo(map);
+                marker.openPopup(); // dispara popupopen -> resalta tarjeta y pin
+            } else {
+                // El mapa aún no está listo: al menos resaltar la tarjeta
+                highlightCard(locationId);
+            }
 
-            // 1. Actualizar clase activa en las tarjetas de la lista
-            const cards = elements.locationsList.querySelectorAll('.location-card');
-            cards.forEach(card => {
-                const isActive = card.dataset.locationId === locationId;
+            // En móvil, desplazar hacia el mapa
+            if (window.innerWidth <= 992) {
+                const mapContainer = document.querySelector('#gpk-locations-map-widget .map-container');
+                if (mapContainer) mapContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function onPopupOpen(id) {
+            state.activeLocationId = id;
+            highlightCard(id);
+            highlightPin(id);
+        }
+
+        function onPopupClose(id) {
+            if (state.activeLocationId === id) clearActive();
+        }
+
+        function highlightCard(id) {
+            if (!elements.locationsList) return;
+            elements.locationsList.querySelectorAll('.location-card').forEach(card => {
+                const isActive = card.dataset.locationId === id;
                 card.classList.toggle('active', isActive);
                 card.setAttribute('aria-selected', isActive);
-                
-                // Auto scroll de la lista hacia la tarjeta seleccionada (si se activó desde un pin del mapa)
-                if (isActive && !triggerScroll) {
-                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
+                if (isActive) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             });
-
-            // 2. Actualizar pines activos
-            locationsData.forEach(loc => {
-                const pinEl = document.getElementById(`pin-${loc.id}`);
-                if (pinEl) {
-                    pinEl.classList.toggle('active', loc.id === locationId);
-                }
-            });
-
-            // 3. Abrir y actualizar Popup
-            showPopup(location);
-
-            // 4. Scroll en móvil
-            if (triggerScroll && window.innerWidth <= 992) {
-                const mapContainer = document.querySelector('.map-container');
-                mapContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
         }
 
-        function showPopup(location) {
-            if (!elements.mapPopup) return;
-
-            // Actualizar datos del Popup
-            elements.popupTitle.textContent = location.name;
-            
-            // Categoria badge
-            elements.popupCategory.textContent = location.category;
-            elements.popupCategory.className = `popup-category ${location.categoryClass}`;
-
-            // Address
-            elements.popupAddress.textContent = location.address;
-
-            // Telefono con enlace
-            elements.popupPhone.innerHTML = `<a href="tel:+52${location.phone.replace(/\s/g, '')}">${escapeHtml(location.phone)}</a>`;
-
-            // Helper to resolve images inside initWidget scope
-            function resolveImagePath(path) {
-                if (!path) return "";
-                if (path.startsWith("http") || path.startsWith("//") || path.startsWith("data:")) {
-                    return path;
-                }
-                const relativePart = path.replace("widgets/locations-map/", "");
-                return `https://grupak-widgets.vercel.app/widgets/locations-map/${relativePart}`;
-            }
-
-            // Imagen
-            if (elements.popupImage) {
-                elements.popupImage.src = resolveImagePath(location.imageUrl);
-                elements.popupImage.alt = `Planta ${location.name}`;
-                
-                // Fallback si la imagen falla
-                elements.popupImage.onerror = () => {
-                    elements.popupImage.src = resolveImagePath('widgets/locations-map/images/dji-aerial.webp');
-                };
-            }
-
-            // Posicionamiento dinámico sobre el pin correspondiente
-            const pinEl = document.getElementById(`pin-${location.id}`);
-            if (pinEl) {
-                elements.mapPopup.style.left = pinEl.style.left;
-                elements.mapPopup.style.top = pinEl.style.top;
-            }
-
-            // Si el pin está muy arriba (menos del 35% del contenedor), colocar el popup debajo
-            const pinTopPercent = parseFloat(location.pinTop);
-            if (!isNaN(pinTopPercent) && pinTopPercent < 35) {
-                elements.mapPopup.classList.add('popup-below');
-            } else {
-                elements.mapPopup.classList.remove('popup-below');
-            }
-
-            // Mostrar Popup
-            elements.mapPopup.classList.add('visible');
-            elements.mapOverlay.classList.add('visible');
-
-            // Focus
-            elements.mapPopup.focus();
-        }
-
-        function closePopup() {
-            if (!elements.mapPopup) return;
-
-            elements.mapPopup.classList.remove('visible');
-            elements.mapPopup.classList.remove('popup-below');
-            elements.mapOverlay.classList.remove('visible');
-
-            // Quitar estado activo en tarjetas y pines
-            const activeCard = elements.locationsList.querySelector('.location-card.active');
-            if (activeCard) {
-                activeCard.classList.remove('active');
-                activeCard.setAttribute('aria-selected', 'false');
-            }
-
-            locationsData.forEach(loc => {
-                const pinEl = document.getElementById(`pin-${loc.id}`);
-                if (pinEl) {
-                    pinEl.classList.remove('active');
+        function highlightPin(id) {
+            Object.keys(markers).forEach(key => {
+                const marker = markers[key];
+                if (marker && marker._icon) {
+                    marker._icon.classList.toggle('active', key === id);
                 }
             });
+        }
 
+        function clearActive() {
             state.activeLocationId = null;
+
+            if (elements.locationsList) {
+                const activeCard = elements.locationsList.querySelector('.location-card.active');
+                if (activeCard) {
+                    activeCard.classList.remove('active');
+                    activeCard.setAttribute('aria-selected', 'false');
+                }
+            }
+
+            Object.values(markers).forEach(marker => {
+                if (marker._icon) marker._icon.classList.remove('active');
+            });
         }
 
         // ==========================================================================

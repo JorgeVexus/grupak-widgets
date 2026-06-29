@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview · Locations Map</title>
+    <!-- Pre-cargamos el CSS local con el id que el JS espera, para que use el LOCAL y no el de Vercel -->
+    <link id="gpk-locations-styles" rel="stylesheet" href="locations-map.css">
+</head>
+<body style="margin:0;background:#fff;">
+    <div id="gpk-locations-map-widget" class="locations-map-section">
+        <div class="locations-map-container" id="locationsMap">
+            <aside class="locations-panel" role="complementary" aria-label="Lista de ubicaciones">
+                <header class="locations-panel-header">
+                    <h1 class="locations-title">
+                        Conoce <strong class="text-green">nuestras ubicaciones</strong>
+                    </h1>
+                </header>
+                <div class="locations-search" role="search" aria-label="Buscar ubicaciones">
+                    <div class="search-wrapper">
+                        <input type="search" class="search-input" id="locationSearch" placeholder="Buscar locación"
+                            aria-label="Buscar locación" autocomplete="off">
+                        <span class="search-icon" aria-hidden="true">
+                            <img src="images/search-icon.svg" alt="Buscar">
+                        </span>
+                    </div>
+                </div>
+                <div class="locations-filters" role="group" aria-label="Filtrar por tipo de ubicación">
+                    <p class="filters-label">Filtrar por categoría</p>
+                    <div class="filters-tags" id="filterTags" role="radiogroup" aria-label="Categorías de ubicaciones"></div>
+                </div>
+                <div class="locations-list" id="locationsList" role="list" aria-label="Ubicaciones disponibles"></div>
+            </aside>
+            <main class="map-container" role="main" aria-label="Mapa de ubicaciones">
+                <div id="gpkMap" class="gpk-map" aria-label="Mapa interactivo de ubicaciones de Grupack"></div>
+            </main>
+        </div>
+    </div>
+    <script src="locations-map.js"></script>
+</body>
+</html>

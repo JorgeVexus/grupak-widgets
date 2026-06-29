@@ -31,52 +31,9 @@
             </div>
         </aside>
 
-        <!-- PANEL DERECHO - MAPA -->
+        <!-- PANEL DERECHO - MAPA INTERACTIVO (Leaflet) -->
         <main class="map-container" role="main" aria-label="Mapa de ubicaciones">
-            <div class="map-image-wrapper" id="mapImageWrapper">
-                <!-- Imagen de mapa de fondo de Figma -->
-                <img class="map-image" id="mapImage"
-                    src="widgets/locations-map/images/map-bg.webp"
-                    alt="Mapa de ubicaciones de Grupack en México central" loading="eager">
-
-                <!-- Overlay para cerrar popup al hacer click fuera -->
-                <div class="map-overlay" id="mapOverlay" aria-hidden="true"></div>
-
-                <!-- Contenedor dinámico de pines del mapa -->
-                <div id="mapPinsContainer">
-                    <!-- Los pines se generan dinámicamente en JS -->
-                </div>
-
-                <!-- POPUP DE UBICACIÓN RESALTADA -->
-                <div class="map-popup" id="mapPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle"
-                    aria-describedby="popupAddress" tabindex="-1">
-                    <div class="popup-image-container">
-                        <img class="popup-image" id="popupImage" src="" alt="" loading="lazy">
-                    </div>
-                    <div class="popup-content">
-                        <div class="popup-header">
-                            <h2 class="popup-name" id="popupTitle"></h2>
-                            <span class="popup-category" id="popupCategory"></span>
-                        </div>
-                        <div class="popup-divider"></div>
-                        <div class="popup-detail" id="popupAddress">
-                            <img class="popup-detail-icon" src="widgets/locations-map/images/icon-address.svg" alt="Dirección" aria-hidden="true">
-                            <span class="popup-detail-text"></span>
-                        </div>
-                        <div class="popup-detail" id="popupPhone">
-                            <img class="popup-detail-icon" src="widgets/locations-map/images/icon-phone.svg" alt="Teléfono" aria-hidden="true">
-                            <span class="popup-detail-text"></span>
-                        </div>
-                        <div class="popup-hours" id="popupHours">
-                            <span class="status-dot" aria-hidden="true"></span>
-                            <span class="status-open">Abierto ahora</span>
-                            <span class="status-separator" aria-hidden="true">•</span>
-                            <span class="status-close">Cierra a las 20:00 hrs</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <div id="gpkMap" class="gpk-map" aria-label="Mapa interactivo de ubicaciones de Grupack"></div>
         </main>
     </div>
 </div>

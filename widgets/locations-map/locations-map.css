@@ -391,89 +391,70 @@
     position: relative;
 }
 
-#gpk-locations-map-widget .map-image-wrapper {
-    position: relative;
-    width: 1233px;
-    height: 810px;
-    transform-origin: top left;
-}
-
-#gpk-locations-map-widget .map-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    user-select: none;
-    pointer-events: none;
-}
-
-/* Overlay click-out */
-#gpk-locations-map-widget .map-overlay {
+/* Contenedor del mapa interactivo Leaflet */
+#gpk-locations-map-widget .gpk-map {
     position: absolute;
     inset: 0;
-    z-index: 5;
-    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #E8EAED;
 }
 
-#gpk-locations-map-widget .map-overlay.visible {
+/* Reset del wrapper por defecto de los marcadores (divIcon) de Leaflet */
+#gpk-locations-map-widget .leaflet-div-icon {
+    background: transparent;
+    border: none;
+}
+
+#gpk-locations-map-widget .leaflet-container {
+    font-family: var(--font-body);
+    background-color: #E8EAED;
+}
+
+/* Marcadores (pines) sobre el mapa Leaflet.
+   El wrapper externo (.gpk-map-pin-wrap) recibe el transform de posicionamiento
+   de Leaflet; el span interno (.gpk-map-pin) es el que escalamos al hacer hover/activo. */
+#gpk-locations-map-widget .gpk-map-pin {
     display: block;
-}
-
-/* Marcadores en el mapa */
-#gpk-locations-map-widget .map-pin {
-    position: absolute;
+    position: relative;
     width: 26px;
     height: 33px;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center bottom;
     cursor: pointer;
-    transform: translate(-50%, -100%) scale(1);
-    transition: transform var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
-    z-index: 10;
-    border: none;
-    background-color: transparent;
-    outline: none;
+    transform-origin: center bottom;
+    transition: transform var(--transition-fast), filter var(--transition-fast);
 }
 
-#gpk-locations-map-widget .map-pin.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, -100%) scale(0.5);
-}
-
-#gpk-locations-map-widget .map-pin.corporativo {
+#gpk-locations-map-widget .gpk-map-pin.corporativo {
     background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-corporativo.svg');
     color: var(--color-corporativo);
 }
 
-#gpk-locations-map-widget .map-pin.planta-papel {
+#gpk-locations-map-widget .gpk-map-pin.planta-papel {
     background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-papel.svg');
     color: var(--color-papel);
 }
 
-#gpk-locations-map-widget .map-pin.planta-corrugado {
+#gpk-locations-map-widget .gpk-map-pin.planta-corrugado {
     background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-corrugado.svg');
     color: var(--color-corrugado);
 }
 
-#gpk-locations-map-widget .map-pin.abastecimiento {
+#gpk-locations-map-widget .gpk-map-pin.abastecimiento {
     background-image: url('https://grupak-widgets.vercel.app/widgets/locations-map/images/pin-abastecimiento.svg');
     color: var(--color-abastecimiento);
 }
 
-#gpk-locations-map-widget .map-pin:hover {
-    transform: translate(-50%, -100%) scale(1.2);
-    z-index: 12;
+#gpk-locations-map-widget .gpk-map-pin-wrap:hover .gpk-map-pin,
+#gpk-locations-map-widget .gpk-map-pin-wrap.active .gpk-map-pin {
+    transform: scale(1.18);
 }
 
-#gpk-locations-map-widget .map-pin.active {
-    transform: translate(-50%, -100%) scale(1.2);
-    z-index: 100;
-}
-
-/* Pulsación para Pines Activos */
-#gpk-locations-map-widget .map-pin::after {
+/* Pulsación para pines activos */
+#gpk-locations-map-widget .gpk-map-pin::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -489,7 +470,7 @@
     transition: opacity var(--transition-fast);
 }
 
-#gpk-locations-map-widget .map-pin.active::after {
+#gpk-locations-map-widget .gpk-map-pin-wrap.active .gpk-map-pin::after {
     opacity: 1;
     animation: pinActivePulse 2s infinite ease-out;
 }
@@ -505,64 +486,46 @@
     }
 }
 
-/* Popup de Ubicación en el Mapa */
-#gpk-locations-map-widget .map-popup {
-    position: absolute;
-    width: 361px;
-    background-color: var(--color-white);
-    border-bottom: 2px solid var(--color-border);
-    border-left: 2px solid var(--color-border);
-    border-right: 2px solid var(--color-border);
+/* Popup nativo de Leaflet estilizado como el popup original del diseño */
+#gpk-locations-map-widget .gpk-popup .leaflet-popup-content-wrapper {
+    padding: 0;
     border-radius: 3px;
-    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
-    z-index: 110;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translate(-50%, -100%) translateY(-15px) scale(0.95);
-    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
-    outline: none;
+    overflow: hidden;
+    background-color: var(--color-white);
+    border: 2px solid var(--color-border);
+    box-shadow: var(--shadow-popup);
 }
 
-#gpk-locations-map-widget .map-popup.visible {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translate(-50%, -100%) translateY(-15px) scale(1);
+#gpk-locations-map-widget .gpk-popup .leaflet-popup-content {
+    margin: 0;
+    width: 340px !important;
+    line-height: normal;
 }
 
-/* Flecha inferior del popup */
-#gpk-locations-map-widget .map-popup::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid var(--color-white);
-    filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.05));
+#gpk-locations-map-widget .gpk-popup .leaflet-popup-tip {
+    background-color: var(--color-white);
+    border: none;
+    box-shadow: var(--shadow-popup);
 }
 
-/* Posicionamiento del popup cuando está debajo del pin (para evitar cortes en la parte superior) */
-#gpk-locations-map-widget .map-popup.popup-below {
-    transform: translate(-50%, 0) translateY(15px) scale(0.95);
-    border-top: 2px solid var(--color-border);
+#gpk-locations-map-widget .gpk-popup a.leaflet-popup-close-button {
+    width: 26px;
+    height: 26px;
+    top: 8px;
+    right: 8px;
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    transition: background-color var(--transition-fast);
+    z-index: 2;
 }
 
-#gpk-locations-map-widget .map-popup.popup-below.visible {
-    transform: translate(-50%, 0) translateY(15px) scale(1);
-}
-
-/* Invertir la flecha para que apunte hacia arriba */
-#gpk-locations-map-widget .map-popup.popup-below::after {
-    bottom: auto;
-    top: -10px;
-    border-top: none;
-    border-bottom: 10px solid var(--color-white);
-    filter: drop-shadow(0 -2px 1px rgba(0, 0, 0, 0.05));
+#gpk-locations-map-widget .gpk-popup a.leaflet-popup-close-button:hover {
+    background-color: rgba(0, 0, 0, 0.55);
+    color: var(--color-white);
 }
 
 #gpk-locations-map-widget .popup-image-container {
@@ -1040,5 +1003,18 @@
     #gpk-locations-map-widget .popup-name {
         min-width: 130px;
         font-size: 15px;
+    }
+}
+
+/* Ancho del popup de Leaflet en pantallas pequeñas */
+@media (max-width: 576px) {
+    #gpk-locations-map-widget .gpk-popup .leaflet-popup-content {
+        width: min(300px, calc(100vw - 60px)) !important;
+    }
+}
+
+@media (max-width: 400px) {
+    #gpk-locations-map-widget .gpk-popup .leaflet-popup-content {
+        width: min(248px, calc(100vw - 48px)) !important;
     }
 }
