@@ -104,13 +104,30 @@
 
 .mas-alla-badge {
     display: inline-block;
-    background-color: var(--mas-alla-green);
+    background-image: url('images/Vector-badge.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
     color: white;
-    padding: 6px 16px;
+    padding: 7px 22px 11px;
     font-size: 14px;
     font-weight: 500;
-    border-radius: 4px;
     margin-bottom: 20px;
+}
+
+/* Línea punteada divisoria entre el encabezado y la descripción */
+.mas-alla-dash-divider {
+    width: 100%;
+    max-width: 680px;
+    height: 2px;
+    margin-top: 28px;
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--mas-alla-gray) 0,
+        var(--mas-alla-gray) 12px,
+        transparent 12px,
+        transparent 22px
+    );
 }
 
 .mas-alla-title {
@@ -279,6 +296,9 @@
         font-size: 14px;
         line-height: 1.35;
     }
+    .mas-alla-dash-divider {
+        margin-top: 14px;
+    }
     .mas-alla-items-container {
         gap: 10px;
     }
@@ -415,6 +435,10 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    .mas-alla-dash-divider {
+        display: none;
     }
 
     /* Carousel container — clips slides */
