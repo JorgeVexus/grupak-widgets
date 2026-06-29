@@ -2392,7 +2392,7 @@
 
 #gpk-products-widget .grabados-card-title {
     font-family: var(--font-title);
-    font-size: 17px;
+    font-size: 21px;
     font-weight: 900 !important;
     line-height: 1.25;
     margin: 0 0 16px 0;
@@ -2401,7 +2401,7 @@
 }
 
 #gpk-products-widget .grabados-card-desc {
-    font-size: 13px;
+    font-size: 18px;
     line-height: 1.5;
     opacity: 0.92;
     margin: 0;
@@ -2572,7 +2572,7 @@
 
 #gpk-products-widget .energia-row h3 {
     font-family: var(--font-title);
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 700 !important;
     color: var(--color-green) !important;
     margin: 0;
@@ -2580,7 +2580,7 @@
 }
 
 #gpk-products-widget .energia-row p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     color: var(--color-grey-medium) !important;
     margin: 0;
