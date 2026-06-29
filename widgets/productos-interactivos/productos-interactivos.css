@@ -2729,7 +2729,7 @@
 
     /* Slide 0: Intro */
     #gpk-products-widget .products-intro-pane {
-        padding: 12px 8px 22px 0 !important;
+        padding: 12px 8px 22px 3% !important;
     }
 
     #gpk-products-widget .products-board.mode-0 .products-nav-footer {
@@ -2739,7 +2739,7 @@
     #gpk-products-widget .intro-title-new {
         font-size: 13px !important;
         font-weight: 700 !important;
-        color: #0f2d17 !important;
+        color: var(--color-grey-dark) !important;
         line-height: 1.16 !important;
         margin: 0 0 14px 0 !important;
         max-width: 172px !important;
@@ -2751,7 +2751,7 @@
     #gpk-products-widget .intro-title-new .text-green {
         font-size: inherit !important;
         font-weight: inherit !important;
-        color: #0f6f24 !important;
+        color: var(--color-green) !important;
     }
 
     #gpk-products-widget .overview-title-new .text-green,
@@ -2760,7 +2760,8 @@
     }
 
     #gpk-products-widget .intro-mobile-img-container {
-        width: calc(100% - 16px) !important;
+        width: calc(100% - 64px - 3%) !important;
+        max-width: 320px !important;
         background-color: #ffffff !important;
         border: 1px solid #dedede !important;
         border-radius: 0 !important;
@@ -2768,7 +2769,7 @@
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        margin: 0 8px 12px 8px !important;
+        margin: 0 auto 18px auto !important;
         box-shadow: none !important;
         aspect-ratio: 1.14 / 1 !important;
         overflow: hidden !important;
@@ -2785,11 +2786,11 @@
     }
 
     #gpk-products-widget .intro-mobile-desc {
-        font-size: 7px !important;
-        line-height: 1.52 !important;
+        font-size: 16px !important;
+        line-height: 1.35 !important;
         color: #3d3d3d !important;
-        margin: 0 0 8px 0 !important;
-        max-width: 168px !important;
+        margin: 0 8px 10px 0 !important;
+        max-width: calc(100% - 8px) !important;
         text-align: left !important;
     }
 
