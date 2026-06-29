@@ -4,7 +4,6 @@
     --mas-alla-dark-green: #02321E;
     --mas-alla-deep-green: #062819;
     --mas-alla-bg-light: #F2F9E9;
-    --mas-alla-transparent-green: rgba(104, 189, 72, 0.8);
     --mas-alla-watermark: rgba(2, 50, 30, 0.2);
     --font-main: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -79,22 +78,6 @@
 .mas-alla-content-section::-webkit-scrollbar {
     display: none;
 }
-
-.mas-alla-divider {
-    position: absolute;
-    right: 18px;
-    width: 6px;
-    height: 56px;
-    background-color: var(--mas-alla-transparent-green);
-    border-radius: 50px;
-    z-index: 15;
-    transition: top 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.mas-alla-divider.state-0 { top: 12%; }
-.mas-alla-divider.state-1 { top: 37%; }
-.mas-alla-divider.state-2 { top: 62%; }
-.mas-alla-divider.state-3 { top: 85%; }
 
 .mas-alla-header {
     margin-bottom: 40px;
@@ -349,9 +332,6 @@
     .mas-alla-title {
         font-size: 36px;
     }
-    .mas-alla-divider {
-        display: none;
-    }
     .mas-alla-item {
         opacity: 1 !important;
         pointer-events: auto !important;
@@ -539,10 +519,6 @@
     .mas-alla-dot.active {
         background: var(--mas-alla-green);
         width: 20px;
-    }
-
-    .mas-alla-divider {
-        display: none;
     }
 
     /* Scroll spacer stays at 400vh to drive carousel via scroll */

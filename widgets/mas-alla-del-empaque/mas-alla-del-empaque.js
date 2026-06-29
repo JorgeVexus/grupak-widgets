@@ -61,7 +61,6 @@
         const items = widget.querySelectorAll(".mas-alla-item");
         const spacer = widget.querySelector(".mas-alla-scroll-spacer");
         const wrapper = widget.querySelector(".mas-alla-sticky-wrapper");
-        const divider = widget.querySelector("#gpk-mas-alla-divider");
         const itemsContainer = widget.querySelector(".mas-alla-items-container");
 
         const TOTAL = items.length; // 4
@@ -121,7 +120,7 @@
             window.scrollTo({ top: targetScrollY, behavior: "smooth" });
         }
 
-        // ── Update active state (images + items + divider + dots) ──────────
+        // ── Update active state (images + items + dots) ──────────
         function updateActiveState(index) {
             if (index === currentIndex) return;
             currentIndex = index;
@@ -143,13 +142,7 @@
                 }
             });
 
-            // 3. Divider position (desktop only)
-            if (divider) {
-                divider.className = "mas-alla-divider";
-                divider.classList.add(`state-${index}`);
-            }
-
-            // 4. Dots (mobile only)
+            // 3. Dots (mobile only)
             updateDots(index);
         }
 
