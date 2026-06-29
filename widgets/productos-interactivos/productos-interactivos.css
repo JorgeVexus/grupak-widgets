@@ -682,6 +682,7 @@
     font-family: var(--font-body);
     font-size: 13.5px;
     line-height: 1.45;
+    font-weight: 700 !important;
     color: var(--color-green) !important;
     margin-bottom: 24px;
     height: 65px;
@@ -1927,6 +1928,7 @@
 
 #gpk-products-widget .products-board.mode-5 .papel-text-block.active p {
     color: #5F9D2F !important;
+    font-weight: 700 !important;
 }
 
 /* Transition to top-left when entering Mode 6 */
@@ -2737,26 +2739,26 @@
     }
 
     #gpk-products-widget .intro-title-new {
-        font-size: 13px !important;
+        font-size: 24px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
-        line-height: 1.16 !important;
+        line-height: 1.1 !important;
         margin: 0 0 14px 0 !important;
-        max-width: 172px !important;
+        max-width: 100% !important;
         text-align: left !important;
-        letter-spacing: 0 !important;
+        letter-spacing: -0.5px !important;
         text-wrap: balance !important;
     }
 
     #gpk-products-widget .intro-title-new .text-green {
         font-size: inherit !important;
-        font-weight: inherit !important;
+        font-weight: 700 !important;
         color: var(--color-green) !important;
     }
 
     #gpk-products-widget .overview-title-new .text-green,
     #gpk-products-widget .laminas-main-title .text-green {
-        font-weight: inherit !important;
+        font-weight: 700 !important;
     }
 
     #gpk-products-widget .intro-mobile-img-container {
@@ -3389,7 +3391,7 @@
 
     #gpk-products-widget .product-subtitle {
         font-size: 10px !important;
-        font-weight: 500 !important;
+        font-weight: 700 !important;
         color: var(--color-green) !important;
         margin-bottom: 6px !important;
     }
