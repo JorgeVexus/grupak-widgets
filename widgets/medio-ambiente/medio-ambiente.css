@@ -601,8 +601,8 @@
   }
 
   .ma-header {
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     gap: 16px;
   }
 
@@ -615,10 +615,11 @@
   }
 
   .ma-title {
-    max-width: 10ch;
+    max-width: 32ch;
     font-size: clamp(34px, 11vw, 52px);
     line-height: 1.05;
     white-space: normal;
+    margin: 0 auto;
   }
 
   .ma-intro {
@@ -633,6 +634,8 @@
     color: var(--ma-gray) !important;
     font-size: clamp(15px, 4.2vw, 17px);
     line-height: 1.45;
+    text-align: center;
+    margin-inline: auto;
   }
 
   .ma-intro-copy[data-copy="2"] {
@@ -712,7 +715,8 @@
     max-width: 62ch;
     font-size: clamp(15px, 4.2vw, 17px);
     line-height: 1.45;
-    text-align: left;
+    text-align: center;
+    margin-inline: auto;
     overflow-wrap: anywhere;
   }
 
