@@ -2715,7 +2715,7 @@
         height: 100% !important;
         background-color: var(--color-grey-light) !important;
         box-sizing: border-box !important;
-        padding: 20px 16px 70px 16px !important;
+        padding: 14px 14px 64px 14px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
@@ -2729,11 +2729,11 @@
 
     /* Slide 0: Intro */
     #gpk-products-widget .intro-title-new {
-        font-size: 18px !important;
+        font-size: 17px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         line-height: 1.25 !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 10px !important;
         max-width: 100% !important;
         text-align: left !important;
     }
@@ -2751,36 +2751,37 @@
     #gpk-products-widget .intro-mobile-img-container {
         width: 100% !important;
         background-color: var(--color-white) !important;
-        border: 1px solid #e3e5e9 !important;
+        border: none !important;
         border-radius: 12px !important;
-        padding: 12px !important;
+        padding: 8px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 12px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
     }
 
     #gpk-products-widget .intro-mobile-img {
-        max-height: 120px !important;
+        max-height: 150px !important;
         width: auto !important;
+        max-width: 100% !important;
         object-fit: contain !important;
         display: block !important;
         margin: 0 !important;
     }
 
     #gpk-products-widget .intro-mobile-desc {
-        font-size: 13px !important;
-        line-height: 1.45 !important;
+        font-size: 12px !important;
+        line-height: 1.38 !important;
         color: var(--color-grey-medium) !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 14px !important;
         text-align: left !important;
     }
 
     #gpk-products-widget .intro-kpis-grid-new {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
+        gap: 10px !important;
         margin-top: 0 !important;
         width: 100% !important;
     }
@@ -2789,7 +2790,7 @@
         background-color: var(--color-white) !important;
         border: 1px solid #e3e5e9 !important;
         border-radius: 8px !important;
-        padding: 12px 8px !important;
+        padding: 10px 8px !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
@@ -2799,16 +2800,16 @@
     }
 
     #gpk-products-widget .kpi-line-new {
-        order: 1 !important;
-        margin: 0 auto 8px auto !important;
-        width: 30px !important;
+        order: 2 !important;
+        margin: 0 auto 5px auto !important;
+        width: 34px !important;
         height: 2px !important;
         background-color: var(--color-green) !important;
     }
 
     #gpk-products-widget .kpi-number-new {
-        order: 2 !important;
-        font-size: 24px !important;
+        order: 1 !important;
+        font-size: 23px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         margin-bottom: 4px !important;
