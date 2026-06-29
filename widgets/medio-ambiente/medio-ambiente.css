@@ -705,7 +705,7 @@
 
   .ma-step-copy p {
     width: 100%;
-    max-width: 60ch;
+    max-width: none;
     font-size: clamp(14px, 4vw, 16px);
     line-height: 1.42;
   }
