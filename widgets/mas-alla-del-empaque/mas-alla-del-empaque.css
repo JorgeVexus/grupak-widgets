@@ -463,7 +463,8 @@
         grid-template-columns: 50px 1fr !important;
         column-gap: 12px;
         padding: 14px 16px !important;
-        min-height: auto;
+        padding-top: 0px !important;
+        min-height: 150px !important;
         background-image: url('images/vector svg.svg') !important;
     }
 
