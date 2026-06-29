@@ -466,7 +466,7 @@
   transform: translate(-50%, 0);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1173px) {
   .ma-state-13 .ma-wheel {
     transform: translate(-50%, -50%) translateY(-135px) scale(.88);
   }
@@ -508,7 +508,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1180px) {
+@media (min-width: 1173px) and (max-width: 1280px) {
   .ma-sticky {
     min-height: 720px;
   }
@@ -518,7 +518,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1172px) {
   .ma-scroll-spacer {
     display: none;
   }

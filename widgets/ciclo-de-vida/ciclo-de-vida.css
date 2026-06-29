@@ -660,8 +660,8 @@
   color: var(--color-green);
 }
 
-/* ====== Mobile Layout Stack (<768px) ====== */
-@media (max-width: 768px) {
+/* ====== Mobile Layout Stack (<1172px) ====== */
+@media (max-width: 1172px) {
   body {
     overflow-y: auto;
     height: auto;

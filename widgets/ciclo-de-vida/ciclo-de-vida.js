@@ -146,7 +146,7 @@
         // --- Viewport Auto-scaling Logic ---
         function scaleBoard() {
             if (!board) return;
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 1172) {
                 board.style.transform = "none";
                 return;
             }
@@ -161,7 +161,7 @@
         function goToSlide(index) {
             if (index < 0 || index >= totalSlides) return;
 
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 1172) {
                 // Mobile behavior: scroll to corresponding element
                 if (index === 0) {
                     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -195,7 +195,7 @@
         }
 
         function handleScroll() {
-            if (window.innerWidth <= 768) return;
+            if (window.innerWidth <= 1172) return;
 
             var rect = spacer.getBoundingClientRect();
             var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -243,7 +243,7 @@
             widget.classList.add("lifecycle-state-" + currentSlide);
 
             // 2. Manage step cards active states (only in desktop)
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > 1172) {
                 stepCards.forEach(card => {
                     const stepNum = parseInt(card.getAttribute("data-step"));
                     const mappedStep = currentSlide - 6; // State 7 -> Step 1, State 8 -> Step 2, etc.
@@ -362,7 +362,7 @@
 
             // Keyboard navigation when visible
             document.addEventListener("keydown", (e) => {
-                if (window.innerWidth <= 768) return;
+                if (window.innerWidth <= 1172) return;
                 
                 const rect = spacer.getBoundingClientRect();
                 const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
@@ -376,10 +376,10 @@
             });
 
             // Resize hooks
-            let isMobile = window.innerWidth <= 768;
+            let isMobile = window.innerWidth <= 1172;
             window.addEventListener("resize", () => {
                 const wasMobile = isMobile;
-                isMobile = window.innerWidth <= 768;
+                isMobile = window.innerWidth <= 1172;
 
                 scaleBoard();
                 updateUI();
@@ -399,7 +399,7 @@
             });
 
             // Initial scroll event binding
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 1172) {
                 setupMobileAnimations();
             } else {
                 window.addEventListener("scroll", handleScroll, { passive: true });
@@ -412,7 +412,7 @@
             scaleBoard();
             setupEvents();
             
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > 1172) {
                 handleScroll();
             }
             

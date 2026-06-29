@@ -87,8 +87,8 @@
     var lines = Array.prototype.slice.call(widget.querySelectorAll(".ma-line"));
     var currentState = -1;
     var stateCount = 14;
-    var compactQuery = window.matchMedia("(min-width: 768px) and (max-width: 1180px)");
-    var mobileQuery = window.matchMedia("(max-width: 767px)");
+    var compactQuery = window.matchMedia("(min-width: 1173px) and (max-width: 1280px)");
+    var mobileQuery = window.matchMedia("(max-width: 1172px)");
     var mobileRevealObserver = null;
 
     if (!board || !spacer) return;
