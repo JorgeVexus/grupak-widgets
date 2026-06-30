@@ -1,7 +1,9 @@
 (function() {
     "use strict";
 
-    const baseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
+    const productionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
+    const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    const baseURL = isLocalHost ? "/widgets/productos-interactivos" : productionBaseURL;
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-products-styles")) {
@@ -45,12 +47,34 @@
         const prevBtn = root.querySelector("#p-prev-btn");
         const nextBtn = root.querySelector("#p-next-btn");
         const dotsContainer = root.querySelector("#footer-dots");
+        const widgetProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
+        const widgetBaseURL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+            ? "/widgets/productos-interactivos"
+            : widgetProductionBaseURL;
 
         // Dynamically set logo src to support both local preview and production
         const logo = board ? board.querySelector(".preloader-logo") : null;
+        const heroHome = board ? board.querySelector("#gpk-hero-home") : null;
         if (logo) {
-            const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-            logo.src = isLocal ? "widgets/productos-interactivos/logoGrupak.svg" : `${baseURL}/logoGrupak.svg`;
+            logo.src = `${widgetBaseURL}/logoGrupak.svg`;
+        }
+        if (heroHome) {
+            const heroImg = heroHome.querySelector(".gpk-hero-home-img");
+            const kpiBgs = heroHome.querySelectorAll(".gpk-hero-kpi-bg");
+
+            if (heroImg) heroImg.src = `${widgetBaseURL}/images/hero-home.webp`;
+            kpiBgs.forEach(bg => {
+                bg.src = `${widgetBaseURL}/images/vector%20hero%20home.svg`;
+            });
+        }
+
+        function startHeroIntro() {
+            if (!heroHome) return;
+
+            heroHome.classList.add("is-running");
+            window.setTimeout(() => {
+                heroHome.classList.add("is-dismissed");
+            }, 2850);
         }
 
         // --- Dot Indicators Builder ---
@@ -419,6 +443,7 @@
             updatePreloaderOnScroll(0);
             board.classList.remove("preloading");
             updateUI();
+            startHeroIntro();
         }
 
         init();
