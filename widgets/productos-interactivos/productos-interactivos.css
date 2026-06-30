@@ -214,18 +214,17 @@
    Initial Home Hero (automatic intro)
    ========================================== */
 #gpk-products-widget .gpk-hero-home {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: calc(100vw / var(--board-scale, 1));
-    height: calc(100vh / var(--board-scale, 1));
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 130;
     overflow: hidden;
     background-color: #062819;
     color: var(--color-white);
     pointer-events: auto;
     opacity: 1;
-    transform: translate3d(-50%, -50%, 0);
+    transform: none;
     transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.35s ease;
 }
 
@@ -386,7 +385,9 @@
 }
 
 #gpk-products-widget .gpk-hero-home-banner h1 {
-    width: 690px;
+    width: auto;
+    max-width: none;
+    flex: 0 0 auto;
     font-family: var(--font-title);
     font-size: 80px;
     line-height: 1.04;
@@ -394,6 +395,7 @@
     color: var(--color-white);
     font-weight: 900 !important;
     letter-spacing: 0;
+    white-space: nowrap;
 }
 
 #gpk-products-widget .gpk-hero-home-banner p {
@@ -4364,9 +4366,11 @@
     }
 
     #gpk-products-widget .gpk-hero-home-banner h1 {
-        width: 100% !important;
+        width: auto !important;
+        max-width: none !important;
         font-size: clamp(38px, 11vw, 62px) !important;
         line-height: 1.02 !important;
+        white-space: nowrap !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner p {

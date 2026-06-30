@@ -55,6 +55,10 @@
         // Dynamically set logo src to support both local preview and production
         const logo = board ? board.querySelector(".preloader-logo") : null;
         const heroHome = board ? board.querySelector("#gpk-hero-home") : null;
+        if (heroHome && heroHome.parentElement !== root) {
+            root.appendChild(heroHome);
+        }
+
         if (logo) {
             logo.src = `${widgetBaseURL}/logoGrupak.svg`;
         }
