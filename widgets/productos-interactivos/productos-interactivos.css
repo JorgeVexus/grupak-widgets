@@ -193,8 +193,8 @@
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
     height: 100%;
     background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a30809b91c301774f05b899_fondo.svg');
     background-size: 100% 100%;
@@ -1305,16 +1305,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(70px, 8vw, 150px);
+    gap: 70px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #gpk-products-widget .cajas-image-container {
-    width: 48%;
+    width: 36%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     opacity: 0;
     transform: translateX(-150px);
@@ -1328,9 +1328,9 @@
 }
 
 #gpk-products-widget .cajas-text-container {
-    width: 25%;
-    max-width: 25%;
-    flex: 0 0 25%;
+    width: 30%;
+    max-width: 30%;
+    flex: 0 0 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1446,6 +1446,7 @@
 #gpk-products-widget .cajas-digital-content {
     justify-content: center;
     align-items: center;
+    transform: translateY(-40px);
 }
 
 #gpk-products-widget .digital-content-wrapper {
@@ -1453,7 +1454,7 @@
     width: 1400px;
     justify-content: center;
     align-items: center;
-    gap: 120px;
+    gap: 70px;
 }
 
 #gpk-products-widget .digital-text-content {
@@ -1512,9 +1513,9 @@
 }
 
 #gpk-products-widget .digital-image-container {
-    width: 680px;
+    width: 520px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-end;
     flex-shrink: 0;
     opacity: 0;
@@ -1884,7 +1885,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    margin-top: 20px;
+    margin-top: 0;
     position: relative;
 }
 
@@ -1903,7 +1904,8 @@
 }
 
 #gpk-products-widget .products-board.mode-7 .laminas-wavy-line {
-    opacity: 1;
+    display: none !important;
+    opacity: 0;
 }
 
 #gpk-products-widget .laminas-card-new {
@@ -2803,7 +2805,7 @@
 
 /* Card Content typography and alignment */
 #gpk-products-widget .energia-row-content {
-    max-width: 530px;
+    max-width: 640px;
     padding: 24px 35px 24px 45px;
     box-sizing: border-box;
     display: flex;
@@ -4267,6 +4269,12 @@
     transition: opacity 0.5s ease;
 }
 
+@media (min-width: 1025px) {
+    #gpk-products-widget .products-nav-footer {
+        display: none !important;
+    }
+}
+
 /* Responsive overrides for preloader shape */
 @media (max-width: 1024px) {
     #gpk-products-widget .gpk-hero-home {
@@ -4303,41 +4311,42 @@
     }
 
     #gpk-products-widget .gpk-hero-kpi {
-        height: 52px !important;
-        width: 178px !important;
+        height: 54px !important;
+        width: 138px !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-content {
-        height: 43px !important;
-        gap: 8px !important;
-        padding: 4px 9px 9px 7px !important;
+        height: 50px !important;
+        gap: 5px !important;
+        padding: 5px 8px 9px 6px !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-number {
-        font-size: 25px !important;
+        font-size: 12px !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-copy,
     #gpk-products-widget .gpk-hero-kpi-copy strong,
     #gpk-products-widget .gpk-hero-kpi-copy span {
-        font-size: 9px !important;
-        line-height: 1.08 !important;
+        font-size: 6.5px !important;
+        font-weight: 400 !important;
+        line-height: 1.05 !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-left {
-        left: -7px !important;
+        left: 15% !important;
         top: 54% !important;
         transform: translate3d(-70px, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-top {
-        right: -8px !important;
+        right: 15% !important;
         top: 8% !important;
         transform: translate3d(70px, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-right {
-        right: -12px !important;
+        right: 20% !important;
         top: 60% !important;
         transform: translate3d(70px, 0, 0) !important;
     }
@@ -4390,5 +4399,45 @@
     }
     #gpk-products-widget .preloader-logo {
         max-width: 60% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #gpk-products-widget .gpk-hero-kpi {
+        height: 52px !important;
+        width: 128px !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-content {
+        height: 50px !important;
+        gap: 5px !important;
+        padding: 5px 7px 8px 6px !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-number {
+        font-size: 12px !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-copy,
+    #gpk-products-widget .gpk-hero-kpi-copy strong,
+    #gpk-products-widget .gpk-hero-kpi-copy span {
+        font-size: 6.5px !important;
+        font-weight: 400 !important;
+        line-height: 1.05 !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-left {
+        left: 15% !important;
+        top: 55% !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-top {
+        right: 15% !important;
+        top: 8% !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-right {
+        right: 20% !important;
+        top: 61% !important;
     }
 }

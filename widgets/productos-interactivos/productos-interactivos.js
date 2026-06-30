@@ -68,6 +68,16 @@
             });
         }
 
+        const cajasMainImage = board ? board.querySelector(".cajas-main-image") : null;
+        if (cajasMainImage) {
+            cajasMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%201.webp`;
+        }
+
+        const digitalMainImage = board ? board.querySelector(".digital-main-image") : null;
+        if (digitalMainImage) {
+            digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202.webp`;
+        }
+
         function startHeroIntro() {
             if (!heroHome) return;
 
