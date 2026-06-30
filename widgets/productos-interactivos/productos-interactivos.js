@@ -72,9 +72,19 @@
             if (!heroHome) return;
 
             heroHome.classList.add("is-running");
-            window.setTimeout(() => {
-                heroHome.classList.add("is-dismissed");
-            }, 2850);
+            updateHeroIntroOnScroll(0);
+        }
+
+        function updateHeroIntroOnScroll(progress) {
+            if (!heroHome) return;
+
+            const fadeStart = 0.004;
+            const fadeEnd = 0.032;
+            const fadeProgress = Math.max(0, Math.min(1, (progress - fadeStart) / (fadeEnd - fadeStart)));
+            const opacity = 1 - fadeProgress;
+
+            heroHome.style.opacity = opacity;
+            heroHome.classList.toggle("is-scroll-hidden", opacity <= 0.01);
         }
 
         // --- Dot Indicators Builder ---
@@ -94,6 +104,7 @@
         // --- Viewport Scaling Logic ---
         function scaleBoard() {
             if (window.innerWidth <= 1024) {
+                board.style.setProperty('--board-scale', 1);
                 board.style.transform = "none";
                 return;
             }
@@ -142,6 +153,7 @@
             progress = Math.max(0, Math.min(1, progress));
 
             // Run preloader scroll animation
+            updateHeroIntroOnScroll(progress);
             updatePreloaderOnScroll(progress);
 
             const targetSlide = Math.min(Math.floor(progress * totalSlides), totalSlides - 1);
@@ -440,6 +452,7 @@
             buildDots();
             scaleBoard();
             setupEvents();
+            updateHeroIntroOnScroll(0);
             updatePreloaderOnScroll(0);
             board.classList.remove("preloading");
             updateUI();

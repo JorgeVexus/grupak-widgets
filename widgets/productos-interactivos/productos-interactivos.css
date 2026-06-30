@@ -215,17 +215,21 @@
    ========================================== */
 #gpk-products-widget .gpk-hero-home {
     position: absolute;
-    inset: 0;
+    left: 50%;
+    top: 50%;
+    width: calc(100vw / var(--board-scale, 1));
+    height: calc(100vh / var(--board-scale, 1));
     z-index: 130;
     overflow: hidden;
     background-color: #062819;
     color: var(--color-white);
     pointer-events: auto;
     opacity: 1;
-    transition: opacity 0.55s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.55s ease;
+    transform: translate3d(-50%, -50%, 0);
+    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.35s ease;
 }
 
-#gpk-products-widget .gpk-hero-home.is-dismissed {
+#gpk-products-widget .gpk-hero-home.is-scroll-hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
