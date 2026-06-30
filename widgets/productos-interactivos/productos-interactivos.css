@@ -239,7 +239,7 @@
     left: 50%;
     top: 61.2px;
     width: 1317px;
-    height: 706px;
+    height: 570px;
     transform: translateX(-50%);
     transform-origin: center center;
     will-change: transform, opacity;
@@ -360,7 +360,7 @@
 #gpk-products-widget .gpk-hero-home-banner {
     position: absolute;
     left: 122px;
-    top: 814px;
+    top: 670px;
     width: 1607px;
     display: flex;
     align-items: flex-start;
