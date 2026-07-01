@@ -79,7 +79,7 @@
 
         const digitalMainImage = board ? board.querySelector(".digital-main-image") : null;
         if (digitalMainImage) {
-            digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202.webp`;
+            digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202-1.webp`;
         }
 
         function startHeroIntro() {

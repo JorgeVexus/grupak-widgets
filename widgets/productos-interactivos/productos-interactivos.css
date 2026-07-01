@@ -1526,7 +1526,7 @@
 }
 
 #gpk-products-widget .digital-main-image {
-    max-width: 100%;
+    max-width: none;
     max-height: 650px;
     object-fit: contain;
 }
