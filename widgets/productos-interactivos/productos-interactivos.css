@@ -361,6 +361,7 @@
     position: absolute;
     left: 122px;
     top: 670px;
+    margin-top: 75px;
     width: 1607px;
     display: flex;
     align-items: flex-start;
@@ -490,50 +491,46 @@
     opacity: 0;
 }
 
-/* Staggered sequential animations per column */
+/* Scroll-driven sequential animations per column */
 
 /* 1. Caja (Cajas y empaques) */
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-caja .contour-path {
+#gpk-products-widget .products-board.mode-0.reveal-1:not(.preloading) #p-caja .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
-    animation-delay: 0.1s, 0.1s;
 }
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-caja .pillar-img {
+#gpk-products-widget .products-board.mode-0.reveal-1:not(.preloading) #p-caja .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 0.9s;
+    animation-delay: 0.45s;
 }
 
 /* 2. Lámina (Hojas y láminas) */
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-lamina .contour-path {
+#gpk-products-widget .products-board.mode-0.reveal-2:not(.preloading) #p-lamina .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
-    animation-delay: 1.1s, 1.1s;
 }
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-lamina .pillar-img {
+#gpk-products-widget .products-board.mode-0.reveal-2:not(.preloading) #p-lamina .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 1.9s;
+    animation-delay: 0.45s;
 }
 
 /* 3. Papel (Rollo de papel) */
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-rollo .contour-path {
+#gpk-products-widget .products-board.mode-0.reveal-3:not(.preloading) #p-rollo .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
-    animation-delay: 2.1s, 2.1s;
 }
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-rollo .pillar-img {
+#gpk-products-widget .products-board.mode-0.reveal-3:not(.preloading) #p-rollo .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 2.9s;
+    animation-delay: 0.45s;
 }
 
 /* 4. Grabados (Pirámide de rodillos) */
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-grabados .contour-path {
+#gpk-products-widget .products-board.mode-0.reveal-4:not(.preloading) #p-grabados .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
-    animation-delay: 3.1s, 3.1s;
 }
-#gpk-products-widget .products-board.mode-0:not(.preloading) #p-grabados .pillar-img {
+#gpk-products-widget .products-board.mode-0.reveal-4:not(.preloading) #p-grabados .pillar-img {
     animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 3.9s;
+    animation-delay: 0.45s;
 }
 
 @keyframes gpkDrawOutline {
@@ -1526,7 +1523,7 @@
 }
 
 #gpk-products-widget .digital-main-image {
-    max-width: 100%;
+    max-width: none;
     max-height: 650px;
     object-fit: contain;
 }
@@ -2602,12 +2599,13 @@
     pointer-events: none;
 }
 
-/* Green card style with background SVG from user */
+/* Green card style */
 #gpk-products-widget .grabados-green-card {
     position: absolute;
     width: 330px;
     height: 290px;
-    background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a1f3e59cc5986fdc70e1aa3_green%20card%20bg.svg');
+    background-color: var(--color-green);
+    background-image: none;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -2640,6 +2638,7 @@
     font-family: var(--font-title);
     font-size: 21px;
     font-weight: 900 !important;
+    color: var(--color-white);
     line-height: 1.25;
     margin: 0 0 16px 0;
     text-transform: uppercase;
@@ -2649,6 +2648,7 @@
 #gpk-products-widget .grabados-card-desc {
     font-size: 18px;
     line-height: 1.5;
+    color: var(--color-white);
     opacity: 0.92;
     margin: 0;
 }
@@ -3447,7 +3447,7 @@
         font-size: 16px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
-        text-align: left !important;
+        text-align: center !important;
         margin-bottom: 10px !important;
         line-height: 1.3 !important;
         letter-spacing: 0 !important;
@@ -3461,7 +3461,7 @@
         width: 40px !important;
         height: 2px !important;
         background-color: var(--color-green) !important;
-        margin: 8px 0 !important;
+        margin: 8px auto !important;
         opacity: 1 !important;
         transform: none !important;
         border-radius: 1px !important;
@@ -3505,7 +3505,7 @@
         font-size: 15px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
-        text-align: left !important;
+        text-align: center !important;
         margin-bottom: 6px !important;
         line-height: 1.25 !important;
         opacity: 1 !important;
@@ -3516,7 +3516,7 @@
         width: 40px !important;
         height: 2px !important;
         background-color: var(--color-green) !important;
-        margin: 8px 0 !important;
+        margin: 8px auto !important;
         opacity: 1 !important;
         transform: none !important;
         border-radius: 1px !important;
@@ -4090,6 +4090,7 @@
     #gpk-products-widget .product-card,
     #gpk-products-widget .papel-text-block {
         width: 100% !important;
+        max-width: 100% !important;
         flex: 0 0 auto !important;
     }
 
@@ -4114,6 +4115,131 @@
         height: 100% !important;
         max-height: none !important;
         object-fit: contain !important;
+    }
+
+    /* Slide 6: keep paper products as a compact 2x2 mobile grid. */
+    #gpk-products-widget .papel-products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        height: calc(100dvh - 112px) !important;
+        min-height: 560px !important;
+        align-items: stretch !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-card {
+        height: 100% !important;
+        min-width: 0 !important;
+        padding: 0 !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto 6px auto !important;
+        border: none !important;
+        background-color: transparent !important;
+        padding: 5px !important;
+        aspect-ratio: 1.35 / 0.9 !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-img {
+        width: 100% !important;
+        height: 78px !important;
+        max-height: 78px !important;
+        object-fit: contain !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-info {
+        padding: 7px 7px 8px 7px !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-name {
+        font-size: 12px !important;
+        margin-bottom: 2px !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-subtitle {
+        font-size: 8.5px !important;
+        margin-bottom: 4px !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-desc {
+        font-size: 9px !important;
+        line-height: 1.25 !important;
+        margin-bottom: 6px !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .product-uses {
+        padding-top: 6px !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .uses-bubble {
+        font-size: 7px !important;
+        padding: 1px 4px !important;
+        margin-bottom: 2px !important;
+    }
+
+    #gpk-products-widget .papel-products-grid .uses-text {
+        font-size: 8px !important;
+        line-height: 1.25 !important;
+    }
+
+    /* Slide 7: compact laminate cards so the card group behaves like the paper grid. */
+    #gpk-products-widget .laminas-cards-grid-new {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-new {
+        min-width: 0 !important;
+        padding: 6px !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-new[data-index="3"] {
+        grid-column: 1 / -1 !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-new[data-index="3"] .laminas-card-image {
+        max-width: 260px !important;
+        margin-bottom: 8px !important;
+        aspect-ratio: 1.55 / 0.9 !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-new[data-index="3"] .laminas-card-img {
+        height: 118px !important;
+        max-height: 118px !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto 6px auto !important;
+        border: none !important;
+        background-color: transparent !important;
+        padding: 4px !important;
+        aspect-ratio: 1.35 / 0.72 !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-img {
+        width: 100% !important;
+        height: 72px !important;
+        max-height: 72px !important;
+        object-fit: contain !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-title {
+        font-size: 11px !important;
+        margin-bottom: 3px !important;
+    }
+
+    #gpk-products-widget .laminas-cards-grid-new .laminas-card-desc {
+        font-size: 8.5px !important;
+        line-height: 1.25 !important;
     }
 
     #gpk-products-widget .products-board:not(.mode-3) .cajas-convencionales-content {
@@ -4147,6 +4273,75 @@
     /* General helper classes */
     #gpk-products-widget .section-detail-title {
         font-size: 20px !important;
+    }
+
+    /* Mobile hierarchy parity: keep desktop color/weight semantics at smaller sizes. */
+    #gpk-products-widget .overview-col-title,
+    #gpk-products-widget .laminas-card-title,
+    #gpk-products-widget .product-name,
+    #gpk-products-widget .grabados-card-title,
+    #gpk-products-widget .energia-row h3 {
+        color: var(--color-green) !important;
+        font-weight: 700 !important;
+    }
+
+    #gpk-products-widget .overview-col-desc,
+    #gpk-products-widget .laminas-card-desc,
+    #gpk-products-widget .product-desc,
+    #gpk-products-widget .grabados-card-desc,
+    #gpk-products-widget .energia-row p {
+        font-weight: 400 !important;
+    }
+
+    #gpk-products-widget .product-subtitle,
+    #gpk-products-widget .uses-bubble {
+        color: var(--color-grey-medium) !important;
+        font-weight: 700 !important;
+    }
+
+    /* Slide 9: keep desktop energy card artwork on mobile. */
+    #gpk-products-widget .energia-row {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        background-size: 100% 100% !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-color: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        min-height: 104px !important;
+        overflow: hidden !important;
+    }
+
+    #gpk-products-widget .energia-row::before {
+        content: "" !important;
+        position: absolute !important;
+        inset: 8px 11px 8px 11px !important;
+        z-index: 0 !important;
+        background: rgba(255, 255, 255, 0.76) !important;
+        pointer-events: none !important;
+    }
+
+    #gpk-products-widget .energia-row-content {
+        position: relative !important;
+        z-index: 1 !important;
+        padding: 15px 24px !important;
+    }
+
+    #gpk-products-widget .energia-row[data-index="1"] {
+        background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a29943d21667aea15af7d1e_eficiencia.png') !important;
+    }
+
+    #gpk-products-widget .energia-row[data-index="2"] {
+        background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a29943cfb0a8a01eb7cde0d_impacto.png') !important;
+    }
+
+    #gpk-products-widget .energia-row[data-index="3"] {
+        background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a29943ddcd9e841652325b6_suministro.png') !important;
     }
 
     #gpk-products-widget .fade-in-on-scroll {
@@ -4366,11 +4561,12 @@
     }
 
     #gpk-products-widget .gpk-hero-home-banner h1 {
-        width: auto !important;
-        max-width: none !important;
-        font-size: clamp(38px, 11vw, 62px) !important;
-        line-height: 1.02 !important;
-        white-space: nowrap !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: clamp(28px, 8.8vw, 44px) !important;
+        line-height: 1.04 !important;
+        white-space: normal !important;
+        overflow-wrap: normal !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner p {
@@ -4443,5 +4639,208 @@
     #gpk-products-widget .gpk-hero-kpi-right {
         right: 20% !important;
         top: 61% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #gpk-products-widget .grabados-green-card {
+        background-color: var(--color-green) !important;
+        background-image: none !important;
+        color: var(--color-white) !important;
+    }
+
+    #gpk-products-widget .grabados-card-title,
+    #gpk-products-widget .grabados-card-desc {
+        color: var(--color-white) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #gpk-products-widget .products-board.mode-2 .cajas-mobile-hero-container,
+    #gpk-products-widget .products-board.mode-3 .cajas-image-container,
+    #gpk-products-widget .products-board.mode-4 .digital-image-container,
+    #gpk-products-widget .products-board.mode-5 .papel-hero-image {
+        width: calc(100% - 24px) !important;
+        max-width: 380px !important;
+        margin: 0 auto 18px auto !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        aspect-ratio: auto !important;
+        overflow: visible !important;
+    }
+
+    #gpk-products-widget .products-board.mode-2 .cajas-mobile-hero-img,
+    #gpk-products-widget .products-board.mode-3 .cajas-main-image,
+    #gpk-products-widget .products-board.mode-4 .digital-main-image,
+    #gpk-products-widget .products-board.mode-5 .papel-main-image {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 330px !important;
+        object-fit: contain !important;
+    }
+
+    #gpk-products-widget .products-board.mode-6 .papel-products-grid .product-image {
+        background: transparent !important;
+        border: none !important;
+        padding: 2px !important;
+        width: 100% !important;
+        max-width: none !important;
+        aspect-ratio: 1.45 / 0.9 !important;
+    }
+
+    #gpk-products-widget .products-board.mode-6 .papel-products-grid .product-img {
+        height: 92px !important;
+        max-height: 92px !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+}
+
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+    @keyframes gpkMobileEnterLeft {
+        0% {
+            translate: -28px 0;
+            filter: blur(4px);
+            opacity: 0.001;
+        }
+        100% {
+            translate: 0 0;
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes gpkMobileEnterRight {
+        0% {
+            translate: 28px 0;
+            filter: blur(4px);
+            opacity: 0.001;
+        }
+        100% {
+            translate: 0 0;
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes gpkMobileEnterUp {
+        0% {
+            translate: 0 24px;
+            filter: blur(4px);
+            opacity: 0.001;
+        }
+        100% {
+            translate: 0 0;
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes gpkMobileImageIn {
+        0% {
+            translate: 0 18px;
+            scale: 0.96;
+            filter: blur(5px);
+            opacity: 0.001;
+        }
+        100% {
+            translate: 0 0;
+            scale: 1;
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    #gpk-products-widget .products-board.mode-0 .intro-title-new,
+    #gpk-products-widget .products-board.mode-1 .overview-header,
+    #gpk-products-widget .products-board.mode-2 .pane-title-centered,
+    #gpk-products-widget .products-board.mode-3 .pane-title-centered,
+    #gpk-products-widget .products-board.mode-4 .pane-title-centered,
+    #gpk-products-widget .products-board.mode-5 .papel-shared-title,
+    #gpk-products-widget .products-board.mode-7 .laminas-main-title,
+    #gpk-products-widget .products-board.mode-8 .grabados-main-title,
+    #gpk-products-widget .products-board.mode-9 .energia-main-title {
+        animation: gpkMobileEnterLeft 520ms cubic-bezier(0.16, 1, 0.3, 1) 40ms both !important;
+        will-change: translate, filter, opacity;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .intro-mobile-img-container,
+    #gpk-products-widget .products-board.mode-2 .cajas-mobile-hero-container,
+    #gpk-products-widget .products-board.mode-3 .cajas-image-container,
+    #gpk-products-widget .products-board.mode-4 .digital-image-container,
+    #gpk-products-widget .products-board.mode-5 .papel-hero-image {
+        animation: gpkMobileImageIn 620ms cubic-bezier(0.16, 1, 0.3, 1) 90ms both !important;
+        will-change: translate, scale, filter, opacity;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .intro-mobile-desc,
+    #gpk-products-widget .products-board.mode-3 .cajas-text-container,
+    #gpk-products-widget .products-board.mode-4 .digital-text-content,
+    #gpk-products-widget .products-board.mode-7 .laminas-intro-left,
+    #gpk-products-widget .products-board.mode-7 .laminas-intro-right,
+    #gpk-products-widget .products-board.mode-8 .grabados-intro-text,
+    #gpk-products-widget .products-board.mode-9 .energia-intro-text {
+        animation: gpkMobileEnterUp 560ms cubic-bezier(0.16, 1, 0.3, 1) 130ms both !important;
+        will-change: translate, filter, opacity;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .kpi-item-new,
+    #gpk-products-widget .products-board.mode-1 .overview-col-new,
+    #gpk-products-widget .products-board.mode-2 .cajas-column,
+    #gpk-products-widget .products-board.mode-5 .papel-text-block,
+    #gpk-products-widget .products-board.mode-6 .product-card,
+    #gpk-products-widget .products-board.mode-7 .laminas-card-new,
+    #gpk-products-widget .products-board.mode-8 .grabados-green-card,
+    #gpk-products-widget .products-board.mode-9 .energia-row {
+        animation: gpkMobileEnterLeft 560ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+        will-change: translate, filter, opacity;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .kpi-item-new:nth-child(1),
+    #gpk-products-widget .products-board.mode-1 .overview-col-new:nth-child(1),
+    #gpk-products-widget .products-board.mode-2 .cajas-column:nth-of-type(1),
+    #gpk-products-widget .products-board.mode-5 .papel-text-block:nth-child(1),
+    #gpk-products-widget .products-board.mode-6 .product-card:nth-child(1),
+    #gpk-products-widget .products-board.mode-7 .laminas-card-new:nth-child(1),
+    #gpk-products-widget .products-board.mode-8 .grabados-green-card:nth-child(1),
+    #gpk-products-widget .products-board.mode-9 .energia-row:nth-child(1) {
+        animation-delay: 80ms !important;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .kpi-item-new:nth-child(2),
+    #gpk-products-widget .products-board.mode-1 .overview-col-new:nth-child(2),
+    #gpk-products-widget .products-board.mode-2 .cajas-column:nth-of-type(2),
+    #gpk-products-widget .products-board.mode-5 .papel-text-block:nth-child(2),
+    #gpk-products-widget .products-board.mode-6 .product-card:nth-child(2),
+    #gpk-products-widget .products-board.mode-7 .laminas-card-new:nth-child(2),
+    #gpk-products-widget .products-board.mode-8 .grabados-green-card:nth-child(2),
+    #gpk-products-widget .products-board.mode-9 .energia-row:nth-child(2) {
+        animation-delay: 160ms !important;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .kpi-item-new:nth-child(3),
+    #gpk-products-widget .products-board.mode-1 .overview-col-new:nth-child(3),
+    #gpk-products-widget .products-board.mode-5 .papel-text-block:nth-child(3),
+    #gpk-products-widget .products-board.mode-6 .product-card:nth-child(3),
+    #gpk-products-widget .products-board.mode-7 .laminas-card-new:nth-child(3),
+    #gpk-products-widget .products-board.mode-8 .grabados-green-card:nth-child(3),
+    #gpk-products-widget .products-board.mode-9 .energia-row:nth-child(3) {
+        animation-delay: 240ms !important;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .kpi-item-new:nth-child(4),
+    #gpk-products-widget .products-board.mode-1 .overview-col-new:nth-child(4),
+    #gpk-products-widget .products-board.mode-5 .papel-text-block:nth-child(4),
+    #gpk-products-widget .products-board.mode-6 .product-card:nth-child(4),
+    #gpk-products-widget .products-board.mode-8 .grabados-green-card:nth-child(4) {
+        animation-delay: 320ms !important;
+    }
+
+    #gpk-products-widget .products-board.mode-6 .product-card:nth-child(2n),
+    #gpk-products-widget .products-board.mode-7 .laminas-card-new:nth-child(2n),
+    #gpk-products-widget .products-board.mode-8 .grabados-green-card:nth-child(2n) {
+        animation-name: gpkMobileEnterRight !important;
     }
 }

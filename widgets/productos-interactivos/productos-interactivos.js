@@ -37,6 +37,7 @@
         const totalSlides = 10;
         let isAnimating = false;
         let isPreloading = false;
+        let lastScrollProgress = 0;
 
         // Scoped DOM Elements to prevent clashes
         const root = document.getElementById("gpk-products-widget");
@@ -79,7 +80,7 @@
 
         const digitalMainImage = board ? board.querySelector(".digital-main-image") : null;
         if (digitalMainImage) {
-            digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202.webp`;
+            digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202-1.webp`;
         }
 
         function startHeroIntro() {
@@ -165,6 +166,7 @@
             const relativeScroll = scrollTop - trackerTop;
             let progress = relativeScroll / scrollHeight;
             progress = Math.max(0, Math.min(1, progress));
+            lastScrollProgress = progress;
 
             // Run preloader scroll animation
             updateHeroIntroOnScroll(progress);
@@ -178,7 +180,29 @@
             }
             
             // Update scroll-driven text blocks on desktop
+            updateSlideZeroRevealOnScroll(progress);
             updatePaperTextBlocksOnScroll(progress);
+        }
+
+        function updateSlideZeroRevealOnScroll(progress) {
+            const revealClasses = ["reveal-1", "reveal-2", "reveal-3", "reveal-4"];
+            if (!board) return;
+
+            revealClasses.forEach(className => board.classList.remove(className));
+
+            if (currentSlide !== 0 || board.classList.contains("preloading")) return;
+
+            const slideZeroEnd = 1 / totalSlides;
+            const revealStart = 0.082;
+            const revealEnd = slideZeroEnd - 0.002;
+            const revealProgress = Math.max(0, Math.min(1, (progress - revealStart) / (revealEnd - revealStart)));
+            const revealCount = progress <= revealStart
+                ? 0
+                : Math.max(0, Math.min(4, Math.floor(revealProgress * 4) + 1));
+
+            for (let i = 0; i < revealCount; i += 1) {
+                board.classList.add(revealClasses[i]);
+            }
         }
 
         function updateUI() {
@@ -222,6 +246,8 @@
                     block.classList.remove("active");
                 });
             }
+
+            updateSlideZeroRevealOnScroll(lastScrollProgress);
         }
 
         // --- Scroll-driven Papel text blocks (Mode 5) ---
@@ -470,6 +496,7 @@
             updatePreloaderOnScroll(0);
             board.classList.remove("preloading");
             updateUI();
+            updateSlideZeroRevealOnScroll(0);
             startHeroIntro();
         }
 
