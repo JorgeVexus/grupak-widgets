@@ -18,7 +18,7 @@
     var MX_STATES = "Aguascalientes,Baja California,Baja California Sur,Campeche,Chiapas,Chihuahua,Ciudad de Mexico,Coahuila,Colima,Durango,Estado de Mexico,Guanajuato,Guerrero,Hidalgo,Jalisco,Michoacan,Morelos,Nayarit,Nuevo Leon,Oaxaca,Puebla,Queretaro,Quintana Roo,San Luis Potosi,Sinaloa,Sonora,Tabasco,Tamaulipas,Tlaxcala,Veracruz,Yucatan,Zacatecas".split(",");
     var US_STATES = "Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming".split(",");
 
-    var MINIMUMS_NOTE = "Trabajamos con volumenes industriales. La cantidad minima para cotizacion de cajas de carton corrugado es de 1 tonelada. Si tu requerimiento es menor, te recomendamos contactar a un distribuidor local.";
+    var MINIMUMS_NOTE = "Trabajamos con volúmenes industriales. La cantidad mínima para cotización de cajas de cartón corrugado es de 1 tonelada. Si tu requerimiento es menor, te recomendamos contactar a un distribuidor local.";
 
     var PRODUCT_SPECS = {
         papel: {
@@ -34,8 +34,8 @@
             ]
         },
         lamina: {
-            label: "Lamina de carton corrugado",
-            title: "Especificaciones de lamina",
+            label: "Lámina de cartón corrugado",
+            title: "Especificaciones de lámina",
             note: true,
             fields: [
                 field("select", "lamina_tipo_corrugado", "Tipo de corrugado", ["Sencillo", "Doble", "Otro"]),
@@ -47,14 +47,14 @@
             ]
         },
         cajas: {
-            label: "Cajas de carton corrugado",
+            label: "Cajas de cartón corrugado",
             title: "Especificaciones de cajas",
             note: true,
             fields: [
                 field("select", "cajas_tipo", "Tipo de caja", ["Regular ranurada", "Suajada", "Charola", "Otro"]),
                 field("select", "cajas_color_liner", "Color de liner", ["Kraft", "Blanco", "Otro"]),
                 field("select", "cajas_flauta", "Flauta", ["B", "C", "E", "BC", "Otra"]),
-                field("select", "cajas_numero_tintas", "Numero de tintas", ["1", "2", "3", "4 o mas"]),
+                field("select", "cajas_numero_tintas", "Número de tintas", ["1", "2", "3", "4 o más"]),
                 field("text", "cajas_largo_cm", "Largo (cm)", null, false, "third"),
                 field("text", "cajas_ancho_cm", "Ancho (cm)", null, false, "third"),
                 field("text", "cajas_alto_cm", "Alto (cm)", null, false, "third"),
@@ -64,13 +64,13 @@
             ]
         },
         grabado: {
-            label: "Grabado y flexografia",
+            label: "Grabado y flexografía",
             title: "Especificaciones de grabado",
             note: true,
             fields: [
                 field("text", "grabado_sustrato", "Tipo de sustrato"),
-                field("select", "grabado_arte_listo", "¿Cuentas con arte listo?", ["Si", "No", "En proceso"]),
-                field("text", "grabado_numero_tintas", "Numero de tintas"),
+                field("select", "grabado_arte_listo", "¿Cuentas con arte listo?", ["Sí", "No", "En proceso"]),
+                field("text", "grabado_numero_tintas", "Número de tintas"),
                 field("text", "grabado_tiraje", "Cantidad estimada de piezas o tiraje"),
                 field("file", "grabado_archivo", "Subir archivo (pdf, docx, referencia)", null, false, "full"),
                 field("text", "grabado_formatos", "Formato aceptado: ai, pdf, png, jpg", null, false, "full", true),
@@ -78,15 +78,15 @@
             ]
         },
         impresion: {
-            label: "Impresion digital (WowPak)",
-            title: "Especificaciones de impresion digital",
+            label: "Impresión digital (WowPak)",
+            title: "Especificaciones de impresión digital",
             note: true,
             fields: [
                 field("text", "impresion_tipo_pieza", "Tipo de pieza"),
                 field("text", "impresion_formato", "Formato aproximado", null, false, null, false, "ej. 60 x 40 cm"),
-                field("number", "impresion_tiraje", "Tiraje estimado (numero de piezas) *", null, true),
-                field("select", "impresion_arte_listo", "¿Cuentas con arte listo?", ["Si", "No", "En proceso"]),
-                field("text", "impresion_resolucion", "Resolucion de interes"),
+                field("number", "impresion_tiraje", "Tiraje estimado (número de piezas) *", null, true),
+                field("select", "impresion_arte_listo", "¿Cuentas con arte listo?", ["Sí", "No", "En proceso"]),
+                field("text", "impresion_resolucion", "Resolución de interés"),
                 field("file", "impresion_archivo", "Subir archivo", null, false, "full"),
                 field("text", "impresion_formatos", "Formatos aceptados: ai, pdf, png, jpg", null, false, "full", true),
                 field("textarea", "impresion_comentarios", "Comentarios adicionales", null, false, "full")
@@ -96,9 +96,9 @@
             label: "Seguimiento de pedido",
             title: "Seguimiento de pedido",
             fields: [
-                field("text", "seguimiento_numero_pedido", "Numero de pedido / orden de compra *", null, true),
+                field("text", "seguimiento_numero_pedido", "Número de pedido / orden de compra *", null, true),
                 field("text", "seguimiento_empresa", "Empresa *", null, true),
-                field("textarea", "seguimiento_comentarios", "Comentarios o consulta especifica", null, false, "full")
+                field("textarea", "seguimiento_comentarios", "Comentarios o consulta específica", null, false, "full")
             ],
             portal: true
         }
@@ -190,6 +190,21 @@
         var spec = form && form.querySelector("[data-product-spec]");
         if (!form || !grid || !spec) return;
 
+        function adjustPosition() {
+            var checkedRadio = grid.querySelector('input[name="producto_interes"]:checked');
+            if (!checkedRadio) return;
+            var card = checkedRadio.closest(".gpk-product-card");
+            if (window.innerWidth <= 719) {
+                if (card && card.nextSibling !== spec) {
+                    card.parentNode.insertBefore(spec, card.nextSibling);
+                }
+            } else {
+                if (grid.nextSibling !== spec) {
+                    grid.parentNode.insertBefore(spec, grid.nextSibling);
+                }
+            }
+        }
+
         grid.addEventListener("change", function (event) {
             var radio = event.target;
             if (!radio || radio.type !== "radio") return;
@@ -198,8 +213,11 @@
                 card.classList.toggle("is-selected", card.contains(radio));
             });
 
+            adjustPosition();
             renderProductSpec(spec, radio.value);
         });
+
+        window.addEventListener("resize", adjustPosition);
     }
 
     function renderProductSpec(container, key) {
@@ -267,7 +285,7 @@
             placeholder.value = "";
             placeholder.disabled = true;
             placeholder.selected = true;
-            placeholder.textContent = "Selecciona una opcion";
+            placeholder.textContent = "Selecciona una opción";
             input.appendChild(placeholder);
             config.options.forEach(function (optionText) {
                 var option = document.createElement("option");
@@ -336,7 +354,7 @@
         placeholder.value = "";
         placeholder.disabled = true;
         placeholder.selected = true;
-        placeholder.textContent = "Selecciona una opcion";
+        placeholder.textContent = "Selecciona una opción";
         select.appendChild(placeholder);
 
         list.forEach(function (state) {
@@ -407,22 +425,22 @@
                     if (res.ok) {
                         form.reset();
                         resetDynamicState(form);
-                        showStatus(status, "ok", "Gracias. Tu informacion fue enviada correctamente. Nuestro equipo te contactara muy pronto.");
+                        showStatus(status, "ok", "Gracias. Tu información fue enviada correctamente. Nuestro equipo te contactará muy pronto.");
                         return;
                     }
                     return res.json()
                         .then(function (data) {
                             var msg = data && data.errors && data.errors.length
                                 ? data.errors.map(function (err) { return err.message; }).join(". ")
-                                : "Hubo un problema al enviar el formulario. Por favor intentalo de nuevo.";
+                                : "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.";
                             showStatus(status, "error", msg);
                         })
                         .catch(function () {
-                            showStatus(status, "error", "Hubo un problema al enviar el formulario. Por favor intentalo de nuevo.");
+                            showStatus(status, "error", "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.");
                         });
                 })
                 .catch(function () {
-                    showStatus(status, "error", "No se pudo conectar con el servidor. Revisa tu conexion e intentalo de nuevo.");
+                    showStatus(status, "error", "No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.");
                 })
                 .finally(function () {
                     button.disabled = false;
