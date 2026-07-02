@@ -519,10 +519,6 @@
         font-size: clamp(30px, 9.2vw, 38px);
     }
 
-    .sust-comisiones {
-        grid-template-columns: 1fr;
-    }
-
     .sust-diagram-area {
         width: min(92vw, 380px) !important;
         height: min(86vw, 360px) !important;
