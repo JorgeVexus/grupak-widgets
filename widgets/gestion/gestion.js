@@ -1,6 +1,76 @@
 (function () {
     "use strict";
 
+    var isLocalhost =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1" ||
+        window.location.protocol === "file:";
+
+    var baseURL = isLocalhost
+        ? "/widgets/gestion"
+        : "https://grupak-widgets.vercel.app/widgets/gestion";
+
+    if (!document.getElementById("gpk-gestion-styles")) {
+        var link = document.createElement("link");
+        link.id = "gpk-gestion-styles";
+        link.rel = "stylesheet";
+        link.href = isLocalhost
+            ? "widgets/gestion/gestion.css"
+            : baseURL + "/gestion.css";
+        document.head.appendChild(link);
+    }
+
+    function start() {
+        var root =
+            document.getElementById("gpk-gestion-widget-root") ||
+            document.getElementById("grupak-gestion-root");
+
+        if (root) {
+            fetch(
+                isLocalhost
+                    ? "widgets/gestion/gestion.html"
+                    : baseURL + "/gestion.html"
+            )
+                .then(function (res) {
+                    if (!res.ok) throw new Error("Error loading Gestion widget HTML");
+                    return res.text();
+                })
+                .then(function (html) {
+                    root.innerHTML = html;
+                    resolveImages(root);
+                    initGestionWidget();
+                })
+                .catch(function (err) {
+                    console.error("[gpk-gestion]", err);
+                });
+        } else if (document.getElementById("gpk-gestion-widget")) {
+            resolveImages(document.getElementById("gpk-gestion-widget"));
+            initGestionWidget();
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+
+    function resolveImages(container) {
+        if (!container) return;
+
+        container.querySelectorAll("img").forEach(function (img) {
+            var src = img.getAttribute("src");
+            if (!src) return;
+
+            if (src.indexOf("http") !== 0 && src.indexOf("data:") !== 0) {
+                var cleanSrc = src.charAt(0) === "/" ? src.slice(1) : src;
+                img.src = isLocalhost
+                    ? "widgets/gestion/" + cleanSrc
+                    : baseURL.replace(/\/$/, "") + "/" + cleanSrc;
+            }
+        });
+    }
+
     function initGestionWidget() {
         var root = document.getElementById("gpk-gestion-widget");
         if (!root || root.dataset.gestionReady === "true") return;
@@ -173,9 +243,4 @@
         autoTimer = window.setInterval(goNext, 5200);
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initGestionWidget);
-    } else {
-        initGestionWidget();
-    }
 })();
