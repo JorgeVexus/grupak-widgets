@@ -8,8 +8,9 @@
   --color-grey-medium: #6E6E6E;
   --color-grey-light: #E3E5E9;
   --color-white: #FFFFFF;
-  --font-title: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-title: 'Neuehaasdisplaymediu', 'Neuehaasdisplayroman', sans-serif;
+  --font-body: 'Neuehaasdisplayroman', 'Neuehaasdisplaymediu', sans-serif;
+  --font-black: 'Neuehaasdisplayblack', var(--font-title);
 
   width: 100%;
   position: relative;
@@ -95,7 +96,7 @@
 }
 
 #gpk-timeline-widget .header-title {
-  font-family: var(--font-title);
+  font-family: var(--font-black);
   font-size: 80px;
   font-weight: 900;
   letter-spacing: -2px;
@@ -181,7 +182,7 @@
   align-items: center;
   justify-content: center;
   color: var(--color-white);
-  font-family: var(--font-title);
+  font-family: var(--font-black);
   font-weight: 900;
   font-size: 14px;
   opacity: 1;
@@ -291,7 +292,7 @@
 }
 
 #gpk-timeline-widget .card-badge-text {
-  font-family: var(--font-title);
+  font-family: var(--font-black);
   font-weight: 900;
   font-size: 13px;
   color: var(--color-white);
@@ -1283,7 +1284,7 @@
     top: 12px;
     width: 48px;
     text-align: right;
-    font-family: var(--font-title);
+    font-family: var(--font-black);
     font-weight: 900;
     font-size: 15px;
     color: var(--color-green);
