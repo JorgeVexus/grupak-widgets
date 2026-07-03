@@ -324,14 +324,14 @@
 
 #gpk-products-widget .gpk-hero-kpi-left {
     left: calc(var(--hero-media-width) * -0.04);
-    top: calc(var(--hero-media-height) * 0.795);
+    top: calc((var(--hero-media-height) * 0.795) + 16px);
     width: 293px;
     transform: translate3d(-120px, 0, 0);
 }
 
 #gpk-products-widget .gpk-hero-kpi-top {
     right: calc(var(--hero-media-width) * -0.024);
-    top: calc(var(--hero-media-height) * 0.177);
+    top: calc((var(--hero-media-height) * 0.177) + 16px);
     width: 349px;
     transform: translate3d(130px, 0, 0);
 }
@@ -342,7 +342,7 @@
 
 #gpk-products-widget .gpk-hero-kpi-right {
     right: calc(var(--hero-media-width) * -0.076);
-    top: calc(var(--hero-media-height) * 0.818);
+    top: calc((var(--hero-media-height) * 0.818) + 16px);
     width: 317px;
     transform: translate3d(130px, 0, 0);
 }
@@ -396,8 +396,8 @@
     width: auto;
     max-width: none;
     flex: 0 0 auto;
-    font-family: var(--font-title);
-    font-size: clamp(58px, 4.7vw, 80px);
+    font-family: 'Neuehaasdisplayblack', var(--font-title);
+    font-size: clamp(58px, 4.5vw, 80px);
     line-height: 1.04;
     text-transform: uppercase;
     color: var(--color-white);
@@ -413,6 +413,12 @@
     font-size: 21px;
     line-height: 1.18;
     color: var(--color-white);
+}
+
+@media (min-width: 1025px) and (max-width: 1499px) {
+    #gpk-products-widget .gpk-hero-home-banner h1 {
+        font-size: clamp(54px, 4.3vw, 68px);
+    }
 }
 
 @keyframes gpkHeroImageSettle {
@@ -4541,19 +4547,19 @@
 
     #gpk-products-widget .gpk-hero-kpi-left {
         left: 15% !important;
-        top: 54% !important;
+        top: 57% !important;
         transform: translate3d(-70px, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-top {
         right: 15% !important;
-        top: 8% !important;
+        top: 11% !important;
         transform: translate3d(70px, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-right {
         right: 20% !important;
-        top: 60% !important;
+        top: 63% !important;
         transform: translate3d(70px, 0, 0) !important;
     }
 
@@ -4665,17 +4671,17 @@
 
     #gpk-products-widget .gpk-hero-kpi-left {
         left: 15% !important;
-        top: 55% !important;
+        top: 58% !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-top {
         right: 15% !important;
-        top: 8% !important;
+        top: 11% !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-right {
         right: 20% !important;
-        top: 61% !important;
+        top: 64% !important;
     }
 }
 
