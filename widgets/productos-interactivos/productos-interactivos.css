@@ -3993,7 +3993,7 @@
         transform: none !important;
         opacity: 1 !important;
         text-align: left !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 10px !important;
         pointer-events: auto !important;
     }
 
@@ -4003,7 +4003,7 @@
         text-align: left !important;
         color: var(--color-green) !important;
         font-weight: 700 !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 4px !important;
     }
 
     #gpk-products-widget .energia-intro-text {
@@ -4033,26 +4033,43 @@
         height: auto !important;
         background-image: none !important;
         background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
-        border-radius: 12px !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+        border: 1px solid #dedede !important;
+        border-radius: 3px !important;
+        box-shadow: none !important;
         box-sizing: border-box !important;
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
         pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+    }
+
+    #gpk-products-widget .energia-mobile-image-container {
+        display: block !important;
+        width: 100% !important;
+        height: 80px !important;
+        overflow: hidden !important;
+    }
+
+    #gpk-products-widget .energia-mobile-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
     }
 
     #gpk-products-widget .energia-row-content {
         max-width: 100% !important;
-        padding: 12px 10px !important;
+        padding: 12px 12px !important;
     }
 
     #gpk-products-widget .energia-row h3 {
         font-size: 13px !important;
         font-weight: 700 !important;
         color: var(--color-green) !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 3px !important;
         line-height: 1.25 !important;
     }
 
@@ -4339,42 +4356,38 @@
         top: auto !important;
         right: auto !important;
         bottom: auto !important;
-        background-size: 100% 100% !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-color: transparent !important;
-        border: none !important;
-        border-radius: 0 !important;
+        background-image: none !important;
+        background-color: var(--color-white) !important;
+        border: 1px solid #dedede !important;
+        border-radius: 3px !important;
         box-shadow: none !important;
-        min-height: 104px !important;
+        min-height: auto !important;
         overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     #gpk-products-widget .energia-row::before {
-        content: "" !important;
-        position: absolute !important;
-        inset: 8px 11px 8px 11px !important;
-        z-index: 0 !important;
-        background: rgba(255, 255, 255, 0.76) !important;
-        pointer-events: none !important;
+        display: none !important;
     }
 
     #gpk-products-widget .energia-row-content {
         position: relative !important;
         z-index: 1 !important;
-        padding: 15px 24px !important;
+        padding: 12px 12px !important;
+        background-color: var(--color-white) !important;
     }
 
     #gpk-products-widget .energia-row[data-index="1"] {
-        background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a29943d21667aea15af7d1e_eficiencia.png') !important;
+        background-image: none !important;
     }
 
     #gpk-products-widget .energia-row[data-index="2"] {
-        background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a29943cfb0a8a01eb7cde0d_impacto.png') !important;
+        background-image: none !important;
     }
 
     #gpk-products-widget .energia-row[data-index="3"] {
-        background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a29943ddcd9e841652325b6_suministro.png') !important;
+        background-image: none !important;
     }
 
     #gpk-products-widget .fade-in-on-scroll {
