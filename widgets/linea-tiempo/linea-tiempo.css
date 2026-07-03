@@ -954,7 +954,7 @@
 /* 2021 Slide Animations (Staggered Stacking) */
 #gpk-timeline-widget .info-section-2021-1 {
   position: absolute;
-  left: 120px;
+  left: 0;
   top: 230px;
   width: 400px;
   height: auto;
@@ -965,7 +965,7 @@
 
 #gpk-timeline-widget .info-section-2021-2 {
   position: absolute;
-  left: 600px;
+  left: 480px;
   top: 610px;
   width: 420px;
   height: auto;
@@ -977,7 +977,7 @@
 
 #gpk-timeline-widget .image-container-2021-1 {
   position: absolute;
-  left: 570px;
+  left: 450px;
   top: 150px;
   width: 480px;
   height: 330px;
@@ -989,7 +989,7 @@
 
 #gpk-timeline-widget .image-container-2021-2 {
   position: absolute;
-  left: 120px;
+  left: 0;
   top: 500px;
   width: 450px;
   height: 294px;
