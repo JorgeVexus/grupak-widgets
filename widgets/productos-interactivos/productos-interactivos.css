@@ -215,7 +215,7 @@
    ========================================== */
 #gpk-products-widget .gpk-hero-home {
     --hero-media-width: min(78vw, 1317px);
-    --hero-media-height: min(72vh, 650px);
+    --hero-media-height: min(68vh, 600px);
     --hero-media-top: clamp(95px, calc(8vh + 35px), 113px);
     --hero-banner-top: calc(var(--hero-media-top) + var(--hero-media-height) + clamp(42px, 6.8vh, 62px));
     --hero-side-pad: clamp(72px, 6.6vw, 122px);
