@@ -3387,13 +3387,18 @@
         width: 100% !important;
         flex: 0 0 auto !important;
         padding: 16px 12px !important;
+        text-align: center !important;
+        align-items: center !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     #gpk-products-widget .cajas-column h2 {
         font-size: 14px !important;
         color: var(--color-grey-dark) !important;
         margin-bottom: 8px !important;
-        text-align: left !important;
+        text-align: center !important;
+        font-weight: 700 !important;
         line-height: 1.25 !important;
     }
 
@@ -3402,13 +3407,13 @@
         line-height: 1.4 !important;
         color: var(--color-grey-medium) !important;
         max-width: 100% !important;
-        text-align: left !important;
+        text-align: center !important;
         margin: 0 !important;
     }
 
     #gpk-products-widget .cajas-intro-content .highlight-line {
-        margin: 8px 0 !important;
-        width: 40px !important;
+        margin: 8px auto !important;
+        width: 120px !important;
         height: 2px !important;
         background-color: var(--color-green) !important;
         border-radius: 1px !important;
@@ -3457,7 +3462,7 @@
     }
 
     #gpk-products-widget .cajas-detail-title {
-        font-size: 16px !important;
+        font-size: 14px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         text-align: center !important;
@@ -3471,13 +3476,20 @@
     }
 
     #gpk-products-widget .cajas-green-line {
-        width: 40px !important;
+        width: 120px !important;
         height: 2px !important;
         background-color: var(--color-green) !important;
         margin: 8px auto !important;
         opacity: 1 !important;
         transform: none !important;
         border-radius: 1px !important;
+    }
+
+    #gpk-products-widget .cajas-text-container {
+        text-align: center !important;
+        align-items: center !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     #gpk-products-widget .cajas-paragraph-1,
@@ -3489,6 +3501,7 @@
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
+        text-align: center !important;
     }
 
     #gpk-products-widget .cajas-paragraph-2 {
