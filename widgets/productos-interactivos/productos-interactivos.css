@@ -214,10 +214,16 @@
    Initial Home Hero (automatic intro)
    ========================================== */
 #gpk-products-widget .gpk-hero-home {
+    --hero-media-width: min(78vw, 1317px);
+    --hero-media-height: min(62.6vh, 570px);
+    --hero-media-top: clamp(95px, calc(8vh + 35px), 113px);
+    --hero-banner-top: calc(var(--hero-media-top) + var(--hero-media-height) + clamp(42px, 6.8vh, 62px));
+    --hero-side-pad: clamp(72px, 6.6vw, 122px);
     position: fixed;
     inset: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
+    min-height: 100dvh;
     z-index: 130;
     overflow: hidden;
     background-color: #062819;
@@ -237,9 +243,9 @@
 #gpk-products-widget .gpk-hero-home-media {
     position: absolute;
     left: 50%;
-    top: 61.2px;
-    width: 1317px;
-    height: 570px;
+    top: var(--hero-media-top);
+    width: var(--hero-media-width);
+    height: var(--hero-media-height);
     transform: translateX(-50%);
     transform-origin: center center;
     will-change: transform, opacity;
@@ -317,15 +323,15 @@
 }
 
 #gpk-products-widget .gpk-hero-kpi-left {
-    left: -53px;
-    top: 453px;
+    left: calc(var(--hero-media-width) * -0.04);
+    top: calc(var(--hero-media-height) * 0.795);
     width: 293px;
     transform: translate3d(-120px, 0, 0);
 }
 
 #gpk-products-widget .gpk-hero-kpi-top {
-    right: -32px;
-    top: 101px;
+    right: calc(var(--hero-media-width) * -0.024);
+    top: calc(var(--hero-media-height) * 0.177);
     width: 349px;
     transform: translate3d(130px, 0, 0);
 }
@@ -335,8 +341,8 @@
 }
 
 #gpk-products-widget .gpk-hero-kpi-right {
-    right: -100px;
-    top: 466px;
+    right: calc(var(--hero-media-width) * -0.076);
+    top: calc(var(--hero-media-height) * 0.818);
     width: 317px;
     transform: translate3d(130px, 0, 0);
 }
@@ -359,14 +365,15 @@
 
 #gpk-products-widget .gpk-hero-home-banner {
     position: absolute;
-    left: 122px;
-    top: 670px;
-    margin-top: 75px;
-    width: 1607px;
+    left: var(--hero-side-pad);
+    right: var(--hero-side-pad);
+    top: var(--hero-banner-top);
+    margin-top: 0;
+    width: auto;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 120px;
+    gap: clamp(48px, 6.5vw, 120px);
     color: var(--color-white);
 }
 
@@ -390,7 +397,7 @@
     max-width: none;
     flex: 0 0 auto;
     font-family: var(--font-title);
-    font-size: 80px;
+    font-size: clamp(58px, 4.7vw, 80px);
     line-height: 1.04;
     text-transform: uppercase;
     color: var(--color-white);
@@ -400,8 +407,8 @@
 }
 
 #gpk-products-widget .gpk-hero-home-banner p {
-    width: 575px;
-    padding-top: 48px;
+    width: min(31vw, 575px);
+    padding-top: clamp(22px, 4vh, 48px);
     font-family: var(--font-body);
     font-size: 21px;
     line-height: 1.18;
@@ -2604,8 +2611,8 @@
     position: absolute;
     width: 330px;
     height: 290px;
-    background-color: var(--color-green);
-    background-image: none;
+    background-color: transparent;
+    background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a1f3e59cc5986fdc70e1aa3_green%20card%20bg.svg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -4479,11 +4486,13 @@
         width: 100vw !important;
         height: 100dvh !important;
         min-height: 100dvh !important;
-        padding: 7dvh 18px 6dvh !important;
+        box-sizing: border-box !important;
+        padding: calc(9dvh + 35px) 18px 4dvh !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         gap: 24px !important;
+        overflow-x: hidden !important;
     }
 
     #gpk-products-widget .gpk-hero-home-media {
@@ -4551,13 +4560,17 @@
     #gpk-products-widget .gpk-hero-home-banner {
         position: relative !important;
         left: auto !important;
+        right: auto !important;
         top: auto !important;
-        width: min(100%, 620px) !important;
+        width: min(calc(100vw - 36px), 620px) !important;
+        max-width: calc(100vw - 36px) !important;
+        box-sizing: border-box !important;
         margin: 0 auto !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 14px !important;
+        overflow: hidden !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner h1 {
@@ -4566,15 +4579,19 @@
         font-size: clamp(28px, 8.8vw, 44px) !important;
         line-height: 1.04 !important;
         white-space: normal !important;
-        overflow-wrap: normal !important;
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+        text-wrap: balance !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner p {
         width: 100% !important;
-        max-width: 460px !important;
+        max-width: 100% !important;
         padding-top: 0 !important;
         font-size: clamp(15px, 4vw, 19px) !important;
         line-height: 1.22 !important;
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
     }
 
     @keyframes gpkHeroImageSettleMobile {
@@ -4603,6 +4620,26 @@
 }
 
 @media (max-width: 480px) {
+    #gpk-products-widget .gpk-hero-home {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+    }
+
+    #gpk-products-widget .gpk-hero-home-banner {
+        width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
+    }
+
+    #gpk-products-widget .gpk-hero-home-banner h1 {
+        font-size: clamp(27px, 8.2vw, 36px) !important;
+        line-height: 1.08 !important;
+    }
+
+    #gpk-products-widget .gpk-hero-home-banner p {
+        font-size: clamp(14px, 3.8vw, 16px) !important;
+        line-height: 1.24 !important;
+    }
+
     #gpk-products-widget .gpk-hero-kpi {
         height: 52px !important;
         width: 128px !important;
