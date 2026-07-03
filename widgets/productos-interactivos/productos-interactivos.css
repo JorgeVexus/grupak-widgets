@@ -3520,15 +3520,20 @@
     #gpk-products-widget .digital-text-content {
         width: calc(60% - 6px) !important;
         background-color: var(--color-white) !important;
-        border: 1px solid rgba(227, 229, 233, 0.7) !important;
+        border: 1px solid #dedede !important;
         padding: 16px 12px !important;
-        border-radius: 12px !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+        border-radius: 3px !important;
+        box-shadow: none !important;
         box-sizing: border-box !important;
+        text-align: center !important;
+        align-items: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
     }
 
     #gpk-products-widget .digital-subtitle {
-        font-size: 15px !important;
+        font-size: 14px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
         text-align: center !important;
@@ -3539,7 +3544,7 @@
     }
 
     #gpk-products-widget .digital-green-line {
-        width: 40px !important;
+        width: 120px !important;
         height: 2px !important;
         background-color: var(--color-green) !important;
         margin: 8px auto !important;
@@ -3557,6 +3562,7 @@
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
+        text-align: center !important;
     }
 
     #gpk-products-widget .digital-paragraph-2 {
