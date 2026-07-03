@@ -192,21 +192,21 @@
   color: var(--ma-gray);
 }
 
-.ma-state-3 .ma-intro-copy[data-copy="2"],
-.ma-state-4 .ma-intro-copy[data-copy="2"] {
-  opacity: 1;
-  color: var(--ma-green);
-  transform: translateX(-50%) translateY(0);
-}
-
-.ma-state-4 .ma-intro-copy[data-copy="2"] {
-  color: var(--ma-gray);
-}
-
+.ma-state-3 .ma-intro-copy[data-copy="3"],
 .ma-state-4 .ma-intro-copy[data-copy="3"] {
   opacity: 1;
   color: var(--ma-green);
   transform: translateY(0);
+}
+
+.ma-state-4 .ma-intro-copy[data-copy="3"] {
+  color: var(--ma-gray);
+}
+
+.ma-state-4 .ma-intro-copy[data-copy="2"] {
+  opacity: 1;
+  color: var(--ma-green);
+  transform: translateX(-50%) translateY(0);
 }
 
 .ma-state-5 .ma-intro-copy,
