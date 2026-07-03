@@ -39,6 +39,40 @@
         let isPreloading = false;
         let lastScrollProgress = 0;
 
+        // Custom slide ranges to extend Slide 0 duration and smooth animations
+        const slideRanges = [
+            { start: 0.0, end: 0.18 },   // Slide 0 (extended)
+            { start: 0.18, end: 0.271 },  // Slide 1
+            { start: 0.271, end: 0.362 }, // Slide 2
+            { start: 0.362, end: 0.453 }, // Slide 3
+            { start: 0.453, end: 0.544 }, // Slide 4
+            { start: 0.544, end: 0.635 }, // Slide 5
+            { start: 0.635, end: 0.726 }, // Slide 6
+            { start: 0.726, end: 0.817 }, // Slide 7
+            { start: 0.817, end: 0.908 }, // Slide 8
+            { start: 0.908, end: 1.0 }    // Slide 9
+        ];
+
+        function getSlideFromProgress(progress) {
+            for (let i = 0; i < slideRanges.length; i++) {
+                const r = slideRanges[i];
+                if (progress >= r.start && progress < r.end) {
+                    return i;
+                }
+            }
+            return slideRanges.length - 1;
+        }
+
+        function getProgressForSlide(index) {
+            if (index < 0 || index >= slideRanges.length) return 0.5;
+            const r = slideRanges[index];
+            if (index === 0) {
+                // Ir a un punto donde las cajas ya estén reveladas y se pueda leer la info (e.g. 0.15)
+                return 0.15;
+            }
+            return (r.start + r.end) / 2;
+        }
+
         // Scoped DOM Elements to prevent clashes
         const root = document.getElementById("gpk-products-widget");
         if (!root) return;
@@ -141,7 +175,7 @@
             const trackerTop = rect.top + scrollTop;
             const scrollHeight = rect.height - window.innerHeight;
 
-            const targetProgress = (index + 0.5) / totalSlides;
+            const targetProgress = getProgressForSlide(index);
             const targetScrollY = trackerTop + targetProgress * scrollHeight;
 
             currentSlide = index; // Update immediately for responsive UI
@@ -172,7 +206,7 @@
             updateHeroIntroOnScroll(progress);
             updatePreloaderOnScroll(progress);
 
-            const targetSlide = Math.min(Math.floor(progress * totalSlides), totalSlides - 1);
+            const targetSlide = getSlideFromProgress(progress);
 
             if (targetSlide !== currentSlide) {
                 currentSlide = targetSlide;
@@ -192,9 +226,8 @@
 
             if (currentSlide !== 0 || board.classList.contains("preloading")) return;
 
-            const slideZeroEnd = 1 / totalSlides;
             const revealStart = 0.082;
-            const revealEnd = slideZeroEnd - 0.002;
+            const revealEnd = 0.14; // Reveled completely at 0.14, staying static until 0.18
             const revealProgress = Math.max(0, Math.min(1, (progress - revealStart) / (revealEnd - revealStart)));
             const revealCount = progress <= revealStart
                 ? 0
@@ -256,7 +289,8 @@
             const textBlocks = root.querySelectorAll(".papel-text-block");
             
             if (currentSlide === 5) {
-                const localProgress = (progress - 0.5) / 0.1;
+                const r = slideRanges[5];
+                const localProgress = (progress - r.start) / (r.end - r.start);
                 
                 const tlBlock = root.querySelector(".papel-text-block.tl");
                 const blBlock = root.querySelector(".papel-text-block.bl");
