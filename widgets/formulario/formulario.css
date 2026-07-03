@@ -7,7 +7,10 @@
     --gpk-form-soft-line: #edf0ef;
     --gpk-form-field: #f3f4f3;
     --gpk-form-white: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
+    --gpk-form-font-title: 'Neuehaasdisplaymediu', 'Neuehaasdisplayroman', sans-serif;
+    --gpk-form-font-body: 'Neuehaasdisplayroman', 'Neuehaasdisplaymediu', sans-serif;
+    --gpk-form-font-black: 'Neuehaasdisplayblack', var(--gpk-form-font-title);
+    font-family: var(--gpk-form-font-body);
     color: var(--gpk-form-ink);
     background: transparent;
     width: 100%;
@@ -42,6 +45,7 @@
     color: var(--gpk-form-ink);
     cursor: pointer;
     font: inherit;
+    font-family: var(--gpk-form-font-title);
     font-size: 17px;
     padding: 18px 4px;
     position: relative;
@@ -49,6 +53,7 @@
 
 .gpk-form-tab.is-active {
     color: var(--gpk-form-green);
+    font-family: var(--gpk-form-font-black);
     font-weight: 700;
 }
 
@@ -85,6 +90,7 @@
 .gpk-section-title,
 .gpk-spec-title {
     color: var(--gpk-form-ink);
+    font-family: var(--gpk-form-font-title);
     font-size: 17px;
     font-weight: 700;
     line-height: 1.2;
@@ -251,6 +257,7 @@
 .gpk-product-card strong {
     color: var(--gpk-form-ink);
     display: block;
+    font-family: var(--gpk-form-font-title);
     font-size: 14px;
     font-weight: 700;
     line-height: 1.2;
@@ -316,6 +323,7 @@
     background: var(--gpk-form-green);
     color: var(--gpk-form-white);
     display: flex;
+    font-family: var(--gpk-form-font-title);
     font-size: 13px;
     font-weight: 700;
     justify-content: center;
@@ -383,6 +391,7 @@
     color: var(--gpk-form-green);
     cursor: pointer;
     font: inherit;
+    font-family: var(--gpk-form-font-title);
     font-size: 12px;
     font-weight: 700;
     margin-right: 12px;
@@ -395,6 +404,7 @@
     color: var(--gpk-form-green);
     cursor: pointer;
     font: inherit;
+    font-family: var(--gpk-form-font-title);
     font-size: 14px;
     font-weight: 700;
     min-height: 40px;
