@@ -3701,7 +3701,7 @@
         width: 100% !important;
         height: auto !important;
         background-color: transparent !important;
-        padding: 12px !important;
+        padding: 8px !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
@@ -3714,7 +3714,7 @@
     }
 
     #gpk-products-widget .product-info {
-        padding: 12px 10px !important;
+        padding: 8px 8px !important;
         text-align: left !important;
         display: flex !important;
         flex-direction: column !important;
@@ -3726,26 +3726,27 @@
         font-size: 13px !important;
         font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 2px !important;
     }
 
     #gpk-products-widget .product-subtitle {
         font-size: 10px !important;
         font-weight: 700 !important;
         color: var(--color-green) !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 4px !important;
     }
 
     #gpk-products-widget .product-desc {
-        font-size: 11px !important;
-        line-height: 1.4 !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
         color: var(--color-grey-medium) !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 6px !important;
+        flex: none !important;
     }
 
     #gpk-products-widget .product-uses {
         border-top: 1px solid rgba(227, 229, 233, 0.7) !important;
-        padding-top: 10px !important;
+        padding-top: 6px !important;
         margin-left: 0 !important;
     }
 
@@ -3757,7 +3758,7 @@
         padding: 2px 6px !important;
         border-radius: 10px !important;
         display: inline-block !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 2px !important;
         text-transform: uppercase !important;
         letter-spacing: 0.5px !important;
         opacity: 1 !important;
