@@ -168,8 +168,10 @@
         }
 
         function pauseAuto() {
-            if (autoTimer) window.clearInterval(autoTimer);
-            autoTimer = window.setInterval(goNext, 5200);
+            if (autoTimer) {
+                window.clearInterval(autoTimer);
+                autoTimer = null;
+            }
         }
 
         if (prev) {
@@ -240,7 +242,6 @@
 
         window.addEventListener("resize", measure);
         measure();
-        autoTimer = window.setInterval(goNext, 5200);
     }
 
 })();
