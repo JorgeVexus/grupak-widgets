@@ -862,7 +862,7 @@
 
 #gpk-products-widget .overview-grid-new {
     position: absolute;
-    top: 550px;
+    top: 570px;
     left: 105px;
     width: 1640px;
     display: grid;
@@ -953,7 +953,7 @@
     border-radius: 0;
     padding: 10px 24px;
     font-family: var(--font-title);
-    font-weight: 700;
+    font-weight: 900 !important;
     font-size: 14px;
     cursor: pointer;
     min-width: 140px;
@@ -977,7 +977,7 @@
 
 #gpk-products-widget .products-board.mode-1 #p-caja {
     left: 105px;
-    top: 290px;
+    top: 320px;
     width: 380px;
     height: 240px;
     opacity: 1;
@@ -985,7 +985,7 @@
 }
 #gpk-products-widget .products-board.mode-1 #p-lamina {
     left: 525px;
-    top: 240px;
+    top: 270px;
     width: 380px;
     height: 270px;
     opacity: 1;
@@ -993,7 +993,7 @@
 }
 #gpk-products-widget .products-board.mode-1 #p-rollo {
     left: 945px;
-    top: 310px;
+    top: 340px;
     width: 380px;
     height: 220px;
     opacity: 1;
@@ -1001,7 +1001,7 @@
 }
 #gpk-products-widget .products-board.mode-1 #p-grabados {
     left: 1365px;
-    top: 320px;
+    top: 350px;
     width: 380px;
     height: 210px;
     opacity: 1;

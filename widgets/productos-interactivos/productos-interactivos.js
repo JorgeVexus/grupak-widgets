@@ -28,6 +28,9 @@
                 initWidget();
             })
             .catch(err => console.error("Error loading products widget:", err));
+    } else {
+        // Fallback for inlined embeds where HTML is already present in the DOM
+        initWidget();
     }
 
     // Encapsulated widget logic
