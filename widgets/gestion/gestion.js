@@ -106,7 +106,7 @@
             perView = getPerView();
             maxIndex = Math.max(0, slides.length - perView);
             if (!hasMeasured) {
-                index = perView === 2 ? maxIndex : 0;
+                index = 0;
                 hasMeasured = true;
             }
             index = Math.min(index, maxIndex);
