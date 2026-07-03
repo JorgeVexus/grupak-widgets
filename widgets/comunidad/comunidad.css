@@ -362,7 +362,7 @@
         top: auto;
         width: 100%;
         height: auto;
-        padding: clamp(26px, 7vw, 48px) clamp(18px, 6vw, 32px) 64px;
+        padding: clamp(26px, 7vw, 48px) clamp(18px, 6vw, 32px) 110px !important;
         transform: none !important;
     }
 
@@ -379,6 +379,10 @@
         width: 100%;
         height: auto !important;
         opacity: 1 !important;
+    }
+
+    .com-panel {
+        overflow: visible !important;
     }
 
     .com-media {
