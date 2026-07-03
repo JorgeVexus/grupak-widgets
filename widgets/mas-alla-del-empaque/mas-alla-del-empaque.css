@@ -211,18 +211,18 @@
         pointer-events: none;
     }
     .mas-alla-item.gpk-hidden[data-index="0"] { transform: translate(0, 30px); }
-    .mas-alla-item.gpk-hidden[data-index="1"] { transform: translate(73px, 30px); }
-    .mas-alla-item.gpk-hidden[data-index="2"] { transform: translate(146px, 30px); }
-    .mas-alla-item.gpk-hidden[data-index="3"] { transform: translate(221px, 30px); }
+    .mas-alla-item.gpk-hidden[data-index="1"] { transform: translate(56px, 30px); }
+    .mas-alla-item.gpk-hidden[data-index="2"] { transform: translate(112px, 30px); }
+    .mas-alla-item.gpk-hidden[data-index="3"] { transform: translate(168px, 30px); }
 
     .mas-alla-item.gpk-active {
         opacity: 1;
         pointer-events: auto;
     }
     .mas-alla-item.gpk-active[data-index="0"] { transform: translate(0, 0); }
-    .mas-alla-item.gpk-active[data-index="1"] { transform: translate(73px, 0); }
-    .mas-alla-item.gpk-active[data-index="2"] { transform: translate(146px, 0); }
-    .mas-alla-item.gpk-active[data-index="3"] { transform: translate(221px, 0); }
+    .mas-alla-item.gpk-active[data-index="1"] { transform: translate(56px, 0); }
+    .mas-alla-item.gpk-active[data-index="2"] { transform: translate(112px, 0); }
+    .mas-alla-item.gpk-active[data-index="3"] { transform: translate(168px, 0); }
 
     .mas-alla-item.gpk-active .mas-alla-item-inner {
         background-image: url('images/vector_active.svg');
@@ -242,9 +242,9 @@
         pointer-events: auto;
     }
     .mas-alla-item.gpk-inactive[data-index="0"] { transform: translate(0, 0); }
-    .mas-alla-item.gpk-inactive[data-index="1"] { transform: translate(73px, 0); }
-    .mas-alla-item.gpk-inactive[data-index="2"] { transform: translate(146px, 0); }
-    .mas-alla-item.gpk-inactive[data-index="3"] { transform: translate(221px, 0); }
+    .mas-alla-item.gpk-inactive[data-index="1"] { transform: translate(56px, 0); }
+    .mas-alla-item.gpk-inactive[data-index="2"] { transform: translate(112px, 0); }
+    .mas-alla-item.gpk-inactive[data-index="3"] { transform: translate(168px, 0); }
 
     .mas-alla-item.gpk-inactive .mas-alla-item-inner {
         background-image: url('images/vector svg.svg');
