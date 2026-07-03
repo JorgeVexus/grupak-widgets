@@ -294,7 +294,7 @@
     font-size: 50px;
     line-height: 1;
     color: var(--color-white);
-    font-weight: 700 !important;
+    font-weight: 900 !important;
     letter-spacing: 0;
     white-space: nowrap;
 }
