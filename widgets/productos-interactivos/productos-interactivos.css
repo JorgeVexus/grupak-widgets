@@ -1973,7 +1973,7 @@
 #gpk-products-widget .laminas-card-title {
     font-family: var(--font-title);
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 900 !important;
     color: var(--color-green);
     margin-bottom: 12px;
     line-height: 1.2;
