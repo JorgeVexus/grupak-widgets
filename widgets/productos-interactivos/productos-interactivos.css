@@ -226,7 +226,7 @@
     min-height: 100dvh;
     z-index: 130;
     overflow: hidden;
-    background-color: #062819;
+    background-color: #383838;
     color: var(--color-white);
     pointer-events: auto;
     opacity: 1;
