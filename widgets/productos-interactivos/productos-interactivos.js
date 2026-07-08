@@ -193,6 +193,7 @@
         window.gpkGoToProductsSlide = function(index) {
             goToSlide(index);
         };
+        window.dispatchEvent(new CustomEvent("gpkProductsReady"));
 
         function handleScroll() {
             const rect = tracker.getBoundingClientRect();

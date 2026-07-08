@@ -158,30 +158,73 @@
         widget.dataset.gpkReady = "true";
 
         bindTabs(widget);
+        exposePublicApi(widget);
         bindProducts(widget);
         widget.querySelectorAll(".gpk-form-panel").forEach(function (form) {
             bindCountryState(form);
             bindSubmit(form);
         });
+        openRequestedTab(widget);
     }
 
     function bindTabs(widget) {
         var tabs = widget.querySelectorAll(".gpk-form-tab");
-        var panels = widget.querySelectorAll(".gpk-form-panel");
 
         tabs.forEach(function (tab) {
             tab.addEventListener("click", function () {
                 var target = tab.getAttribute("data-gpk-tab");
-                tabs.forEach(function (item) {
-                    var active = item === tab;
-                    item.classList.toggle("is-active", active);
-                    item.setAttribute("aria-selected", active ? "true" : "false");
-                });
-                panels.forEach(function (panel) {
-                    panel.classList.toggle("is-active", panel.getAttribute("data-gpk-panel") === target);
-                });
+                selectTab(widget, target, false);
             });
         });
+    }
+
+    function selectTab(widget, target, shouldScroll) {
+        var tabs = widget.querySelectorAll(".gpk-form-tab");
+        var panels = widget.querySelectorAll(".gpk-form-panel");
+        var found = false;
+
+        tabs.forEach(function (item) {
+            var active = item.getAttribute("data-gpk-tab") === target;
+            found = found || active;
+            item.classList.toggle("is-active", active);
+            item.setAttribute("aria-selected", active ? "true" : "false");
+        });
+
+        if (!found) return false;
+
+        panels.forEach(function (panel) {
+            panel.classList.toggle("is-active", panel.getAttribute("data-gpk-panel") === target);
+        });
+
+        if (shouldScroll) {
+            widget.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        return true;
+    }
+
+    function exposePublicApi(widget) {
+        window.gpkOpenFormulario = function (target) {
+            return selectTab(widget, target || "contacto", true);
+        };
+    }
+
+    function openRequestedTab(widget) {
+        var params = new URLSearchParams(window.location.search);
+        var target = params.get("gpkForm");
+
+        if (!target && window.location.hash) {
+            var hash = window.location.hash.replace("#", "");
+            if (hash === "proveeduria" || hash === "proveedor") {
+                target = "proveedor";
+            } else if (hash === "ventas" || hash === "contacto") {
+                target = "contacto";
+            }
+        }
+
+        if (target) {
+            selectTab(widget, target, false);
+        }
     }
 
     function bindProducts(widget) {
