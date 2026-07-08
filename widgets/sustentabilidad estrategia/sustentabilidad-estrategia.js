@@ -1,13 +1,19 @@
 /**
  * Grupak — Estrategia de Sustentabilidad Widget
- * Scroll-driven animation following the same pattern as mas-alla-del-empaque.
+ * Scroll-driven animation.
  *
- * States (driven by scroll progress 0 → 1):
- *   0 : Blank white  (0   – 0.20)
- *   1 : Frame 1 centered (green arc)                (0.20 – 0.45)
- *   2 : Frame 2 centered (green + blue circles)     (0.45 – 0.68)
- *   3 : Frame 3 centered (all three circles)        (0.68 – 0.86)
- *   4 : Final layout — text left, diagram right     (0.86 – 1.00)
+ * Layout states (drive title/text/diagram position via CSS classes):
+ *   0 : Blank white, big centered logo               (0    – 0.20)
+ *   1-3 : Logo shrunk + docked, circles orbit in      (0.20 – 0.86)
+ *   4 : Final layout — text left, diagram right       (0.86 – 1.00)
+ *
+ * Independently of the layout state, the logo scale and each circle's
+ * rotation/scale/opacity are driven continuously (scrubbed 1:1 with scroll)
+ * so the circles visibly swing in around the fixed logo pivot:
+ *   - logo shrinks from full size down to its resting scale over 0 – 0.20
+ *   - green circle swings in, rotating left (CCW)      0.20 – 0.45
+ *   - blue circle swings in, rotating left (CCW)        0.45 – 0.68
+ *   - orange circle swings in, rotating right (CW)      0.68 – 0.86
  */
 (function () {
     "use strict";
@@ -75,12 +81,59 @@
         var widget = document.getElementById("gpk-sust-widget");
         if (!widget) return;
 
-        var frames  = widget.querySelectorAll(".sust-frame");
+        var logoWrap = widget.querySelector(".sust-logo-wrap");
+        var circleGreen  = widget.querySelector('.sust-circle[data-circle="green"]');
+        var circleBlue   = widget.querySelector('.sust-circle[data-circle="blue"]');
+        var circleOrange = widget.querySelector('.sust-circle[data-circle="orange"]');
         var spacer  = widget.querySelector(".sust-scroll-spacer");
         var mobileQuery = window.matchMedia("(max-width: 900px)");
         var mobileRevealObserver = null;
 
         if (!spacer) return;   // mobile / embed — static layout, skip scroll logic
+
+        /* Scroll-progress sub-ranges for the pivot-orbit entrance animation */
+        var LOGO_SHRINK_END = 0.20;
+        var GREEN_RANGE  = [0.20, 0.45];
+        var BLUE_RANGE   = [0.45, 0.68];
+        var ORANGE_RANGE = [0.68, 0.86];
+        var LOGO_REST_SCALE = 0.45;
+
+        function easeOutCubic(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+        function subProgress(p, range) {
+            var start = range[0], end = range[1];
+            if (end <= start) return p >= end ? 1 : 0;
+            return Math.max(0, Math.min(1, (p - start) / (end - start)));
+        }
+
+        /* direction: "left" = rotates in counter-clockwise, "right" = rotates in clockwise */
+        function applyCircle(el, p, direction) {
+            if (!el) return;
+            var eased = easeOutCubic(p);
+            var startAngle = direction === "right" ? 180 : -180;
+            var angle = startAngle * (1 - eased);
+            var scale = 0.05 + 0.95 * eased;
+            var opacity = Math.max(0, Math.min(1, p / 0.3));
+            el.style.transform = "rotate(" + angle.toFixed(2) + "deg) scale(" + scale.toFixed(4) + ")";
+            el.style.opacity = String(opacity);
+        }
+
+        function applyLogoScale(p) {
+            if (!logoWrap) return;
+            var t = Math.max(0, Math.min(1, p / LOGO_SHRINK_END));
+            var eased = easeOutCubic(t);
+            var scale = 1 - (1 - LOGO_REST_SCALE) * eased;
+            logoWrap.style.transform = "translate(-50%, -50%) scale(" + scale.toFixed(4) + ")";
+        }
+
+        function applyOrbit(progress) {
+            applyLogoScale(progress);
+            applyCircle(circleGreen, subProgress(progress, GREEN_RANGE), "left");
+            applyCircle(circleBlue, subProgress(progress, BLUE_RANGE), "left");
+            applyCircle(circleOrange, subProgress(progress, ORANGE_RANGE), "right");
+        }
 
         var currentState = -1;
 
@@ -113,10 +166,6 @@
 
             var items = getMobileRevealItems();
             widget.classList.add("sust-mobile-ready");
-
-            frames.forEach(function (frame, idx) {
-                frame.classList.toggle("active", idx === 2);
-            });
 
             if (!window.IntersectionObserver) {
                 items.forEach(function (item) {
@@ -153,18 +202,6 @@
             return 4;
         }
 
-        /* Frame index for each state:
-         *   state 0 → no frame (-1)
-         *   state 1 → frame 0 (green arc)
-         *   state 2 → frame 1 (two circles)
-         *   state 3 → frame 2 (all circles)
-         *   state 4 → frame 2 (all circles, different layout)
-         */
-        function stateToFrameIndex(state) {
-            if (state === 0) return -1;
-            return Math.min(state - 1, 2);
-        }
-
         function applyState(state) {
             if (state === currentState) return;
             currentState = state;
@@ -174,17 +211,14 @@
                 .replace(/\bsust-state-\d+\b/g, "")
                 .trim();
             widget.classList.add("sust-state-" + state);
-
-            /* Crossfade frames */
-            var fi = stateToFrameIndex(state);
-            frames.forEach(function (frame, idx) {
-                frame.classList.toggle("active", idx === fi);
-            });
         }
 
         function handleScroll() {
             if (mobileQuery.matches) {
                 applyState(4);
+                if (logoWrap) {
+                    logoWrap.style.transform = "translate(-50%, -50%) scale(" + LOGO_REST_SCALE + ")";
+                }
                 return;
             }
 
@@ -194,6 +228,7 @@
             var raw     = -rect.top / (rect.height - vh);
             var progress = Math.max(0, Math.min(1, raw));
             applyState(progressToState(progress));
+            applyOrbit(progress);
         }
 
         /* Only listen while the widget is in the viewport */

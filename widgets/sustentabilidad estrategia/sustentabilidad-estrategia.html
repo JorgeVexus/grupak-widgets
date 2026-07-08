@@ -7,11 +7,6 @@
             <h2 class="sust-title">Estrategia de <strong>sustentabilidad</strong></h2>
         </div>
 
-        <!-- ① Logo: large + centered in state 0, shrinks and fades out by state 1 -->
-        <div class="sust-logo-wrap">
-            <img src="images/logo-grupak.svg" class="sust-logo" alt="Grupak">
-        </div>
-
         <!-- ② Text panel (left column, only visible in state 4) -->
         <div class="sust-text-panel">
             <p class="sust-para">La estrategia de sustentabilidad está integrada por tres pilares que nos permiten avanzar con responsabilidad ambiental y social dentro de nuestras operaciones y con los diferentes grupos de interés.</p>
@@ -41,11 +36,16 @@
             </div>
         </div>
 
-        <!-- ③ Diagram area: crossfading frames, animates position on state 4 -->
+        <!-- ③ Diagram area: 3 circles rotate in around the fixed logo pivot, animates position on state 4 -->
         <div class="sust-diagram-area">
-            <img src="images/sustentabilidad frame 1.webp" class="sust-frame" data-index="0" alt="Medio Ambiente">
-            <img src="images/sustentabilidad frame 2.webp" class="sust-frame" data-index="1" alt="Medio Ambiente y Clientes">
-            <img src="images/sustentabilidad frame 3.webp" class="sust-frame" data-index="2" alt="Estrategia de Sustentabilidad">
+            <img src="images/circle-medio-ambiente.webp" class="sust-circle" data-circle="green" alt="Medio Ambiente">
+            <img src="images/circle-clientes-proveedores.webp" class="sust-circle" data-circle="blue" alt="Clientes y Proveedores">
+            <img src="images/circle-comunidad.webp" class="sust-circle" data-circle="orange" alt="Comunidad">
+
+            <!-- Logo: large + centered in state 0, shrinks and stays visible as the rotation pivot -->
+            <div class="sust-logo-wrap">
+                <img src="images/logo-grupak.svg" class="sust-logo" alt="Grupak">
+            </div>
         </div>
 
     </div>
