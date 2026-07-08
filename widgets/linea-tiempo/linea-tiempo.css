@@ -8,9 +8,9 @@
   --color-grey-medium: #6E6E6E;
   --color-grey-light: #E3E5E9;
   --color-white: #FFFFFF;
-  --font-title: 'Neuehaasdisplaymediu', 'Neuehaasdisplayroman', sans-serif;
-  --font-body: 'Neuehaasdisplayroman', 'Neuehaasdisplaymediu', sans-serif;
-  --font-black: 'Neuehaasdisplayblack', var(--font-title);
+  --font-title: 'Open Sans', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  --font-black: 'Open Sans', sans-serif;
 
   width: 100%;
   position: relative;

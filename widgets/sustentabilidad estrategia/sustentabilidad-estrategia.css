@@ -7,7 +7,7 @@
 :root {
     --sust-gray:        #6e6e6e;
     --sust-green:       #4a9a27;
-    --sust-font:        'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --sust-font:        'Open Sans', sans-serif;
     --sust-ease:        cubic-bezier(0.25, 1, 0.5, 1);
     --sust-dur:         0.75s;
 }

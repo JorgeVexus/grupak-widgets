@@ -4,7 +4,7 @@
     --com-gray-soft: #8a8a8a;
     --com-green: #9ac35c;
     --com-orange: #f15a24;
-    --com-font: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --com-font: 'Open Sans', sans-serif;
     --com-ease: cubic-bezier(0.25, 1, 0.5, 1);
     --com-dur: 760ms;
 }

@@ -8,8 +8,8 @@
     --color-grey-medium: #6E6E6E;
     --color-grey-light: #d9d9d9;
     --color-white: #FFFFFF;
-    --font-title: 'Neuehaasdisplayroman', 'Neuehaasdisplaymediu', sans-serif;
-    --font-body: 'Neuehaasdisplayroman', 'Neuehaasdisplaymediu', sans-serif;
+    --font-title: 'Open Sans', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
 
     width: 100%;
     background-color: var(--color-grey-light);
@@ -396,7 +396,7 @@
     width: auto;
     max-width: none;
     flex: 0 0 auto;
-    font-family: 'Neuehaasdisplayblack', var(--font-title);
+    font-family: var(--font-title);
     font-size: clamp(58px, 4.5vw, 80px);
     line-height: 1.04;
     text-transform: uppercase;

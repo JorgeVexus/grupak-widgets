@@ -7,9 +7,9 @@
     --gpk-form-soft-line: #edf0ef;
     --gpk-form-field: #f3f4f3;
     --gpk-form-white: #ffffff;
-    --gpk-form-font-title: 'Neuehaasdisplaymediu', 'Neuehaasdisplayroman', sans-serif;
-    --gpk-form-font-body: 'Neuehaasdisplayroman', 'Neuehaasdisplaymediu', sans-serif;
-    --gpk-form-font-black: 'Neuehaasdisplayblack', var(--gpk-form-font-title);
+    --gpk-form-font-title: 'Open Sans', sans-serif;
+    --gpk-form-font-body: 'Open Sans', sans-serif;
+    --gpk-form-font-black: 'Open Sans', sans-serif;
     font-family: var(--gpk-form-font-body);
     color: var(--gpk-form-ink);
     background: transparent;
