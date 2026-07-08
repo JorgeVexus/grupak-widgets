@@ -7,6 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
+    var assetVersion = "20260708-navbar-transparent-4";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -19,7 +20,7 @@
         var link = document.createElement("link");
         link.id = "gpk-navbar-menu-styles";
         link.rel = "stylesheet";
-        link.href = baseURL + "/navbar-menu.css";
+        link.href = baseURL + "/navbar-menu.css?v=" + assetVersion;
         document.head.appendChild(link);
     }
 
@@ -29,7 +30,7 @@
             document.getElementById("grupak-navbar-menu-root");
 
         if (root) {
-            fetch(baseURL + "/navbar-menu.html")
+            fetch(baseURL + "/navbar-menu.html?v=" + assetVersion)
                 .then(function (res) {
                     if (!res.ok) throw new Error("Error loading navbar menu HTML");
                     return res.text();
