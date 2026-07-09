@@ -98,7 +98,7 @@
 /* State 4: title glides to the left column */
 .sust-state-4 .sust-title-block {
     opacity: 1;
-    top: 25%;
+    top: 12%;
     left: 4%;
     transform: translateX(0);
 }
@@ -150,16 +150,29 @@
     left: 4%;
     top: 18%;
     width: 40%;
+    height: 0;
     max-height: none;
     overflow: visible;
     pointer-events: none;
-    transition: top var(--sust-dur) var(--sust-ease);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: top var(--sust-dur) var(--sust-ease), height var(--sust-dur) var(--sust-ease);
     z-index: 15;
 }
 
 .sust-state-4 .sust-text-panel {
     pointer-events: auto;
-    top: 37%;
+    top: 20%;
+    height: 62%;
+}
+
+/* Groups: intro paragraphs vs. small paragraph + commissions. Flex
+   space-between on the panel spreads these two groups across its full
+   height, producing one large gap between them instead of a fixed margin. */
+.sust-text-group {
+    display: flex;
+    flex-direction: column;
 }
 
 .sust-para {
@@ -174,7 +187,7 @@
 
 .sust-para--sm {
     font-size: clamp(10.5px, 0.72vw, 13px);
-    margin-top: 16px;
+    margin-top: 0;
     margin-bottom: 10px;
     transform: translateY(26px);
 }
@@ -184,10 +197,10 @@
     transform: translateY(0);
 }
 
-.sust-text-panel > *:nth-child(1) { transition-delay: 0.05s; }
-.sust-text-panel > *:nth-child(2) { transition-delay: 0.15s; }
-.sust-text-panel > *:nth-child(3) { transition-delay: 0.28s; }
-.sust-text-panel > *:nth-child(4) { transition-delay: 0.38s; }
+.sust-text-group--intro .sust-para:nth-child(1) { transition-delay: 0.05s; }
+.sust-text-group--intro .sust-para:nth-child(2) { transition-delay: 0.15s; }
+.sust-text-group--outro .sust-para--sm { transition-delay: 0.28s; }
+.sust-text-group--outro .sust-comisiones { transition-delay: 0.38s; }
 
 /* Commissions row — slides up in from below, alongside the small paragraph */
 .sust-comisiones {
@@ -195,7 +208,7 @@
     gap: clamp(10px, 1.45vw, 28px);
     align-items: flex-start;
     flex-wrap: wrap;
-    margin-top: clamp(28px, 3.6vw, 48px);
+    margin-top: clamp(12px, 1.6vw, 20px);
     opacity: 0;
     transform: translateY(26px);
     transition: opacity 0.6s ease, transform 0.65s var(--sust-ease);
@@ -252,15 +265,19 @@
     transition:
         left      var(--sust-dur) var(--sust-ease),
         top       var(--sust-dur) var(--sust-ease),
-        width     var(--sust-dur) var(--sust-ease);
+        width     var(--sust-dur) var(--sust-ease),
+        height    var(--sust-dur) var(--sust-ease);
 }
 
-/* State 4: slide to right half — sized big enough to bleed past the right
-   edge of the viewport, matching the reference layout. */
+/* State 4: slide to right half — sized off viewport HEIGHT (not width) so it
+   reads as large as the reference layout regardless of aspect ratio. Left is
+   pulled in a bit from the edge so the circles don't get clipped by the
+   viewport/scrollbar. */
 .sust-state-4 .sust-diagram-area {
-    left: 80%;
+    left: 74%;
     top: 51%;
-    width: min(62vw, 900px);
+    width: auto;
+    height: min(88vh, 950px);
 }
 
 /* Circle sprites — each orbits the logo pivot; rotation/scale/opacity are
@@ -300,12 +317,13 @@
 
     .sust-text-panel {
         left: 4.5%;
-        top: 40%;
-        width: 42%;
+        top: 20%;
+        width: 38%;
     }
 
     .sust-state-4 .sust-text-panel {
-        top: 40%;
+        top: 20%;
+        height: 58%;
     }
 
     .sust-para {
@@ -316,12 +334,13 @@
 
     .sust-para--sm {
         font-size: clamp(10px, 0.95vw, 12px);
-        margin-top: 10px;
+        margin-top: 0;
         margin-bottom: 8px;
     }
 
     .sust-comisiones {
         gap: 10px 14px;
+        margin-top: clamp(10px, 1.4vw, 16px);
     }
 
     .sust-com-name {
@@ -329,8 +348,9 @@
     }
 
     .sust-state-4 .sust-diagram-area {
-        left: 79%;
-        width: min(58vw, 680px);
+        left: 73%;
+        width: auto;
+        height: min(78vh, 580px);
     }
 }
 
@@ -340,15 +360,16 @@
     }
 
     .sust-state-4 .sust-title-block {
-        top: 5%;
+        top: 6%;
     }
 
     .sust-text-panel {
-        top: 40%;
+        top: 16%;
     }
 
     .sust-state-4 .sust-text-panel {
-        top: 40%;
+        top: 16%;
+        height: 64%;
     }
 
     .sust-para {
@@ -359,12 +380,13 @@
 
     .sust-para--sm {
         font-size: clamp(9.5px, 0.68vw, 11px);
-        margin-top: 8px;
+        margin-top: 0;
         margin-bottom: 6px;
     }
 
     .sust-comisiones {
         gap: 8px 12px;
+        margin-top: clamp(8px, 1.2vw, 14px);
     }
 
     .sust-com-label,
@@ -378,8 +400,9 @@
 
     .sust-state-4 .sust-diagram-area {
         top: 52%;
-        left: 79%;
-        width: min(56vw, 660px);
+        left: 72%;
+        width: auto;
+        height: min(78vh, 560px);
     }
 }
 
