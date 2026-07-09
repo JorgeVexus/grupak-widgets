@@ -120,6 +120,22 @@
             digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202-1.webp`;
         }
 
+        // Slide 0 pillar contour/image pairs (Lámina, Papel, Grabados)
+        const pillarImageAssets = {
+            lamina: "laminas",
+            rollo: "papel",
+            grabados: "grabado"
+        };
+        Object.keys(pillarImageAssets).forEach(pillarKey => {
+            const assetName = pillarImageAssets[pillarKey];
+            const wrapper = board ? board.querySelector(`#p-${pillarKey}`) : null;
+            if (!wrapper) return;
+            const contourImg = wrapper.querySelector(".pillar-contour-img");
+            const fillImg = wrapper.querySelector(".pillar-img");
+            if (contourImg) contourImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/${assetName}%20contorno.png`;
+            if (fillImg) fillImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/${assetName}%20imagen.png`;
+        });
+
         function startHeroIntro() {
             if (!heroHome) return;
 
@@ -222,24 +238,50 @@
             updatePaperTextBlocksOnScroll(progress);
         }
 
+        // Lámina, Papel and Grabados reveal in two scroll-scrubbed stages within their
+        // own slice of the reveal range: first the contour fades in, then (on further
+        // scroll) the image fills it in via a clip-path wipe while the contour fades out.
+        const pillarFillSegments = [
+            { pillar: "lamina", start: 0.0965, end: 0.111 },
+            { pillar: "rollo", start: 0.111, end: 0.1255 },
+            { pillar: "grabados", start: 0.1255, end: 0.14 }
+        ];
+
         function updateSlideZeroRevealOnScroll(progress) {
-            const revealClasses = ["reveal-1", "reveal-2", "reveal-3", "reveal-4"];
             if (!board) return;
 
-            revealClasses.forEach(className => board.classList.remove(className));
-
-            if (currentSlide !== 0 || board.classList.contains("preloading")) return;
-
+            // 1. Caja keeps the original threshold-triggered draw/fade animation
+            board.classList.remove("reveal-1");
             const revealStart = 0.082;
-            const revealEnd = 0.14; // Reveled completely at 0.14, staying static until 0.18
-            const revealProgress = Math.max(0, Math.min(1, (progress - revealStart) / (revealEnd - revealStart)));
-            const revealCount = progress <= revealStart
-                ? 0
-                : Math.max(0, Math.min(4, Math.floor(revealProgress * 4) + 1));
-
-            for (let i = 0; i < revealCount; i += 1) {
-                board.classList.add(revealClasses[i]);
+            const isSlideZeroActive = currentSlide === 0 && !board.classList.contains("preloading");
+            if (isSlideZeroActive && progress > revealStart) {
+                board.classList.add("reveal-1");
             }
+
+            // 2. Lámina, Papel, Grabados: continuous scroll-driven contour -> fill
+            pillarFillSegments.forEach(seg => {
+                const wrapper = root.querySelector(`#p-${seg.pillar}`);
+                if (!wrapper) return;
+                const contourImg = wrapper.querySelector(".pillar-contour-img");
+                const fillImg = wrapper.querySelector(".pillar-img");
+                if (!contourImg || !fillImg) return;
+
+                if (!isSlideZeroActive) {
+                    // Let the stylesheet rules for other modes/slides take back over
+                    contourImg.style.opacity = "";
+                    fillImg.style.opacity = "";
+                    fillImg.style.clipPath = "";
+                    return;
+                }
+
+                const local = Math.max(0, Math.min(1, (progress - seg.start) / (seg.end - seg.start)));
+                const contourPhase = Math.max(0, Math.min(1, local * 2));       // first half: contour fades in
+                const fillPhase = Math.max(0, Math.min(1, (local - 0.5) * 2));  // second half: image fills in
+
+                contourImg.style.opacity = contourPhase * (1 - fillPhase);
+                fillImg.style.opacity = 1;
+                fillImg.style.clipPath = `inset(${(1 - fillPhase) * 100}% 0 0 0)`;
+            });
         }
 
         function updateUI() {

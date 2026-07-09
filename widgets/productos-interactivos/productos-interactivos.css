@@ -506,7 +506,7 @@
 
 /* Scroll-driven sequential animations per column */
 
-/* 1. Caja (Cajas y empaques) */
+/* 1. Caja (Cajas y empaques) — unchanged: draw outline then fade to image */
 #gpk-products-widget .products-board.mode-0.reveal-1:not(.preloading) #p-caja .contour-path {
     opacity: 1;
     animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
@@ -516,34 +516,29 @@
     animation-delay: 0.45s;
 }
 
-/* 2. Lámina (Hojas y láminas) */
-#gpk-products-widget .products-board.mode-0.reveal-2:not(.preloading) #p-lamina .contour-path {
-    opacity: 1;
-    animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
-}
-#gpk-products-widget .products-board.mode-0.reveal-2:not(.preloading) #p-lamina .pillar-img {
-    animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 0.45s;
-}
-
-/* 3. Papel (Rollo de papel) */
-#gpk-products-widget .products-board.mode-0.reveal-3:not(.preloading) #p-rollo .contour-path {
-    opacity: 1;
-    animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
-}
-#gpk-products-widget .products-board.mode-0.reveal-3:not(.preloading) #p-rollo .pillar-img {
-    animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 0.45s;
+/* 2-4. Lámina, Papel, Grabados: contour + image are layered PNGs.
+   Their reveal (contour fade-in, then image fill wipe) is scroll-scrubbed
+   continuously from JS (see updateSlideZeroRevealOnScroll), not by CSS keyframes. */
+#gpk-products-widget .pillar-contour-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 2;
 }
 
-/* 4. Grabados (Pirámide de rodillos) */
-#gpk-products-widget .products-board.mode-0.reveal-4:not(.preloading) #p-grabados .contour-path {
-    opacity: 1;
-    animation: gpkDrawOutline 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards, gpkFadeOutOutline 0.5s ease 1.3s forwards;
-}
-#gpk-products-widget .products-board.mode-0.reveal-4:not(.preloading) #p-grabados .pillar-img {
-    animation: gpkFadeInImage 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 0.45s;
+#gpk-products-widget #p-lamina .pillar-img,
+#gpk-products-widget #p-rollo .pillar-img,
+#gpk-products-widget #p-grabados .pillar-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    will-change: clip-path;
 }
 
 @keyframes gpkDrawOutline {
