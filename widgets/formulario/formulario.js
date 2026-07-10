@@ -77,31 +77,6 @@
                 field("textarea", "grabado_comentarios", "Comentarios adicionales", null, false, "full")
             ]
         },
-        impresion: {
-            label: "Impresión digital (WowPak)",
-            title: "Especificaciones de impresión digital",
-            note: true,
-            fields: [
-                field("text", "impresion_tipo_pieza", "Tipo de pieza"),
-                field("text", "impresion_formato", "Formato aproximado", null, false, null, false, "ej. 60 x 40 cm"),
-                field("number", "impresion_tiraje", "Tiraje estimado (número de piezas) *", null, true),
-                field("select", "impresion_arte_listo", "¿Cuentas con arte listo?", ["Sí", "No", "En proceso"]),
-                field("text", "impresion_resolucion", "Resolución de interés"),
-                field("file", "impresion_archivo", "Subir archivo", null, false, "full"),
-                field("text", "impresion_formatos", "Formatos aceptados: ai, pdf, png, jpg", null, false, "full", true),
-                field("textarea", "impresion_comentarios", "Comentarios adicionales", null, false, "full")
-            ]
-        },
-        seguimiento: {
-            label: "Seguimiento de pedido",
-            title: "Seguimiento de pedido",
-            fields: [
-                field("text", "seguimiento_numero_pedido", "Número de pedido / orden de compra *", null, true),
-                field("text", "seguimiento_empresa", "Empresa *", null, true),
-                field("textarea", "seguimiento_comentarios", "Comentarios o consulta específica", null, false, "full")
-            ],
-            portal: true
-        }
     };
 
     function field(type, name, label, options, required, width, readonly, placeholder) {

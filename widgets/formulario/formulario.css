@@ -206,7 +206,7 @@
     border-bottom: 1px solid var(--gpk-form-soft-line);
     display: grid;
     gap: 16px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 0 0 34px;
     padding-bottom: 34px;
 }
