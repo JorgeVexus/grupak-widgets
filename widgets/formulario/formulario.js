@@ -10,10 +10,11 @@
         ? "widgets/formulario"
         : "https://grupak-widgets.vercel.app/widgets/formulario";
 
-    var CFG = {
-        contacto: "https://formspree.io/f/TU_ID_CONTACTO",
-        proveedor: "https://formspree.io/f/TU_ID_PROVEEDOR"
-    };
+    var WEBHOOK_URL = "https://infinity-mind.app.n8n.cloud/webhook/grupak-landing-consent";
+    var WEBHOOK_SOURCE = "landing-grupak-whatsapp";
+    var WEBHOOK_CAMPAIGN_ID = "grupak-sitio-web";
+    var WEBHOOK_CAMPAIGN_NAME = "Formulario sitio web Grupak";
+    var WHATSAPP_CONSENT_TEXT = "Acepto recibir mensajes de WhatsApp de Grupak relacionados con mi solicitud de cotización y entiendo que puedo solicitar dejar de recibirlos.";
 
     var MX_STATES = "Aguascalientes,Baja California,Baja California Sur,Campeche,Chiapas,Chihuahua,Ciudad de Mexico,Coahuila,Colima,Durango,Estado de Mexico,Guanajuato,Guerrero,Hidalgo,Jalisco,Michoacan,Morelos,Nayarit,Nuevo Leon,Oaxaca,Puebla,Queretaro,Quintana Roo,San Luis Potosi,Sinaloa,Sonora,Tabasco,Tamaulipas,Tlaxcala,Veracruz,Yucatan,Zacatecas".split(",");
     var US_STATES = "Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming".split(",");
@@ -362,7 +363,7 @@
             stateSelect.disabled = false;
             stateSelect.required = true;
             stateSelect.name = "estado";
-            fillStateOptions(stateSelect, country.value === "Mexico" ? MX_STATES : US_STATES);
+            fillStateOptions(stateSelect, country.value === "México" ? MX_STATES : US_STATES);
         });
     }
 
@@ -408,17 +409,82 @@
         }
     }
 
-    function bindSubmit(form) {
+    function fieldValue(form, name) {
+        var el = form.querySelector('[name="' + name + '"]');
+        return el ? el.value.trim() : "";
+    }
+
+    function buildPayload(form) {
         var formType = form.getAttribute("data-gpk-form");
-        var endpoint = CFG[formType];
+        var isProveedor = formType === "proveedor";
+
+        var nombreCompleto = (fieldValue(form, "nombre") + " " + fieldValue(form, "apellido")).trim();
+        var empresa = isProveedor ? fieldValue(form, "nombre_empresa") : fieldValue(form, "empresa");
+        var producto = isProveedor ? "" : fieldValue(form, "producto_interes_nombre");
+
+        var cantidadField = form.querySelector('[name$="_toneladas"], [name$="_tiraje"]');
+        var comentariosField = isProveedor
+            ? form.querySelector('[name="comentarios"]')
+            : form.querySelector('[name$="_comentarios"]');
+        var comentariosTexto = comentariosField ? comentariosField.value.trim() : "";
+
+        if (isProveedor) {
+            var contexto = [];
+            var categoria = fieldValue(form, "categoria");
+            var especialidad = fieldValue(form, "especialidad");
+            if (categoria) contexto.push("Categoría: " + categoria);
+            if (especialidad) contexto.push("Especialidad: " + especialidad);
+            if (contexto.length) {
+                comentariosTexto = contexto.join(" | ") + (comentariosTexto ? " — " + comentariosTexto : "");
+            }
+        }
+
+        var consentCheckbox = form.querySelector("[data-gpk-consent-whatsapp]");
+        var params = new URLSearchParams(window.location.search);
+
+        var payload = {
+            source: WEBHOOK_SOURCE,
+            campaign_id: WEBHOOK_CAMPAIGN_ID,
+            campaign_name: WEBHOOK_CAMPAIGN_NAME,
+            nombre: nombreCompleto,
+            empresa: empresa,
+            telefono: fieldValue(form, "telefono_principal"),
+            correo: fieldValue(form, "correo_principal"),
+            producto: producto,
+            cantidad: cantidadField ? cantidadField.value.trim() : "",
+            ciudad: "",
+            medidas: "",
+            comentarios: comentariosTexto,
+            consent_whatsapp: !!(consentCheckbox && consentCheckbox.checked),
+            consent_text: WHATSAPP_CONSENT_TEXT,
+            landing_url: window.location.href,
+            referrer_url: document.referrer || "",
+            utm_source: params.get("utm_source") || "",
+            utm_medium: params.get("utm_medium") || "",
+            utm_campaign: params.get("utm_campaign") || "",
+            utm_content: params.get("utm_content") || "",
+            utm_term: params.get("utm_term") || ""
+        };
+
+        Object.keys(payload).forEach(function (key) {
+            if (payload[key] === "") delete payload[key];
+        });
+
+        return payload;
+    }
+
+    function bindSubmit(form) {
         var status = form.querySelector(".gpk-status");
         var button = form.querySelector(".gpk-submit");
 
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            if (endpoint.indexOf("TU_ID") !== -1) {
-                showStatus(status, "error", "Falta configurar el endpoint de Formspree en widgets/formulario/formulario.js.");
+            var honeypot = form.querySelector('[name="_gotcha"]');
+            if (honeypot && honeypot.value) {
+                form.reset();
+                resetDynamicState(form);
+                showStatus(status, "ok", "Gracias. Tu información fue enviada correctamente. Nuestro equipo te contactará muy pronto.");
                 return;
             }
 
@@ -428,16 +494,10 @@
             status.className = "gpk-status";
             status.textContent = "";
 
-            var data = new FormData(form);
-            Array.from(data.keys()).forEach(function (key) {
-                var value = data.get(key);
-                if (value && value.size === 0) data.delete(key);
-            });
-
-            fetch(endpoint, {
+            fetch(WEBHOOK_URL, {
                 method: "POST",
-                body: data,
-                headers: { Accept: "application/json" }
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(buildPayload(form))
             })
                 .then(function (res) {
                     if (res.ok) {
@@ -446,16 +506,7 @@
                         showStatus(status, "ok", "Gracias. Tu información fue enviada correctamente. Nuestro equipo te contactará muy pronto.");
                         return;
                     }
-                    return res.json()
-                        .then(function (data) {
-                            var msg = data && data.errors && data.errors.length
-                                ? data.errors.map(function (err) { return err.message; }).join(". ")
-                                : "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.";
-                            showStatus(status, "error", msg);
-                        })
-                        .catch(function () {
-                            showStatus(status, "error", "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.");
-                        });
+                    showStatus(status, "error", "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.");
                 })
                 .catch(function () {
                     showStatus(status, "error", "No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.");

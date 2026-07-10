@@ -6,8 +6,6 @@
         </div>
 
         <form class="gpk-form-panel is-active" data-gpk-panel="contacto" data-gpk-form="contacto" role="tabpanel">
-            <input type="hidden" name="_subject" value="Nuevo mensaje de contacto - Sitio web Grupak">
-            <input type="hidden" name="formulario" value="Contacto">
             <input type="text" name="_gotcha" class="gpk-honeypot" tabindex="-1" autocomplete="off">
 
             <h3 class="gpk-section-title">Datos personales</h3>
@@ -132,15 +130,17 @@
                 <input type="checkbox" name="acepta_aviso_privacidad" value="Si" required>
                 <span>He leído el Aviso de Privacidad *</span>
             </label>
+            <label class="gpk-check">
+                <input type="checkbox" name="consent_whatsapp" data-gpk-consent-whatsapp>
+                <span>Acepto recibir mensajes de WhatsApp de Grupak relacionados con mi solicitud de cotización y entiendo que puedo solicitar dejar de recibirlos.</span>
+            </label>
             <p class="gpk-legal">Grupak es una empresa privada dedicada a la manufactura de Papel y Cartón 100% reciclado por lo que no participa en ningún programa de apoyo económico gubernamental. Evite ser víctima de fraude, no se deje engañar.</p>
 
             <button type="submit" class="gpk-submit">Enviar mensaje</button>
             <div class="gpk-status" role="status"></div>
         </form>
 
-        <form class="gpk-form-panel" data-gpk-panel="proveedor" data-gpk-form="proveedor" role="tabpanel" enctype="multipart/form-data">
-            <input type="hidden" name="_subject" value="Nueva solicitud de proveedor - Sitio web Grupak">
-            <input type="hidden" name="formulario" value="Proveedor">
+        <form class="gpk-form-panel" data-gpk-panel="proveedor" data-gpk-form="proveedor" role="tabpanel">
             <input type="text" name="_gotcha" class="gpk-honeypot" tabindex="-1" autocomplete="off">
 
             <p class="gpk-intro">En Grupak estamos en constante búsqueda de socios comerciales que nos ayuden a cumplir con nuestra misión y alcanzar nuestra visión.</p>
@@ -264,16 +264,15 @@
                         <option>Otro</option>
                     </select>
                 </div>
-                <div class="gpk-field gpk-full">
-                    <label for="proveedor-archivo">Subir archivo (catálogo, presentación comercial)</label>
-                    <input id="proveedor-archivo" type="file" name="archivo" accept=".doc,.docx,.ppt,.pptx,.pdf,.png,.jpg,.jpeg">
-                    <p class="gpk-hint">Formatos aceptados: .doc, .docx, .ppt, .pptx, .pdf, .png, .jpg</p>
-                </div>
             </div>
 
             <label class="gpk-check">
                 <input type="checkbox" name="acepta_aviso_privacidad" value="Si" required>
                 <span>He leído el Aviso de Privacidad *</span>
+            </label>
+            <label class="gpk-check">
+                <input type="checkbox" name="consent_whatsapp" data-gpk-consent-whatsapp>
+                <span>Acepto recibir mensajes de WhatsApp de Grupak relacionados con mi solicitud de cotización y entiendo que puedo solicitar dejar de recibirlos.</span>
             </label>
             <label class="gpk-check">
                 <input type="checkbox" name="acepta_pago_150_dias" value="Si">
