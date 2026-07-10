@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20260708-navbar-transparent-5";
+    var assetVersion = "20260710-cta-submenu-1";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -101,7 +101,9 @@
         panel.addEventListener("click", function (event) {
             var clickedLink = event.target.closest("a");
             if (!clickedLink) return;
-            if (!clickedLink.closest(".gpk-navbar-menu__item") || clickedLink.classList.contains("gpk-navbar-menu__card")) {
+            var opensDropdown = clickedLink.closest(".gpk-navbar-menu__item") && !clickedLink.hasAttribute("data-gpk-action");
+            var isCard = clickedLink.classList.contains("gpk-navbar-menu__card");
+            if (!opensDropdown || isCard) {
                 setOpen(false);
             }
         });
