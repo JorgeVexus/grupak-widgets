@@ -136,6 +136,14 @@
             if (fillImg) fillImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/${assetName}%20imagen.png`;
         });
 
+        const cajaWrapper = board ? board.querySelector("#p-caja") : null;
+        if (cajaWrapper) {
+            const contourImg = cajaWrapper.querySelector(".pillar-contour-img");
+            const fillImg = cajaWrapper.querySelector(".pillar-img");
+            if (contourImg) contourImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/caja%20Image%201%20caja%20contorno.webp`;
+            if (fillImg) fillImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/caja%20Image%201.webp`;
+        }
+
         function startHeroIntro() {
             if (!heroHome) return;
 
@@ -238,10 +246,12 @@
             updatePaperTextBlocksOnScroll(progress);
         }
 
-        // Lámina, Papel and Grabados reveal in two scroll-scrubbed stages within their
-        // own slice of the reveal range: first the contour fades in, then (on further
-        // scroll) the image fills it in via a clip-path wipe while the contour fades out.
+        // Caja, Lámina, Papel and Grabados reveal in two scroll-scrubbed stages within
+        // their own slice of the reveal range: first the contour fades in, then (on
+        // further scroll) the image fills it in via a clip-path wipe while the contour
+        // fades out.
         const pillarFillSegments = [
+            { pillar: "caja", start: 0.082, end: 0.0965 },
             { pillar: "lamina", start: 0.0965, end: 0.111 },
             { pillar: "rollo", start: 0.111, end: 0.1255 },
             { pillar: "grabados", start: 0.1255, end: 0.14 }
@@ -250,15 +260,9 @@
         function updateSlideZeroRevealOnScroll(progress) {
             if (!board) return;
 
-            // 1. Caja keeps the original threshold-triggered draw/fade animation
-            board.classList.remove("reveal-1");
-            const revealStart = 0.082;
             const isSlideZeroActive = currentSlide === 0 && !board.classList.contains("preloading");
-            if (isSlideZeroActive && progress > revealStart) {
-                board.classList.add("reveal-1");
-            }
 
-            // 2. Lámina, Papel, Grabados: continuous scroll-driven contour -> fill
+            // Caja, Lámina, Papel, Grabados: continuous scroll-driven contour -> fill
             pillarFillSegments.forEach(seg => {
                 const wrapper = root.querySelector(`#p-${seg.pillar}`);
                 if (!wrapper) return;
