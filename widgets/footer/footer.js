@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/footer" : productionBaseURL;
-    var assetVersion = "20260709-footer-1";
+    var assetVersion = "20260713-footer-3";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -57,6 +57,7 @@
 
         bindProductLinks(footer);
         bindFormLinks(footer);
+        bindLocationLinks(footer);
     }
 
     function bindProductLinks(footer) {
@@ -99,6 +100,23 @@
                 if (typeof window.gpkOpenFormulario === "function") {
                     event.preventDefault();
                     window.gpkOpenFormulario(targetTab);
+                }
+            });
+        });
+    }
+
+    function bindLocationLinks(footer) {
+        footer.querySelectorAll('[data-gpk-action="location"]').forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                var filterId = link.getAttribute("data-gpk-filter") || "all";
+                if (typeof window.gpkSetLocationsFilter === "function") {
+                    event.preventDefault();
+                    window.gpkSetLocationsFilter(filterId);
+                    
+                    var locationsWidget = document.getElementById("gpk-locations-map-widget") || document.getElementById("gpk-locations-widget-root");
+                    if (locationsWidget) {
+                        locationsWidget.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
                 }
             });
         });

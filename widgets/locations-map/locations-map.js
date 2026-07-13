@@ -223,10 +223,26 @@
         // ==========================================================================
         function init() {
             cacheElements();
+
+            // Check for initial filter in URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialFilter = urlParams.get('gpkFilter');
+            if (initialFilter && categories.some(cat => cat.id === initialFilter)) {
+                state.activeFilter = initialFilter;
+                state.filteredLocations = locationsData.filter(loc => loc.categoryClass === initialFilter);
+            }
+
             renderFilterTags();
             renderLocationsList();
             bindEvents();
             loadLeaflet(initMap);
+
+            // Expose a global function to switch filter dynamically
+            window.gpkSetLocationsFilter = function(filterId) {
+                if (categories.some(cat => cat.id === filterId)) {
+                    setActiveFilter(filterId);
+                }
+            };
 
             console.log('🗺️ Locations Map Widget (Leaflet) inicializado');
         }
@@ -321,7 +337,10 @@
                 marker.addTo(map);
             });
 
-            // Ajustar la vista para que se vean todos los marcadores
+            // Ajustar la vista para que se vean todos los marcadores o los filtrados
+            if (state.activeFilter !== 'all') {
+                updatePinsVisibility();
+            }
             fitToVisible();
 
             // Recalcular tamaño tras el render inicial y en cada resize
@@ -439,11 +458,11 @@
 
             elements.filterTags.innerHTML = categories.map(cat => `
                 <button
-                    class="filter-tag ${cat.id === 'all' ? 'active' : ''}"
+                    class="filter-tag ${cat.id === state.activeFilter ? 'active' : ''}"
                     data-filter="${cat.id}"
                     style="color: ${cat.color};"
                     role="radio"
-                    aria-checked="${cat.id === 'all'}"
+                    aria-checked="${cat.id === state.activeFilter}"
                 >
                     <span class="tag-dot" style="background-color: ${cat.color};"></span>
                     <span>${cat.name}</span>
