@@ -27,14 +27,16 @@
         ? "/widgets/sustentabilidad estrategia"
         : "https://grupak-widgets.vercel.app/widgets/sustentabilidad%20estrategia";
 
+    var assetVersion = "20260713-sust-2";
+
     /* ── 1. Inject CSS ── */
     if (!document.getElementById("gpk-sust-styles")) {
         const link = document.createElement("link");
         link.id   = "gpk-sust-styles";
         link.rel  = "stylesheet";
         link.href = isLocalhost
-            ? "widgets/sustentabilidad estrategia/sustentabilidad-estrategia.css"
-            : `${baseURL}/sustentabilidad-estrategia.css`;
+            ? "widgets/sustentabilidad estrategia/sustentabilidad-estrategia.css?v=" + assetVersion
+            : `${baseURL}/sustentabilidad-estrategia.css?v=` + assetVersion;
         document.head.appendChild(link);
     }
 
@@ -43,8 +45,8 @@
     if (root) {
         fetch(
             isLocalhost
-                ? "widgets/sustentabilidad estrategia/sustentabilidad-estrategia.html"
-                : `${baseURL}/sustentabilidad-estrategia.html`
+                ? "widgets/sustentabilidad estrategia/sustentabilidad-estrategia.html?v=" + assetVersion
+                : `${baseURL}/sustentabilidad-estrategia.html?v=` + assetVersion
         )
             .then(function (res) {
                 if (!res.ok) throw new Error("Error loading Sustentabilidad widget HTML");
