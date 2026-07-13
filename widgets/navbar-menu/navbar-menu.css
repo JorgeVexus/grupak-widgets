@@ -85,6 +85,10 @@
     transition: color 0.22s ease;
 }
 
+.gpk-navbar-menu__link.is-active {
+    color: var(--gpk-green) !important;
+}
+
 .gpk-navbar-menu__link:is(:hover, :focus-visible),
 .gpk-navbar-menu__item:focus-within > .gpk-navbar-menu__link,
 .gpk-navbar-menu__item:hover > .gpk-navbar-menu__link {

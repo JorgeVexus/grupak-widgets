@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20260710-cta-submenu-1";
+    var assetVersion = "20260713-cta-submenu-1";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -61,6 +61,36 @@
         bindProductLinks(navbar);
         bindFormLinks(navbar);
         bindAutoHide(navbar);
+        highlightCurrentLink(navbar);
+    }
+
+    function highlightCurrentLink(navbar) {
+        var currentPath = window.location.pathname;
+        if (currentPath === "/" || currentPath === "/index.html") {
+            currentPath = "/";
+        }
+
+        var links = navbar.querySelectorAll(".gpk-navbar-menu__link");
+        links.forEach(function (link) {
+            var href = link.getAttribute("href");
+            if (!href) return;
+
+            if (href.startsWith("#")) return;
+
+            var parser = document.createElement("a");
+            parser.href = href;
+
+            var linkPath = parser.pathname;
+            if (linkPath === "/" || linkPath === "/index.html") {
+                linkPath = "/";
+            }
+
+            if (linkPath !== "/" && currentPath.indexOf(linkPath) !== -1) {
+                link.classList.add("is-active");
+            } else if (linkPath === "/" && currentPath === "/") {
+                link.classList.add("is-active");
+            }
+        });
     }
 
     function bindMobileMenu(navbar) {
