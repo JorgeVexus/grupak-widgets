@@ -401,3 +401,15 @@
         transition-duration: 0.01ms;
     }
 }
+
+.gpk-chat__back svg,
+.gpk-chat__links button svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+}
