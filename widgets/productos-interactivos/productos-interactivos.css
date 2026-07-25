@@ -733,18 +733,18 @@
 }
 
 #gpk-products-widget .products-board.mode-0 #p-rollo {
-    left: 1290px;
-    top: 550px;
-    width: 280px;
-    height: 280px;
+    left: 1270px;
+    top: 535px;
+    width: 315px;
+    height: 315px;
     z-index: 30;
 }
 
 #gpk-products-widget .products-board.mode-0 #p-grabados {
-    left: 1410px;
-    top: 610px;
-    width: 330px;
-    height: 250px;
+    left: 1435px;
+    top: 625px;
+    width: 285px;
+    height: 215px;
     z-index: 40;
 }
 
