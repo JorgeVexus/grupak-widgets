@@ -95,6 +95,27 @@
             ? "/widgets/productos-interactivos"
             : widgetProductionBaseURL;
 
+        // Resolve embed-relative assets against the widget host. Without this,
+        // published pages can duplicate "widgets/productos-interactivos" in the URL.
+        const widgetAssetPrefix = "widgets/productos-interactivos/";
+        board.querySelectorAll("img[src]").forEach(img => {
+            const source = img.getAttribute("src");
+            if (!source || !source.startsWith(widgetAssetPrefix)) return;
+
+            const relativePath = source
+                .slice(widgetAssetPrefix.length)
+                .split("/")
+                .map(segment => encodeURIComponent(segment))
+                .join("/");
+            img.src = `${widgetBaseURL}/${relativePath}`;
+        });
+
+        board.querySelectorAll(".grabados-green-card").forEach(card => {
+            const index = card.getAttribute("data-index");
+            if (!index) return;
+            card.style.backgroundImage = `url("${widgetBaseURL}/images/slide-grabados/grabados%20${index.padStart(2, "0")}.webp")`;
+        });
+
         // Dynamically set logo src to support both local preview and production
         const logo = board ? board.querySelector(".preloader-logo") : null;
         const heroHome = board ? board.querySelector("#gpk-hero-home") : null;
@@ -105,6 +126,12 @@
         if (logo) {
             logo.src = `${widgetBaseURL}/logoGrupak.svg`;
         }
+
+        const preloaderOutline = board ? board.querySelector(".preloader-board-outline") : null;
+        if (preloaderOutline) {
+            preloaderOutline.style.backgroundImage = `url("${widgetBaseURL}/fondo-outline.svg")`;
+        }
+
         if (heroHome) {
             const heroImg = heroHome.querySelector(".gpk-hero-home-img");
             const kpiBgs = heroHome.querySelectorAll(".gpk-hero-kpi-bg");
@@ -115,9 +142,19 @@
             });
         }
 
+        const introMobileImage = board ? board.querySelector(".intro-mobile-img") : null;
+        if (introMobileImage) {
+            introMobileImage.src = `${widgetBaseURL}/images/hero-new.webp`;
+        }
+
         const cajasMainImage = board ? board.querySelector(".cajas-main-image") : null;
         if (cajasMainImage) {
             cajasMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%201.webp`;
+        }
+
+        const cajasMobileHeroImage = board ? board.querySelector(".cajas-mobile-hero-img") : null;
+        if (cajasMobileHeroImage) {
+            cajasMobileHeroImage.src = `${widgetBaseURL}/images/slide%200%20nuevas%20imagenes/03.png`;
         }
 
         const digitalMainImage = board ? board.querySelector(".digital-main-image") : null;
@@ -202,6 +239,18 @@
         function goToSlide(index) {
             if (index < 0 || index >= totalSlides) return;
 
+            if (window.innerWidth <= 1024) {
+                const trackerTop = tracker.getBoundingClientRect().top
+                    + (window.pageYOffset || document.documentElement.scrollTop);
+                const targetScrollY = trackerTop + (index * window.innerHeight);
+
+                window.scrollTo({
+                    top: targetScrollY,
+                    behavior: "smooth"
+                });
+                return;
+            }
+
             // Desktop scroll management
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -226,6 +275,33 @@
         window.dispatchEvent(new CustomEvent("gpkProductsReady"));
 
         function handleScroll() {
+            if (window.innerWidth <= 1024) {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const trackerTop = tracker.getBoundingClientRect().top + scrollTop;
+                const relativeScroll = Math.max(0, scrollTop - trackerTop);
+                const targetSlide = Math.min(
+                    totalSlides - 1,
+                    Math.floor((relativeScroll + 1) / window.innerHeight)
+                );
+                const mobileProgress = Math.min(1, relativeScroll / (window.innerHeight * (totalSlides - 1)));
+
+                lastScrollProgress = mobileProgress;
+                updateHeroIntroOnScroll(Math.min(0.032, relativeScroll / window.innerHeight * 0.032));
+
+                const preloader = root.querySelector("#gpk-preloader");
+                if (preloader && relativeScroll > 4) {
+                    preloader.style.opacity = "0";
+                    preloader.style.pointerEvents = "none";
+                }
+
+                if (targetSlide !== currentSlide) {
+                    currentSlide = targetSlide;
+                    updateUI();
+                    updatePaperTextBlocksOnScroll(mobileProgress);
+                }
+                return;
+            }
+
             const rect = tracker.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const trackerTop = rect.top + scrollTop;
