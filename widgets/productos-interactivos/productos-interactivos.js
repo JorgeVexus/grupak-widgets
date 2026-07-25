@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
 
     const productionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
@@ -36,7 +36,7 @@
     // Encapsulated widget logic
     function initWidget() {
         // --- State Management ---
-        let currentSlide = 0; 
+        let currentSlide = 0;
         const totalSlides = 10;
         let isAnimating = false;
         let isPreloading = false;
@@ -80,7 +80,7 @@
         const root = document.getElementById("gpk-products-widget");
         if (!root) return;
 
-                const board = root.querySelector("#products-board");
+        const board = root.querySelector("#products-board");
         const tracker = root.querySelector(".products-scroll-tracker");
         const prevBtn = root.querySelector("#p-prev-btn");
         const nextBtn = root.querySelector("#p-next-btn");
@@ -104,7 +104,7 @@
             const heroImg = heroHome.querySelector(".gpk-hero-home-img");
             const kpiBgs = heroHome.querySelectorAll(".gpk-hero-kpi-bg");
 
-            if (heroImg) heroImg.src = `${widgetBaseURL}/images/hero-home.webp`;
+            if (heroImg) heroImg.src = `${widgetBaseURL}/images/hero-new.webp`;
             kpiBgs.forEach(bg => {
                 bg.src = `${widgetBaseURL}/images/vector%20hero%20home.svg`;
             });
@@ -214,7 +214,7 @@
             });
         }
 
-        window.gpkGoToProductsSlide = function(index) {
+        window.gpkGoToProductsSlide = function (index) {
             goToSlide(index);
         };
         window.dispatchEvent(new CustomEvent("gpkProductsReady"));
@@ -240,7 +240,7 @@
                 currentSlide = targetSlide;
                 updateUI();
             }
-            
+
             // Update scroll-driven text blocks on desktop
             updateSlideZeroRevealOnScroll(progress);
             updatePaperTextBlocksOnScroll(progress);
@@ -303,7 +303,7 @@
             pillars.forEach(p => {
                 const pillarType = p.getAttribute("data-pillar");
                 let isActive = false;
-                
+
                 if (currentSlide === 0 || currentSlide === 1) {
                     isActive = true;
                 } else if (pillarType === "caja" && (currentSlide === 2 || currentSlide === 3 || currentSlide === 4)) {
@@ -337,33 +337,33 @@
         function updatePaperTextBlocksOnScroll(progress) {
             if (window.innerWidth <= 1024) return;
             const textBlocks = root.querySelectorAll(".papel-text-block");
-            
+
             if (currentSlide === 5) {
                 const r = slideRanges[5];
                 const localProgress = (progress - r.start) / (r.end - r.start);
-                
+
                 const tlBlock = root.querySelector(".papel-text-block.tl");
                 const blBlock = root.querySelector(".papel-text-block.bl");
                 const trBlock = root.querySelector(".papel-text-block.tr");
                 const brBlock = root.querySelector(".papel-text-block.br");
-                
+
                 if (tlBlock) {
                     tlBlock.classList.add("revealed");
                     tlBlock.classList.toggle("active", localProgress < 0.25);
                 }
-                
+
                 if (blBlock) {
                     const isRevealed = localProgress >= 0.25;
                     blBlock.classList.toggle("revealed", isRevealed);
                     blBlock.classList.toggle("active", isRevealed && localProgress < 0.5);
                 }
-                
+
                 if (trBlock) {
                     const isRevealed = localProgress >= 0.5;
                     trBlock.classList.toggle("revealed", isRevealed);
                     trBlock.classList.toggle("active", isRevealed && localProgress < 0.75);
                 }
-                
+
                 if (brBlock) {
                     const isRevealed = localProgress >= 0.75;
                     brBlock.classList.toggle("revealed", isRevealed);
@@ -391,7 +391,7 @@
 
             document.addEventListener("keydown", (e) => {
                 if (window.innerWidth <= 1024) return;
-                
+
                 const rect = root.getBoundingClientRect();
                 const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
                 if (!isVisible) return;
@@ -429,7 +429,7 @@
             const boardOutline = preloader.querySelector(".preloader-board-outline");
 
             // --- STAGED SCROLL ANIMATION ---
-            
+
             // 1. Stage 1: Logo fades in and scales slightly (p: 0 to 0.15)
             let logoOpacity = 0;
             let logoScale = 0.9;
