@@ -120,11 +120,11 @@
             digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202-1.webp`;
         }
 
-        // Slide 0 pillar contour/image pairs (Caja, Lámina, Papel, Grabados: 01 to 04)
+        // Slide 0 pillar contour/image pairs (Rollo: 01, Lámina: 02, Caja: 03, Grabados: 04)
         const slideZeroPillars = [
-            { key: "caja", num: "01" },
+            { key: "rollo", num: "01" },
             { key: "lamina", num: "02" },
-            { key: "rollo", num: "03" },
+            { key: "caja", num: "03" },
             { key: "grabados", num: "04" }
         ];
 
@@ -244,9 +244,9 @@
         // further scroll) the image fills it in via a clip-path wipe while the contour
         // fades out.
         const pillarFillSegments = [
-            { pillar: "caja", start: 0.082, end: 0.0965 },
+            { pillar: "rollo", start: 0.082, end: 0.0965 },
             { pillar: "lamina", start: 0.0965, end: 0.111 },
-            { pillar: "rollo", start: 0.111, end: 0.1255 },
+            { pillar: "caja", start: 0.111, end: 0.1255 },
             { pillar: "grabados", start: 0.1255, end: 0.14 }
         ];
 

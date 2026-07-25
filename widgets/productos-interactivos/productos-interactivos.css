@@ -716,35 +716,35 @@
     height: 100%;
 }
 
-#gpk-products-widget .products-board.mode-0 #p-caja {
-    left: 740px;
-    top: 115px;
-    width: 850px;
+#gpk-products-widget .products-board.mode-0 #p-rollo {
+    left: 680px;
+    top: 110px;
+    width: 340px;
     height: 510px;
     z-index: 10;
 }
 
 #gpk-products-widget .products-board.mode-0 #p-lamina {
-    left: 1090px;
-    top: 380px;
-    width: 340px;
-    height: 340px;
+    left: 880px;
+    top: 290px;
+    width: 380px;
+    height: 380px;
     z-index: 20;
 }
 
-#gpk-products-widget .products-board.mode-0 #p-rollo {
-    left: 1270px;
-    top: 535px;
-    width: 315px;
-    height: 315px;
+#gpk-products-widget .products-board.mode-0 #p-caja {
+    left: 1150px;
+    top: 460px;
+    width: 440px;
+    height: 352px;
     z-index: 30;
 }
 
 #gpk-products-widget .products-board.mode-0 #p-grabados {
-    left: 1435px;
-    top: 625px;
-    width: 285px;
-    height: 215px;
+    left: 1440px;
+    top: 580px;
+    width: 320px;
+    height: 237px;
     z-index: 40;
 }
 
