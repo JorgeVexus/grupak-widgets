@@ -1,21 +1,28 @@
 (function() {
     "use strict";
 
-    const baseURL = "https://grupak-widgets.vercel.app/widgets/productos-menu";
+    const isLocalhost =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1" ||
+        window.location.protocol === "file:";
+    const baseURL = isLocalhost
+        ? "widgets/productos-menu"
+        : "https://grupak-widgets.vercel.app/widgets/productos-menu";
+    const assetVersion = "20260725-laptop-1";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-menu-styles")) {
         const link = document.createElement("link");
         link.id = "gpk-menu-styles";
         link.rel = "stylesheet";
-        link.href = `${baseURL}/productos-menu.css`;
+        link.href = `${baseURL}/productos-menu.css?v=${assetVersion}`;
         document.head.appendChild(link);
     }
 
     // 2. Fetch and inject HTML markup
     const container = document.getElementById("gpk-products-menu-root");
     if (container) {
-        fetch(`${baseURL}/productos-menu.html`)
+        fetch(`${baseURL}/productos-menu.html?v=${assetVersion}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading products menu HTML");
                 return res.text();

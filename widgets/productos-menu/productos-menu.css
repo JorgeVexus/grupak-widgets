@@ -207,6 +207,40 @@
     transform: translateY(-50%) scale(1);
 }
 
+/* Escala intermedia para laptops: evita el salto de 28px a 50px al superar 1024px. */
+@media (min-width: 1025px) and (max-width: 1600px) {
+    .gpk-products-section {
+        padding: 72px 32px;
+    }
+
+    .gpk-products-header-title {
+        margin-bottom: 44px;
+        font-size: 40px;
+    }
+
+    .gpk-product-item {
+        height: 140px;
+    }
+
+    .gpk-product-content {
+        padding: 0 56px;
+    }
+
+    .gpk-product-title {
+        left: 56px;
+        font-size: 38px;
+    }
+
+    .gpk-product-info {
+        right: 56px;
+        width: 48%;
+    }
+
+    .gpk-product-description {
+        font-size: 16px;
+    }
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (Tablet y Mobile <= 1024px)
    ========================================================================== */
