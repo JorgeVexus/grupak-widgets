@@ -1,4 +1,25 @@
 <footer id="gpk-footer" class="gpk-footer" data-gpk-footer>
+    <section class="gpk-footer__newsletter" aria-labelledby="gpk-newsletter-title">
+        <img class="gpk-footer__newsletter-photo" data-gpk-newsletter-photo alt="Equipo de Grupak en planta">
+        <div class="gpk-footer__newsletter-panel">
+            <h2 id="gpk-newsletter-title">Suscríbete a nuestro <strong>newsletter</strong></h2>
+            <p>Recibe noticias, innovaciones y actualizaciones sobre nuestras soluciones de papel y cartón corrugado.</p>
+            <form class="gpk-footer__newsletter-form" data-gpk-newsletter-form novalidate>
+                <label class="gpk-footer__sr-only" for="gpk-newsletter-email">Tu correo electrónico</label>
+                <input id="gpk-newsletter-email" name="email" type="email" autocomplete="email"
+                    placeholder="Tu correo electrónico" required>
+                <button type="submit">
+                    <span>Suscribirme</span>
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M3 8h9M9 4.5 12.5 8 9 11.5" fill="none" stroke="currentColor"
+                            stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </form>
+            <p class="gpk-footer__newsletter-status" data-gpk-newsletter-status aria-live="polite"></p>
+        </div>
+        <img class="gpk-footer__newsletter-people" data-gpk-newsletter-people alt="" aria-hidden="true">
+    </section>
     <div class="gpk-footer__inner">
         <div class="gpk-footer__top">
             <!-- Columna izquierda: marca + contacto -->

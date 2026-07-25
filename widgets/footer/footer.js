@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/footer" : productionBaseURL;
-    var assetVersion = "20260713-footer-3";
+    var assetVersion = "20260725-footer-5";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -55,9 +55,42 @@
             logo.src = logoURL;
         }
 
+        var newsletterPhoto = footer.querySelector("[data-gpk-newsletter-photo]");
+        if (newsletterPhoto) {
+            newsletterPhoto.src = baseURL + "/newsletter-figma.png?v=" + assetVersion;
+        }
+
+        var newsletterPeople = footer.querySelector("[data-gpk-newsletter-people]");
+        if (newsletterPeople) {
+            newsletterPeople.src = baseURL + "/newsletter-people.png?v=" + assetVersion;
+        }
+
+        bindNewsletter(footer);
         bindProductLinks(footer);
         bindFormLinks(footer);
         bindLocationLinks(footer);
+    }
+
+    function bindNewsletter(footer) {
+        var form = footer.querySelector("[data-gpk-newsletter-form]");
+        var status = footer.querySelector("[data-gpk-newsletter-status]");
+        if (!form || !status) return;
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var email = form.elements.email;
+
+            if (!email || !email.validity.valid) {
+                status.textContent = "Ingresa un correo electrónico válido.";
+                status.dataset.state = "error";
+                if (email) email.focus();
+                return;
+            }
+
+            status.textContent = "Gracias. Tu correo quedó registrado.";
+            status.dataset.state = "success";
+            form.reset();
+        });
     }
 
     function bindProductLinks(footer) {
