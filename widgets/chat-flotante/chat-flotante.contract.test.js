@@ -187,3 +187,58 @@ test("mounting is idempotent and SPA reinitialization cleans global listeners", 
     assert.equal(app.keydownCount(), 1);
     assert.equal(app.root.querySelectorAll("[data-gpk-chat-widget]").length, 1);
 });
+
+test("ignores a pending mount when an SPA replaces its root", async function () {
+    var dom = parseHTML("<!doctype html><html><head></head><body><div id=\"gpk-floating-chat-root\"></div></body></html>");
+    var window = dom.window;
+    var document = window.document;
+    var pendingFetches = [];
+    var keydownListeners = new Set();
+    var originalAdd = document.addEventListener.bind(document);
+    var originalRemove = document.removeEventListener.bind(document);
+
+    if (!window.location) {
+        Object.defineProperty(window, "location", {
+            value: { hostname: "localhost", protocol: "http:" }
+        });
+    }
+    document.addEventListener = function (type, listener, options) {
+        if (type === "keydown") keydownListeners.add(listener);
+        return originalAdd(type, listener, options);
+    };
+    document.removeEventListener = function (type, listener, options) {
+        if (type === "keydown") keydownListeners.delete(listener);
+        return originalRemove(type, listener, options);
+    };
+
+    var context = vm.createContext({
+        console: console,
+        document: document,
+        fetch: function () {
+            return new Promise(function (resolve) {
+                pendingFetches.push(resolve);
+            });
+        },
+        window: window
+    });
+
+    vm.runInContext(script, context);
+    var staleRoot = document.getElementById("gpk-floating-chat-root");
+    var currentRoot = document.createElement("div");
+    currentRoot.id = "gpk-floating-chat-root";
+    staleRoot.replaceWith(currentRoot);
+    vm.runInContext(script, context);
+
+    assert.equal(pendingFetches.length, 2);
+    pendingFetches[1]({ ok: true, text: function () { return Promise.resolve(html); } });
+    await flushPromises();
+    await flushPromises();
+    pendingFetches[0]({ ok: true, text: function () { return Promise.resolve(html); } });
+    await flushPromises();
+    await flushPromises();
+
+    assert.equal(staleRoot.querySelectorAll("[data-gpk-chat-widget]").length, 0);
+    assert.equal(currentRoot.querySelectorAll("[data-gpk-chat-widget]").length, 1);
+    assert.equal(keydownListeners.size, 1);
+    assert.equal(window.gpkFloatingChatController.root, currentRoot);
+});

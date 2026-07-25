@@ -5,6 +5,7 @@
     var baseURL = isLocalhost ? "widgets/chat-flotante" : "https://grupak-widgets.vercel.app/widgets/chat-flotante";
     var assetVersion = "20260725-task-3";
     var controllerKey = "gpkFloatingChatController";
+    var mountGenerationKey = "gpkFloatingChatMountGeneration";
 
     ensureStyles();
     mountWidget();
@@ -27,6 +28,8 @@
         cleanupPreviousController();
         root.removeAttribute("data-gpk-chat-ready");
         root.setAttribute("data-gpk-chat-loading", "true");
+        var mountGeneration = (window[mountGenerationKey] || 0) + 1;
+        window[mountGenerationKey] = mountGeneration;
 
         fetch(baseURL + "/chat-flotante.html?v=" + assetVersion)
             .then(function (response) {
@@ -34,13 +37,20 @@
                 return response.text();
             })
             .then(function (html) {
+                if (!isCurrentMount(root, mountGeneration)) return;
                 root.innerHTML = html;
-                initializeWidget(root);
+                initializeWidget(root, mountGeneration);
             })
             .catch(function (error) {
                 root.removeAttribute("data-gpk-chat-loading");
                 console.error("[gpk-floating-chat]", error);
             });
+    }
+
+    function isCurrentMount(root, mountGeneration) {
+        return window[mountGenerationKey] === mountGeneration &&
+            document.getElementById("gpk-floating-chat-root") === root &&
+            root.isConnected;
     }
 
     function cleanupPreviousController() {
@@ -50,7 +60,8 @@
         }
     }
 
-    function initializeWidget(root) {
+    function initializeWidget(root, mountGeneration) {
+        if (!isCurrentMount(root, mountGeneration)) return;
         var widget = root.querySelector("[data-gpk-chat-widget]");
         var panel = root.querySelector("[data-gpk-chat-panel]");
         var launcher = root.querySelector("[data-gpk-chat-launcher]");
@@ -122,6 +133,7 @@
             document.removeEventListener("keydown", handleDocumentKeydown);
         }
 
+        cleanupPreviousController();
         launcher.addEventListener("click", handleLauncherClick);
         closeButton.addEventListener("click", closeWidget);
         widget.addEventListener("click", handleWidgetClick);
@@ -131,6 +143,6 @@
         widget.setAttribute("data-open", "false");
         root.removeAttribute("data-gpk-chat-loading");
         root.setAttribute("data-gpk-chat-ready", "true");
-        window[controllerKey] = { cleanup: cleanup };
+        window[controllerKey] = { cleanup: cleanup, root: root };
     }
 })();
