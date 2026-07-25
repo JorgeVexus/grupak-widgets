@@ -3,7 +3,7 @@
     --gpk-chat-green-dark: #063c24;
     --gpk-chat-green-soft: #eef8e9;
     --gpk-chat-text: #143226;
-    --gpk-chat-muted: #727a76;
+    --gpk-chat-muted: #59615d;
     --gpk-chat-line: #e3e8e5;
     --gpk-chat-message: #f2f2f2;
     position: fixed;
@@ -67,7 +67,7 @@
     gap: 10px;
     padding: 9px 10px 9px 12px;
     color: #ffffff;
-    background: linear-gradient(90deg, #4a9227 0%, #63ad25 100%);
+    background: linear-gradient(90deg, #285f19 0%, #37751d 100%);
 }
 
 .gpk-chat__header::after {
@@ -111,7 +111,7 @@
 .gpk-chat__subtitle {
     display: block;
     margin-top: 3px;
-    color: rgba(255, 255, 255, 0.88);
+    color: #ffffff;
     font-size: 10px;
     line-height: 1.1;
 }
@@ -303,7 +303,7 @@
     flex: 0 0 auto;
     place-items: center;
     border-top: 1px solid #e5e7e6;
-    color: #777d79;
+    color: #5f6662;
     background: #f4f4f4;
     font-size: 10px;
     text-align: center;
@@ -371,14 +371,20 @@
     outline-offset: 3px;
 }
 
+.gpk-chat__close:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--gpk-chat-green-dark);
+}
+
 @media (max-width: 575px) {
     .gpk-chat {
-        right: 16px;
-        bottom: 16px;
+        right: calc(16px + env(safe-area-inset-right, 0px));
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
 
     .gpk-chat__panel {
-        width: min(320px, calc(100vw - 32px));
+        width: min(320px, calc(100vw - 32px - env(safe-area-inset-right, 0px)));
         max-height: calc(100dvh - 112px);
     }
 }
