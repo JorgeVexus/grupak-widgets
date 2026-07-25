@@ -717,7 +717,7 @@
 }
 
 #gpk-products-widget .products-board.mode-0 #p-rollo {
-    left: 680px;
+    left: 840px;
     top: 110px;
     width: 340px;
     height: 510px;
@@ -725,7 +725,7 @@
 }
 
 #gpk-products-widget .products-board.mode-0 #p-lamina {
-    left: 880px;
+    left: 1030px;
     top: 290px;
     width: 380px;
     height: 380px;
@@ -733,7 +733,7 @@
 }
 
 #gpk-products-widget .products-board.mode-0 #p-caja {
-    left: 1150px;
+    left: 1210px;
     top: 460px;
     width: 440px;
     height: 352px;
@@ -741,10 +741,10 @@
 }
 
 #gpk-products-widget .products-board.mode-0 #p-grabados {
-    left: 1440px;
-    top: 580px;
-    width: 320px;
-    height: 237px;
+    left: 1525px;
+    top: 655px;
+    width: 260px;
+    height: 193px;
     z-index: 40;
 }
 
@@ -944,38 +944,38 @@
     height: 100%;
 }
 
-#gpk-products-widget .products-board.mode-1 #p-caja {
-    left: 40px;
-    top: 235px;
-    width: 510px;
-    height: 325px;
+#gpk-products-widget .products-board.mode-1 #p-rollo {
+    left: 152px;
+    top: 120px;
+    width: 286px;
+    height: 430px;
     opacity: 1;
     pointer-events: auto;
 }
 
 #gpk-products-widget .products-board.mode-1 #p-lamina {
-    left: 525px;
+    left: 580px;
     top: 270px;
-    width: 380px;
+    width: 270px;
     height: 270px;
     opacity: 1;
     pointer-events: auto;
 }
 
-#gpk-products-widget .products-board.mode-1 #p-rollo {
-    left: 945px;
-    top: 340px;
-    width: 380px;
-    height: 220px;
+#gpk-products-widget .products-board.mode-1 #p-caja {
+    left: 966px;
+    top: 270px;
+    width: 338px;
+    height: 270px;
     opacity: 1;
     pointer-events: auto;
 }
 
 #gpk-products-widget .products-board.mode-1 #p-grabados {
-    left: 1365px;
-    top: 350px;
-    width: 380px;
-    height: 210px;
+    left: 1406px;
+    top: 320px;
+    width: 297px;
+    height: 220px;
     opacity: 1;
     pointer-events: auto;
 }
@@ -997,7 +997,7 @@
 }
 
 /* Flying menu coordinates (synced with navigation labels) */
-#gpk-products-widget .products-board:not(.mode-0):not(.mode-1) #p-caja {
+#gpk-products-widget .products-board:not(.mode-0):not(.mode-1) #p-rollo {
     left: 450px;
     top: 9px;
 }
@@ -1007,7 +1007,7 @@
     top: 9px;
 }
 
-#gpk-products-widget .products-board:not(.mode-0):not(.mode-1) #p-rollo {
+#gpk-products-widget .products-board:not(.mode-0):not(.mode-1) #p-caja {
     left: 740px;
     top: 9px;
 }
