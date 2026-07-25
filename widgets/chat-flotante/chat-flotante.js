@@ -4,6 +4,7 @@
     var isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/chat-flotante" : "https://grupak-widgets.vercel.app/widgets/chat-flotante";
     var assetVersion = "20260725-task-3";
+    var controllerKey = "gpkFloatingChatController";
 
     ensureStyles();
     mountWidget();
@@ -20,6 +21,13 @@
     function mountWidget() {
         var root = document.getElementById("gpk-floating-chat-root");
         if (!root) return;
+        if (root.getAttribute("data-gpk-chat-ready") === "true" && root.querySelector("[data-gpk-chat-widget]")) return;
+        if (root.getAttribute("data-gpk-chat-loading") === "true") return;
+
+        cleanupPreviousController();
+        root.removeAttribute("data-gpk-chat-ready");
+        root.setAttribute("data-gpk-chat-loading", "true");
+
         fetch(baseURL + "/chat-flotante.html?v=" + assetVersion)
             .then(function (response) {
                 if (!response.ok) throw new Error("Error loading floating chat HTML");
@@ -30,8 +38,16 @@
                 initializeWidget(root);
             })
             .catch(function (error) {
+                root.removeAttribute("data-gpk-chat-loading");
                 console.error("[gpk-floating-chat]", error);
             });
+    }
+
+    function cleanupPreviousController() {
+        var previousController = window[controllerKey];
+        if (previousController && typeof previousController.cleanup === "function") {
+            previousController.cleanup();
+        }
     }
 
     function initializeWidget(root) {
@@ -43,7 +59,10 @@
         var states = ["greeting", "main", "contact", "products", "information"];
         var isOpen = false;
 
-        if (!widget || !panel || !launcher || !closeButton || !views.length) return;
+        if (!widget || !panel || !launcher || !closeButton || !views.length) {
+            root.removeAttribute("data-gpk-chat-loading");
+            return;
+        }
 
         function showView(state) {
             if (states.indexOf(state) === -1) return;
@@ -51,6 +70,14 @@
                 view.hidden = view.getAttribute("data-view") !== state;
             });
             widget.setAttribute("data-state", state);
+
+            if (isOpen) {
+                var visibleView = root.querySelector('[data-view="' + state + '"]');
+                var focusTarget = visibleView.querySelector(".gpk-chat__back") ||
+                    visibleView.querySelector("[data-action]") ||
+                    closeButton;
+                focusTarget.focus();
+            }
         }
 
         function openWidget() {
@@ -73,21 +100,37 @@
             launcher.focus();
         }
 
-        launcher.addEventListener("click", function () {
+        function handleLauncherClick() {
             if (isOpen) closeWidget();
             else openWidget();
-        });
-        closeButton.addEventListener("click", closeWidget);
-        widget.addEventListener("click", function (event) {
+        }
+
+        function handleWidgetClick(event) {
             var action = event.target.closest("[data-action]");
             if (!action || action.hasAttribute("data-final-action")) return;
             showView(action.getAttribute("data-action"));
-        });
-        document.addEventListener("keydown", function (event) {
+        }
+
+        function handleDocumentKeydown(event) {
             if (event.key === "Escape" && isOpen) closeWidget();
-        });
+        }
+
+        function cleanup() {
+            launcher.removeEventListener("click", handleLauncherClick);
+            closeButton.removeEventListener("click", closeWidget);
+            widget.removeEventListener("click", handleWidgetClick);
+            document.removeEventListener("keydown", handleDocumentKeydown);
+        }
+
+        launcher.addEventListener("click", handleLauncherClick);
+        closeButton.addEventListener("click", closeWidget);
+        widget.addEventListener("click", handleWidgetClick);
+        document.addEventListener("keydown", handleDocumentKeydown);
 
         showView("greeting");
         widget.setAttribute("data-open", "false");
+        root.removeAttribute("data-gpk-chat-loading");
+        root.setAttribute("data-gpk-chat-ready", "true");
+        window[controllerKey] = { cleanup: cleanup };
     }
 })();
