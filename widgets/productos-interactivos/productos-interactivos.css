@@ -593,45 +593,50 @@
 
 #gpk-products-widget .intro-kpis-grid-new {
     display: flex;
-    gap: 40px;
+    gap: 60px;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 #gpk-products-widget .kpi-item-new {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 150px;
+    align-items: flex-start;
+    text-align: left;
+    width: auto;
 }
 
 #gpk-products-widget .kpi-number-new {
     font-family: var(--font-title);
-    font-size: 44px;
+    font-size: 50px;
     font-weight: 700 !important;
-    color: #7E7E7E;
+    color: #6E6E6E;
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
 }
 
 #gpk-products-widget .kpi-line-new {
-    width: 80px;
-    height: 3px;
-    background-color: var(--color-green);
-    margin: 0 auto 12px auto;
+    width: 190px;
+    height: 2px;
+    background-color: var(--color-green, #5F9D2F);
+    margin: 6px 0 10px 0;
 }
 
 #gpk-products-widget .kpi-label-top {
     font-family: var(--font-title);
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700 !important;
-    color: var(--color-grey-dark);
-    margin-bottom: 4px;
+    color: #6E6E6E;
+    line-height: 1.2;
+    margin-bottom: 2px;
 }
 
 #gpk-products-widget .kpi-label-bottom {
-    font-family: var(--font-body);
-    font-size: 13px;
-    color: #7E7E7E;
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
+    font-size: 18px;
+    font-weight: 400 !important;
+    color: #6E6E6E;
     line-height: 1.3;
 }
 
@@ -902,11 +907,13 @@
 }
 
 #gpk-products-widget .overview-col-desc {
-    font-family: var(--font-body);
-    font-size: 15px;
-    line-height: 1.45;
-    font-weight: 700 !important;
-    color: var(--color-green) !important;
+    color: var(--color-green, #5F9D2F) !important;
+    text-align: center;
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif !important;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: normal !important;
     margin-bottom: 24px;
     height: 65px;
     overflow: hidden;
@@ -1018,79 +1025,35 @@
 }
 
 /* ==========================================
-   PILLAR VISIBILITY: Default hidden, show per mode
+   PILLAR VISIBILITY: Hidden in header for all detail modes (Modes 2-14)
    ========================================== */
-/* Base state: all pillars hidden (except Mode 0 & 1 where CSS explicitly shows them) */
+/* Base state: all pillar wrappers hidden in header after Mode 1 */
 #gpk-products-widget .products-board:not(.mode-0):not(.mode-1) .pillar-wrapper {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
-/* Mode 2: Cajas intro (2 columnas) - show caja hero + menu icon */
-#gpk-products-widget .products-board.mode-2 #p-caja {
-    opacity: 1;
-    pointer-events: auto;
+/* Mode 7: Cajas intro hero box only */
+#gpk-products-widget .products-board.mode-7 #p-caja {
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
-#gpk-products-widget .products-board.mode-2 #p-caja .pillar-inner {
+#gpk-products-widget .products-board.mode-7 #p-caja .pillar-inner {
     width: 100%;
     height: 100%;
 }
 
-/* Mode 3: Cajas convencionales - show caja moving left + menu icon */
-#gpk-products-widget .products-board.mode-3 #p-caja {
-    opacity: 0.3;
-    /* hero fading out */
-    pointer-events: none;
-}
-
-#gpk-products-widget .products-board.mode-3 #p-caja.active-menu-pillar {
-    opacity: 1;
-}
-
-/* Mode 4: Cajas digital (Screen 05) - show caja small in header only */
-#gpk-products-widget .products-board.mode-4 #p-caja {
-    opacity: 0;
-    /* hero hidden */
-}
-
-#gpk-products-widget .products-board.mode-4 #p-caja.active-menu-pillar {
-    opacity: 1;
-}
-
-/* Modes 5-9 (Papel, Láminas, Grabados, Energía) - no pillar icons in header */
-#gpk-products-widget .products-board.mode-5 .pillar-wrapper,
-#gpk-products-widget .products-board.mode-6 .pillar-wrapper,
-#gpk-products-widget .products-board.mode-7 .pillar-wrapper,
-#gpk-products-widget .products-board.mode-8 .pillar-wrapper,
-#gpk-products-widget .products-board.mode-9 .pillar-wrapper {
+/* Hide stacked boxes and display stand in ALL modes except 8 & 9 */
+#gpk-products-widget .products-board:not(.mode-8):not(.mode-9) .cajas-stacked-group,
+#gpk-products-widget .products-board:not(.mode-8):not(.mode-9) .stacked-box {
     opacity: 0 !important;
     pointer-events: none !important;
 }
 
-/* Hide stacked boxes and display stand in ALL modes except 3 & 4 */
-#gpk-products-widget .products-board:not(.mode-3):not(.mode-4) .cajas-stacked-group,
-#gpk-products-widget .products-board:not(.mode-3):not(.mode-4) .stacked-box {
+#gpk-products-widget .products-board:not(.mode-8):not(.mode-9) .digital-display-stand {
     opacity: 0 !important;
     pointer-events: none !important;
-}
-
-#gpk-products-widget .products-board:not(.mode-3):not(.mode-4) .digital-display-stand {
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
-
-/* Active header pillar state - scale up the active menu icon */
-#gpk-products-widget .products-board .pillar-wrapper.active-menu-pillar {
-    transform: scale(1.1);
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Scale down inactive menu pillars */
-#gpk-products-widget .products-board:not(.mode-0):not(.mode-1) .pillar-wrapper:not(.active-menu-pillar) {
-    transform: scale(0.65);
-    opacity: 0.45;
 }
 
 /* ==========================================
@@ -1128,9 +1091,34 @@
 
 #gpk-products-widget .products-board.mode-2 .pane-title-centered,
 #gpk-products-widget .products-board.mode-3 .pane-title-centered,
-#gpk-products-widget .products-board.mode-4 .pane-title-centered {
+#gpk-products-widget .products-board.mode-4 .pane-title-centered,
+#gpk-products-widget .products-board.mode-7 .pane-title-centered,
+#gpk-products-widget .products-board.mode-8 .pane-title-centered,
+#gpk-products-widget .products-board.mode-9 .pane-title-centered {
     opacity: 1;
     transform: translateY(0);
+}
+
+#gpk-products-widget .products-board.mode-7 .pane-header-centered,
+#gpk-products-widget .products-board.mode-8 .pane-header-centered,
+#gpk-products-widget .products-board.mode-9 .pane-header-centered {
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+    z-index: 30;
+    margin-bottom: 0;
+}
+
+#gpk-products-widget .products-board.mode-7 .pane-title-centered,
+#gpk-products-widget .products-board.mode-8 .pane-title-centered,
+#gpk-products-widget .products-board.mode-9 .pane-title-centered {
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-title), sans-serif;
+    font-size: 80px;
+    font-weight: 500 !important;
+    color: var(--gris-princ, #6E6E6E);
+    line-height: normal;
+    margin: 0;
 }
 
 #gpk-products-widget .product-badge {
@@ -1212,11 +1200,11 @@
 }
 
 /* ==========================================
-   CAJAS Y EMPAQUES DETAIL VIEWS (Modes 2-4)
+   CAJAS Y EMPAQUES DETAIL VIEWS (Modes 7-9)
    ========================================== */
-#gpk-products-widget .products-board.mode-2 #pane-cajas,
-#gpk-products-widget .products-board.mode-3 #pane-cajas,
-#gpk-products-widget .products-board.mode-4 #pane-cajas {
+#gpk-products-widget .products-board.mode-7 #pane-cajas,
+#gpk-products-widget .products-board.mode-8 #pane-cajas,
+#gpk-products-widget .products-board.mode-9 #pane-cajas {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -1235,33 +1223,33 @@
 }
 
 /* Active sub-panel state mappings */
-#gpk-products-widget .products-board.mode-2 .cajas-intro-content {
+#gpk-products-widget .products-board.mode-7 .cajas-intro-content {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-#gpk-products-widget .products-board.mode-4 .cajas-digital-content {
+#gpk-products-widget .products-board.mode-9 .cajas-digital-content {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-40px);
     pointer-events: auto;
 }
 
-/* Exit animation to the right for Mode 2 content */
-#gpk-products-widget .products-board.mode-3 .cajas-intro-content,
-#gpk-products-widget .products-board.mode-4 .cajas-intro-content {
+/* Exit animation to the right for Mode 7 content */
+#gpk-products-widget .products-board.mode-8 .cajas-intro-content,
+#gpk-products-widget .products-board.mode-9 .cajas-intro-content {
     opacity: 0;
     transform: translateX(180px);
     pointer-events: none;
 }
 
-/* Mode 2 Layout: Two parallel columns (Convencionales vs Digital) */
+/* Mode 7 Layout: Two parallel columns (Convencionales vs Digital) */
 #gpk-products-widget .cajas-intro-content {
     position: absolute;
     left: 100px;
     right: 100px;
-    top: 280px;
-    bottom: 100px;
+    top: 180px;
+    bottom: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1283,7 +1271,7 @@
     transition-delay: 0.15s;
 }
 
-#gpk-products-widget .products-board.mode-2 .cajas-column {
+#gpk-products-widget .products-board.mode-7 .cajas-column {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -1314,23 +1302,23 @@
     border-radius: 1.5px;
 }
 
-/* Mode 3 (Screen 4) Layout & Transitions */
+/* Mode 8 (Screen 4) Layout & Transitions */
 #gpk-products-widget .cajas-convencionales-content {
     position: absolute;
-    inset: 160px 100px 100px 100px;
+    inset: 120px 100px 60px 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 70px;
+    gap: 60px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #gpk-products-widget .cajas-image-container {
-    width: 36%;
+    width: 44%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     opacity: 0;
     transform: translateX(-150px);
@@ -1339,14 +1327,14 @@
 
 #gpk-products-widget .cajas-main-image {
     max-width: 100%;
-    max-height: 520px;
+    max-height: 460px;
     object-fit: contain;
 }
 
 #gpk-products-widget .cajas-text-container {
-    width: 30%;
-    max-width: 30%;
-    flex: 0 0 30%;
+    width: 460px;
+    max-width: 460px;
+    flex: 0 0 460px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1376,7 +1364,7 @@
     width: 258px;
     height: 4px;
     background-color: var(--color-green);
-    margin: 10px auto 24px auto;
+    margin: 8px auto 14px auto;
     border-radius: 2px;
 }
 
@@ -1384,8 +1372,9 @@
     font-size: 18px;
     line-height: 1.5;
     color: var(--color-grey-medium);
-    margin-bottom: 24px;
+    margin-bottom: 14px;
     text-align: center;
+    max-width: 395px;
 }
 
 #gpk-products-widget .cajas-paragraph-1 strong {
@@ -1398,68 +1387,69 @@
     line-height: 1.5;
     color: var(--color-grey-medium);
     text-align: center;
+    max-width: 395px;
     opacity: 0;
     transform: translateY(120px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Active Entrance in Mode 3 */
-#gpk-products-widget .products-board.mode-3 .cajas-convencionales-content {
+/* Active Entrance in Mode 8 */
+#gpk-products-widget .products-board.mode-8 .cajas-convencionales-content {
     opacity: 1;
     pointer-events: auto;
 }
 
-#gpk-products-widget .products-board.mode-3 .cajas-image-container {
+#gpk-products-widget .products-board.mode-8 .cajas-detail-title,
+#gpk-products-widget .products-board.mode-8 .cajas-image-container {
     opacity: 1;
     transform: translateX(0);
 }
 
-#gpk-products-widget .products-board.mode-3 .cajas-detail-title,
-#gpk-products-widget .products-board.mode-3 .cajas-green-line,
-#gpk-products-widget .products-board.mode-3 .cajas-paragraph-1 {
+#gpk-products-widget .products-board.mode-8 .cajas-green-line,
+#gpk-products-widget .products-board.mode-8 .cajas-paragraph-1 {
     opacity: 1;
     transform: translateX(0);
 }
 
-#gpk-products-widget .products-board.mode-3 .cajas-green-line {
+#gpk-products-widget .products-board.mode-8 .cajas-green-line {
     transition-delay: 0.05s;
 }
 
-#gpk-products-widget .products-board.mode-3 .cajas-paragraph-1 {
+#gpk-products-widget .products-board.mode-8 .cajas-paragraph-1 {
     transition-delay: 0.1s;
 }
 
-#gpk-products-widget .products-board.mode-3 .cajas-paragraph-2 {
+#gpk-products-widget .products-board.mode-8 .cajas-paragraph-2 {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.25s;
     /* Delay for the bottom-up entry */
 }
 
-/* Exit to the left when moving to Mode 4 */
-#gpk-products-widget .products-board.mode-4 .cajas-convencionales-content {
+/* Exit to the left when moving to Mode 9 */
+#gpk-products-widget .products-board.mode-9 .cajas-convencionales-content {
     opacity: 0;
     pointer-events: none;
 }
 
-#gpk-products-widget .products-board.mode-4 .cajas-image-container {
+#gpk-products-widget .products-board.mode-9 .cajas-image-container {
     opacity: 0;
     transform: translateX(-150px);
 }
 
-#gpk-products-widget .products-board.mode-4 .cajas-detail-title,
-#gpk-products-widget .products-board.mode-4 .cajas-green-line,
-#gpk-products-widget .products-board.mode-4 .cajas-paragraph-1 {
+#gpk-products-widget .products-board.mode-9 .cajas-detail-title,
+#gpk-products-widget .products-board.mode-9 .cajas-green-line,
+#gpk-products-widget .products-board.mode-9 .cajas-paragraph-1 {
     opacity: 0;
     transform: translateX(-100px);
 }
 
-#gpk-products-widget .products-board.mode-4 .cajas-paragraph-2 {
+#gpk-products-widget .products-board.mode-9 .cajas-paragraph-2 {
     opacity: 0;
     transform: translateY(150px);
 }
 
-/* Mode 4 Layout: Text content on left, image on right */
+/* Mode 9 Layout: Text content on left, image on right */
 #gpk-products-widget .cajas-digital-content {
     justify-content: center;
     align-items: center;
@@ -1475,12 +1465,12 @@
 }
 
 #gpk-products-widget .digital-text-content {
-    width: 450px;
+    width: 460px;
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-shrink: 0;
-    margin-top: -60px;
+    margin-top: -80px;
     text-align: center;
 }
 
@@ -1489,7 +1479,7 @@
     font-size: 50px;
     font-weight: 700;
     color: var(--color-grey-medium);
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     line-height: 1.08;
     text-align: center;
     opacity: 0;
@@ -1501,7 +1491,7 @@
     width: 258px;
     height: 4px;
     background-color: var(--color-green);
-    margin: 0 auto 24px auto;
+    margin: 8px auto 14px auto;
     border-radius: 2px;
     opacity: 0;
     transform: translateX(100px);
@@ -1512,8 +1502,11 @@
     font-size: 18px;
     line-height: 1.5;
     color: var(--color-grey-medium);
-    margin-bottom: 24px;
+    margin-bottom: 14px;
     text-align: center;
+    max-width: 395px;
+    margin-left: auto;
+    margin-right: auto;
     opacity: 0;
     transform: translateX(100px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1524,6 +1517,9 @@
     line-height: 1.5;
     color: var(--color-grey-medium);
     text-align: center;
+    max-width: 395px;
+    margin-left: auto;
+    margin-right: auto;
     opacity: 0;
     transform: translateY(120px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1546,76 +1542,76 @@
     object-fit: contain;
 }
 
-/* Active Entrance in Mode 4 */
-#gpk-products-widget .products-board.mode-4 .digital-subtitle,
-#gpk-products-widget .products-board.mode-4 .digital-green-line,
-#gpk-products-widget .products-board.mode-4 .digital-paragraph-1 {
+/* Active Entrance in Mode 9 */
+#gpk-products-widget .products-board.mode-9 .digital-subtitle,
+#gpk-products-widget .products-board.mode-9 .digital-green-line,
+#gpk-products-widget .products-board.mode-9 .digital-paragraph-1 {
     opacity: 1;
     transform: translateX(0);
 }
 
-#gpk-products-widget .products-board.mode-4 .digital-green-line {
+#gpk-products-widget .products-board.mode-9 .digital-green-line {
     transition-delay: 0.05s;
 }
 
-#gpk-products-widget .products-board.mode-4 .digital-paragraph-1 {
+#gpk-products-widget .products-board.mode-9 .digital-paragraph-1 {
     transition-delay: 0.1s;
 }
 
-#gpk-products-widget .products-board.mode-4 .digital-paragraph-2 {
+#gpk-products-widget .products-board.mode-9 .digital-paragraph-2 {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.25s;
     /* Delay for the bottom-up entry */
 }
 
-#gpk-products-widget .products-board.mode-4 .digital-image-container {
+#gpk-products-widget .products-board.mode-9 .digital-image-container {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.15s;
 }
 
-/* Exit to the left when moving to Mode 5 (Papel) */
-#gpk-products-widget .products-board.mode-5 .cajas-digital-content {
+/* Exit to the left when moving to Mode 10 (Grabados) */
+#gpk-products-widget .products-board.mode-10 .cajas-digital-content {
     opacity: 0;
     pointer-events: none;
 }
 
-#gpk-products-widget .products-board.mode-5 .digital-text-content {
+#gpk-products-widget .products-board.mode-10 .digital-text-content {
     opacity: 0;
     transform: translateX(-200px);
 }
 
-#gpk-products-widget .products-board.mode-5 .digital-image-container {
+#gpk-products-widget .products-board.mode-10 .digital-image-container {
     opacity: 0;
     transform: translateX(200px);
 }
 
-#gpk-products-widget .products-board.mode-5 .pane-title-centered {
+#gpk-products-widget .products-board.mode-10 .pane-title-centered {
     opacity: 0;
     transform: translateY(-80px);
 }
 
 /* ==========================================
-   Slide 2 (Mode 2) overrides using specific selector to win specificity
+   Slide 7 (Mode 7) overrides using specific selector to win specificity
    ========================================== */
-#gpk-products-widget .products-board.mode-2 #pillars-container #p-caja {
+#gpk-products-widget .products-board.mode-7 #pillars-container #p-caja {
     left: 50%;
-    top: 547px;
-    width: 780px;
-    height: 640px;
+    top: 500px;
+    width: 560px;
+    height: 460px;
     transform: translate(-50%, -50%);
     opacity: 1;
     pointer-events: auto;
     z-index: 50;
 }
 
-#gpk-products-widget .products-board.mode-2 #pillars-container #p-caja .pillar-inner {
+#gpk-products-widget .products-board.mode-7 #pillars-container #p-caja .pillar-inner {
     width: 100%;
     height: 100%;
 }
 
-#gpk-products-widget .products-board.mode-2 #pillars-container #p-lamina {
+#gpk-products-widget .products-board.mode-7 #pillars-container #p-lamina {
     left: 1877px;
     top: 319px;
     width: 340px;
@@ -1624,7 +1620,7 @@
     transform: none;
 }
 
-#gpk-products-widget .products-board.mode-2 #pillars-container #p-rollo {
+#gpk-products-widget .products-board.mode-7 #pillars-container #p-rollo {
     left: 2328px;
     top: 367px;
     width: 280px;
@@ -1633,7 +1629,7 @@
     transform: none;
 }
 
-#gpk-products-widget .products-board.mode-2 #pillars-container #p-grabados {
+#gpk-products-widget .products-board.mode-7 #pillars-container #p-grabados {
     left: 2732px;
     top: 366px;
     width: 330px;
@@ -1642,8 +1638,8 @@
     transform: none;
 }
 
-/* Mode 3 (Slide 3) overrides */
-#gpk-products-widget .products-board.mode-3 #pillars-container #p-caja {
+/* Mode 8 (Slide 8) overrides */
+#gpk-products-widget .products-board.mode-8 #pillars-container #p-caja {
     left: 50%;
     top: 547px;
     width: 640px;
@@ -1654,7 +1650,7 @@
     z-index: 10;
 }
 
-#gpk-products-widget .products-board.mode-3 #pillars-container #p-lamina {
+#gpk-products-widget .products-board.mode-8 #pillars-container #p-lamina {
     left: 1877px;
     top: 319px;
     width: 340px;
@@ -1663,7 +1659,7 @@
     transform: none;
 }
 
-#gpk-products-widget .products-board.mode-3 #pillars-container #p-rollo {
+#gpk-products-widget .products-board.mode-8 #pillars-container #p-rollo {
     left: 2328px;
     top: 367px;
     width: 280px;
@@ -1672,7 +1668,7 @@
     transform: none;
 }
 
-#gpk-products-widget .products-board.mode-3 #pillars-container #p-grabados {
+#gpk-products-widget .products-board.mode-8 #pillars-container #p-grabados {
     left: 2732px;
     top: 366px;
     width: 330px;
@@ -1681,8 +1677,8 @@
     transform: none;
 }
 
-/* Mode 4 (Slide 4) overrides */
-#gpk-products-widget .products-board.mode-4 #pillars-container #p-caja {
+/* Mode 9 (Slide 9) overrides */
+#gpk-products-widget .products-board.mode-9 #pillars-container #p-caja {
     left: 100px;
     top: 750px;
     transform: scale(0.45);
@@ -1690,7 +1686,7 @@
     z-index: 10;
 }
 
-#gpk-products-widget .products-board.mode-4 #pillars-container #p-lamina {
+#gpk-products-widget .products-board.mode-9 #pillars-container #p-lamina {
     left: 1877px;
     top: 319px;
     width: 340px;
@@ -1699,7 +1695,7 @@
     transform: none;
 }
 
-#gpk-products-widget .products-board.mode-4 #pillars-container #p-rollo {
+#gpk-products-widget .products-board.mode-9 #pillars-container #p-rollo {
     left: 2328px;
     top: 367px;
     width: 280px;
@@ -1708,7 +1704,7 @@
     transform: none;
 }
 
-#gpk-products-widget .products-board.mode-4 #pillars-container #p-grabados {
+#gpk-products-widget .products-board.mode-9 #pillars-container #p-grabados {
     left: 2732px;
     top: 366px;
     width: 330px;
@@ -1730,19 +1726,19 @@
     transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-#gpk-products-widget .products-board.mode-3 .cajas-stacked-group {
+#gpk-products-widget .products-board.mode-8 .cajas-stacked-group {
     opacity: 0;
     pointer-events: none;
 }
 
-/* Horizontal alignment transition in Mode 4 */
-#gpk-products-widget .products-board.mode-4 .cajas-stacked-group {
+/* Horizontal alignment transition in Mode 9 */
+#gpk-products-widget .products-board.mode-9 .cajas-stacked-group {
     opacity: 0;
     pointer-events: none;
 }
 
-/* Hide stacked boxes in Mode 4 */
-#gpk-products-widget .products-board.mode-4 .stacked-box {
+/* Hide stacked boxes in Mode 9 */
+#gpk-products-widget .products-board.mode-9 .stacked-box {
     opacity: 0;
     transform: translateY(50px) scale(0.8);
 }
@@ -1872,9 +1868,9 @@
 }
 
 /* ==========================================
-   MODE 7: LÁMINAS DE CARTÓN (Screen 08)
+   MODE 4: LÁMINAS DE CARTÓN (Figma Pixel Perfect Design)
    ========================================== */
-#gpk-products-widget .products-board.mode-7 #pane-laminas {
+#gpk-products-widget .products-board.mode-4 #pane-laminas {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -1882,36 +1878,39 @@
 
 #gpk-products-widget .laminas-intro-content {
     position: absolute;
-    inset: 120px 100px 100px 100px;
+    inset: 100px 100px 80px 100px;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
-#gpk-products-widget .products-board.mode-7 #laminas-intro-content {
+#gpk-products-widget .products-board.mode-4 #laminas-intro-content {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-/* Exit laminas-intro-content when moving to Mode 8 */
-#gpk-products-widget .products-board.mode-8 #laminas-intro-content {
+/* Exit laminas-intro-content when moving to Mode 5 */
+#gpk-products-widget .products-board.mode-5 #laminas-intro-content {
     opacity: 0;
     pointer-events: none;
     transform: translateY(-100px);
 }
 
-/* Title at top - LEFT ALIGNED, simple vertical layout */
+/* Title at top */
 #gpk-products-widget .laminas-title-wrapper {
     margin-bottom: 0px;
 }
 
 #gpk-products-widget .laminas-main-title {
-    font-family: var(--font-title);
-    font-size: 96px;
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-title), sans-serif;
+    font-size: 80px;
     font-weight: 500 !important;
-    color: var(--color-grey-medium);
+    color: var(--gris-princ, #6E6E6E);
     letter-spacing: -1.2px;
     line-height: 1.1;
     margin: 0;
@@ -1919,16 +1918,10 @@
 
 #gpk-products-widget .laminas-main-title .text-green {
     color: var(--color-green);
-    font-weight: 900 !important;
+    font-weight: 700 !important;
 }
 
 /* Intro text - two columns */
-#gpk-products-widget .laminas-intro-content {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
 #gpk-products-widget .laminas-intro-text {
     display: flex;
     gap: 60px;
@@ -1941,176 +1934,253 @@
 
 #gpk-products-widget .laminas-intro-left p,
 #gpk-products-widget .laminas-intro-right p {
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
     font-size: 18px;
-    line-height: 1.6;
-    color: var(--color-grey-medium);
-    max-width: 660px;
+    line-height: 1.55;
+    color: var(--gris-princ, #6E6E6E);
+    max-width: 780px;
     opacity: 0;
-    transform: translateY(60px);
+    transform: translateY(40px);
     transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1), transform 1.0s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Three cards grid with wavy line */
-#gpk-products-widget .laminas-cards-grid-new {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 0;
+/* Bottom layout: Left text block + 2 corrugated stacks side-by-side */
+#gpk-products-widget .laminas-bottom-layout {
     position: relative;
-}
-
-/* Decorative wavy line connecting cards */
-#gpk-products-widget .laminas-wavy-line {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    pointer-events: none;
-    z-index: 1;
-    transform: translateY(-50%);
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
-}
-
-#gpk-products-widget .products-board.mode-7 .laminas-wavy-line {
-    display: none !important;
-    opacity: 0;
-}
-
-#gpk-products-widget .laminas-card-new {
-    background: transparent;
-    border-radius: 16px;
-    border: none;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    overflow: visible;
-    opacity: 0;
-    transform: translateY(80px);
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 2;
-    position: relative;
-}
-
-#gpk-products-widget .laminas-card-new:hover {
-    transform: translateY(-8px);
-}
-
-#gpk-products-widget .laminas-card-image {
-    flex: 0 0 auto;
-    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
-    overflow: visible;
-}
-
-#gpk-products-widget .laminas-card-img {
+    gap: 70px;
+    margin-top: 20px;
     width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    border: none;
-    border-radius: 8px;
-    transition: transform 0.4s ease;
 }
 
-#gpk-products-widget .laminas-card-new:hover .laminas-card-img {
-    transform: scale(1.03);
+#gpk-products-widget .laminas-resistencia-box {
+    width: 320px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
 }
 
-#gpk-products-widget .laminas-card-info {
-    padding: 24px 16px 16px 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-#gpk-products-widget .laminas-card-title {
-    font-family: var(--font-title);
-    font-size: 20px;
-    font-weight: 900 !important;
+#gpk-products-widget .laminas-resistencia-title {
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-title), sans-serif;
+    font-size: 24px;
+    font-weight: 700 !important;
     color: var(--color-green);
-    margin-bottom: 12px;
-    line-height: 1.2;
+    margin-bottom: 10px;
+    line-height: 1.25;
 }
 
-#gpk-products-widget .laminas-card-desc {
-    font-size: 14px;
+#gpk-products-widget .laminas-resistencia-desc {
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
+    font-size: 18px;
     line-height: 1.5;
-    color: var(--color-grey-dark);
-    max-width: 280px;
-    margin: 0 auto;
+    color: var(--gris-princ, #6E6E6E);
 }
 
-/* ==========================================
-   MODE 7 ENTRANCE ANIMATIONS
-   ========================================== */
+#gpk-products-widget .laminas-stack-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
 
-/* Title + intro text */
-#gpk-products-widget .products-board.mode-7 .laminas-main-title {
+#gpk-products-widget .laminas-stack-container.stack-1 {
+    width: 380px;
+    transition-delay: 0.4s;
+}
+
+#gpk-products-widget .laminas-stack-container.stack-2 {
+    width: 430px;
+    transition-delay: 0.55s;
+}
+
+#gpk-products-widget .laminas-stack-img {
+    width: 100%;
+    height: auto;
+    max-height: 430px;
+    object-fit: contain;
+}
+
+/* Mode 4 Entrance active states */
+#gpk-products-widget .products-board.mode-4 .laminas-main-title {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.1s;
 }
 
-#gpk-products-widget .products-board.mode-7 .laminas-intro-left p {
+#gpk-products-widget .products-board.mode-4 .laminas-intro-left p {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.2s;
 }
 
-#gpk-products-widget .products-board.mode-7 .laminas-intro-right p {
+#gpk-products-widget .products-board.mode-4 .laminas-intro-right p {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.3s;
 }
 
-/* Cards - from bottom */
-#gpk-products-widget .products-board.mode-7 .laminas-card-new {
+#gpk-products-widget .products-board.mode-4 .laminas-resistencia-box {
     opacity: 1;
     transform: translateY(0);
 }
 
-#gpk-products-widget .products-board.mode-7 .laminas-card-new[data-index="1"] {
-    transition-delay: 0.4s;
-}
-
-#gpk-products-widget .products-board.mode-7 .laminas-card-new[data-index="2"] {
-    transition-delay: 0.55s;
-}
-
-#gpk-products-widget .products-board.mode-7 .laminas-card-new[data-index="3"] {
-    transition-delay: 0.7s;
-}
-
-/* Card initial positions - from below */
-#gpk-products-widget .laminas-card-new[data-index="1"] {
-    transform: translateY(100px);
-}
-
-#gpk-products-widget .laminas-card-new[data-index="2"] {
-    transform: translateY(100px);
-}
-
-#gpk-products-widget .laminas-card-new[data-index="3"] {
-    transform: translateY(100px);
-}
-
-/* Exit animations for Mode 8 */
-#gpk-products-widget .products-board.mode-8 .laminas-intro-content {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-100px);
+#gpk-products-widget .products-board.mode-4 .laminas-stack-container {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ==========================================
-   PAPEL DETAIL VIEWS (Modes 5-6)
+   MODES 5 & 6: LÁMINAS ESPECIFICACIONES (Figma 1670:21343)
    ========================================== */
-#gpk-products-widget .products-board.mode-5 #pane-papel,
-#gpk-products-widget .products-board.mode-6 #pane-papel {
+#gpk-products-widget .products-board.mode-5 #pane-laminas-specs,
+#gpk-products-widget .products-board.mode-6 #pane-laminas-specs {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#gpk-products-widget .laminas-specs-container {
+    position: absolute;
+    inset: 100px 100px 60px 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+#gpk-products-widget .laminas-specs-stage-content {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-top: 40px;
+}
+
+#gpk-products-widget .laminas-spec-group {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Spec Group 1: Initial position in Mode 5 (Full screen at right) */
+#gpk-products-widget .laminas-spec-group.spec-group-1 {
+    left: 450px;
+    gap: 40px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#gpk-products-widget .spec-group-1 .spec-text-box {
+    width: 260px;
+    flex-shrink: 0;
+}
+
+#gpk-products-widget .spec-frame-wrapper {
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: width 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#gpk-products-widget .spec-vector-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    z-index: 2;
+}
+
+#gpk-products-widget .spec-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+
+#gpk-products-widget .spec-group-1 .spec-frame-wrapper {
+    width: 800px;
+    height: 480px;
+}
+
+/* Spec Group 2: Hidden in Mode 5, enters in Mode 6 */
+#gpk-products-widget .laminas-spec-group.spec-group-2 {
+    left: 880px;
+    gap: 40px;
+    opacity: 0;
+    transform: translateY(-50%) translateX(100px);
+    pointer-events: none;
+}
+
+#gpk-products-widget .spec-group-2 .spec-text-box {
+    width: 260px;
+    flex-shrink: 0;
+}
+
+#gpk-products-widget .spec-group-2 .spec-frame-wrapper {
+    width: 600px;
+    height: 480px;
+}
+
+/* Titles and Typography for Specs */
+#gpk-products-widget .spec-title {
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-title), sans-serif;
+    font-size: 24px;
+    font-weight: 700 !important;
+    color: var(--color-green);
+    margin-bottom: 12px;
+    line-height: 1.25;
+}
+
+#gpk-products-widget .spec-desc {
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--gris-princ, #6E6E6E);
+    margin: 0;
+}
+
+/* MODE 5 ACTIVE STATE (Stage 1: Spec 1 enters centered at full size) */
+#gpk-products-widget .products-board.mode-5 .laminas-spec-group.spec-group-1 {
+    opacity: 1;
+    left: 250px;
+    pointer-events: auto;
+}
+
+/* MODE 6 ACTIVE STATE (Stage 2: Spec 1 shrinks ONLY width to 320px / left, Spec 2 enters) */
+#gpk-products-widget .products-board.mode-6 .laminas-spec-group.spec-group-1 {
+    opacity: 1;
+    left: 0px;
+    gap: 30px;
+    pointer-events: auto;
+}
+
+#gpk-products-widget .products-board.mode-6 .spec-group-1 .spec-frame-wrapper {
+    width: 320px;
+}
+
+#gpk-products-widget .products-board.mode-6 .laminas-spec-group.spec-group-2 {
+    opacity: 1;
+    left: 780px;
+    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
+}
+
+/* ==========================================
+   PAPEL DETAIL VIEWS (Modes 2-3)
+   ========================================== */
+#gpk-products-widget .products-board.mode-2 #pane-papel,
+#gpk-products-widget .products-board.mode-3 #pane-papel {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -2126,27 +2196,27 @@
     pointer-events: none;
 }
 
-#gpk-products-widget .products-board.mode-5 #papel-intro-content {
+#gpk-products-widget .products-board.mode-2 #papel-intro-content {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-#gpk-products-widget .products-board.mode-6 #papel-grid-content {
+#gpk-products-widget .products-board.mode-3 #papel-grid-content {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-/* Exit papel-intro-content when moving to Mode 6 */
-#gpk-products-widget .products-board.mode-6 #papel-intro-content {
+/* Exit papel-intro-content when moving to Mode 3 */
+#gpk-products-widget .products-board.mode-3 #papel-intro-content {
     opacity: 0;
     pointer-events: none;
     transform: translateY(-100px);
 }
 
 /* ==========================================
-   MODE 5: Paper roll with 4 text blocks (Screen 06)
+   MODE 2: Paper roll with 4 text blocks (Screen 06)
    ========================================== */
 
 /* Shared Papel Title & Green Line */
@@ -2155,10 +2225,11 @@
     left: 50%;
     top: 100px;
     transform: translateY(30px) translateX(-50%);
-    font-family: var(--font-title);
-    font-size: 96px;
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-title), sans-serif;
+    font-size: 80px;
     font-weight: 500 !important;
-    color: var(--color-grey-medium);
+    color: var(--gris-princ, #6E6E6E);
+    line-height: normal;
     letter-spacing: -1.5px;
     margin: 0;
     opacity: 0;
@@ -2186,7 +2257,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -30%);
-    width: 620px;
+    width: 520px;
     height: auto;
     z-index: 10;
     opacity: 0;
@@ -2201,14 +2272,12 @@
 #gpk-products-widget .papel-main-image {
     width: 100%;
     height: auto;
-    max-height: 600px;
+    max-height: 480px;
     object-fit: contain;
     filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.15));
-    transition: filter 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: rotate(-90deg);
+    transition: filter 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
-/* Remove old absolute-positioned title */
-/* #gpk-products-widget .papel-title { ... } */
 
 /* 4 Text blocks positioned around the image */
 #gpk-products-widget .papel-text-blocks {
@@ -2228,104 +2297,109 @@
 }
 
 #gpk-products-widget .papel-text-block p {
+    color: var(--gris-princ, #6E6E6E);
+    text-align: center;
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
     font-size: 18px;
-    line-height: 1.55;
-    color: var(--color-grey-dark);
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 /* Positions for 4 corners around the central image */
 #gpk-products-widget .papel-text-block.tl {
-    left: 100px;
+    left: 60px;
     top: 180px;
 }
 
 #gpk-products-widget .papel-text-block.bl {
-    left: 100px;
-    bottom: 180px;
+    left: 280px;
+    bottom: 140px;
 }
 
 #gpk-products-widget .papel-text-block.tr {
-    right: 100px;
+    right: 60px;
     top: 180px;
 }
 
 #gpk-products-widget .papel-text-block.br {
-    right: 100px;
-    bottom: 180px;
+    right: 280px;
+    bottom: 140px;
 }
 
-/* Active entrance animations for Mode 5 - SLOWER */
-#gpk-products-widget .products-board.mode-5 .papel-shared-title {
+/* Active entrance animations for Mode 2 */
+#gpk-products-widget .products-board.mode-2 .papel-shared-title {
     opacity: 1;
     transform: translateY(0) translateX(-50%);
     left: 50%;
     top: 100px;
-    font-size: 96px;
+    font-size: 80px;
     transition-delay: 0.1s;
 }
 
-#gpk-products-widget .products-board.mode-5 .papel-hero-image {
+#gpk-products-widget .products-board.mode-2 .papel-hero-image {
     opacity: 1;
     left: 50%;
     top: 50%;
-    width: 620px;
+    width: 520px;
     transform: translate(-50%, -50%);
     transition-delay: 0.2s;
 }
 
-/* Controlled by JS and scroll inside Mode 5 */
-#gpk-products-widget .products-board.mode-5 .papel-text-block {
+/* Controlled by JS and scroll inside Mode 2 */
+#gpk-products-widget .products-board.mode-2 .papel-text-block {
     opacity: 0;
     transform: translateY(80px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s ease;
 }
 
-#gpk-products-widget .products-board.mode-5 .papel-text-block.revealed {
+#gpk-products-widget .products-board.mode-2 .papel-text-block.revealed {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* Color animation: current text is GREEN, previous turns BLACK */
-#gpk-products-widget .products-board.mode-5 .papel-text-block p {
-    color: var(--color-grey-dark);
+#gpk-products-widget .products-board.mode-2 .papel-text-block p {
+    color: var(--gris-princ, #6E6E6E);
     transition: color 0.6s ease;
 }
 
-#gpk-products-widget .products-board.mode-5 .papel-text-block.active p {
+#gpk-products-widget .products-board.mode-2 .papel-text-block.active p {
     color: #5F9D2F !important;
     font-weight: 700 !important;
 }
 
-/* Transition to top-left when entering Mode 6 */
-#gpk-products-widget .products-board.mode-6 .papel-hero-image {
+/* Transition to top-left when entering Mode 3 */
+#gpk-products-widget .products-board.mode-3 .papel-hero-image {
     opacity: 1;
-    left: 380px;
-    top: 130px;
+    left: 420px;
+    top: 75px;
     width: 160px;
     transform: translate(0, 0);
     transition-delay: 0s;
 }
 
-#gpk-products-widget .products-board.mode-6 .papel-main-image {
+#gpk-products-widget .products-board.mode-3 .papel-main-image {
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+    transform: rotate(-90deg);
 }
 
-#gpk-products-widget .products-board.mode-6 .papel-shared-title {
+#gpk-products-widget .products-board.mode-3 .papel-shared-title {
     opacity: 1;
     transform: translateY(0) translateX(0);
     left: 100px;
     top: 100px;
-    font-size: 96px;
+    font-size: 80px;
     pointer-events: auto;
 }
 
-#gpk-products-widget .products-board.mode-6 .papel-title-green-line {
+#gpk-products-widget .products-board.mode-3 .papel-title-green-line {
     width: 140px;
     opacity: 1;
     margin: 8px 0 0 0;
 }
 
-#gpk-products-widget .products-board.mode-6 .papel-text-block {
+#gpk-products-widget .products-board.mode-3 .papel-text-block {
     opacity: 0;
     transform: translateY(80px);
     transition-duration: 0.8s;
@@ -2333,24 +2407,24 @@
 }
 
 /* ==========================================
-   MODE 6: Screen 07 - Papel products grid (New design)
+   MODE 3: Screen 07 - Papel products grid (New design)
    ========================================== */
 
-/* Hide the rollo pillar in Mode 6 (hero is now .papel-grid-hero-image) */
-#gpk-products-widget .products-board.mode-6 #p-rollo {
+/* Hide the rollo pillar in Mode 3 (hero is now .papel-grid-hero-image) */
+#gpk-products-widget .products-board.mode-3 #p-rollo {
     opacity: 0 !important;
     pointer-events: none !important;
 }
 
-/* papel-grid-content visible in Mode 6 */
-#gpk-products-widget .products-board.mode-6 #papel-grid-content {
+/* papel-grid-content visible in Mode 3 */
+#gpk-products-widget .products-board.mode-3 #papel-grid-content {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-/* Exit animations for papel-intro-content when entering Mode 6 */
-#gpk-products-widget .products-board.mode-6 .papel-text-block {
+/* Exit animations for papel-intro-content when entering Mode 3 */
+#gpk-products-widget .products-board.mode-3 .papel-text-block {
     opacity: 0;
     transform: translateY(80px);
     transition-duration: 0.8s;
@@ -2358,7 +2432,7 @@
 }
 
 /* ==========================================
-   MODE 6: Screen 07 - Papel Products Grid
+   MODE 3: Screen 07 - Papel Products Grid
    ========================================== */
 
 #gpk-products-widget .papel-grid-content {
@@ -2476,7 +2550,7 @@
     gap: 4px;
     border-top: none;
     padding-top: 0;
-    margin-left: -26px;
+    margin-left: -15px;
 }
 
 #gpk-products-widget .uses-bubble {
@@ -2488,7 +2562,7 @@
     border-radius: 0;
     width: fit-content;
     display: inline-block;
-    transform: translateX(-20px);
+    transform: translateX(0);
     opacity: 0;
     transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -2503,117 +2577,113 @@
 }
 
 /* ==========================================
-   MODE 6 ENTRANCE ANIMATIONS
+   MODE 3 ENTRANCE ANIMATIONS
    ========================================== */
 
 /* ==========================================
-   MODE 6 ENTRANCE ANIMATIONS - Reorganization from Mode 5
+   MODE 3 ENTRANCE ANIMATIONS - Reorganization from Mode 2
    ========================================== */
 
 /* Shared elements transition from center to top-left is handled by the shared class rules */
 
-/* Product cards - reorganize from 4 corners (like Mode 5 text blocks) to 2x2 grid */
-#gpk-products-widget .products-board.mode-6 .product-card {
+/* Product cards - reorganize from 4 corners to 2x2 grid */
+#gpk-products-widget .products-board.mode-3 .product-card {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* Card 1 (TL) -> from top-left corner */
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="1"] {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="1"] {
     transition-delay: 0.4s;
 }
 
 /* Card 2 (TR) -> from top-right corner */
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="2"] {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="2"] {
     transition-delay: 0.5s;
 }
 
 /* Card 3 (BL) -> from bottom-left corner */
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="3"] {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="3"] {
     transition-delay: 0.6s;
     margin-left: 100px;
 }
 
 /* Card 4 (BR) -> from bottom-right corner */
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="4"] {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="4"] {
     transition-delay: 0.7s;
     margin-left: 100px;
 }
 
-/* Card initial positions (Mode 5 corner positions) */
+/* Card initial positions */
 #gpk-products-widget .product-card[data-index="1"] {
-    /* Start at TL corner like Mode 5 text block tl */
     transform: translate(-600px, -300px);
 }
 
 #gpk-products-widget .product-card[data-index="2"] {
-    /* Start at TR corner like Mode 5 text block tr */
     transform: translate(600px, -300px);
 }
 
 #gpk-products-widget .product-card[data-index="3"] {
-    /* Start at BL corner like Mode 5 text block bl */
     transform: translate(-600px, 300px);
 }
 
 #gpk-products-widget .product-card[data-index="4"] {
-    /* Start at BR corner like Mode 5 text block br */
     transform: translate(600px, 300px);
 }
 
 /* Uses bubble + text staggered */
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="1"] .uses-bubble {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="1"] .uses-bubble {
     transition-delay: 0.8s;
 }
 
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="1"] .uses-text {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="1"] .uses-text {
     transition-delay: 0.9s;
 }
 
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="2"] .uses-bubble {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="2"] .uses-bubble {
     transition-delay: 1.0s;
 }
 
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="2"] .uses-text {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="2"] .uses-text {
     transition-delay: 1.1s;
 }
 
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="3"] .uses-bubble {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="3"] .uses-bubble {
     transition-delay: 1.1s;
 }
 
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="3"] .uses-text {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="3"] .uses-text {
     transition-delay: 1.2s;
 }
 
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="4"] .uses-bubble {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="4"] .uses-bubble {
     transition-delay: 1.3s;
 }
 
-#gpk-products-widget .products-board.mode-6 .product-card[data-index="4"] .uses-text {
+#gpk-products-widget .products-board.mode-3 .product-card[data-index="4"] .uses-text {
     transition-delay: 1.4s;
 }
 
-#gpk-products-widget .products-board.mode-6 .uses-bubble,
-#gpk-products-widget .products-board.mode-6 .uses-text {
+#gpk-products-widget .products-board.mode-3 .uses-bubble,
+#gpk-products-widget .products-board.mode-3 .uses-text {
     opacity: 1;
     transform: translateX(0);
 }
 
-/* Exit animations for Mode 7 */
-#gpk-products-widget .products-board.mode-7 .papel-grid-content {
+/* Exit animations for Mode 4 */
+#gpk-products-widget .products-board.mode-4 .papel-grid-content {
     opacity: 0;
     pointer-events: none;
     transform: translateY(-50px);
 }
 
-#gpk-products-widget .products-board.mode-7 .papel-shared-title {
+#gpk-products-widget .products-board.mode-4 .papel-shared-title {
     opacity: 0;
     transform: translateY(-50px) translateX(0);
     transition-duration: 0.8s;
 }
 
-#gpk-products-widget .products-board.mode-7 .papel-hero-image {
+#gpk-products-widget .products-board.mode-4 .papel-hero-image {
     opacity: 0;
     transform: translateY(-50px);
     transition-duration: 0.8s;
@@ -2644,29 +2714,44 @@
     transition-duration: 0.8s;
 }
 
-/* Cards exit down */
-#gpk-products-widget .products-board.mode-8 .laminas-card-new {
+/* Exit animations for Mode 14 (Grabados -> Energía) */
+#gpk-products-widget .products-board.mode-14 .grabados-main-title {
+    opacity: 0;
+    transform: translateX(-600px);
+    transition-duration: 0.8s;
+    transition-delay: 0s;
+}
+
+#gpk-products-widget .products-board.mode-14 .grabados-intro-text {
+    opacity: 0;
+    transform: translateX(-600px);
+    transition-duration: 0.8s;
+    transition-delay: 0s;
+}
+
+#gpk-products-widget .products-board.mode-14 .grabados-green-card {
     opacity: 0;
     transform: translateY(300px);
     transition-duration: 0.8s;
-}
-
-/* Wavy line exit */
-#gpk-products-widget .products-board.mode-8 .laminas-wavy-line {
-    opacity: 0;
-    transition-duration: 0.5s;
+    transition-delay: 0s;
 }
 
 /* ==========================================
-   GRABADOS & PREPRENSA DETAIL (Mode 8)
+   GRABADOS & PREPRENSA DETAIL (Modes 10-13)
    ========================================== */
-#gpk-products-widget .products-board.mode-8 #pane-grabados {
+#gpk-products-widget .products-board.mode-10 #pane-grabados,
+#gpk-products-widget .products-board.mode-11 #pane-grabados,
+#gpk-products-widget .products-board.mode-12 #pane-grabados,
+#gpk-products-widget .products-board.mode-13 #pane-grabados {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-#gpk-products-widget .products-board.mode-8 #p-grabados {
+#gpk-products-widget .products-board.mode-10 #p-grabados,
+#gpk-products-widget .products-board.mode-11 #p-grabados,
+#gpk-products-widget .products-board.mode-12 #p-grabados,
+#gpk-products-widget .products-board.mode-13 #p-grabados {
     opacity: 0 !important;
     pointer-events: none !important;
 }
@@ -2675,33 +2760,39 @@
 #gpk-products-widget .grabados-left-content {
     position: absolute;
     left: 100px;
-    top: 100px;
-    width: 1100px;
+    top: 90px;
+    width: 1200px;
     /* Wider so paragraphs do not compress */
     display: flex;
     flex-direction: column;
     pointer-events: none;
 }
 
-#gpk-products-widget .products-board.mode-8 .grabados-left-content {
+#gpk-products-widget .products-board.mode-10 .grabados-left-content,
+#gpk-products-widget .products-board.mode-11 .grabados-left-content,
+#gpk-products-widget .products-board.mode-12 .grabados-left-content,
+#gpk-products-widget .products-board.mode-13 .grabados-left-content {
     pointer-events: auto;
 }
 
 /* Main title */
 #gpk-products-widget .grabados-main-title {
     font-family: var(--font-title);
-    font-size: 96px;
+    font-size: 80px;
     font-weight: 500 !important;
     color: var(--color-grey-medium);
     letter-spacing: -1.2px;
     line-height: 1.1;
-    margin: 0 0 20px 0;
+    margin: 0 0 14px 0;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-#gpk-products-widget .products-board.mode-8 .grabados-main-title {
+#gpk-products-widget .products-board.mode-10 .grabados-main-title,
+#gpk-products-widget .products-board.mode-11 .grabados-main-title,
+#gpk-products-widget .products-board.mode-12 .grabados-main-title,
+#gpk-products-widget .products-board.mode-13 .grabados-main-title {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.1s;
@@ -2711,21 +2802,24 @@
 #gpk-products-widget .grabados-intro-text {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-#gpk-products-widget .products-board.mode-8 .grabados-intro-text {
+#gpk-products-widget .products-board.mode-10 .grabados-intro-text,
+#gpk-products-widget .products-board.mode-11 .grabados-intro-text,
+#gpk-products-widget .products-board.mode-12 .grabados-intro-text,
+#gpk-products-widget .products-board.mode-13 .grabados-intro-text {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.25s;
 }
 
 #gpk-products-widget .grabados-intro-text p {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.5;
     color: var(--color-grey-medium);
     margin: 0;
 }
@@ -2740,96 +2834,123 @@
 /* Green card style */
 #gpk-products-widget .grabados-green-card {
     position: absolute;
-    width: 330px;
-    height: 290px;
+    width: 280px;
+    height: 390px;
     background-color: transparent;
-    background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a1f3e59cc5986fdc70e1aa3_green%20card%20bg.svg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     color: var(--color-white);
-    padding: 28px 36px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    box-sizing: border-box;
     opacity: 0;
     transform: translateY(100px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-#gpk-products-widget .products-board.mode-8 .grabados-green-card {
+/* Card 1 appears in Mode 10 */
+#gpk-products-widget .products-board.mode-10 .grabados-green-card[data-index="1"],
+#gpk-products-widget .products-board.mode-11 .grabados-green-card[data-index="1"],
+#gpk-products-widget .products-board.mode-12 .grabados-green-card[data-index="1"],
+#gpk-products-widget .products-board.mode-13 .grabados-green-card[data-index="1"] {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-/* Coordinates and staggered delay for each card */
+/* Card 2 appears in Mode 11 */
+#gpk-products-widget .products-board.mode-11 .grabados-green-card[data-index="2"],
+#gpk-products-widget .products-board.mode-12 .grabados-green-card[data-index="2"],
+#gpk-products-widget .products-board.mode-13 .grabados-green-card[data-index="2"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Card 3 appears in Mode 12 */
+#gpk-products-widget .products-board.mode-12 .grabados-green-card[data-index="3"],
+#gpk-products-widget .products-board.mode-13 .grabados-green-card[data-index="3"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Card 4 appears in Mode 13 */
+#gpk-products-widget .products-board.mode-13 .grabados-green-card[data-index="4"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Coordinates, height, padding alignment and background image for each card */
 #gpk-products-widget .grabados-green-card[data-index="1"] {
-    left: 130px;
-    top: 350px;
-    transition-delay: 0.5s;
+    left: 120px;
+    top: 320px;
+    height: 390px;
+    background-image: url('widgets/productos-interactivos/images/slide-grabados/grabados 01.webp');
+    justify-content: flex-start;
+    padding: 0;
 }
 
 #gpk-products-widget .grabados-green-card[data-index="2"] {
-    left: 540px;
-    top: 460px;
-    transition-delay: 0.65s;
+    left: 530px;
+    top: 440px;
+    height: 390px;
+    background-image: url('widgets/productos-interactivos/images/slide-grabados/grabados 02.webp');
+    justify-content: flex-end;
+    padding: 0;
 }
 
 #gpk-products-widget .grabados-green-card[data-index="3"] {
-    left: 950px;
-    top: 350px;
-    transition-delay: 0.8s;
+    left: 940px;
+    top: 320px;
+    height: 390px;
+    background-image: url('widgets/productos-interactivos/images/slide-grabados/grabados 03.webp');
+    justify-content: flex-start;
+    padding: 0;
 }
 
 #gpk-products-widget .grabados-green-card[data-index="4"] {
-    left: 1360px;
-    top: 460px;
-    transition-delay: 0.95s;
+    left: 1350px;
+    top: 440px;
+    height: 390px;
+    background-image: url('widgets/productos-interactivos/images/slide-grabados/grabados 04.webp');
+    justify-content: flex-end;
+    padding: 0;
+}
+
+#gpk-products-widget .grabados-card-text-wrapper {
+    width: 100%;
+    height: 195px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 #gpk-products-widget .grabados-card-title {
     font-family: var(--font-title);
-    font-size: 21px;
-    font-weight: 900 !important;
+    font-size: 16px;
+    font-weight: 800 !important;
     color: var(--color-white);
-    line-height: 1.25;
-    margin: 0 0 16px 0;
+    line-height: 1.2;
+    margin: 0 0 18px 0;
     text-transform: uppercase;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.2px;
 }
 
 #gpk-products-widget .grabados-card-desc {
-    font-size: 18px;
-    line-height: 1.5;
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
+    font-size: 14px;
+    line-height: 1.35;
     color: var(--color-white);
-    opacity: 0.92;
+    opacity: 0.95;
     margin: 0;
-}
-
-/* Exit animations for Mode 9 (Grabados -> Energía) */
-#gpk-products-widget .products-board.mode-9 .grabados-main-title {
-    opacity: 0;
-    transform: translateX(-600px);
-    transition-duration: 0.8s;
-    transition-delay: 0s;
-}
-
-#gpk-products-widget .products-board.mode-9 .grabados-intro-text {
-    opacity: 0;
-    transform: translateX(-600px);
-    transition-duration: 0.8s;
-    transition-delay: 0s;
-}
-
-#gpk-products-widget .products-board.mode-9 .grabados-green-card {
-    opacity: 0;
-    transform: translateY(300px);
-    transition-duration: 0.8s;
-    transition-delay: 0s;
 }
 
 /* Chat icon - bottom right on grey background */
@@ -2837,24 +2958,10 @@
     display: none !important;
 }
 
-#gpk-products-widget .products-board.mode-8 .grabados-chat-icon {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    pointer-events: auto;
-    transition-delay: 1.1s;
-}
-
-#gpk-products-widget .grabados-chat-icon:hover {
-    transform: scale(1.1);
-    background-color: #73c03b;
-}
-
-/* Grabados mobile media query combined at the end of the file */
-
 /* ==========================================
-   ENERGY & SUSTENTABILIDAD (Mode 9)
+   ENERGY & SUSTENTABILIDAD (Mode 14)
    ========================================== */
-#gpk-products-widget .products-board.mode-9 #pane-energia {
+#gpk-products-widget .products-board.mode-14 #pane-energia {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -2874,7 +2981,7 @@
     pointer-events: none;
 }
 
-#gpk-products-widget .products-board.mode-9 .energia-header {
+#gpk-products-widget .products-board.mode-14 .energia-header {
     opacity: 1;
     transform: translate(-50%, 0) translateX(0);
     transition-delay: 0.1s;
@@ -2938,7 +3045,7 @@
     display: none;
 }
 
-#gpk-products-widget .products-board.mode-9 .energia-row {
+#gpk-products-widget .products-board.mode-14 .energia-row {
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
@@ -3285,15 +3392,21 @@
     }
 
     /* Slide 1: Overview */
+    #gpk-products-widget .products-overview-pane {
+        padding: 12px 10px 70px 10px !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+    }
+
     #gpk-products-widget .overview-header {
-        margin-bottom: 12px !important;
+        margin-bottom: 6px !important;
         opacity: 1 !important;
         transform: none !important;
         text-align: left !important;
     }
 
     #gpk-products-widget .overview-title-new {
-        font-size: 24px !important;
+        font-size: 20px !important;
         letter-spacing: -0.5px !important;
         text-align: left !important;
         margin: 0 !important;
@@ -3302,27 +3415,21 @@
     #gpk-products-widget .overview-grid-new {
         position: static !important;
         width: 100% !important;
-        flex: 1 1 auto !important;
+        flex: 0 0 auto !important;
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
-        gap: 12px !important;
+        gap: 8px !important;
         padding: 0 !important;
         overflow: visible !important;
         align-items: stretch !important;
-    }
-
-    #gpk-products-widget .products-overview-pane {
-        justify-content: flex-start !important;
-        gap: 12px !important;
     }
 
     #gpk-products-widget .overview-col-new {
         opacity: 1 !important;
         transform: none !important;
         background-color: var(--color-white) !important;
-        padding: 16px 12px !important;
-        border-radius: 12px !important;
+        padding: 8px 8px 8px 8px !important;
+        border-radius: 6px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
         border: 1px solid rgba(227, 229, 233, 0.7) !important;
         display: flex !important;
@@ -3331,18 +3438,20 @@
         text-align: center !important;
         transition: none !important;
         width: 100% !important;
-        height: 100% !important;
+        height: auto !important;
         min-height: 0 !important;
         box-sizing: border-box !important;
         justify-content: space-between !important;
     }
 
     #gpk-products-widget .overview-col-title {
-        font-size: 14px !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
         color: var(--color-grey-dark) !important;
-        margin-bottom: 6px !important;
-        padding-bottom: 6px !important;
+        margin-bottom: 2px !important;
+        padding-bottom: 0 !important;
         border: none !important;
+        line-height: 1.2 !important;
     }
 
     #gpk-products-widget .overview-col-title::after {
@@ -3353,33 +3462,32 @@
         display: block !important;
         width: auto !important;
         height: auto !important;
-        max-height: 75px !important;
+        max-height: 48px !important;
         object-fit: contain !important;
-        margin: 0 auto 10px auto !important;
+        margin: 0 auto 4px auto !important;
     }
 
     #gpk-products-widget .overview-col-desc {
         height: auto !important;
-        -webkit-line-clamp: 3 !important;
-        display: -webkit-box !important;
-        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: none !important;
+        display: block !important;
         color: var(--color-grey-medium) !important;
-        font-size: 11px !important;
-        line-height: 1.4 !important;
-        margin-bottom: 12px !important;
-        overflow: hidden !important;
+        font-size: 10px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 6px !important;
+        overflow: visible !important;
     }
 
     #gpk-products-widget .overview-col-btn {
         width: 100% !important;
         max-width: 100% !important;
-        border-radius: 0 !important;
+        border-radius: 2px !important;
         background-color: var(--color-green) !important;
         color: var(--color-white) !important;
-        font-size: 11px !important;
+        font-size: 10px !important;
         font-weight: 700 !important;
-        padding: 6px 12px !important;
-        margin-top: 4px !important;
+        padding: 5px 8px !important;
+        margin-top: 2px !important;
         text-align: center !important;
         min-width: auto !important;
     }
@@ -3857,8 +3965,9 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
         overflow: hidden !important;
         box-sizing: border-box !important;
-        justify-content: space-between !important;
+        justify-content: flex-start !important;
         margin-left: 0 !important;
+        height: auto !important;
     }
 
     #gpk-products-widget .product-image {
@@ -3873,8 +3982,8 @@
     }
 
     #gpk-products-widget .product-img {
-        max-height: 70px !important;
-        width: auto !important;
+        max-height: 130px !important;
+        width: 100% !important;
         object-fit: contain !important;
     }
 
@@ -3884,7 +3993,7 @@
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        flex-grow: 1 !important;
+        flex-grow: 0 !important;
     }
 
     #gpk-products-widget .product-name {
@@ -4332,63 +4441,78 @@
         object-fit: contain !important;
     }
 
-    /* Slide 6: keep paper products as a compact 2x2 mobile grid. */
+    /* Slide 3 (Papel Grid): keep paper products as a compact 2x2 mobile grid. */
     #gpk-products-widget .papel-products-grid {
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+        grid-template-rows: auto !important;
         gap: 8px !important;
         width: 100% !important;
-        height: calc(100dvh - 112px) !important;
-        min-height: 560px !important;
-        align-items: stretch !important;
+        height: auto !important;
+        min-height: 0 !important;
+        align-items: start !important;
     }
 
     #gpk-products-widget .papel-products-grid .product-card {
-        height: 100% !important;
-        min-width: 0 !important;
-        padding: 0 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 6px !important;
+        border-radius: 8px !important;
+        justify-content: flex-start !important;
+        align-self: start !important;
     }
 
     #gpk-products-widget .papel-products-grid .product-image {
         width: 100% !important;
         max-width: 100% !important;
-        margin: 0 auto 6px auto !important;
+        margin: 0 auto 4px auto !important;
         border: none !important;
         background-color: transparent !important;
-        padding: 5px !important;
-        aspect-ratio: 1.35 / 0.9 !important;
+        padding: 2px !important;
+        aspect-ratio: auto !important;
     }
 
     #gpk-products-widget .papel-products-grid .product-img {
         width: 100% !important;
-        height: 78px !important;
-        max-height: 78px !important;
+        height: 130px !important;
+        max-height: 130px !important;
         object-fit: contain !important;
     }
 
+    /* Specific compact image height for FortePak R (card 3) to fit longer description */
+    #gpk-products-widget .papel-products-grid .product-card[data-index="3"] .product-img {
+        height: 95px !important;
+        max-height: 95px !important;
+    }
+
     #gpk-products-widget .papel-products-grid .product-info {
-        padding: 7px 7px 8px 7px !important;
+        padding: 4px 4px 2px 4px !important;
+        flex-grow: 0 !important;
+        justify-content: flex-start !important;
     }
 
     #gpk-products-widget .papel-products-grid .product-name {
         font-size: 12px !important;
+        line-height: 1.2 !important;
         margin-bottom: 2px !important;
     }
 
     #gpk-products-widget .papel-products-grid .product-subtitle {
-        font-size: 8.5px !important;
+        font-size: 9px !important;
+        line-height: 1.15 !important;
         margin-bottom: 4px !important;
     }
 
     #gpk-products-widget .papel-products-grid .product-desc {
-        font-size: 9px !important;
-        line-height: 1.25 !important;
+        font-size: 9.5px !important;
+        line-height: 1.3 !important;
         margin-bottom: 6px !important;
+        flex: none !important;
     }
 
     #gpk-products-widget .papel-products-grid .product-uses {
-        padding-top: 6px !important;
+        padding-top: 4px !important;
+        margin-bottom: 0 !important;
     }
 
     #gpk-products-widget .papel-products-grid .uses-bubble {
@@ -4400,6 +4524,7 @@
     #gpk-products-widget .papel-products-grid .uses-text {
         font-size: 8px !important;
         line-height: 1.25 !important;
+        margin-bottom: 0 !important;
     }
 
     /* Slide 7: compact laminate cards so the card group behaves like the paper grid. */
@@ -4927,20 +5052,28 @@
         object-fit: contain !important;
     }
 
-    #gpk-products-widget .products-board.mode-6 .papel-products-grid .product-image {
+    #gpk-products-widget .products-board.mode-6 .papel-products-grid .product-image,
+    #gpk-products-widget .products-board.mode-3 .papel-products-grid .product-image {
         background: transparent !important;
         border: none !important;
         padding: 2px !important;
         width: 100% !important;
         max-width: none !important;
-        aspect-ratio: 1.45 / 0.9 !important;
+        aspect-ratio: auto !important;
     }
 
-    #gpk-products-widget .products-board.mode-6 .papel-products-grid .product-img {
-        height: 92px !important;
-        max-height: 92px !important;
+    #gpk-products-widget .products-board.mode-6 .papel-products-grid .product-img,
+    #gpk-products-widget .products-board.mode-3 .papel-products-grid .product-img {
+        height: 130px !important;
+        max-height: 130px !important;
         width: 100% !important;
         object-fit: contain !important;
+    }
+
+    #gpk-products-widget .products-board.mode-6 .papel-products-grid .product-card[data-index="3"] .product-img,
+    #gpk-products-widget .products-board.mode-3 .papel-products-grid .product-card[data-index="3"] .product-img {
+        height: 95px !important;
+        max-height: 95px !important;
     }
 }
 
@@ -5092,5 +5225,1041 @@
     #gpk-products-widget .products-board.mode-7 .laminas-card-new:nth-child(2n),
     #gpk-products-widget .products-board.mode-8 .grabados-green-card:nth-child(2n) {
         animation-name: gpkMobileEnterRight !important;
+    }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE — MODES 7-14 (Láminas Specs, Cajas, Grabados, Energía)
+   ========================================================================== */
+@media (max-width: 1024px) {
+
+    /* -----------------------------------------------------------------------
+       PANE VISIBILITY — show/hide the right pane for each mode
+    ----------------------------------------------------------------------- */
+
+    /* Láminas Intro: mode-4 (desktop) → stays as-is on mobile */
+    #gpk-products-widget .products-board.mode-4 .pane-laminas {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Láminas Specs: mode-5 and mode-6 show pane-laminas-specs */
+    #gpk-products-widget .products-board.mode-5 .pane-laminas-specs,
+    #gpk-products-widget .products-board.mode-6 .pane-laminas-specs {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Cajas: mode-7, 8, 9 show pane-cajas */
+    #gpk-products-widget .products-board.mode-7 .pane-cajas,
+    #gpk-products-widget .products-board.mode-8 .pane-cajas,
+    #gpk-products-widget .products-board.mode-9 .pane-cajas {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Papel: mode-2 and mode-3 show pane-papel */
+    #gpk-products-widget .products-board.mode-2 .pane-papel,
+    #gpk-products-widget .products-board.mode-3 .pane-papel {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Grabados: modes 10-13 show pane-grabados */
+    #gpk-products-widget .products-board.mode-10 .pane-grabados,
+    #gpk-products-widget .products-board.mode-11 .pane-grabados,
+    #gpk-products-widget .products-board.mode-12 .pane-grabados,
+    #gpk-products-widget .products-board.mode-13 .pane-grabados {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Energía: mode-14 shows pane-energia */
+    #gpk-products-widget .products-board.mode-14 .pane-energia {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Sub-content within pane-cajas for mobile mode mapping */
+    /* mode-7 → Cajas Intro */
+    #gpk-products-widget .products-board.mode-7 .cajas-intro-content {
+        display: flex !important;
+    }
+    /* mode-8 → Cajas Convencionales */
+    #gpk-products-widget .products-board.mode-8 .cajas-convencionales-content {
+        display: flex !important;
+    }
+    /* mode-9 → Cajas Digital */
+    #gpk-products-widget .products-board.mode-9 .cajas-digital-content {
+        display: flex !important;
+    }
+
+    /* Sub-content within pane-papel for mobile mode mapping */
+    /* mode-2 → Papel Intro (4 text blocks) */
+    #gpk-products-widget .products-board.mode-2 .papel-intro-content {
+        display: flex !important;
+    }
+    /* mode-3 → Papel Products Grid */
+    #gpk-products-widget .products-board.mode-3 .papel-grid-content {
+        display: flex !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       PANE LAYOUT BASE — flex column, full height, scrollable
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .pane-laminas,
+    #gpk-products-widget .pane-laminas-specs,
+    #gpk-products-widget .pane-grabados,
+    #gpk-products-widget .pane-energia {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-color: #f7f8f7 !important;
+        box-sizing: border-box !important;
+        padding: 16px 12px 24px 12px !important;
+        display: none !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        gap: 16px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: opacity 0.4s ease !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       MODE 4: Láminas Intro (pane-laminas)
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .products-board.mode-4 .pane-laminas {
+        gap: 14px !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-title-wrapper {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-main-title {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-medium) !important;
+        letter-spacing: -0.5px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-intro-content {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-intro-text {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-intro-left,
+    #gpk-products-widget .pane-laminas .laminas-intro-right {
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 14px 12px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-intro-left p,
+    #gpk-products-widget .pane-laminas .laminas-intro-right p {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-bottom-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        position: static !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-resistencia-box {
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 14px 12px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        position: static !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-resistencia-title {
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: var(--color-green) !important;
+        margin-bottom: 6px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-resistencia-desc {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        color: var(--color-grey-medium) !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-stack-container {
+        position: static !important;
+        width: 100% !important;
+        opacity: 1 !important;
+        transform: none !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    #gpk-products-widget .pane-laminas .laminas-stack-img {
+        max-width: 100% !important;
+        max-height: 180px !important;
+        object-fit: contain !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       MODES 5 & 6: Láminas Specs (pane-laminas-specs)
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .pane-laminas-specs .laminas-specs-container {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .pane-laminas-specs .laminas-title-wrapper {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    #gpk-products-widget .pane-laminas-specs .laminas-main-title {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-medium) !important;
+        letter-spacing: -0.5px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .laminas-specs-stage-content {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .laminas-spec-group {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        width: 100% !important;
+    }
+
+    /* Mode 5 → show spec-group-1 only, mode 6 → show spec-group-2 only */
+    #gpk-products-widget .products-board.mode-5 .laminas-spec-group {
+        display: none !important;
+    }
+    #gpk-products-widget .products-board.mode-5 .laminas-spec-group.spec-group-1 {
+        display: flex !important;
+    }
+    #gpk-products-widget .products-board.mode-6 .laminas-spec-group {
+        display: none !important;
+    }
+    #gpk-products-widget .products-board.mode-6 .laminas-spec-group.spec-group-2 {
+        display: flex !important;
+    }
+
+    #gpk-products-widget .spec-text-box {
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 16px 14px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        position: static !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .spec-title {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        color: var(--color-green) !important;
+        margin-bottom: 8px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .spec-desc {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .spec-image-box {
+        position: static !important;
+        width: 100% !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .spec-frame-wrapper {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 340px !important;
+        margin: 0 auto !important;
+    }
+
+    #gpk-products-widget .spec-vector-frame {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    #gpk-products-widget .spec-img {
+        position: absolute !important;
+        top: 8% !important;
+        left: 8% !important;
+        width: 84% !important;
+        height: 84% !important;
+        object-fit: contain !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       MODES 7, 8, 9: Cajas (pane-cajas) — title always visible
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .pane-cajas .pane-header-centered {
+        position: static !important;
+        width: 100% !important;
+        text-align: left !important;
+        margin-bottom: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+
+    #gpk-products-widget .pane-cajas .pane-title-centered {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-medium) !important;
+        letter-spacing: -0.5px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Cajas mobile hero visible only in mode-7 */
+    #gpk-products-widget .products-board:not(.mode-7) .cajas-mobile-hero-container {
+        display: none !important;
+    }
+    #gpk-products-widget .products-board.mode-7 .cajas-mobile-hero-container {
+        display: flex !important;
+        position: static !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: 16/9 !important;
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 8px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+    }
+    #gpk-products-widget .products-board.mode-7 .cajas-mobile-hero-img {
+        max-height: 100% !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    /* mode-7: show cajas-intro-content */
+    #gpk-products-widget .products-board.mode-7 .cajas-intro-content {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .products-board.mode-7 .cajas-intro-content .cajas-column {
+        width: 100% !important;
+        flex: 0 0 auto !important;
+        padding: 16px 14px !important;
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .products-board.mode-7 .cajas-column h2 {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: var(--color-green) !important;
+        margin-bottom: 8px !important;
+        line-height: 1.3 !important;
+    }
+
+    #gpk-products-widget .products-board.mode-7 .cajas-column p {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+    }
+
+    #gpk-products-widget .products-board.mode-7 .highlight-line {
+        width: 40px !important;
+        height: 2px !important;
+        background-color: var(--color-green) !important;
+        margin: 0 0 10px 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* mode-8: Cajas Convencionales */
+    #gpk-products-widget .products-board.mode-8 .cajas-convencionales-content {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .products-board.mode-8 .cajas-image-container {
+        width: 100% !important;
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 12px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+        aspect-ratio: 16/9 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget .products-board.mode-8 .cajas-main-image {
+        max-height: 100% !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    #gpk-products-widget .products-board.mode-8 .cajas-text-container {
+        width: 100% !important;
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 16px 14px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+
+    #gpk-products-widget .products-board.mode-8 .cajas-detail-title {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        color: var(--color-green) !important;
+        margin-bottom: 8px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-align: left !important;
+    }
+
+    #gpk-products-widget .products-board.mode-8 .cajas-green-line {
+        width: 40px !important;
+        height: 2px !important;
+        background-color: var(--color-green) !important;
+        margin: 0 0 10px 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .products-board.mode-8 .cajas-paragraph-1,
+    #gpk-products-widget .products-board.mode-8 .cajas-paragraph-2 {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+        margin-bottom: 8px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-align: left !important;
+    }
+
+    /* mode-9: Cajas Digital */
+    #gpk-products-widget .products-board.mode-9 .cajas-digital-content {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 100% !important;
+    }
+
+    #gpk-products-widget .products-board.mode-9 .digital-content-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+    }
+
+    #gpk-products-widget .products-board.mode-9 .digital-image-container {
+        width: 100% !important;
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 12px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+        aspect-ratio: 16/9 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        order: 0 !important;
+    }
+
+    #gpk-products-widget .products-board.mode-9 .digital-main-image {
+        max-height: 100% !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    #gpk-products-widget .products-board.mode-9 .digital-text-content {
+        width: 100% !important;
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 16px 14px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+        order: 1 !important;
+    }
+
+    #gpk-products-widget .products-board.mode-9 .digital-subtitle {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: var(--color-green) !important;
+        margin-bottom: 8px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .products-board.mode-9 .digital-green-line {
+        width: 40px !important;
+        height: 2px !important;
+        background-color: var(--color-green) !important;
+        margin: 0 0 10px 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .products-board.mode-9 .digital-paragraph-1,
+    #gpk-products-widget .products-board.mode-9 .digital-paragraph-2 {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+        margin-bottom: 8px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       PAPEL: modes 2 & 3 — pane-papel title always visible
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .pane-papel {
+        padding: 12px 10px 70px 10px !important;
+        gap: 8px !important;
+    }
+
+    #gpk-products-widget .pane-papel .papel-shared-title {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-medium) !important;
+        letter-spacing: -0.5px !important;
+        margin-bottom: 0 !important;
+        white-space: normal !important;
+    }
+
+    /* Paper roll image only in mode-2 */
+    #gpk-products-widget .products-board:not(.mode-2) .pane-papel .papel-hero-image {
+        display: none !important;
+    }
+    #gpk-products-widget .products-board.mode-2 .pane-papel .papel-hero-image {
+        display: flex !important;
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        max-width: 260px !important;
+        margin: 10px auto 14px auto !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        height: 110px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: visible !important;
+    }
+    #gpk-products-widget .products-board.mode-2 .pane-papel .papel-main-image {
+        width: auto !important;
+        height: auto !important;
+        max-height: 170px !important;
+        max-width: 170px !important;
+        object-fit: contain !important;
+        filter: none !important;
+        transform: rotate(-90deg) !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       MODES 10-13: Grabados (pane-grabados) — show all 4 cards simultaneously
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .pane-grabados .grabados-left-content {
+        position: static !important;
+        width: 100% !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-main-title {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        color: var(--color-grey-medium) !important;
+        letter-spacing: -0.5px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        margin-bottom: 0 !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-intro-text {
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 14px 12px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-intro-text p {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+        opacity: 1 !important;
+        transform: none !important;
+        margin-bottom: 6px !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-intro-text p:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    /* Show all 4 cards as a 2×2 grid regardless of mode-10/11/12/13 */
+    #gpk-products-widget .pane-grabados .grabados-cards-grid-new {
+        position: static !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-green-card {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        background-image: none !important;
+        background-color: var(--color-green) !important;
+        border: none !important;
+        border-radius: 10px !important;
+        padding: 16px 14px !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-card-text-wrapper {
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        gap: 6px !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-card-title {
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        color: #fff !important;
+        margin-bottom: 0 !important;
+        line-height: 1.3 !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-card-desc {
+        font-size: 11px !important;
+        line-height: 1.4 !important;
+        color: rgba(255,255,255,0.85) !important;
+    }
+
+    #gpk-products-widget .pane-grabados .grabados-chat-icon {
+        position: static !important;
+        margin: 8px auto 0 auto !important;
+        opacity: 1 !important;
+        transform: none !important;
+        width: 36px !important;
+        height: 36px !important;
+        color: var(--color-green) !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       MODE 14: Energía (pane-energia)
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .pane-energia .energia-header {
+        position: static !important;
+        width: 100% !important;
+        transform: none !important;
+        opacity: 1 !important;
+        text-align: left !important;
+        pointer-events: auto !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-main-title {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        color: var(--color-green) !important;
+        letter-spacing: -0.5px !important;
+        margin-bottom: 8px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-intro-text {
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        padding: 14px 12px !important;
+        box-sizing: border-box !important;
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-rows {
+        position: static !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        opacity: 1 !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-row {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        background-image: none !important;
+        background-color: #fff !important;
+        border: 1px solid #dedede !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-row::before {
+        display: none !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-mobile-image-container {
+        display: block !important;
+        width: 100% !important;
+        height: 120px !important;
+        overflow: hidden !important;
+        flex-shrink: 0 !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-mobile-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-row-content {
+        position: relative !important;
+        z-index: 1 !important;
+        padding: 14px 14px !important;
+        background-color: #fff !important;
+        max-width: 100% !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-row h3 {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: var(--color-green) !important;
+        margin-bottom: 4px !important;
+        line-height: 1.25 !important;
+    }
+
+    #gpk-products-widget .pane-energia .energia-row p {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: var(--color-grey-medium) !important;
+    }
+
+    /* -----------------------------------------------------------------------
+       NAV FOOTER — show on all modes in mobile
+    ----------------------------------------------------------------------- */
+    #gpk-products-widget .products-nav-footer {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 12px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 200 !important;
+        background-color: rgba(255,255,255,0.96) !important;
+        border-radius: 40px !important;
+        padding: 6px 14px !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12) !important;
+        width: auto !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    #gpk-products-widget .products-board.mode-0 .products-nav-footer {
+        display: none !important;
+    }
+
+    #gpk-products-widget .footer-arrow {
+        background: none !important;
+        border: none !important;
+        color: var(--color-green) !important;
+        cursor: pointer !important;
+        padding: 4px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        opacity: 1 !important;
+    }
+
+    #gpk-products-widget .footer-arrow:disabled {
+        opacity: 0.3 !important;
+        cursor: default !important;
+    }
+
+    #gpk-products-widget .footer-dots {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+
+    #gpk-products-widget .dot-indicator {
+        width: 6px !important;
+        height: 6px !important;
+        border-radius: 50% !important;
+        background-color: #ccc !important;
+        transition: background-color 0.3s ease, transform 0.3s ease !important;
+    }
+
+    #gpk-products-widget .dot-indicator.active {
+        background-color: var(--color-green) !important;
+        transform: scale(1.5) !important;
+    }
+}
+
+/* ==========================================================================
+   MOBILE GLOBAL RESET — force all pane elements visible (override desktop 0-opacity init)
+   ========================================================================== */
+@media (max-width: 1024px) {
+
+    /* All detail pane elements: reset any desktop-only opacity/transform animations */
+    #gpk-products-widget .details-pane *,
+    #gpk-products-widget .products-intro-pane *,
+    #gpk-products-widget .products-overview-pane * {
+        transition: none !important;
+    }
+
+    /* Force ALL elements inside active panes to be visible */
+    #gpk-products-widget .grabados-main-title,
+    #gpk-products-widget .grabados-intro-text,
+    #gpk-products-widget .grabados-green-card,
+    #gpk-products-widget .grabados-cards-grid-new,
+    #gpk-products-widget .grabados-left-content,
+    #gpk-products-widget .grabados-card-text-wrapper,
+    #gpk-products-widget .grabados-card-title,
+    #gpk-products-widget .grabados-card-desc {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .energia-header,
+    #gpk-products-widget .energia-main-title,
+    #gpk-products-widget .energia-intro-text,
+    #gpk-products-widget .energia-rows,
+    #gpk-products-widget .energia-row,
+    #gpk-products-widget .energia-row-content,
+    #gpk-products-widget .energia-mobile-image-container,
+    #gpk-products-widget .energia-mobile-image {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .laminas-main-title,
+    #gpk-products-widget .laminas-intro-content,
+    #gpk-products-widget .laminas-intro-text,
+    #gpk-products-widget .laminas-intro-left,
+    #gpk-products-widget .laminas-intro-right,
+    #gpk-products-widget .laminas-intro-left p,
+    #gpk-products-widget .laminas-intro-right p,
+    #gpk-products-widget .laminas-bottom-layout,
+    #gpk-products-widget .laminas-resistencia-box,
+    #gpk-products-widget .laminas-wavy-line,
+    #gpk-products-widget .laminas-card-new,
+    #gpk-products-widget .laminas-cards-grid-new,
+    #gpk-products-widget .laminas-card-image,
+    #gpk-products-widget .laminas-card-img,
+    #gpk-products-widget .laminas-card-info,
+    #gpk-products-widget .laminas-card-title,
+    #gpk-products-widget .laminas-card-desc {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .papel-shared-title,
+    #gpk-products-widget .papel-hero-image,
+    #gpk-products-widget .papel-text-block,
+    #gpk-products-widget .papel-text-blocks,
+    #gpk-products-widget .papel-products-grid,
+    #gpk-products-widget .product-card,
+    #gpk-products-widget .product-image,
+    #gpk-products-widget .product-img,
+    #gpk-products-widget .product-info,
+    #gpk-products-widget .product-uses,
+    #gpk-products-widget .uses-bubble,
+    #gpk-products-widget .uses-text {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget .papel-main-image {
+        opacity: 1 !important;
+        transform: rotate(-90deg) !important;
+    }
+
+    #gpk-products-widget .cajas-main-image,
+    #gpk-products-widget .cajas-image-container,
+    #gpk-products-widget .cajas-text-container,
+    #gpk-products-widget .cajas-detail-title,
+    #gpk-products-widget .cajas-green-line,
+    #gpk-products-widget .cajas-paragraph-1,
+    #gpk-products-widget .cajas-paragraph-2,
+    #gpk-products-widget .digital-main-image,
+    #gpk-products-widget .digital-image-container,
+    #gpk-products-widget .digital-text-content,
+    #gpk-products-widget .digital-subtitle,
+    #gpk-products-widget .digital-green-line,
+    #gpk-products-widget .digital-paragraph-1,
+    #gpk-products-widget .digital-paragraph-2,
+    #gpk-products-widget .cajas-mobile-hero-container,
+    #gpk-products-widget .cajas-mobile-hero-img,
+    #gpk-products-widget .cajas-column,
+    #gpk-products-widget .highlight-line,
+    #gpk-products-widget .pane-title-centered,
+    #gpk-products-widget .pane-header-centered {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Pane sections: ensure all title/text inside are always visible */
+    #gpk-products-widget .details-pane h2,
+    #gpk-products-widget .details-pane h3,
+    #gpk-products-widget .details-pane p,
+    #gpk-products-widget .details-pane span,
+    #gpk-products-widget .details-pane strong {
+        opacity: 1 !important;
+        transform: none !important;
     }
 }

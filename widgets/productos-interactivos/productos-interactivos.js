@@ -37,23 +37,28 @@
     function initWidget() {
         // --- State Management ---
         let currentSlide = 0;
-        const totalSlides = 10;
+        const totalSlides = 15;
         let isAnimating = false;
         let isPreloading = false;
         let lastScrollProgress = 0;
 
-        // Custom slide ranges to extend Slide 0 duration and smooth animations
+        // Custom slide ranges for 15 modes (0 to 14)
         const slideRanges = [
-            { start: 0.0, end: 0.18 },   // Slide 0 (extended)
-            { start: 0.18, end: 0.271 },  // Slide 1
-            { start: 0.271, end: 0.362 }, // Slide 2
-            { start: 0.362, end: 0.453 }, // Slide 3
-            { start: 0.453, end: 0.544 }, // Slide 4
-            { start: 0.544, end: 0.635 }, // Slide 5
-            { start: 0.635, end: 0.726 }, // Slide 6
-            { start: 0.726, end: 0.817 }, // Slide 7
-            { start: 0.817, end: 0.908 }, // Slide 8
-            { start: 0.908, end: 1.0 }    // Slide 9
+            { start: 0.0, end: 0.16 },    // Slide 0 (extended intro)
+            { start: 0.16, end: 0.22 },   // Slide 1 (Overview)
+            { start: 0.22, end: 0.28 },   // Slide 2 (Papel Intro)
+            { start: 0.28, end: 0.34 },   // Slide 3 (Papel Grid)
+            { start: 0.34, end: 0.40 },   // Slide 4 (Láminas Intro)
+            { start: 0.40, end: 0.46 },   // Slide 5 (Láminas Specs 1)
+            { start: 0.46, end: 0.52 },   // Slide 6 (Láminas Specs 2)
+            { start: 0.52, end: 0.58 },   // Slide 7 (Cajas Intro)
+            { start: 0.58, end: 0.64 },   // Slide 8 (Cajas Convencionales)
+            { start: 0.64, end: 0.70 },   // Slide 9 (Cajas Digital)
+            { start: 0.70, end: 0.76 },   // Slide 10 (Grabados Card 1)
+            { start: 0.76, end: 0.82 },   // Slide 11 (Grabados Card 2)
+            { start: 0.82, end: 0.88 },   // Slide 12 (Grabados Card 3)
+            { start: 0.88, end: 0.94 },   // Slide 13 (Grabados Card 4)
+            { start: 0.94, end: 1.0 }     // Slide 14 (Energía & Sustentabilidad)
         ];
 
         function getSlideFromProgress(progress) {
@@ -135,6 +140,14 @@
             const fillImg = wrapper.querySelector(".pillar-img");
             if (contourImg) contourImg.src = `${widgetBaseURL}/images/slide%200%20nuevas%20imagenes/${pillar.num}%20vector.png`;
             if (fillImg) fillImg.src = `${widgetBaseURL}/images/slide%200%20nuevas%20imagenes/${pillar.num}.png`;
+        });
+
+        const overviewMobileImgs = board ? board.querySelectorAll(".overview-mobile-img") : [];
+        const overviewImgNums = ["01", "02", "03", "04"];
+        overviewMobileImgs.forEach((img, idx) => {
+            if (overviewImgNums[idx]) {
+                img.src = `${widgetBaseURL}/images/slide%200%20nuevas%20imagenes/${overviewImgNums[idx]}.png`;
+            }
         });
 
         function startHeroIntro() {
@@ -299,11 +312,13 @@
 
                 if (currentSlide === 0 || currentSlide === 1) {
                     isActive = true;
-                } else if (pillarType === "caja" && (currentSlide === 2 || currentSlide === 3 || currentSlide === 4)) {
+                } else if (pillarType === "rollo" && (currentSlide === 2 || currentSlide === 3)) {
                     isActive = true;
-                } else if (pillarType === "rollo" && (currentSlide === 5 || currentSlide === 6)) {
+                } else if (pillarType === "lamina" && (currentSlide === 4 || currentSlide === 5 || currentSlide === 6)) {
                     isActive = true;
-                } else if (pillarType === "grabados" && currentSlide === 7) {
+                } else if (pillarType === "caja" && (currentSlide === 7 || currentSlide === 8 || currentSlide === 9)) {
+                    isActive = true;
+                } else if (pillarType === "grabados" && (currentSlide >= 10 && currentSlide <= 13)) {
                     isActive = true;
                 }
 
@@ -314,8 +329,8 @@
             prevBtn.disabled = currentSlide === 0;
             nextBtn.disabled = currentSlide === totalSlides - 1;
 
-            // 4. Clean up papel text blocks when leaving mode 5 (if desktop, handled by scroll; on mobile, kept static)
-            if (currentSlide !== 5) {
+            // 4. Clean up papel text blocks when leaving mode 2 (if desktop, handled by scroll; on mobile, kept static)
+            if (currentSlide !== 2) {
                 const textBlocks = root.querySelectorAll(".papel-text-block");
                 textBlocks.forEach(block => {
                     block.classList.remove("revealed");
@@ -326,13 +341,18 @@
             updateSlideZeroRevealOnScroll(lastScrollProgress);
         }
 
-        // --- Scroll-driven Papel text blocks (Mode 5) ---
+        // --- Scroll-driven Papel text blocks (Mode 2) ---
         function updatePaperTextBlocksOnScroll(progress) {
-            if (window.innerWidth <= 1024) return;
             const textBlocks = root.querySelectorAll(".papel-text-block");
+            if (window.innerWidth <= 1024) {
+                if (currentSlide === 2) {
+                    textBlocks.forEach(block => block.classList.add("revealed"));
+                }
+                return;
+            }
 
-            if (currentSlide === 5) {
-                const r = slideRanges[5];
+            if (currentSlide === 2) {
+                const r = slideRanges[2];
                 const localProgress = (progress - r.start) / (r.end - r.start);
 
                 const tlBlock = root.querySelector(".papel-text-block.tl");
