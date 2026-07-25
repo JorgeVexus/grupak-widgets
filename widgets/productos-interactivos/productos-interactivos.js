@@ -120,29 +120,22 @@
             digitalMainImage.src = `${widgetBaseURL}/images/Cajas%20y%20empaques%202-1.webp`;
         }
 
-        // Slide 0 pillar contour/image pairs (Lámina, Papel, Grabados)
-        const pillarImageAssets = {
-            lamina: "laminas",
-            rollo: "papel",
-            grabados: "grabado"
-        };
-        Object.keys(pillarImageAssets).forEach(pillarKey => {
-            const assetName = pillarImageAssets[pillarKey];
-            const wrapper = board ? board.querySelector(`#p-${pillarKey}`) : null;
+        // Slide 0 pillar contour/image pairs (Caja, Lámina, Papel, Grabados: 01 to 04)
+        const slideZeroPillars = [
+            { key: "caja", num: "01" },
+            { key: "lamina", num: "02" },
+            { key: "rollo", num: "03" },
+            { key: "grabados", num: "04" }
+        ];
+
+        slideZeroPillars.forEach(pillar => {
+            const wrapper = board ? board.querySelector(`#p-${pillar.key}`) : null;
             if (!wrapper) return;
             const contourImg = wrapper.querySelector(".pillar-contour-img");
             const fillImg = wrapper.querySelector(".pillar-img");
-            if (contourImg) contourImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/${assetName}%20contorno.png`;
-            if (fillImg) fillImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/${assetName}%20imagen.png`;
+            if (contourImg) contourImg.src = `${widgetBaseURL}/images/slide%200%20nuevas%20imagenes/${pillar.num}%20vector.png`;
+            if (fillImg) fillImg.src = `${widgetBaseURL}/images/slide%200%20nuevas%20imagenes/${pillar.num}.png`;
         });
-
-        const cajaWrapper = board ? board.querySelector("#p-caja") : null;
-        if (cajaWrapper) {
-            const contourImg = cajaWrapper.querySelector(".pillar-contour-img");
-            const fillImg = cajaWrapper.querySelector(".pillar-img");
-            if (contourImg) contourImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/caja%20Image%201%20caja%20contorno.webp`;
-            if (fillImg) fillImg.src = `${widgetBaseURL}/images/slide%200%20no%20bg/caja%20Image%201.webp`;
-        }
 
         function startHeroIntro() {
             if (!heroHome) return;
