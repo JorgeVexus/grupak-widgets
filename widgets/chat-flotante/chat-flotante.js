@@ -3,7 +3,7 @@
 
     var runtimeKey = "gpkFloatingChatRuntime";
     if (window[runtimeKey]) {
-        window[runtimeKey].reconcile();
+        window[runtimeKey].retry();
         return;
     }
 
@@ -23,7 +23,12 @@
     var scheduled = false;
 
     var observer = new MutationObserver(scheduleReconcile);
-    window[runtimeKey] = { observer: observer, reconcile: reconcile, cleanup: cleanupRuntime };
+    window[runtimeKey] = {
+        observer: observer,
+        reconcile: reconcile,
+        retry: retry,
+        cleanup: cleanupRuntime
+    };
 
     ensureStyles();
     observer.observe(document.documentElement, { childList: true, subtree: true });
@@ -99,9 +104,18 @@
             .catch(function (error) {
                 if (!isCurrentMount(root, generation)) return;
                 root.removeAttribute("data-gpk-chat-loading");
+                root.setAttribute("data-gpk-chat-ready", "error");
                 root.innerHTML = '<p class="gpk-chat__load-error" role="status">No fue posible cargar el chat.</p>';
                 console.error("[gpk-floating-chat]", error);
             });
+    }
+
+    function retry() {
+        var root = document.getElementById("gpk-floating-chat-root");
+        if (root && root.getAttribute("data-gpk-chat-ready") === "error") {
+            root.removeAttribute("data-gpk-chat-ready");
+        }
+        reconcile();
     }
 
     function isCurrentMount(root, generation) {

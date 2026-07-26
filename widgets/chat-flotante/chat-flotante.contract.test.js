@@ -80,10 +80,18 @@ async function createHarness(location, options) {
     };
 
     var context = vm.createContext({
-        console: console,
+        console: options.silentErrors ? { error: function () {} } : console,
         document: document,
         fetch: function () {
             fetchCount += 1;
+            if (options.fetchRejects) return Promise.reject(new Error("Network error"));
+            if (options.fetchStatus) {
+                return Promise.resolve({
+                    ok: false,
+                    status: options.fetchStatus,
+                    text: function () { return Promise.resolve(""); }
+                });
+            }
             return Promise.resolve({ ok: true, text: function () { return Promise.resolve(html); } });
         },
         MutationObserver: window.MutationObserver,
@@ -286,4 +294,30 @@ test("resolves preview assets from the script URL", async function () {
 
     assert.match(stylesheet.href, /^http:\/\/localhost:8026\/subruta\/widgets\/chat-flotante\/chat-flotante\.css\?v=/);
     assert.match(avatar.src, /^http:\/\/localhost:8026\/subruta\/widgets\/footer\/newsletter-people\.png\?v=/);
+});
+
+test("keeps a failed fetch terminal until an explicit script retry", async function () {
+    var app = await createHarness(undefined, { fetchStatus: 404, silentErrors: true });
+    var root = app.root();
+
+    await flushPromises();
+    await flushPromises();
+    assert.equal(app.fetchCount(), 1);
+    assert.equal(root.getAttribute("data-gpk-chat-ready"), "error");
+    assert.equal(root.hasAttribute("data-gpk-chat-loading"), false);
+    assert.match(root.textContent, /No fue posible cargar el chat/);
+
+    root.appendChild(app.document.createElement("span"));
+    await flushPromises();
+    await flushPromises();
+    await flushPromises();
+
+    assert.equal(app.fetchCount(), 1);
+    assert.equal(root.getAttribute("data-gpk-chat-ready"), "error");
+    assert.match(root.textContent, /No fue posible cargar el chat/);
+
+    await app.runScript();
+    assert.equal(app.fetchCount(), 2);
+    assert.equal(root.getAttribute("data-gpk-chat-ready"), "error");
+    assert.equal(root.hasAttribute("data-gpk-chat-loading"), false);
 });
