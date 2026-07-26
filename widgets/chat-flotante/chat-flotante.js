@@ -2,8 +2,9 @@
     "use strict";
 
     var isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
-    var baseURL = isLocalhost ? "widgets/chat-flotante" : "https://grupak-widgets.vercel.app/widgets/chat-flotante";
-    var assetVersion = "20260725-task-3";
+    var widgetsBaseURL = isLocalhost ? "widgets" : "https://grupak-widgets.vercel.app/widgets";
+    var baseURL = widgetsBaseURL + "/chat-flotante";
+    var assetVersion = "20260725-task-4";
     var controllerKey = "gpkFloatingChatController";
     var mountGenerationKey = "gpkFloatingChatMountGeneration";
 
@@ -66,6 +67,7 @@
         var panel = root.querySelector("[data-gpk-chat-panel]");
         var launcher = root.querySelector("[data-gpk-chat-launcher]");
         var closeButton = root.querySelector("[data-gpk-chat-close]");
+        var avatar = root.querySelector("[data-gpk-chat-avatar]");
         var views = root.querySelectorAll("[data-view]");
         var states = ["greeting", "main", "contact", "products", "information"];
         var isOpen = false;
@@ -73,6 +75,10 @@
         if (!widget || !panel || !launcher || !closeButton || !views.length) {
             root.removeAttribute("data-gpk-chat-loading");
             return;
+        }
+
+        if (avatar) {
+            avatar.src = widgetsBaseURL + "/footer/newsletter-people.png?v=" + assetVersion;
         }
 
         function showView(state) {
@@ -143,6 +149,6 @@
         widget.setAttribute("data-open", "false");
         root.removeAttribute("data-gpk-chat-loading");
         root.setAttribute("data-gpk-chat-ready", "true");
-        window[controllerKey] = { cleanup: cleanup, root: root };
+        window[controllerKey] = { cleanup: cleanup, root: root, showView: showView };
     }
 })();

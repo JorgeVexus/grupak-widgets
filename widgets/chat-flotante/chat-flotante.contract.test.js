@@ -10,6 +10,7 @@ var parseHTML = require("linkedom").parseHTML;
 var widgetDirectory = __dirname;
 var html = fs.readFileSync(path.join(widgetDirectory, "chat-flotante.html"), "utf8");
 var script = fs.readFileSync(path.join(widgetDirectory, "chat-flotante.js"), "utf8");
+var styles = fs.readFileSync(path.join(widgetDirectory, "chat-flotante.css"), "utf8");
 
 function flushPromises() {
     return new Promise(function (resolve) { setImmediate(resolve); });
@@ -31,9 +32,10 @@ function visibleViews(document) {
         .map(function (view) { return view.getAttribute("data-view"); });
 }
 
-async function createHarness() {
+async function createHarness(location) {
     var dom = parseHTML("<!doctype html><html><head></head><body><div id=\"gpk-floating-chat-root\"></div></body></html>");
     var window = dom.window;
+    var runtimeWindow = Object.create(window);
     var document = window.document;
     var activeElement = document.body;
     Object.defineProperty(document, "activeElement", {
@@ -43,11 +45,9 @@ async function createHarness() {
     window.HTMLElement.prototype.focus = function () {
         activeElement = this;
     };
-    if (!window.location) {
-        Object.defineProperty(window, "location", {
-            value: { hostname: "localhost", protocol: "http:" }
-        });
-    }
+    Object.defineProperty(runtimeWindow, "location", {
+        value: location || { hostname: "localhost", protocol: "http:" }
+    });
     var fetchCount = 0;
     var keydownListeners = new Set();
     var originalAdd = document.addEventListener.bind(document);
@@ -70,7 +70,7 @@ async function createHarness() {
             return Promise.resolve({ ok: true, text: function () { return Promise.resolve(html); } });
         },
         setTimeout: setTimeout,
-        window: window
+        window: runtimeWindow
     });
 
     function runScript() {
@@ -85,13 +85,14 @@ async function createHarness() {
         keydownCount: function () { return keydownListeners.size; },
         root: document.getElementById("gpk-floating-chat-root"),
         runScript: runScript,
-        window: window
+        window: runtimeWindow
     };
 }
 
 test("renders the complete five-view specification with inert final choices", async function () {
     var app = await createHarness();
     var document = app.document;
+    var mainActions = Array.from(document.querySelectorAll('[data-view="main"] .gpk-chat__option'));
     var viewNames = Array.from(document.querySelectorAll("[data-view]")).map(function (view) {
         return view.getAttribute("data-view");
     });
@@ -99,6 +100,16 @@ test("renders the complete five-view specification with inert final choices", as
 
     assert.deepEqual(viewNames, ["greeting", "main", "contact", "products", "information"]);
     assert.deepEqual(visibleViews(document), ["greeting"]);
+    assert.equal(mainActions.length, 3);
+    assert.deepEqual(mainActions.map(function (action) {
+        return action.querySelector("strong").textContent;
+    }), [
+        "Cotizar cajas",
+        "Hablar con un asesor",
+        "Información de productos"
+    ]);
+    assert.equal(document.querySelector('[data-view="main"] [data-action="information"]'), null);
+    assert.ok(document.querySelector('[data-view="information"]'));
     [
         "Cotizar cajas",
         "Hablar con un asesor",
@@ -119,6 +130,31 @@ test("renders the complete five-view specification with inert final choices", as
     assert.equal(document.querySelectorAll("a").length, 0);
     assert.equal(document.querySelectorAll("button[type=\"button\"][data-final-action]").length, 10);
     assert.doesNotMatch(renderedText, /[\u{1F300}-\u{1FAFF}]/u);
+});
+
+test("loads and safely crops the footer portrait as the header avatar", async function () {
+    var app = await createHarness();
+    var avatar = app.document.querySelector("[data-gpk-chat-avatar]");
+
+    assert.ok(avatar);
+    assert.equal(avatar.tagName, "IMG");
+    assert.match(
+        avatar.getAttribute("src"),
+        /^widgets\/footer\/newsletter-people\.png\?v=/
+    );
+    assert.match(styles, /\.gpk-chat__avatar\s*\{[^}]*overflow:\s*hidden;/s);
+    assert.match(styles, /\.gpk-chat__avatar\s*\{[^}]*pointer-events:\s*none;/s);
+    assert.match(styles, /\.gpk-chat__avatar img\s*\{[^}]*pointer-events:\s*none;/s);
+
+    var productionApp = await createHarness({
+        hostname: "www.grupak.com",
+        protocol: "https:"
+    });
+    var productionAvatar = productionApp.document.querySelector("[data-gpk-chat-avatar]");
+    assert.match(
+        productionAvatar.getAttribute("src"),
+        /^https:\/\/grupak-widgets\.vercel\.app\/widgets\/footer\/newsletter-people\.png\?v=/
+    );
 });
 
 test("supports the complete accessible navigation contract", { timeout: 2000 }, async function () {
@@ -156,6 +192,10 @@ test("supports the complete accessible navigation contract", { timeout: 2000 }, 
     click(app.window, document.querySelector('[data-view="products"] .gpk-chat__back'));
     assert.deepEqual(visibleViews(document), ["main"]);
     assert.equal(document.activeElement, document.querySelector('[data-view="main"] [data-action]'));
+
+    app.window.gpkFloatingChatController.showView("information");
+    assert.deepEqual(visibleViews(document), ["information"]);
+    assert.equal(document.activeElement, document.querySelector('[data-view="information"] .gpk-chat__back'));
 
     escape(app.window, document);
     assert.equal(panel.hidden, true);
