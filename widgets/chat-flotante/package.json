@@ -1,0 +1,17 @@
+{
+  "name": "chat-flotante",
+  "version": "1.0.0",
+  "description": "",
+  "main": "chat-flotante.js",
+  "scripts": {
+    "test": "node --test chat-flotante.contract.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "private": true,
+  "devDependencies": {
+    "linkedom": "^0.18.13"
+  }
+}
