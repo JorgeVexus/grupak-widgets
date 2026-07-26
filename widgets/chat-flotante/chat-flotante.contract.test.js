@@ -32,8 +32,11 @@ function visibleViews(document) {
         .map(function (view) { return view.getAttribute("data-view"); });
 }
 
-async function createHarness(location) {
-    var dom = parseHTML("<!doctype html><html><head></head><body><div id=\"gpk-floating-chat-root\"></div></body></html>");
+async function createHarness(location, options) {
+    options = options || {};
+    var rootMarkup = options.withRoot === false ? "" : "<div id=\"gpk-floating-chat-root\"></div>";
+    var scriptSrc = options.scriptSrc || "http://localhost/widgets/chat-flotante/chat-flotante.js";
+    var dom = parseHTML("<!doctype html><html><head><script src=\"" + scriptSrc + "\"></script></head><body>" + rootMarkup + "</body></html>");
     var window = dom.window;
     var runtimeWindow = Object.create(window);
     var document = window.document;
@@ -47,6 +50,20 @@ async function createHarness(location) {
     };
     Object.defineProperty(runtimeWindow, "location", {
         value: location || { hostname: "localhost", protocol: "http:" }
+    });
+    Object.defineProperty(runtimeWindow, "gpkFloatingChatRuntime", {
+        configurable: true,
+        writable: true,
+        value: null
+    });
+    Object.defineProperty(runtimeWindow, "gpkFloatingChatController", {
+        configurable: true,
+        writable: true,
+        value: null
+    });
+    Object.defineProperty(document, "currentScript", {
+        configurable: true,
+        value: { src: scriptSrc }
     });
     var fetchCount = 0;
     var keydownListeners = new Set();
@@ -69,6 +86,8 @@ async function createHarness(location) {
             fetchCount += 1;
             return Promise.resolve({ ok: true, text: function () { return Promise.resolve(html); } });
         },
+        MutationObserver: window.MutationObserver,
+        URL: URL,
         setTimeout: setTimeout,
         window: runtimeWindow
     });
@@ -83,7 +102,7 @@ async function createHarness(location) {
         document: document,
         fetchCount: function () { return fetchCount; },
         keydownCount: function () { return keydownListeners.size; },
-        root: document.getElementById("gpk-floating-chat-root"),
+        root: function () { return document.getElementById("gpk-floating-chat-root"); },
         runScript: runScript,
         window: runtimeWindow
     };
@@ -108,7 +127,10 @@ test("renders the complete five-view specification with inert final choices", as
         "Hablar con un asesor",
         "Información de productos"
     ]);
-    assert.equal(document.querySelector('[data-view="main"] [data-action="information"]'), null);
+    var informationFooter = document.querySelector('.gpk-chat__footer [data-action="information"]');
+    assert.ok(informationFooter);
+    assert.equal(informationFooter.tagName, "BUTTON");
+    assert.equal(informationFooter.getAttribute("type"), "button");
     assert.ok(document.querySelector('[data-view="information"]'));
     [
         "Cotizar cajas",
@@ -140,7 +162,7 @@ test("loads and safely crops the footer portrait as the header avatar", async fu
     assert.equal(avatar.tagName, "IMG");
     assert.match(
         avatar.getAttribute("src"),
-        /^widgets\/footer\/newsletter-people\.png\?v=/
+        /^http:\/\/localhost\/widgets\/footer\/newsletter-people\.png\?v=/
     );
     assert.match(styles, /\.gpk-chat__avatar\s*\{[^}]*overflow:\s*hidden;/s);
     assert.match(styles, /\.gpk-chat__avatar\s*\{[^}]*pointer-events:\s*none;/s);
@@ -193,7 +215,7 @@ test("supports the complete accessible navigation contract", { timeout: 2000 }, 
     assert.deepEqual(visibleViews(document), ["main"]);
     assert.equal(document.activeElement, document.querySelector('[data-view="main"] [data-action]'));
 
-    app.window.gpkFloatingChatController.showView("information");
+    click(app.window, document.querySelector('[data-action="information"]'));
     assert.deepEqual(visibleViews(document), ["information"]);
     assert.equal(document.activeElement, document.querySelector('[data-view="information"] .gpk-chat__back'));
 
@@ -214,71 +236,54 @@ test("mounting is idempotent and SPA reinitialization cleans global listeners", 
 
     assert.equal(app.fetchCount(), 1);
     assert.equal(app.keydownCount(), 1);
-    assert.equal(app.root.getAttribute("data-gpk-chat-ready"), "true");
+    assert.equal(app.root().getAttribute("data-gpk-chat-ready"), "true");
 
     await app.runScript();
     assert.equal(app.fetchCount(), 1);
     assert.equal(app.keydownCount(), 1);
-    assert.equal(app.root.querySelectorAll("[data-gpk-chat-widget]").length, 1);
+    assert.equal(app.root().querySelectorAll("[data-gpk-chat-widget]").length, 1);
 
-    app.root.innerHTML = "";
-    await app.runScript();
+    app.root().innerHTML = "";
+    await flushPromises();
+    await flushPromises();
     assert.equal(app.fetchCount(), 2);
     assert.equal(app.keydownCount(), 1);
-    assert.equal(app.root.querySelectorAll("[data-gpk-chat-widget]").length, 1);
+    assert.equal(app.root().querySelectorAll("[data-gpk-chat-widget]").length, 1);
 });
 
-test("ignores a pending mount when an SPA replaces its root", async function () {
-    var dom = parseHTML("<!doctype html><html><head></head><body><div id=\"gpk-floating-chat-root\"></div></body></html>");
-    var window = dom.window;
-    var document = window.document;
-    var pendingFetches = [];
-    var keydownListeners = new Set();
-    var originalAdd = document.addEventListener.bind(document);
-    var originalRemove = document.removeEventListener.bind(document);
+test("mounts a late root and replaces its controller without reexecuting the script", async function () {
+    var app = await createHarness(undefined, { withRoot: false });
+    var document = app.document;
+    var lateRoot = document.createElement("div");
+    lateRoot.id = "gpk-floating-chat-root";
+    document.body.appendChild(lateRoot);
+    await flushPromises();
+    await flushPromises();
 
-    if (!window.location) {
-        Object.defineProperty(window, "location", {
-            value: { hostname: "localhost", protocol: "http:" }
-        });
-    }
-    document.addEventListener = function (type, listener, options) {
-        if (type === "keydown") keydownListeners.add(listener);
-        return originalAdd(type, listener, options);
-    };
-    document.removeEventListener = function (type, listener, options) {
-        if (type === "keydown") keydownListeners.delete(listener);
-        return originalRemove(type, listener, options);
-    };
+    assert.equal(app.fetchCount(), 1);
+    assert.equal(lateRoot.querySelectorAll("[data-gpk-chat-widget]").length, 1);
+    assert.equal(app.keydownCount(), 1);
 
-    var context = vm.createContext({
-        console: console,
-        document: document,
-        fetch: function () {
-            return new Promise(function (resolve) {
-                pendingFetches.push(resolve);
-            });
-        },
-        window: window
-    });
-
-    vm.runInContext(script, context);
-    var staleRoot = document.getElementById("gpk-floating-chat-root");
     var currentRoot = document.createElement("div");
     currentRoot.id = "gpk-floating-chat-root";
-    staleRoot.replaceWith(currentRoot);
-    vm.runInContext(script, context);
-
-    assert.equal(pendingFetches.length, 2);
-    pendingFetches[1]({ ok: true, text: function () { return Promise.resolve(html); } });
-    await flushPromises();
-    await flushPromises();
-    pendingFetches[0]({ ok: true, text: function () { return Promise.resolve(html); } });
+    lateRoot.replaceWith(currentRoot);
     await flushPromises();
     await flushPromises();
 
-    assert.equal(staleRoot.querySelectorAll("[data-gpk-chat-widget]").length, 0);
+    assert.equal(app.fetchCount(), 2);
     assert.equal(currentRoot.querySelectorAll("[data-gpk-chat-widget]").length, 1);
-    assert.equal(keydownListeners.size, 1);
-    assert.equal(window.gpkFloatingChatController.root, currentRoot);
+    assert.equal(app.keydownCount(), 1);
+    assert.equal(app.window.gpkFloatingChatController.root, currentRoot);
+});
+
+test("resolves preview assets from the script URL", async function () {
+    var app = await createHarness(
+        { hostname: "localhost", protocol: "http:" },
+        { scriptSrc: "http://localhost:8026/subruta/widgets/chat-flotante/chat-flotante.js" }
+    );
+    var stylesheet = app.document.getElementById("gpk-floating-chat-styles");
+    var avatar = app.document.querySelector("[data-gpk-chat-avatar]");
+
+    assert.match(stylesheet.href, /^http:\/\/localhost:8026\/subruta\/widgets\/chat-flotante\/chat-flotante\.css\?v=/);
+    assert.match(avatar.src, /^http:\/\/localhost:8026\/subruta\/widgets\/footer\/newsletter-people\.png\?v=/);
 });

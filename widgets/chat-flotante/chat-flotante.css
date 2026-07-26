@@ -319,8 +319,15 @@
     text-align: center;
 }
 
-.gpk-chat__footer p {
-    margin: 0;
+.gpk-chat__footer button {
+    width: 100%;
+    min-height: 34px;
+    padding: 0 12px;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    cursor: pointer;
+    font-size: inherit;
 }
 
 .gpk-chat__launcher {
@@ -365,6 +372,10 @@
     .gpk-chat__close:hover,
     .gpk-chat__back:hover {
         opacity: 0.72;
+    }
+
+    .gpk-chat__footer button:hover {
+        color: var(--gpk-chat-green-dark);
     }
 }
 
@@ -422,4 +433,17 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.7;
+}
+
+.gpk-chat__load-error {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    max-width: 280px;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid #e3e8e5;
+    color: #143226;
+    background: #ffffff;
+    font: 12px/1.35 Arial, Helvetica, sans-serif;
 }

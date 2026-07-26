@@ -1,68 +1,117 @@
 (function () {
     "use strict";
 
-    var isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
-    var widgetsBaseURL = isLocalhost ? "widgets" : "https://grupak-widgets.vercel.app/widgets";
-    var baseURL = widgetsBaseURL + "/chat-flotante";
-    var assetVersion = "20260725-task-4";
+    var runtimeKey = "gpkFloatingChatRuntime";
+    if (window[runtimeKey]) {
+        window[runtimeKey].reconcile();
+        return;
+    }
+
+    var script = document.currentScript ||
+        document.querySelector('script[src*="chat-flotante.js"]');
+    var isProduction = window.location.protocol !== "file:" &&
+        window.location.hostname !== "localhost" &&
+        window.location.hostname !== "127.0.0.1";
+    var scriptBaseURL = script && script.src ? new URL(".", script.src) : null;
+    var productionWidgetsURL = new URL("https://grupak-widgets.vercel.app/widgets/");
+    var widgetsBaseURL = isProduction ? productionWidgetsURL : scriptBaseURL && new URL("../", scriptBaseURL);
+    var chatBaseURL = isProduction ? new URL("chat-flotante/", productionWidgetsURL) : scriptBaseURL;
+    var assetVersion = "20260725-task-5";
     var controllerKey = "gpkFloatingChatController";
-    var mountGenerationKey = "gpkFloatingChatMountGeneration";
+    var mountGeneration = 0;
+    var observedRoot = null;
+    var scheduled = false;
+
+    var observer = new MutationObserver(scheduleReconcile);
+    window[runtimeKey] = { observer: observer, reconcile: reconcile, cleanup: cleanupRuntime };
 
     ensureStyles();
-    mountWidget();
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    reconcile();
+
+    function assetURL(relativePath) {
+        return new URL(relativePath, widgetsBaseURL).href + "?v=" + assetVersion;
+    }
 
     function ensureStyles() {
-        if (document.getElementById("gpk-floating-chat-styles")) return;
+        if (document.getElementById("gpk-floating-chat-styles") || !chatBaseURL) return;
         var link = document.createElement("link");
         link.id = "gpk-floating-chat-styles";
         link.rel = "stylesheet";
-        link.href = baseURL + "/chat-flotante.css?v=" + assetVersion;
+        link.href = new URL("chat-flotante.css", chatBaseURL).href + "?v=" + assetVersion;
         document.head.appendChild(link);
     }
 
-    function mountWidget() {
-        var root = document.getElementById("gpk-floating-chat-root");
-        if (!root) return;
-        if (root.getAttribute("data-gpk-chat-ready") === "true" && root.querySelector("[data-gpk-chat-widget]")) return;
-        if (root.getAttribute("data-gpk-chat-loading") === "true") return;
+    function scheduleReconcile() {
+        if (scheduled) return;
+        scheduled = true;
+        Promise.resolve().then(function () {
+            scheduled = false;
+            reconcile();
+        });
+    }
 
-        cleanupPreviousController();
+    function reconcile() {
+        var root = document.getElementById("gpk-floating-chat-root");
+        var controller = window[controllerKey];
+        var rootChanged = observedRoot !== root;
+        var widgetMissing = root && !root.querySelector("[data-gpk-chat-widget]");
+
+        if (controller && (controller.root !== root || widgetMissing)) {
+            controller.cleanup();
+            window[controllerKey] = null;
+        }
+        if (rootChanged) {
+            mountGeneration += 1;
+            if (observedRoot) {
+                observedRoot.removeAttribute("data-gpk-chat-loading");
+                observedRoot.removeAttribute("data-gpk-chat-ready");
+            }
+            observedRoot = root;
+        }
+        if (!root) return;
+        if (root.getAttribute("data-gpk-chat-ready") === "error") return;
+        if (root.getAttribute("data-gpk-chat-ready") === "true" && !widgetMissing) return;
+        if (root.getAttribute("data-gpk-chat-loading") === "true") return;
+        mountWidget(root);
+    }
+
+    function mountWidget(root) {
+        if (!chatBaseURL || !widgetsBaseURL || window.location.protocol === "file:") {
+            root.innerHTML = '<p class="gpk-chat__load-error" role="status">Abre esta vista desde un servidor local para cargar el chat.</p>';
+            root.setAttribute("data-gpk-chat-ready", "error");
+            return;
+        }
         root.removeAttribute("data-gpk-chat-ready");
         root.setAttribute("data-gpk-chat-loading", "true");
-        var mountGeneration = (window[mountGenerationKey] || 0) + 1;
-        window[mountGenerationKey] = mountGeneration;
+        var generation = ++mountGeneration;
 
-        fetch(baseURL + "/chat-flotante.html?v=" + assetVersion)
+        fetch(new URL("chat-flotante.html", chatBaseURL).href + "?v=" + assetVersion)
             .then(function (response) {
                 if (!response.ok) throw new Error("Error loading floating chat HTML");
                 return response.text();
             })
             .then(function (html) {
-                if (!isCurrentMount(root, mountGeneration)) return;
+                if (!isCurrentMount(root, generation)) return;
                 root.innerHTML = html;
-                initializeWidget(root, mountGeneration);
+                initializeWidget(root, generation);
             })
             .catch(function (error) {
+                if (!isCurrentMount(root, generation)) return;
                 root.removeAttribute("data-gpk-chat-loading");
+                root.innerHTML = '<p class="gpk-chat__load-error" role="status">No fue posible cargar el chat.</p>';
                 console.error("[gpk-floating-chat]", error);
             });
     }
 
-    function isCurrentMount(root, mountGeneration) {
-        return window[mountGenerationKey] === mountGeneration &&
+    function isCurrentMount(root, generation) {
+        return mountGeneration === generation &&
             document.getElementById("gpk-floating-chat-root") === root &&
             root.isConnected;
     }
 
-    function cleanupPreviousController() {
-        var previousController = window[controllerKey];
-        if (previousController && typeof previousController.cleanup === "function") {
-            previousController.cleanup();
-        }
-    }
-
-    function initializeWidget(root, mountGeneration) {
-        if (!isCurrentMount(root, mountGeneration)) return;
+    function initializeWidget(root, generation) {
+        if (!isCurrentMount(root, generation)) return;
         var widget = root.querySelector("[data-gpk-chat-widget]");
         var panel = root.querySelector("[data-gpk-chat-panel]");
         var launcher = root.querySelector("[data-gpk-chat-launcher]");
@@ -76,10 +125,7 @@
             root.removeAttribute("data-gpk-chat-loading");
             return;
         }
-
-        if (avatar) {
-            avatar.src = widgetsBaseURL + "/footer/newsletter-people.png?v=" + assetVersion;
-        }
+        if (avatar) avatar.src = assetURL("footer/newsletter-people.png");
 
         function showView(state) {
             if (states.indexOf(state) === -1) return;
@@ -87,12 +133,10 @@
                 view.hidden = view.getAttribute("data-view") !== state;
             });
             widget.setAttribute("data-state", state);
-
             if (isOpen) {
                 var visibleView = root.querySelector('[data-view="' + state + '"]');
                 var focusTarget = visibleView.querySelector(".gpk-chat__back") ||
-                    visibleView.querySelector("[data-action]") ||
-                    closeButton;
+                    visibleView.querySelector("[data-action]") || closeButton;
                 focusTarget.focus();
             }
         }
@@ -139,16 +183,21 @@
             document.removeEventListener("keydown", handleDocumentKeydown);
         }
 
-        cleanupPreviousController();
         launcher.addEventListener("click", handleLauncherClick);
         closeButton.addEventListener("click", closeWidget);
         widget.addEventListener("click", handleWidgetClick);
         document.addEventListener("keydown", handleDocumentKeydown);
-
         showView("greeting");
         widget.setAttribute("data-open", "false");
         root.removeAttribute("data-gpk-chat-loading");
         root.setAttribute("data-gpk-chat-ready", "true");
         window[controllerKey] = { cleanup: cleanup, root: root, showView: showView };
+    }
+
+    function cleanupRuntime() {
+        observer.disconnect();
+        if (window[controllerKey]) window[controllerKey].cleanup();
+        window[controllerKey] = null;
+        window[runtimeKey] = null;
     }
 })();
