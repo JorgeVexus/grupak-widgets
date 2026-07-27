@@ -24,10 +24,12 @@
 
 .gpk-form-shell {
     width: min(1104px, calc(100% - 32px));
+    max-width: 1104px;
     margin: 0 auto;
     background: var(--gpk-form-white);
     border: 1px dashed var(--gpk-form-line);
     border-radius: 4px;
+    overflow: hidden;
 }
 
 .gpk-form-tabs {
@@ -70,6 +72,8 @@
 .gpk-form-panel {
     display: none;
     padding: 48px;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .gpk-form-panel.is-active {
@@ -206,7 +210,7 @@
     border-bottom: 1px solid var(--gpk-form-soft-line);
     display: grid;
     gap: 16px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0 0 34px;
     padding-bottom: 34px;
 }
@@ -349,6 +353,12 @@
     gap: 10px;
     line-height: 1.4;
     margin-bottom: 12px;
+    max-width: 100%;
+}
+
+.gpk-check span {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .gpk-check input {
@@ -369,6 +379,8 @@
     font-size: 11px;
     line-height: 1.55;
     margin: 12px 0 26px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .gpk-hint {
