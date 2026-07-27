@@ -14,6 +14,7 @@
     color: var(--gpk-form-ink);
     background: transparent;
     width: 100%;
+    max-width: 100%;
 }
 
 .gpk-form-widget *,
@@ -23,7 +24,7 @@
 }
 
 .gpk-form-shell {
-    width: min(1104px, calc(100% - 32px));
+    width: 100%;
     max-width: 1104px;
     min-width: 0;
     margin: 0 auto;
@@ -31,7 +32,6 @@
     border: 1px dashed var(--gpk-form-line);
     border-radius: 4px;
     overflow: hidden;
-    contain: layout;
 }
 
 .gpk-form-tabs {
@@ -79,6 +79,7 @@
 .gpk-form-panel {
     display: none;
     padding: 48px;
+    width: 100%;
     min-width: 0;
     max-width: 100%;
 }
