@@ -36,11 +36,10 @@
 
 .gpk-form-tabs {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: stretch;
-    gap: clamp(28px, 7vw, 88px);
     border-bottom: 1px dashed var(--gpk-form-line);
-    padding: 0 16px;
+    padding: 0;
     width: 100%;
 }
 
@@ -55,46 +54,10 @@
     font-size: 17px;
     padding: 18px 4px;
     position: relative;
-    flex: 1 1 0;
+    flex: 1 1 0px;
+    width: 33.333%;
     text-align: center;
     white-space: nowrap;
-}
-
-.gpk-form-tab.is-active {
-    color: var(--gpk-form-green);
-    font-family: var(--gpk-form-font-black);
-    font-weight: 700;
-}
-
-.gpk-form-tab.is-active::after {
-    background: var(--gpk-form-green);
-    bottom: -1px;
-    content: "";
-    height: 3px;
-    left: 0;
-    position: absolute;
-    right: 0;
-}
-
-.gpk-form-tabs {
-    display: flex;
-    justify-content: center;
-    gap: clamp(28px, 7vw, 88px);
-    border-bottom: 1px dashed var(--gpk-form-line);
-    padding: 0 16px;
-}
-
-.gpk-form-tab {
-    appearance: none;
-    border: 0;
-    background: transparent;
-    color: var(--gpk-form-ink);
-    cursor: pointer;
-    font: inherit;
-    font-family: var(--gpk-form-font-title);
-    font-size: 17px;
-    padding: 18px 4px;
-    position: relative;
 }
 
 .gpk-form-tab.is-active {

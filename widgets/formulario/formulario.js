@@ -112,6 +112,12 @@
             document.getElementById("grupak-formulario-root");
 
         if (root) {
+            var existingWidget = root.querySelector("#gpk-formulario-widget");
+            if (existingWidget) {
+                initWidget(existingWidget);
+                return;
+            }
+
             fetch(baseURL + "/formulario.html")
                 .then(function (res) {
                     if (!res.ok) throw new Error("Error loading Formulario widget HTML");
