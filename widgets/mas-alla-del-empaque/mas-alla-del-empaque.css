@@ -87,14 +87,19 @@
 
 .mas-alla-badge {
     display: inline-block;
-    background-image: url('images/Vector-badge.svg');
+    background-image: url('images/Vector-badge-new.svg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    color: white;
-    padding: 7px 22px 11px;
-    font-size: 14px;
+    color: #FFF;
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-main), sans-serif;
+    font-size: 13px;
+    font-style: normal;
     font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 10px 70px 16px 70px;
     margin-top: 45px;
     margin-bottom: 6px;
 }
