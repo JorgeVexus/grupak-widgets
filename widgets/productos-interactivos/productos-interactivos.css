@@ -2994,9 +2994,14 @@
     box-sizing: border-box;
 }
 
+#gpk-products-widget .grabados-green-card[data-index="2"] .grabados-card-text-wrapper,
+#gpk-products-widget .grabados-green-card[data-index="4"] .grabados-card-text-wrapper {
+    transform: translateY(-25px);
+}
+
 #gpk-products-widget .grabados-card-title {
     font-family: var(--font-title);
-    font-size: 16px;
+    font-size: 21px;
     font-weight: 800 !important;
     color: var(--color-white);
     line-height: 1.25;
@@ -3007,7 +3012,7 @@
 
 #gpk-products-widget .grabados-card-desc {
     font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.35;
     color: var(--color-white);
     opacity: 0.95;
