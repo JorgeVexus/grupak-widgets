@@ -1996,8 +1996,9 @@
 }
 
 #gpk-products-widget .laminas-resistencia-box {
-    width: 320px;
+    width: 380px;
     flex-shrink: 0;
+    text-align: center;
     opacity: 0;
     transform: translateY(60px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
@@ -2010,6 +2011,8 @@
     color: var(--color-green);
     margin-bottom: 10px;
     line-height: 1.25;
+    white-space: nowrap;
+    text-align: center;
 }
 
 #gpk-products-widget .laminas-resistencia-desc {
@@ -2017,6 +2020,7 @@
     font-size: 18px;
     line-height: 1.5;
     color: var(--gris-princ, #6E6E6E);
+    text-align: center;
 }
 
 #gpk-products-widget .laminas-stack-container {
@@ -2173,6 +2177,10 @@
 }
 
 /* Titles and Typography for Specs */
+#gpk-products-widget .spec-text-box {
+    text-align: center;
+}
+
 #gpk-products-widget .spec-title {
     font-family: "Neue Haas Grotesk Display Pro", var(--font-title), sans-serif;
     font-size: 24px;
@@ -2180,6 +2188,8 @@
     color: var(--color-green);
     margin-bottom: 12px;
     line-height: 1.25;
+    white-space: normal;
+    text-align: center;
 }
 
 #gpk-products-widget .spec-desc {
@@ -2188,6 +2198,7 @@
     line-height: 1.5;
     color: var(--gris-princ, #6E6E6E);
     margin: 0;
+    text-align: center;
 }
 
 /* MODE 5 ACTIVE STATE (Stage 1: Spec 1 enters centered at full size) */
