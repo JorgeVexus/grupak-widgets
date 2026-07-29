@@ -352,9 +352,9 @@
 }
 
 #gpk-products-widget .gpk-hero-kpi-left-top {
-    left: calc(var(--hero-media-width) * -0.095);
-    top: calc((var(--hero-media-height) * 0.42) + -40px);
-    width: 365px;
+    left: calc(var(--hero-media-width) * -0.075);
+    top: calc((var(--hero-media-height) * 0.16) + 10px);
+    width: 355px;
     transform: translate3d(-120px, 0, 0);
 }
 
@@ -4920,7 +4920,7 @@
 
     #gpk-products-widget .gpk-hero-kpi-left-top {
         left: 5% !important;
-        top: 35% !important;
+        top: 10% !important;
         transform: translate3d(-70px, 0, 0) !important;
     }
 
