@@ -1356,7 +1356,7 @@
 }
 
 #gpk-products-widget .cajas-image-container {
-    width: 44%;
+    width: 48%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1367,14 +1367,14 @@
 
 #gpk-products-widget .cajas-main-image {
     max-width: 100%;
-    max-height: 460px;
+    max-height: 530px;
     object-fit: contain;
 }
 
 #gpk-products-widget .cajas-text-container {
-    width: 460px;
-    max-width: 460px;
-    flex: 0 0 460px;
+    width: 520px;
+    max-width: 520px;
+    flex: 0 0 520px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1414,7 +1414,7 @@
     color: var(--color-grey-medium);
     margin-bottom: 14px;
     text-align: center;
-    max-width: 395px;
+    max-width: 480px;
 }
 
 #gpk-products-widget .cajas-paragraph-1 strong {
@@ -1427,7 +1427,7 @@
     line-height: 1.5;
     color: var(--color-grey-medium);
     text-align: center;
-    max-width: 395px;
+    max-width: 480px;
     opacity: 0;
     transform: translateY(120px);
     transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
