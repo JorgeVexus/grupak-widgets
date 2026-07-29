@@ -2167,7 +2167,7 @@
 }
 
 #gpk-products-widget .spec-group-2 .spec-text-box {
-    width: 260px;
+    width: 330px;
     flex-shrink: 0;
 }
 
@@ -2220,9 +2220,13 @@
     width: 320px;
 }
 
+#gpk-products-widget .products-board.mode-6 .spec-group-1 .spec-img-1 {
+    object-position: right center;
+}
+
 #gpk-products-widget .products-board.mode-6 .laminas-spec-group.spec-group-2 {
     opacity: 1;
-    left: 780px;
+    left: 640px;
     transform: translateY(-50%) translateX(0);
     pointer-events: auto;
 }
