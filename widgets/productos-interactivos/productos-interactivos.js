@@ -133,10 +133,22 @@
         }
 
         if (heroHome) {
-            const heroImg = heroHome.querySelector(".gpk-hero-home-img");
+            const heroVideo = heroHome.querySelector(".gpk-hero-home-video");
+            const heroImg = heroHome.querySelector("img.gpk-hero-home-img");
             const kpiBgs = heroHome.querySelectorAll(".gpk-hero-kpi-bg");
 
-            if (heroImg) heroImg.src = `${widgetBaseURL}/images/hero-new.webp`;
+            if (heroVideo) {
+                const mp4Source = heroVideo.querySelector('source[type="video/mp4"]');
+                const webmSource = heroVideo.querySelector('source[type="video/webm"]');
+                if (webmSource) webmSource.src = `${widgetBaseURL}/videos/hero-video.webm`;
+                if (mp4Source) mp4Source.src = `${widgetBaseURL}/videos/hero-video.mp4`;
+                heroVideo.poster = `${widgetBaseURL}/images/hero-new.webp`;
+                heroVideo.load();
+                heroVideo.play().catch(() => {});
+            } else if (heroImg) {
+                heroImg.src = `${widgetBaseURL}/images/hero-new.webp`;
+            }
+
             kpiBgs.forEach(bg => {
                 bg.src = `${widgetBaseURL}/images/vector%20hero%20home.svg`;
             });

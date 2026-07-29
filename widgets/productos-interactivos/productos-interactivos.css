@@ -256,7 +256,8 @@
     animation: gpkHeroImageSettle 1.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-#gpk-products-widget .gpk-hero-home-img {
+#gpk-products-widget .gpk-hero-home-img,
+#gpk-products-widget .gpk-hero-home-video {
     display: block;
     width: 100%;
     height: 100%;
@@ -4848,7 +4849,8 @@
         animation: gpkHeroImageSettleMobile 1.15s cubic-bezier(0.16, 1, 0.3, 1) both !important;
     }
 
-    #gpk-products-widget .gpk-hero-home-img {
+    #gpk-products-widget .gpk-hero-home-img,
+    #gpk-products-widget .gpk-hero-home-video {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
