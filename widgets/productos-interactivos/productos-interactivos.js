@@ -143,6 +143,17 @@
                 if (webmSource) webmSource.src = `${widgetBaseURL}/videos/hero-video.webm`;
                 if (mp4Source) mp4Source.src = `${widgetBaseURL}/videos/hero-video.mp4`;
                 heroVideo.poster = `${widgetBaseURL}/images/hero-new.webp`;
+
+                const maskURL = `url("${widgetBaseURL}/images/hero-mask.png")`;
+                heroVideo.style.webkitMaskImage = maskURL;
+                heroVideo.style.maskImage = maskURL;
+                heroVideo.style.webkitMaskSize = "100% 100%";
+                heroVideo.style.maskSize = "100% 100%";
+                heroVideo.style.webkitMaskRepeat = "no-repeat";
+                heroVideo.style.maskRepeat = "no-repeat";
+                heroVideo.style.webkitMaskPosition = "center";
+                heroVideo.style.maskPosition = "center";
+
                 heroVideo.load();
                 heroVideo.play().catch(() => {});
             } else if (heroImg) {
