@@ -7,10 +7,10 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20260729-certificaciones-1";
+    var assetVersion = "20260729-transparent-white-theme-1";
     var logoURL = isLocalhost
-        ? "widgets/productos-interactivos/logoGrupak.svg"
-        : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
+        ? "widgets/navbar-menu/logoGrupak 2.svg"
+        : "https://grupak-widgets.vercel.app/widgets/navbar-menu/logoGrupak%202.svg";
 
     ensureStyles();
     mountWidget();
@@ -29,6 +29,10 @@
             document.getElementById("gpk-navbar-menu-root") ||
             document.getElementById("grupak-navbar-menu-root");
 
+        var theme = root
+            ? (root.getAttribute("data-gpk-theme") || root.getAttribute("data-gpk-variant") || root.getAttribute("data-gpk-nav-mode"))
+            : null;
+
         if (root) {
             fetch(baseURL + "/navbar-menu.html?v=" + assetVersion)
                 .then(function (res) {
@@ -37,7 +41,11 @@
                 })
                 .then(function (html) {
                     root.innerHTML = html;
-                    initNavbar(root.querySelector("#gpk-navbar-menu"));
+                    var navbar = root.querySelector("#gpk-navbar-menu");
+                    if (navbar && theme) {
+                        navbar.setAttribute("data-gpk-theme", theme);
+                    }
+                    initNavbar(navbar);
                 })
                 .catch(function (err) {
                     console.error("[gpk-navbar-menu]", err);
@@ -45,7 +53,11 @@
             return;
         }
 
-        initNavbar(document.getElementById("gpk-navbar-menu"));
+        var navbar = document.getElementById("gpk-navbar-menu");
+        if (navbar && theme) {
+            navbar.setAttribute("data-gpk-theme", theme);
+        }
+        initNavbar(navbar);
     }
 
     function initNavbar(navbar) {

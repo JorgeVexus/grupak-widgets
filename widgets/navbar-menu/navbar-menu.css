@@ -33,10 +33,10 @@
     justify-content: space-between;
     gap: 24px;
     padding: 10px clamp(20px, 3.9vw, 72px) 10px 28px;
-    background: rgba(10, 12, 14, 0.55);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
 }
 
@@ -315,7 +315,7 @@
 }
 
 .gpk-navbar-menu.gpk-nav-bg-white .gpk-navbar-menu__link {
-    color: #02321e;
+    color: var(--gpk-green);
 }
 
 .gpk-navbar-menu.gpk-nav-bg-white .gpk-navbar-menu__lang,
@@ -334,7 +334,7 @@
 .gpk-navbar-menu.is-mobile-open .gpk-navbar-menu__link:is(:hover, :focus-visible),
 .gpk-navbar-menu.is-mobile-open .gpk-navbar-menu__item:focus-within > .gpk-navbar-menu__link,
 .gpk-navbar-menu.is-mobile-open .gpk-navbar-menu__item:hover > .gpk-navbar-menu__link {
-    color: var(--gpk-green);
+    color: var(--gpk-dark);
 }
 
 .gpk-navbar-menu.gpk-nav-bg-white .gpk-navbar-menu__cta,
@@ -345,6 +345,60 @@
 
 .gpk-navbar-menu.gpk-nav-bg-white .gpk-navbar-menu__cta:is(:hover, :focus-visible),
 .gpk-navbar-menu.is-mobile-open .gpk-navbar-menu__cta:is(:hover, :focus-visible) {
+    background: var(--gpk-green);
+    color: var(--gpk-white);
+}
+
+/* White Base Variant Theme (via data-gpk-theme="white", data-gpk-variant="white", data-gpk-nav-mode="white", or .gpk-theme-white) */
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__bar,
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__bar,
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__bar,
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__bar {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__link,
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__link,
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__link,
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__link {
+    color: var(--gpk-green);
+}
+
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__link:is(:hover, :focus-visible),
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__item:focus-within > .gpk-navbar-menu__link,
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__item:hover > .gpk-navbar-menu__link,
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__link:is(:hover, :focus-visible),
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__item:focus-within > .gpk-navbar-menu__link,
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__item:hover > .gpk-navbar-menu__link,
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__link:is(:hover, :focus-visible),
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__item:focus-within > .gpk-navbar-menu__link,
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__item:hover > .gpk-navbar-menu__link,
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__link:is(:hover, :focus-visible),
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__item:focus-within > .gpk-navbar-menu__link,
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__item:hover > .gpk-navbar-menu__link {
+    color: var(--gpk-dark);
+}
+
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__toggle,
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__toggle,
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__toggle,
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__toggle {
+    color: var(--gpk-dark);
+}
+
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__cta,
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__cta,
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__cta,
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__cta {
+    border-color: var(--gpk-green);
+    color: var(--gpk-green);
+}
+
+.gpk-navbar-menu[data-gpk-theme="white"] .gpk-navbar-menu__cta:is(:hover, :focus-visible),
+.gpk-navbar-menu[data-gpk-variant="white"] .gpk-navbar-menu__cta:is(:hover, :focus-visible),
+.gpk-navbar-menu[data-gpk-nav-mode="white"] .gpk-navbar-menu__cta:is(:hover, :focus-visible),
+.gpk-navbar-menu.gpk-theme-white .gpk-navbar-menu__cta:is(:hover, :focus-visible) {
     background: var(--gpk-green);
     color: var(--gpk-white);
 }
