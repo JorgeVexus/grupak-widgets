@@ -8,7 +8,7 @@
     const baseURL = isLocalhost
         ? "widgets/productos-menu"
         : "https://grupak-widgets.vercel.app/widgets/productos-menu";
-    const assetVersion = "20260725-laptop-1";
+    const assetVersion = "20260729-slide-map-update-1";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-menu-styles")) {
@@ -42,11 +42,11 @@
 
         // Map product names to target slide indices in productos-interactivos
         const slideMap = {
-            "papel": 5,
-            "cajas": 2,
-            "lamina": 7,
-            "grabados": 8,
-            "energia": 9
+            "papel": 2,
+            "cajas": 7,
+            "lamina": 4,
+            "grabados": 10,
+            "energia": 14
         };
 
         items.forEach(item => {
