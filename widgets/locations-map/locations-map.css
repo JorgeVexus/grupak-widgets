@@ -46,7 +46,7 @@
 /* Contenedor Principal */
 #gpk-locations-map-widget .locations-map-container {
     display: grid;
-    grid-template-columns: 442px 1fr;
+    grid-template-columns: 560px 1fr;
     gap: 30px;
     align-items: start;
     width: 100%;
@@ -686,7 +686,7 @@
 /* Contenedores escalados para pantallas menores a 1600px en el mapa */
 @media (min-width: 993px) and (max-width: 1600px) {
     #gpk-locations-map-widget .locations-map-container {
-        grid-template-columns: 400px 1fr;
+        grid-template-columns: 480px 1fr;
     }
     
     #gpk-locations-map-widget .locations-panel {
@@ -704,7 +704,7 @@
 
 @media (min-width: 993px) and (max-width: 1200px) {
     #gpk-locations-map-widget .locations-map-container {
-        grid-template-columns: 350px 1fr;
+        grid-template-columns: 440px 1fr;
     }
     
     #gpk-locations-map-widget .map-image-wrapper {

@@ -8,7 +8,7 @@
         const link = document.createElement("link");
         link.id = "gpk-locations-styles";
         link.rel = "stylesheet";
-        link.href = `${baseURL}/locations-map.css`;
+        link.href = `${baseURL}/locations-map.css?v=20260729-width-1`;
         document.head.appendChild(link);
     }
 
