@@ -189,7 +189,7 @@
     width: 45px;
     flex-shrink: 0;
     transition: color 0.4s ease;
-    transform: translateY(-8px);
+    transform: translateY(-14px);
 }
 
 .mas-alla-item-text strong {
@@ -202,7 +202,7 @@
 }
 
 .mas-alla-item:not([data-index="2"]) .mas-alla-item-text strong {
-    transform: translateY(-8px);
+    transform: translateY(-12px);
 }
 
 .mas-alla-item-text p {
