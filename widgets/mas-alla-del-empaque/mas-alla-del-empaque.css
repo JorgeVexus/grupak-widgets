@@ -52,9 +52,9 @@
 
 .mas-alla-slide-img[data-index="0"] {
     object-fit: contain;
-    object-position: center;
+    object-position: left center;
     background-color: #ffffff;
-    padding: 30px;
+    padding: 20px 20px 20px 0;
     box-sizing: border-box;
 }
 
@@ -380,7 +380,7 @@
     }
 
     .mas-alla-slide-img[data-index="0"] {
-        padding: 16px;
+        padding: 10px 10px 10px 0;
     }
 
     .mas-alla-content-section {
