@@ -470,15 +470,17 @@
 
 #gpk-timeline-widget .photo-img-1962 {
   position: absolute;
-  top: 14px;
-  left: 24px;
-  width: 976px;
-  height: 456px;
+  top: 50%;
+  left: 52.5%;
+  transform: translate(-50%, -50%);
+  width: 930px;
+  height: 445px;
   object-fit: cover;
+  object-position: center;
   z-index: 1;
   opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  border-radius: 8px;
+  transition: opacity 0.6s ease;
 }
 
 #gpk-timeline-widget .vector-img-1962 {
@@ -511,7 +513,6 @@
 
 #gpk-timeline-widget .timeline-slide[data-year="1962"].active .photo-img-1962 {
   opacity: 1;
-  clip-path: inset(0 0% 0 0);
   transition-delay: 0.5s;
 }
 
@@ -626,15 +627,17 @@
 
 #gpk-timeline-widget .photo-img-1985 {
   position: absolute;
-  top: 12px;
-  left: 14px;
-  width: 472px;
-  height: 391px;
+  top: 50%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  height: 365px;
   object-fit: cover;
+  object-position: center;
   z-index: 1;
   opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  border-radius: 8px;
+  transition: opacity 0.6s ease;
 }
 
 #gpk-timeline-widget .vector-img-1985 {
@@ -681,8 +684,7 @@
 
 #gpk-timeline-widget .timeline-slide[data-year="1985"].active .photo-img-1985 {
   opacity: 1;
-  clip-path: inset(0 0% 0 0);
-  transition-delay: 0.5s;
+  transition-delay: 0.3s;
 }
 
 /* 2003 Slide Animations (vector + photo reveal like 1962) */
@@ -1047,10 +1049,10 @@
 
 #gpk-timeline-widget .img-2021-1 {
   position: absolute;
-  top: 14px;
-  left: 22px;
-  width: calc(100% - 44px);
-  height: calc(100% - 28px);
+  top: 8px;
+  left: 34px;
+  width: calc(100% - 52px);
+  height: calc(100% - 22px);
   object-fit: cover;
   display: block;
   border-top-right-radius: 28px;
@@ -1163,10 +1165,10 @@
 /* 2024 Slide Animations (Image Top, Text Bottom) */
 #gpk-timeline-widget .photo-container-2024 {
   position: absolute;
-  left: -110px;
-  top: 130px;
-  width: 1119px;
-  height: 470px;
+  left: 0;
+  top: 150px;
+  width: 1024px;
+  height: 485px;
 }
 
 #gpk-timeline-widget .photo-wrapper-2024 {
@@ -1178,15 +1180,17 @@
 
 #gpk-timeline-widget .photo-img-2024 {
   position: absolute;
-  top: 12px;
-  left: 125px;
-  width: calc(100% - 155px);
-  height: calc(100% - 45px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 880px;
+  height: 420px;
   object-fit: cover;
+  object-position: center;
   z-index: 1;
   opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  border-radius: 8px;
+  transition: opacity 0.6s ease;
 }
 
 #gpk-timeline-widget .vector-img-2024 {
@@ -1195,7 +1199,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
   z-index: 3;
   pointer-events: none;
   opacity: 0;
@@ -1205,7 +1208,7 @@
 #gpk-timeline-widget .timeline-slide[data-year="2024"] .info-section {
   position: absolute;
   left: 0;
-  top: 600px;
+  top: 660px;
   width: 950px;
   height: auto;
   transform: translateY(60px);
@@ -1221,8 +1224,7 @@
 
 #gpk-timeline-widget .timeline-slide[data-year="2024"].active .photo-img-2024 {
   opacity: 1;
-  clip-path: inset(0 0% 0 0);
-  transition-delay: 0.5s;
+  transition-delay: 0.3s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2024"].active .vector-img-2024 {
