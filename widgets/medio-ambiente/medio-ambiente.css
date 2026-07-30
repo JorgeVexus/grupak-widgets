@@ -414,7 +414,7 @@
 .ma-stat {
   position: absolute;
   left: 50%;
-  top: 919px;
+  top: 999px;
   z-index: 8;
   width: 981px;
   margin: 0;
@@ -461,7 +461,7 @@
   .ma-state-13 .ma-step[data-step="6"] { top: 237px; }
 
   .ma-state-13 .ma-stat {
-    top: 842px;
+    top: 922px;
     width: 1040px;
     font-size: 15px;
     line-height: 1.28;
