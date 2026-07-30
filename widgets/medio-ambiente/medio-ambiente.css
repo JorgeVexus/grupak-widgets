@@ -2,7 +2,7 @@
   --ma-green: #5f9d2f;
   --ma-gray: #6e6e6e;
   --ma-dark: #2f302f;
-  --ma-bg: #e3e5e9;
+  --ma-bg: #ffffff;
   --ma-white: #ffffff;
 }
 
@@ -116,6 +116,7 @@
   font-weight: 700;
 }
 
+.ma-state-0 .ma-badge,
 .ma-state-1 .ma-badge,
 .ma-state-2 .ma-badge,
 .ma-state-3 .ma-badge,
@@ -125,6 +126,7 @@
   transform: translateY(0);
 }
 
+.ma-state-0 .ma-title,
 .ma-state-1 .ma-title,
 .ma-state-2 .ma-title,
 .ma-state-3 .ma-title,
@@ -183,6 +185,7 @@
   color: var(--ma-dark);
 }
 
+.ma-state-0 .ma-intro-copy,
 .ma-state-1 .ma-intro-copy,
 .ma-state-2 .ma-intro-copy,
 .ma-state-3 .ma-intro-copy,
