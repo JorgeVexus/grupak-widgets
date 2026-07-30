@@ -102,7 +102,7 @@
     padding: 8px 22px 14px 22px;
     margin-top: 45px;
     margin-bottom: 6px;
-    margin-left: 0;
+    margin-left: -22px;
 }
 
 /* Línea punteada divisoria entre el encabezado y la descripción */
@@ -199,6 +199,7 @@
     width: 135px;
     flex-shrink: 0;
     transition: color 0.4s ease;
+    line-height: 1.15;
 }
 
 .mas-alla-item:not([data-index="2"]) .mas-alla-item-text strong {
@@ -395,6 +396,7 @@
         padding: 4px 12px;
         margin-top: 24px;
         margin-bottom: 4px;
+        margin-left: -12px;
     }
 
     .mas-alla-title {
