@@ -68,7 +68,7 @@
     width: 59.3%;
     flex: none;
     background-color: var(--mas-alla-bg-light);
-    padding: 60px 80px 60px 60px;
+    padding: 60px 60px 60px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,6 +97,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     background-image: url('images/Vector-badge-new.svg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -106,10 +107,10 @@
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
-    line-height: normal;
-    letter-spacing: 2px;
+    line-height: 1;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    padding: 9px 42px 15px 28px;
+    padding: 8px 30px 14px 30px;
     margin-top: 45px;
     margin-bottom: 6px;
     margin-left: 0;
