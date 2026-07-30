@@ -38,6 +38,23 @@
         // --- State Management ---
         let currentSlide = 0;
         const totalSlides = 15;
+        const mobileSectionNames = [
+            "Introducción",
+            "Productos",
+            "Papel",
+            "Papel",
+            "Lámina",
+            "Lámina",
+            "Lámina",
+            "Cajas y empaques",
+            "Cajas y empaques",
+            "Cajas y empaques",
+            "Grabados",
+            "Grabados",
+            "Grabados",
+            "Grabados",
+            "Energía"
+        ];
         let isAnimating = false;
         let isPreloading = false;
         let lastScrollProgress = 0;
@@ -90,6 +107,9 @@
         const prevBtn = root.querySelector("#p-prev-btn");
         const nextBtn = root.querySelector("#p-next-btn");
         const dotsContainer = root.querySelector("#footer-dots");
+        const mobileSectionName = root.querySelector("#mobile-section-name");
+        const mobileSlideCount = root.querySelector("#mobile-slide-count");
+        const mobileProgressFill = root.querySelector("#mobile-progress-fill");
         const widgetProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
         const widgetBaseURL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
             ? "/widgets/productos-interactivos"
@@ -262,6 +282,18 @@
         function goToSlide(index) {
             if (index < 0 || index >= totalSlides) return;
 
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                currentSlide = index;
+                updateUI();
+                window.requestAnimationFrame(() => {
+                    const activePane = Array.from(board.querySelectorAll(
+                        ".products-intro-pane, .products-overview-pane, .details-pane"
+                    )).find(pane => window.getComputedStyle(pane).display !== "none");
+                    activePane?.scrollTo({ top: 0, behavior: "instant" });
+                });
+                return;
+            }
+
             if (window.innerWidth <= 1024) {
                 const trackerTop = tracker.getBoundingClientRect().top
                     + (window.pageYOffset || document.documentElement.scrollTop);
@@ -298,6 +330,10 @@
         window.dispatchEvent(new CustomEvent("gpkProductsReady"));
 
         function handleScroll() {
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                return;
+            }
+
             if (window.innerWidth <= 1024) {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const trackerTop = tracker.getBoundingClientRect().top + scrollTop;
@@ -402,6 +438,16 @@
             dots.forEach((dot, index) => {
                 dot.classList.toggle("active", index === currentSlide);
             });
+
+            if (mobileSectionName) {
+                mobileSectionName.textContent = mobileSectionNames[currentSlide];
+            }
+            if (mobileSlideCount) {
+                mobileSlideCount.textContent = `${currentSlide + 1} de ${totalSlides}`;
+            }
+            if (mobileProgressFill) {
+                mobileProgressFill.style.transform = `scaleX(${(currentSlide + 1) / totalSlides})`;
+            }
 
             // 3. Manage active states on floating pillars
             const pillars = root.querySelectorAll(".pillar-wrapper");
