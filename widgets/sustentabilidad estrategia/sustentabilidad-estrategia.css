@@ -1,561 +1,233 @@
-/* =============================================================
-   GRUPAK — Estrategia de Sustentabilidad Widget
-   Scroll-driven animation: 5 states (sust-state-0 … sust-state-4)
-   ============================================================= */
-
-/* ── Tokens ── */
 :root {
-    --sust-gray:        #6e6e6e;
-    --sust-green:       #4a9a27;
-    --sust-font:        'Open Sans', sans-serif;
-    --sust-ease:        cubic-bezier(0.25, 1, 0.5, 1);
-    --sust-dur:         0.75s;
-    /* Pivot point = exact centre of the Grupak logo within the 1065×915 circle
-       sprite canvas. Every circle's transform-origin and the logo's own anchor
-       point must match this so rotation reads as "orbiting the logo". */
-    --sust-pivot-x:     50.05%;
-    --sust-pivot-y:     57.76%;
+  --sust-bg: #ffffff;
+  --sust-text: #6e6e6e;
+  --sust-title: #2f302f;
+  --sust-green: #5f9d2f;
+  --sust-navy: #1b365d;
+  --sust-purple: #9b2689;
+  --sust-blue: #0082c8;
+  --sust-pink: #e80074;
+  --sust-font: 'Open Sans', sans-serif;
+  --sust-display-font: 'Neue Haas Grotesk Display Pro', 'Open Sans', sans-serif;
 }
 
-/* ── Container ── */
+.sust-widget,
+.sust-widget * {
+  box-sizing: border-box;
+}
+
+.sust-widget {
+  width: 100%;
+  background: var(--sust-bg);
+  color: var(--sust-text);
+  font-family: var(--sust-font);
+  padding: 60px 0;
+  overflow: hidden;
+}
+
 .sust-container {
-    position: relative;
-    width: 100%;
-    overflow-x: clip;
-    background: #fff;
-    font-family: var(--sust-font);
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 0 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
 }
 
-/* ── Sticky Viewport ── */
-.sust-sticky-wrapper {
-    position: sticky;
-    top: 0;
-    height: 100dvh;
-    min-height: 640px;
-    width: 100%;
-    overflow: hidden;
-}
-
-/* =====================================================================
-   ① TITLE BLOCK
-   States 0   → title hidden (opacity 0), centred vertically
-   States 1-3 → title visible, centred horizontally, top of screen
-   State  4   → title visible, left column, top-left
-   ===================================================================== */
-.sust-title-block {
-    position: absolute;
-    /* Box is always sized to fit its (single-line, nowrap) content. Centring
-       and the state-4 shift are both done via left + transform:translateX so
-       the title glides as one continuous element instead of snapping when
-       text-align/width would otherwise change. */
-    top: 7%;
-    left: 50%;
-    width: max-content;
-    max-width: 90%;
-    transform: translateX(-50%);
-    text-align: left;
-    box-sizing: border-box;
-    z-index: 20;
-    /* Transitions for layout shift on state 4 */
-    transition:
-        top       var(--sust-dur) var(--sust-ease),
-        left      var(--sust-dur) var(--sust-ease),
-        transform var(--sust-dur) var(--sust-ease),
-        opacity   0.5s ease;
+/* Left Column: Content (Top-aligned) */
+.sust-content {
+  flex: 0 0 38%;
+  max-width: 580px;
+  padding-top: 12px;
 }
 
 .sust-title {
-    font-size: clamp(22px, 2.35vw, 48px);
-    font-weight: 400;
-    color: var(--sust-gray);
-    line-height: 1.15;
-    margin: 0;
-    padding: 0;
-    /* Allow wrap on very narrow viewports but keep it single line on desktop */
-    white-space: nowrap;
+  font-family: var(--sust-display-font);
+  font-size: clamp(26px, 2.6vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--sust-title);
+  margin: 0 0 28px 0;
+  white-space: nowrap;
 }
 
 .sust-title strong {
-    font-weight: 700;
-    color: var(--sust-green);
+  font-weight: 700;
+  color: var(--sust-green);
 }
 
-/* State 0: title invisible (starts blank) */
-.sust-state-0 .sust-title-block {
-    opacity: 0;
+.sust-copy p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--sust-text);
+  margin: 0 0 18px 0;
 }
 
-/* States 1-3: title visible, centred (left:50% + translateX(-50%)) */
-.sust-state-1 .sust-title-block,
-.sust-state-2 .sust-title-block,
-.sust-state-3 .sust-title-block {
-    opacity: 1;
-    top: 7%;
-    left: 50%;
-    transform: translateX(-50%);
+.sust-copy p:last-child {
+  margin-bottom: 0;
 }
 
-/* State 4: title glides to the left column */
-.sust-state-4 .sust-title-block {
-    opacity: 1;
-    top: 12%;
-    left: 4%;
-    transform: translateX(0);
-}
-
-/* =====================================================================
-   ① b)  LOGO WRAP
-   Lives inside .sust-diagram-area, anchored at the pivot point so it never
-   moves relative to the circles that orbit it. Large + centred in state 0,
-   shrinks to a resting size once scroll begins and then stays put and
-   visible — it acts as the rotation axis for the three circles.
-   ===================================================================== */
-.sust-logo-wrap {
-    position: absolute;
-    left: var(--sust-pivot-x);
-    top: var(--sust-pivot-y);
-    transform: translate(-50%, -50%) scale(1);
-    z-index: 25;
-    transition: transform 0.6s var(--sust-ease);
-    pointer-events: none;
-}
-
-.sust-logo {
-    display: block;
-    width: clamp(180px, 22vw, 320px);   /* large in state 0 */
-    height: auto;
-}
-
-/* State 0: logo fully visible, large, centred */
-.sust-state-0 .sust-logo-wrap {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* States 1-4: logo shrunk to its resting size, stays visible as the pivot */
-.sust-state-1 .sust-logo-wrap,
-.sust-state-2 .sust-logo-wrap,
-.sust-state-3 .sust-logo-wrap,
-.sust-state-4 .sust-logo-wrap {
-    transform: translate(-50%, -50%) scale(0.45);
-}
-
-/* =====================================================================
-   ② TEXT PANEL  (left column, hidden until state 4)
-   Each child reveals individually on state 4: the two intro paragraphs
-   slide down in from above, the small paragraph + commissions row slide
-   up in from below.
-   ===================================================================== */
-.sust-text-panel {
-    position: absolute;
-    left: 4%;
-    top: 18%;
-    width: 40%;
-    height: 0;
-    max-height: none;
-    overflow: visible;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: top var(--sust-dur) var(--sust-ease), height var(--sust-dur) var(--sust-ease);
-    z-index: 15;
-}
-
-.sust-state-4 .sust-text-panel {
-    pointer-events: auto;
-    top: 20%;
-    height: 62%;
-}
-
-/* Groups: intro paragraphs vs. small paragraph + commissions. Flex
-   space-between on the panel spreads these two groups across its full
-   height, producing one large gap between them instead of a fixed margin. */
-.sust-text-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.sust-para {
-    font-size: clamp(11px, 0.82vw, 15px);
-    color: var(--sust-gray);
-    line-height: 1.5;
-    margin: 0 0 16px 0;
-    opacity: 0;
-    transform: translateY(-26px);
-    transition: opacity 0.6s ease, transform 0.65s var(--sust-ease);
-}
-
-.sust-para--sm {
-    font-size: clamp(10.5px, 0.72vw, 13px);
-    margin-top: 0;
-    margin-bottom: 10px;
-    transform: translateY(26px);
-}
-
-.sust-state-4 .sust-para {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.sust-text-group--intro .sust-para:nth-child(1) { transition-delay: 0.05s; }
-.sust-text-group--intro .sust-para:nth-child(2) { transition-delay: 0.15s; }
-.sust-text-group--outro .sust-para--sm { transition-delay: 0.28s; }
-.sust-text-group--outro .sust-comisiones { transition-delay: 0.38s; }
-
-/* Commissions row — slides up in from below, alongside the small paragraph */
+/* Comisiones Section */
 .sust-comisiones {
-    display: flex;
-    gap: clamp(10px, 1.45vw, 28px);
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin-top: clamp(12px, 1.6vw, 20px);
-    opacity: 0;
-    transform: translateY(26px);
-    transition: opacity 0.6s ease, transform 0.65s var(--sust-ease);
-}
-
-.sust-state-4 .sust-comisiones {
-    opacity: 1;
-    transform: translateY(0);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 36px;
+  padding-top: 4px;
 }
 
 .sust-com {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .sust-com-label {
-    font-size: clamp(9px, 0.65vw, 11px);
-    color: var(--sust-gray);
-    line-height: 1.4;
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #9a9a9a;
+  margin-bottom: 4px;
 }
 
 .sust-com-name {
-    font-size: clamp(11px, 0.88vw, 16px);
-    font-weight: 600;
-    line-height: 1.35;
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
-.sust-com-sub {
-    font-size: clamp(9px, 0.65vw, 11px);
-    color: var(--sust-gray);
-    font-weight: 400;
+.sust-com-etica {
+  color: var(--sust-navy);
 }
 
-/* =====================================================================
-   ③ DIAGRAM AREA
-   Holds the logo (pivot) + the three circle sprites. Locked to the sprites'
-   native 1065:915 aspect ratio so percentage-based transform-origin values
-   line up pixel-perfectly with the logo at every size.
-   States 0-3 → centred, circles rotate in around the logo
-   State  4   → diagram slides to right column
-   ===================================================================== */
-.sust-diagram-area {
-    position: absolute;
-    left: 50%;
-    top: 57%;
-    transform: translate(-50%, -50%);
-    width: min(56vw, 680px);
-    aspect-ratio: 1065 / 915;
-    height: auto;
-    z-index: 10;
-    /* Animate position + size on state 4 */
-    transition:
-        left      var(--sust-dur) var(--sust-ease),
-        top       var(--sust-dur) var(--sust-ease),
-        width     var(--sust-dur) var(--sust-ease),
-        height    var(--sust-dur) var(--sust-ease);
+.sust-com-ambiente {
+  color: var(--sust-green);
 }
 
-/* State 4: slide to right half — sized off viewport HEIGHT (not width) so it
-   reads as large as the reference layout regardless of aspect ratio. Left is
-   pulled in a bit from the edge so the circles don't get clipped by the
-   viewport/scrollbar. */
-.sust-state-4 .sust-diagram-area {
-    left: 74%;
-    top: 51%;
-    width: auto;
-    height: min(88vh, 950px);
+.sust-com-comunidad {
+  color: var(--sust-purple);
 }
 
-/* Circle sprites — each orbits the logo pivot; rotation/scale/opacity are
-   driven continuously from JS via inline transform as the user scrolls. */
-.sust-circle {
-    position: absolute;
-    top: 0;
-    left: 0;
+.sust-com-clientes {
+  color: var(--sust-blue);
+}
+
+.sust-com-calidad {
+  color: var(--sust-pink);
+}
+
+/* Right Column: Diagram Media (Image 2 - Extra Large) */
+.sust-media {
+  flex: 0 0 60%;
+  max-width: 920px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.sust-diagram-figure {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sust-diagram-img {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Tablet & Mobile Responsiveness */
+@media (max-width: 1120px) {
+  .sust-container {
+    gap: 30px;
+    padding: 0 32px;
+  }
+
+  .sust-content {
+    flex: 0 0 40%;
+  }
+
+  .sust-media {
+    flex: 0 0 56%;
+  }
+}
+
+@media (max-width: 860px) {
+  .sust-widget {
+    padding: 40px 0;
+  }
+
+  .sust-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    padding: 0 24px;
+  }
+
+  .sust-content {
+    flex: 1 1 auto;
     width: 100%;
-    height: 100%;
-    transform-origin: var(--sust-pivot-x) var(--sust-pivot-y);
-    display: block;
-    user-select: none;
-    opacity: 0;
-    will-change: transform, opacity;
+    max-width: 100%;
+    padding-top: 0;
+  }
+
+  .sust-media {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 620px;
+    justify-content: center;
+    order: 2;
+  }
+
+  .sust-diagram-figure {
+    justify-content: center;
+  }
+
+  .sust-title {
+    font-size: clamp(28px, 6vw, 38px);
+    margin-bottom: 20px;
+  }
+
+  .sust-copy p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .sust-comisiones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 12px;
+    margin-top: 24px;
+  }
 }
 
-/* =====================================================================
-   SCROLL SPACER  (4 × 100vh = 400vh scroll room for 4 state transitions)
-   ===================================================================== */
-.sust-scroll-spacer {
-    height: 400vh;
+@media (max-width: 600px) {
+  .sust-title {
+    white-space: normal;
+  }
 }
 
-@media (min-width: 901px) and (max-width: 1280px) {
-    .sust-sticky-wrapper {
-        min-height: 680px;
-    }
+@media (max-width: 520px) {
+  .sust-container {
+    padding: 0 16px;
+    gap: 28px;
+  }
 
-    .sust-title {
-        font-size: clamp(24px, 2.6vw, 34px);
-    }
+  .sust-comisiones {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+  }
 
-    .sust-state-4 .sust-title-block {
-        left: 4.5%;
-    }
-
-    .sust-text-panel {
-        left: 4.5%;
-        top: 20%;
-        width: 38%;
-    }
-
-    .sust-state-4 .sust-text-panel {
-        top: 20%;
-        height: 58%;
-    }
-
-    .sust-para {
-        font-size: clamp(10.5px, 1.05vw, 13px);
-        line-height: 1.38;
-        margin-bottom: 10px;
-    }
-
-    .sust-para--sm {
-        font-size: clamp(10px, 0.95vw, 12px);
-        margin-top: 0;
-        margin-bottom: 8px;
-    }
-
-    .sust-comisiones {
-        gap: 10px 14px;
-        margin-top: clamp(10px, 1.4vw, 16px);
-    }
-
-    .sust-com-name {
-        font-size: clamp(10.5px, 1.1vw, 13px);
-    }
-
-    .sust-state-4 .sust-diagram-area {
-        left: 73%;
-        width: auto;
-        height: min(78vh, 580px);
-    }
-}
-
-@media (min-width: 901px) and (max-height: 760px) {
-    .sust-sticky-wrapper {
-        min-height: 620px;
-    }
-
-    .sust-state-4 .sust-title-block {
-        top: 6%;
-    }
-
-    .sust-text-panel {
-        top: 16%;
-    }
-
-    .sust-state-4 .sust-text-panel {
-        top: 16%;
-        height: 64%;
-    }
-
-    .sust-para {
-        font-size: clamp(10px, 0.72vw, 12px);
-        line-height: 1.32;
-        margin-bottom: 8px;
-    }
-
-    .sust-para--sm {
-        font-size: clamp(9.5px, 0.68vw, 11px);
-        margin-top: 0;
-        margin-bottom: 6px;
-    }
-
-    .sust-comisiones {
-        gap: 8px 12px;
-        margin-top: clamp(8px, 1.2vw, 14px);
-    }
-
-    .sust-com-label,
-    .sust-com-sub {
-        font-size: 9px;
-    }
-
-    .sust-com-name {
-        font-size: clamp(10px, 0.78vw, 12px);
-    }
-
-    .sust-state-4 .sust-diagram-area {
-        top: 52%;
-        left: 72%;
-        width: auto;
-        height: min(78vh, 560px);
-    }
-}
-
-/* =====================================================================
-   MOBILE — static stacked layout, no scroll animation
-   ===================================================================== */
-@media (max-width: 900px) {
-    .sust-container {
-        overflow-x: hidden;
-    }
-
-    .sust-sticky-wrapper {
-        position: relative;
-        height: auto;
-        min-height: 100dvh;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: clamp(20px, 6vw, 34px);
-        padding: clamp(38px, 9vw, 64px) clamp(18px, 6vw, 30px) 48px;
-        overflow: visible;
-    }
-
-    /* Reset all absolute positioning */
-    .sust-title-block,
-    .sust-text-panel,
-    .sust-diagram-area {
-        position: static !important;
-        left: auto !important;
-        top: auto !important;
-        width: 100% !important;
-        height: auto !important;
-        transform: none !important;
-        opacity: 1 !important;
-        padding: 0 !important;
-        pointer-events: auto !important;
-        text-align: center !important;
-    }
-
-    /* .sust-diagram-area still needs to be a positioning context so the
-       logo (its child) can anchor at the pivot point via absolute + %. */
-    .sust-diagram-area {
-        position: relative !important;
-    }
-
-    /* Logo stays visible on mobile, docked at its resting size — the three
-       circles are shown fully assembled (no rotation animation on mobile). */
-    .sust-logo-wrap {
-        pointer-events: none;
-    }
-
-    /* Circles are always fully docked on mobile — no scroll-driven rotation */
-    .sust-circle {
-        opacity: 1 !important;
-        transform: none !important;
-    }
-
-    .sust-title {
-        max-width: min(100%, 360px);
-        margin: 0 auto;
-        font-size: clamp(32px, 9.6vw, 46px);
-        line-height: 1.08;
-        white-space: normal;
-        overflow-wrap: anywhere;
-        word-break: normal;
-        text-align: center;
-    }
-
-    .sust-text-panel {
-        order: 3;
-        margin: 0;
-        width: auto !important;
-        align-self: stretch;
-        max-width: 680px;
-        padding-inline: clamp(16px, 5vw, 26px) !important;
-    }
-
-    .sust-para,
-    .sust-para--sm {
-        font-size: clamp(14px, 4vw, 16px);
-        line-height: 1.45;
-        text-align: left;
-        margin-bottom: 14px;
-    }
-
-    .sust-comisiones {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        justify-content: stretch;
-        gap: 14px 18px;
-        margin-top: 18px;
-        padding-inline: clamp(4px, 1.5vw, 8px);
-    }
-
-    .sust-com {
-        align-items: flex-start;
-        text-align: left;
-    }
-
-    .sust-com-label,
-    .sust-com-sub {
-        font-size: 11px;
-    }
-
-    .sust-com-name {
-        font-size: clamp(14px, 4.2vw, 18px);
-        line-height: 1.18;
-    }
-
-    .sust-diagram-area {
-        order: 2;
-        width: min(88vw, 520px) !important;
-        aspect-ratio: 1065 / 915;
-        height: auto !important;
-        max-height: 500px;
-        margin: 0 auto;
-    }
-
-    .sust-scroll-spacer {
-        height: 0;
-    }
-
-    .sust-mobile-ready .sust-title-block,
-    .sust-mobile-ready .sust-diagram-area,
-    .sust-mobile-ready .sust-para,
-    .sust-mobile-ready .sust-com {
-        opacity: 0 !important;
-        transform: translate3d(0, 24px, 0) !important;
-        transition: opacity 620ms ease, transform 760ms var(--sust-ease) !important;
-    }
-
-    .sust-mobile-ready .sust-diagram-area {
-        transform: translate3d(0, 18px, 0) scale(.96) !important;
-    }
-
-    .sust-mobile-ready .sust-mobile-in {
-        opacity: 1 !important;
-        transform: translate3d(0, 0, 0) !important;
-    }
-
-    .sust-mobile-ready .sust-diagram-area.sust-mobile-in {
-        transform: translate3d(0, 0, 0) scale(1) !important;
-    }
-}
-
-@media (max-width: 420px) {
-    .sust-title {
-        max-width: 100%;
-        font-size: clamp(30px, 9.2vw, 38px);
-    }
-
-    .sust-diagram-area {
-        width: min(92vw, 380px) !important;
-    }
+  .sust-com-name {
+    font-size: 11px;
+  }
 }
