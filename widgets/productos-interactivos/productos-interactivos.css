@@ -4883,11 +4883,11 @@
         height: 100dvh !important;
         min-height: 100dvh !important;
         box-sizing: border-box !important;
-        padding: calc(9dvh + 35px) 18px 4dvh !important;
+        padding: calc(1dvh + 8px) 14px 2dvh !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important;
-        gap: 24px !important;
+        justify-content: flex-start !important;
+        gap: 10px !important;
         overflow-x: hidden !important;
     }
 
@@ -4895,10 +4895,10 @@
         position: relative !important;
         left: auto !important;
         top: auto !important;
-        width: min(100%, 620px) !important;
+        width: min(95vw, 540px) !important;
         height: auto !important;
         aspect-ratio: 1.86 / 1 !important;
-        margin: 0 auto !important;
+        margin: 4px auto 0 auto !important;
         transform: none !important;
     }
 
@@ -4914,51 +4914,90 @@
         object-position: bottom center !important;
     }
 
+    /* KPI badges: kept strictly inside video bounds to avoid screen clipping */
     #gpk-products-widget .gpk-hero-kpi {
-        height: 54px !important;
-        width: 138px !important;
+        position: absolute !important;
+        height: auto !important;
+        min-height: 44px !important;
+        width: clamp(122px, 37vw, 155px) !important;
+        z-index: 10 !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-bg {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: fill !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-content {
-        height: 50px !important;
-        gap: 5px !important;
-        padding: 5px 8px 9px 6px !important;
+        position: relative !important;
+        z-index: 1 !important;
+        height: 100% !important;
+        min-height: 44px !important;
+        gap: 4px !important;
+        padding: 3px 6px 5px 6px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-number {
-        font-size: 12px !important;
+        font-size: clamp(11px, 3.2vw, 15px) !important;
+        line-height: 1 !important;
     }
 
-    #gpk-products-widget .gpk-hero-kpi-copy,
-    #gpk-products-widget .gpk-hero-kpi-copy strong,
+    #gpk-products-widget .gpk-hero-kpi-copy {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        min-width: 0 !important;
+    }
+
+    #gpk-products-widget .gpk-hero-kpi-copy strong {
+        font-size: clamp(7.5px, 2vw, 9.5px) !important;
+        font-weight: 700 !important;
+        line-height: 1.1 !important;
+    }
+
     #gpk-products-widget .gpk-hero-kpi-copy span {
-        font-size: 6.5px !important;
+        font-size: clamp(6.5px, 1.7vw, 8.2px) !important;
         font-weight: 400 !important;
-        line-height: 1.05 !important;
+        line-height: 1.1 !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-left-top {
-        left: 5% !important;
-        top: 10% !important;
-        transform: translate3d(-70px, 0, 0) !important;
+        left: 2% !important;
+        top: 5% !important;
+        transform: translate3d(-30px, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-left-bottom {
-        left: 5% !important;
-        top: 68% !important;
-        transform: translate3d(-70px, 0, 0) !important;
+        left: 2% !important;
+        top: auto !important;
+        bottom: 5% !important;
+        transform: translate3d(-30px, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-top {
-        right: 5% !important;
-        top: 10% !important;
-        transform: translate3d(70px, 0, 0) !important;
+        right: 2% !important;
+        top: 5% !important;
+        transform: translate3d(30px, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-right {
-        right: 5% !important;
-        top: 65% !important;
-        transform: translate3d(70px, 0, 0) !important;
+        right: 2% !important;
+        top: auto !important;
+        bottom: 5% !important;
+        transform: translate3d(30px, 0, 0) !important;
+    }
+
+    #gpk-products-widget .gpk-hero-home.is-running .gpk-hero-kpi-left-top,
+    #gpk-products-widget .gpk-hero-home.is-running .gpk-hero-kpi-left-bottom,
+    #gpk-products-widget .gpk-hero-home.is-running .gpk-hero-kpi-top,
+    #gpk-products-widget .gpk-hero-home.is-running .gpk-hero-kpi-right {
+        transform: translate3d(0, 0, 0) !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner {
@@ -4966,10 +5005,10 @@
         left: auto !important;
         right: auto !important;
         top: auto !important;
-        width: min(calc(100vw - 36px), 620px) !important;
-        max-width: calc(100vw - 36px) !important;
+        width: min(calc(100vw - 28px), 540px) !important;
+        max-width: calc(100vw - 28px) !important;
         box-sizing: border-box !important;
-        margin: 0 auto !important;
+        margin: 22px auto 0 auto !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
@@ -4980,22 +5019,25 @@
     #gpk-products-widget .gpk-hero-home-banner h1 {
         width: 100% !important;
         max-width: 100% !important;
-        font-size: clamp(28px, 8.8vw, 44px) !important;
-        line-height: 1.04 !important;
+        font-size: clamp(22px, 6.8vw, 34px) !important;
+        line-height: 1.08 !important;
         white-space: normal !important;
         overflow-wrap: anywhere !important;
         word-break: normal !important;
         text-wrap: balance !important;
+        margin: 0 !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner p {
         width: 100% !important;
         max-width: 100% !important;
         padding-top: 0 !important;
-        font-size: clamp(15px, 4vw, 19px) !important;
-        line-height: 1.22 !important;
+        font-size: clamp(13px, 3.6vw, 15.5px) !important;
+        line-height: 1.32 !important;
         overflow-wrap: anywhere !important;
         word-break: normal !important;
+        margin: 0 !important;
+        color: rgba(255, 255, 255, 0.92) !important;
     }
 
     @keyframes gpkHeroImageSettleMobile {
@@ -5027,62 +5069,28 @@
 }
 
 @media (max-width: 480px) {
-    #gpk-products-widget .gpk-hero-home {
-        padding-right: 16px !important;
-        padding-left: 16px !important;
-    }
-
     #gpk-products-widget .gpk-hero-home-banner {
-        width: calc(100vw - 32px) !important;
-        max-width: calc(100vw - 32px) !important;
+        width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner h1 {
-        font-size: clamp(27px, 8.2vw, 36px) !important;
-        line-height: 1.08 !important;
+        font-size: clamp(20px, 6.5vw, 30px) !important;
+        line-height: 1.1 !important;
     }
 
     #gpk-products-widget .gpk-hero-home-banner p {
-        font-size: clamp(14px, 3.8vw, 16px) !important;
-        line-height: 1.24 !important;
+        font-size: clamp(11.5px, 3.3vw, 13.5px) !important;
+        line-height: 1.25 !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi {
-        height: 52px !important;
-        width: 128px !important;
+        width: clamp(135px, 42vw, 165px) !important;
+        min-height: 44px !important;
     }
 
     #gpk-products-widget .gpk-hero-kpi-content {
-        height: 50px !important;
-        gap: 5px !important;
-        padding: 5px 7px 8px 6px !important;
-    }
-
-    #gpk-products-widget .gpk-hero-kpi-number {
-        font-size: 12px !important;
-    }
-
-    #gpk-products-widget .gpk-hero-kpi-copy,
-    #gpk-products-widget .gpk-hero-kpi-copy strong,
-    #gpk-products-widget .gpk-hero-kpi-copy span {
-        font-size: 6.5px !important;
-        font-weight: 400 !important;
-        line-height: 1.05 !important;
-    }
-
-    #gpk-products-widget .gpk-hero-kpi-left {
-        left: 15% !important;
-        top: 58% !important;
-    }
-
-    #gpk-products-widget .gpk-hero-kpi-top {
-        right: 15% !important;
-        top: 11% !important;
-    }
-
-    #gpk-products-widget .gpk-hero-kpi-right {
-        right: 20% !important;
-        top: 64% !important;
+        padding: 3px 6px 5px 6px !important;
     }
 }
 
