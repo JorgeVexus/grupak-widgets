@@ -50,6 +50,14 @@
     z-index: 1;
 }
 
+.mas-alla-slide-img[data-index="0"] {
+    object-fit: contain;
+    object-position: center;
+    background-color: #ffffff;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
 .mas-alla-slide-img.active {
     opacity: 1;
     z-index: 2;
@@ -369,6 +377,10 @@
         width: 100%;
         height: 42vh;
         flex: none;
+    }
+
+    .mas-alla-slide-img[data-index="0"] {
+        padding: 16px;
     }
 
     .mas-alla-content-section {
