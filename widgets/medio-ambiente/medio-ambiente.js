@@ -25,7 +25,11 @@
     document.getElementById("grupak-medio-ambiente-root") ||
     document.getElementById("medio-ambiente-widget-root");
 
-  if (root) {
+  var existingWidget = document.getElementById("gpk-medio-ambiente-widget");
+  if (existingWidget) {
+    resolveImages(existingWidget);
+    initWidget(existingWidget);
+  } else if (root) {
     fetch(
       isLocalhost
         ? "widgets/medio-ambiente/medio-ambiente.html"
@@ -43,12 +47,6 @@
       .catch(function (err) {
         console.error("[gpk-medio-ambiente]", err);
       });
-  } else {
-    var directWidget = document.getElementById("gpk-medio-ambiente-widget");
-    if (directWidget) {
-      resolveImages(directWidget);
-      initWidget(directWidget);
-    }
   }
 
   function resolveImages(container) {
