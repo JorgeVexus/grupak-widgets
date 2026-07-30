@@ -99,10 +99,10 @@
     line-height: normal;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    padding: 8px 22px 14px 22px;
+    padding: 8px 22px 14px 0px;
     margin-top: 45px;
     margin-bottom: 6px;
-    margin-left: -22px;
+    margin-left: 0;
 }
 
 /* Línea punteada divisoria entre el encabezado y la descripción */
@@ -200,9 +200,6 @@
     flex-shrink: 0;
     transition: color 0.4s ease;
     line-height: 1.15;
-}
-
-.mas-alla-item:not([data-index="2"]) .mas-alla-item-text strong {
     transform: translateY(-12px);
 }
 
@@ -393,10 +390,10 @@
 
     .mas-alla-badge {
         font-size: 12px;
-        padding: 4px 12px;
+        padding: 4px 12px 4px 0px;
         margin-top: 24px;
         margin-bottom: 4px;
-        margin-left: -12px;
+        margin-left: 0;
     }
 
     .mas-alla-title {
