@@ -3,6 +3,7 @@
         <div class="gpk-form-tabs" role="tablist" aria-label="Formularios Grupak">
             <button type="button" class="gpk-form-tab is-active" data-gpk-tab="contacto" role="tab" aria-selected="true">Contacto</button>
             <button type="button" class="gpk-form-tab" data-gpk-tab="proveedor" role="tab" aria-selected="false">Quiero ser proveedor</button>
+            <button type="button" class="gpk-form-tab" data-gpk-tab="trabajo" role="tab" aria-selected="false">Quiero trabajar en Grupak</button>
         </div>
 
         <form class="gpk-form-panel is-active" data-gpk-panel="contacto" data-gpk-form="contacto" role="tabpanel">
@@ -287,6 +288,74 @@
             <div class="gpk-status" role="status"></div>
         </form>
 
+        <form class="gpk-form-panel" data-gpk-panel="trabajo" data-gpk-form="trabajo" role="tabpanel">
+            <input type="text" name="_gotcha" class="gpk-honeypot" tabindex="-1" autocomplete="off">
+
+            <h3 class="gpk-section-title">¿Quieres formar parte de Grupak?</h3>
+            <p class="gpk-section-desc">Nos interesa conocer tu perfil. Comparte tu información o consulta nuestras vacantes disponibles para encontrar la oportunidad ideal para ti.</p>
+
+            <div class="gpk-fields-grid">
+                <div class="gpk-field">
+                    <label for="trabajo-nombre">Nombre completo *</label>
+                    <input id="trabajo-nombre" type="text" name="nombre_completo" required autocomplete="name">
+                </div>
+                <div class="gpk-field">
+                    <label for="trabajo-email">Correo electrónico *</label>
+                    <input id="trabajo-email" type="email" name="correo_principal" required autocomplete="email">
+                </div>
+                <div class="gpk-field">
+                    <label for="trabajo-telefono">Teléfono móvil *</label>
+                    <input id="trabajo-telefono" type="tel" name="telefono_principal" required autocomplete="tel">
+                </div>
+                <div class="gpk-field">
+                    <label for="trabajo-area">Área de interés *</label>
+                    <select id="trabajo-area" name="area_interes" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option>Ventas / Cotizaciones</option>
+                        <option>Producción / Operaciones</option>
+                        <option>Logística / Supply Chain</option>
+                        <option>Calidad</option>
+                        <option>Administración / RH</option>
+                        <option>Mantenimiento</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="gpk-field gpk-full">
+                    <label for="trabajo-ubicacion">Ubicación de interés *</label>
+                    <select id="trabajo-ubicacion" name="ubicacion_interes" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option>Planta Ecatepec</option>
+                        <option>Planta Cuernavaca</option>
+                        <option>Planta Toluca</option>
+                        <option>Planta Hidalgo</option>
+                        <option>Corporativo</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="gpk-vacantes-banner">
+                <div class="gpk-vacantes-text">
+                    <h4 class="gpk-vacantes-title">Encuentra la oportunidad ideal para ti</h4>
+                    <p class="gpk-vacantes-subtitle">También puedes consultar todas nuestras vacantes disponibles en nuestra bolsa de trabajo.</p>
+                </div>
+                <a href="https://grupak.webflow.io/bolsa-de-trabajo" target="_blank" rel="noopener noreferrer" class="gpk-vacantes-btn">
+                    <span>Ver vacantes</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </a>
+            </div>
+
+            <label class="gpk-check">
+                <input type="checkbox" name="acepta_aviso_privacidad" value="Si" required>
+                <span>He leído el Aviso de Privacidad *</span>
+            </label>
+
+            <button type="submit" class="gpk-submit">Enviar solicitud</button>
+            <div class="gpk-status" role="status"></div>
+        </form>
 
     </div>
 </section>
