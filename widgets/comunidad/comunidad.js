@@ -126,6 +126,31 @@
             applyState(progressToState(progress));
         }
 
+        function scrollToState(targetState) {
+            if (mobileQuery.matches) return;
+            var rect = spacer.getBoundingClientRect();
+            var vh = window.innerHeight;
+            var distance = Math.max(spacer.offsetHeight - vh, 1);
+            var spacerTop = rect.top + window.scrollY;
+            var targetProgress = (targetState + 0.3) / stateCount;
+            var targetScrollY = spacerTop + (targetProgress * distance);
+
+            window.scrollTo({
+                top: targetScrollY,
+                behavior: "smooth"
+            });
+        }
+
+        widget.querySelectorAll(".com-panel").forEach(function (panel) {
+            var panelIndex = Number(panel.getAttribute("data-panel"));
+            var header = panel.querySelector("h3");
+            if (header && panelIndex) {
+                header.addEventListener("click", function () {
+                    scrollToState(panelIndex);
+                });
+            }
+        });
+
         function setupMobileReveal() {
             if (mobileRevealObserver) {
                 mobileRevealObserver.disconnect();
