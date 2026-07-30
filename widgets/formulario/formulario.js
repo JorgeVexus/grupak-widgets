@@ -435,8 +435,6 @@
             : form.querySelector('[name$="_comentarios"]');
         var comentariosTexto = comentariosField ? comentariosField.value.trim() : "";
 
-        var isTrabajo = formType === "trabajo";
-
         if (isProveedor) {
             var contexto = [];
             var categoria = fieldValue(form, "categoria");
@@ -446,18 +444,6 @@
             if (contexto.length) {
                 comentariosTexto = contexto.join(" | ") + (comentariosTexto ? " — " + comentariosTexto : "");
             }
-        }
-
-        if (isTrabajo) {
-            var ubicacion = fieldValue(form, "ubicacion_interes");
-            var area = fieldValue(form, "area_interes");
-            payload.nombre = fieldValue(form, "nombre_completo");
-            payload.empresa = "";
-            payload.producto = "Bolsa de trabajo - " + (area || "General");
-            payload.ciudad = ubicacion;
-            payload.medidas = area;
-            payload.comentarios = ubicacion ? ("Ubicación: " + ubicacion + (area ? " | Área: " + area : "")) : area;
-            payload.consent_whatsapp = false;
         }
 
         var consentCheckbox = form.querySelector("[data-gpk-consent-whatsapp]");
