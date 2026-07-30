@@ -99,7 +99,7 @@
     line-height: normal;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    padding: 8px 22px 14px 0px;
+    padding: 8px 22px 14px 14px;
     margin-top: 45px;
     margin-bottom: 6px;
     margin-left: 0;
@@ -390,7 +390,7 @@
 
     .mas-alla-badge {
         font-size: 12px;
-        padding: 4px 12px 4px 0px;
+        padding: 4px 12px 4px 8px;
         margin-top: 24px;
         margin-bottom: 4px;
         margin-left: 0;
