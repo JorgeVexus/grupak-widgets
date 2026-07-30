@@ -95,7 +95,7 @@
                 return;
             }
 
-            var scale = Math.min(window.innerWidth / 1768.5, window.innerHeight / 959);
+            var scale = Math.min(window.innerWidth / 2200, window.innerHeight / 900);
             board.style.setProperty("--com-scale", Math.max(scale, 0.48).toFixed(4));
         }
 
