@@ -48,7 +48,7 @@
                 return path;
             }
             const relativePart = path.replace("widgets/locations-map/", "");
-            return `${baseURL}/${relativePart}`;
+            return `${baseURL}/${encodeURI(relativePart)}`;
         }
 
         // ==========================================================================
@@ -62,7 +62,7 @@
                 categoryClass: 'corporativo',
                 address: 'Lago Zúrich 245, Edificio Zúrich, piso 7, Ampliación Granada, C.P. 11529, Ciudad de México',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/corporativo-cdmx.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/corporativo.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Lago+Zurich+245+Edificio+Zurich+Piso+7+Ampliacion+Granada+11529+Ciudad+de+Mexico',
                 lat: 19.4360,
                 lng: -99.2030
@@ -74,7 +74,7 @@
                 categoryClass: 'planta-papel',
                 address: 'Calle Cuatro Norte 302, Parque Industrial Toluca 2000, C.P. 50200 Toluca de Lerdo, Estado de México.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/planta-toluca.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Planta Toluca.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Calle+Cuatro+Norte+302+Parque+Industrial+Toluca+2000+50200+Toluca+Estado+de+Mexico',
                 lat: 19.3071,
                 lng: -99.6575
@@ -86,7 +86,7 @@
                 categoryClass: 'planta-papel',
                 address: 'Av. Atlacomulco 117 A, Chapultepec, C.P. 62450, Cuernavaca, Morelos.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/planta-cuernavaca.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Planta Cuernavaca.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Av+Atlacomulco+117+A+Chapultepec+62450+Cuernavaca+Morelos',
                 lat: 18.9317,
                 lng: -99.2381
@@ -98,7 +98,7 @@
                 categoryClass: 'planta-papel',
                 address: 'Carretera Federal Pachuca CD. Sahagún tramo Cd. Sahagún Emiliano Zapata Km. 20, Emiliano Zapata, C.P. 43960, Hidalgo.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/planta-hidalgo.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Planta Hidalgo  Empaques digital.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carretera+Federal+Pachuca+Ciudad+Sahagun+Tramo+Ciudad+Sahagun+Emiliano+Zapata+Km+20+43960+Hidalgo',
                 lat: 19.8440,
                 lng: -98.6020
@@ -110,7 +110,7 @@
                 categoryClass: 'planta-papel',
                 address: 'Carretera Federal Pachuca CD. Sahagún tramo Cd. Sahagún Emiliano Zapata Km. 20, Emiliano Zapata, C.P. 43960, Hidalgo.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Planta Hidalgo  Empaques digital.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carretera+Federal+Pachuca+Ciudad+Sahagun+Tramo+Ciudad+Sahagun+Emiliano+Zapata+Km+20+43960+Hidalgo',
                 lat: 19.8443,
                 lng: -98.6020
@@ -122,7 +122,7 @@
                 categoryClass: 'abastecimiento',
                 address: 'Calle Prol. José López Bonaga, fracción 1 No. Ext 57 Manzana única Int. 24B, San Lorenzo Tetlixtac, Coacalco de Berriozábal Edo. de Méx. C.P. 55718',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Abastecimientos CDMX.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Prolongacion+Jose+Lopez+Bonaga+57+San+Lorenzo+Tetlixtac+55718+Coacalco+Estado+de+Mexico',
                 lat: 19.6268,
                 lng: -99.1073
@@ -134,7 +134,7 @@
                 categoryClass: 'abastecimiento',
                 address: 'Resurrección Oriente No. 17, Col. Industrial Resurrección C.P. 72228 Puebla, Puebla.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Abastecimientos Puebla.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Resurreccion+Oriente+17+Industrial+Resurreccion+72228+Puebla+Puebla',
                 lat: 19.0465,
                 lng: -98.1547
@@ -146,7 +146,7 @@
                 categoryClass: 'abastecimiento',
                 address: 'Ebanistas 10, Industrial Xhala, C.P. 54714 Cuautitlán Izcalli; Edo. de México.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Abastecimientos Cuatitlan.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ebanistas+10+Industrial+Xhala+54714+Cuautitlan+Izcalli+Estado+de+Mexico',
                 lat: 19.6452,
                 lng: -99.2148
@@ -158,7 +158,7 @@
                 categoryClass: 'abastecimiento',
                 address: 'Acceso II 4, Parque Industrial Benito Juárez, C.P. 76120 Querétaro, Qro.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Abastecimientos Queretaro.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Acceso+II+4+Parque+Industrial+Benito+Juarez+76120+Queretaro+Queretaro',
                 lat: 20.5975,
                 lng: -100.4148
@@ -170,7 +170,7 @@
                 categoryClass: 'abastecimiento',
                 address: 'Carretera 57, 3990 Blvr. San Luis, Industrial San Luis, 78395 San Luis, S.L.P.',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/dji-aerial.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Abastecimientos San Luis Potosi.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carretera+57+3990+Boulevard+San+Luis+Industrial+San+Luis+78395+San+Luis+Potosi',
                 lat: 22.0915,
                 lng: -100.9672
@@ -182,7 +182,7 @@
                 categoryClass: 'abastecimiento',
                 address: 'Calle San Antonio No. 36. Colonia Reforma, San Mateo Atenco. Edo de Mex. CP 52120',
                 phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/planta-toluca.webp',
+                imageUrl: 'widgets/locations-map/images/ubicaciones/Abastecimientos Toluca.webp',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=Calle+San+Antonio+36+Colonia+Reforma+San+Mateo+Atenco+52120+Estado+de+Mexico',
                 lat: 19.2718,
                 lng: -99.5384
