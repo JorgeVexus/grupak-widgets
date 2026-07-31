@@ -75,6 +75,9 @@ Assert-Match $js 'root\.appendChild\(heroHome\)' "Desktop hero must retain its o
 Assert-NotMatch $js 'root\.insertBefore\(heroHome, tracker\)' "Desktop hero must not be injected into the mobile flow"
 Assert-Match $js 'wrapper\.querySelectorAll\("video\[autoplay\]"\)' "Cloned mobile autoplay videos must be initialized"
 Assert-Match $js '(?s)id:\s*"mobile-intro".*?id:\s*"mobile-slide-zero".*?id:\s*"mobile-products-index"' "Mobile flow must keep hero, slide 0 and products as separate consecutive sections"
+Assert-Match $js 'querySelector\("\.gpk-hero-home-banner h1"\)' "Mobile hero must source its title from the desktop hero"
+Assert-Match $js 'mobile-hero-title' "Mobile hero title clone is missing"
+Assert-Match $js 'video\.style\.webkitMaskImage\s*=\s*maskURL' "Cloned mobile video must receive the desktop mask"
 Assert-Match $css '--mobile-site-header-clearance:\s*88px' "Mobile hero needs live-menu clearance"
 Assert-Match $css '(?s)#mobile-intro\.mobile-flow-section\s*\{[^}]*padding-top:\s*calc\(var\(--mobile-site-header-clearance\)' "Mobile intro needs live-menu clearance"
 Assert-Match $css '(?s)\.intro-mobile-video\s*\{[^}]*object-fit:\s*cover' "Mobile intro video needs a stable media crop"
@@ -87,6 +90,11 @@ Assert-Match $css '(?s)MOBILE SLIDE 0 SEPARATION.*?#mobile-intro \.intro-kpis-gr
 Assert-Match $css '(?s)MOBILE SLIDE 0 SEPARATION.*?#mobile-slide-zero \.intro-title-new\s*\{[^}]*display:\s*block\s*!important' "Mobile slide 0 must show the desktop intro text"
 Assert-Match $css '(?s)MOBILE SLIDE 0 SEPARATION.*?#mobile-slide-zero \.intro-kpis-grid-new\s*\{[^}]*display:\s*grid\s*!important' "Mobile slide 0 must show the two production KPIs"
 Assert-Match $css '(?s)SLIDE 0 PRODUCTION KPIS - FINAL SHARED LAYOUT.*?MOBILE SLIDE 0 VISIBILITY OVERRIDE.*?#mobile-intro \.intro-kpis-grid-new\s*\{[^}]*display:\s*none\s*!important' "The final cascade must keep production KPIs out of the mobile hero"
+Assert-Match $css '(?s)MOBILE HERO INITIAL STABILITY.*?#mobile-intro \.products-intro-pane\s*\{[^}]*display:\s*flex\s*!important[^}]*flex-direction:\s*column\s*!important' "Mobile hero must use stable normal flow from first render"
+Assert-Match $css '(?s)MOBILE HERO INITIAL STABILITY.*?#mobile-intro \.intro-mobile-desc\s*\{[^}]*position:\s*static\s*!important[^}]*transform:\s*none\s*!important' "Mobile hero description must not depend on scroll positioning"
+Assert-Match $css '(?s)MOBILE HERO INITIAL STABILITY.*?\.intro-mobile-video\s*\{[^}]*-webkit-mask-size:\s*100% 100%' "Mobile hero video must preserve the desktop mask geometry"
+Assert-Match $css '(?s)SLIDE 0 PRODUCTION KPIS - FINAL SHARED LAYOUT.*?MOBILE SLIDE 0 VISIBILITY OVERRIDE.*?MOBILE HERO INITIAL STABILITY - CASCADE OVERRIDE.*?#mobile-intro \.intro-mobile-desc\s*\{[^}]*position:\s*static\s*!important' "Stable hero flow must be the final mobile cascade"
+Assert-Match $css '(?s)MOBILE HERO INITIAL STABILITY - CASCADE OVERRIDE.*?#mobile-intro \.intro-mobile-img-container\s*\{[^}]*aspect-ratio:\s*auto\s*!important' "Mobile video container must not retain the legacy aspect ratio"
 
 $requiredIds = @(
     "mobile-intro",

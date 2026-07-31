@@ -526,6 +526,15 @@
                     const source = board.querySelector(selector);
                     if (source) wrapper.appendChild(source.cloneNode(true));
                 });
+                if (section.id === "mobile-intro") {
+                    const desktopHeroTitle = heroHome?.querySelector(".gpk-hero-home-banner h1");
+                    const mobileHeroPane = wrapper.querySelector(".products-intro-pane");
+                    if (desktopHeroTitle && mobileHeroPane) {
+                        const mobileHeroTitle = desktopHeroTitle.cloneNode(true);
+                        mobileHeroTitle.className = "mobile-hero-title";
+                        mobileHeroPane.prepend(mobileHeroTitle);
+                    }
+                }
                 wrapper.querySelectorAll("[data-target-slide]").forEach(button => {
                     const targetId = mobileSlideTargets[Number(button.dataset.targetSlide)];
                     if (!targetId) return;
@@ -544,6 +553,17 @@
                 });
                 flow.appendChild(wrapper);
                 wrapper.querySelectorAll("video[autoplay]").forEach(video => {
+                    if (video.classList.contains("intro-mobile-video")) {
+                        const maskURL = `url("${widgetBaseURL}/images/hero-mask.png")`;
+                        video.style.webkitMaskImage = maskURL;
+                        video.style.maskImage = maskURL;
+                        video.style.webkitMaskSize = "100% 100%";
+                        video.style.maskSize = "100% 100%";
+                        video.style.webkitMaskRepeat = "no-repeat";
+                        video.style.maskRepeat = "no-repeat";
+                        video.style.webkitMaskPosition = "center";
+                        video.style.maskPosition = "center";
+                    }
                     video.muted = true;
                     video.load();
                     const playAttempt = video.play();

@@ -47,6 +47,73 @@
     }
 }
 
+/* MOBILE HERO INITIAL STABILITY - FINAL LAYER */
+@media (max-width: 768px) {
+    #gpk-products-widget #mobile-intro .products-intro-pane {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget #mobile-intro .mobile-hero-title {
+        order: 0 !important;
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        color: #f7f7f3 !important;
+        font-size: clamp(28px, 8vw, 36px) !important;
+        line-height: 1.05 !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-mobile-img-container {
+        order: 1 !important;
+        position: static !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-mobile-video {
+        position: static !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1.86 / 1 !important;
+        object-fit: cover !important;
+        transform: none !important;
+        -webkit-mask-size: 100% 100% !important;
+        mask-size: 100% 100% !important;
+        -webkit-mask-repeat: no-repeat !important;
+        mask-repeat: no-repeat !important;
+        -webkit-mask-position: center !important;
+        mask-position: center !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-mobile-desc {
+        order: 2 !important;
+        position: static !important;
+        inset: auto !important;
+        width: 100% !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget #mobile-intro .mobile-hero-kpis {
+        order: 3 !important;
+        margin: 0 !important;
+    }
+}
+
 /* MOBILE SLIDE 0 SEPARATION - FINAL LAYER */
 @media (max-width: 768px) {
     #gpk-products-widget #mobile-intro .intro-title-new,
@@ -10253,5 +10320,39 @@
 @media (max-width: 768px) {
     #gpk-products-widget #mobile-intro .intro-kpis-grid-new {
         display: none !important;
+    }
+}
+
+/* MOBILE HERO INITIAL STABILITY - CASCADE OVERRIDE */
+@media (max-width: 768px) {
+    #gpk-products-widget #mobile-intro .products-intro-pane {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        min-height: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-mobile-img-container,
+    #gpk-products-widget #mobile-intro .intro-mobile-video,
+    #gpk-products-widget #mobile-intro .intro-mobile-desc {
+        position: static !important;
+        inset: auto !important;
+        transform: none !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-mobile-img-container {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        aspect-ratio: auto !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-mobile-desc {
+        width: 100% !important;
+        margin: 0 !important;
     }
 }
