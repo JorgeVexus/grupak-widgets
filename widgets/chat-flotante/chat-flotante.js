@@ -139,7 +139,7 @@
             root.removeAttribute("data-gpk-chat-loading");
             return;
         }
-        if (avatar) avatar.src = assetURL("footer/newsletter-people.png");
+        if (avatar) avatar.src = assetURL("chat-flotante/Images/valeria.webp");
 
         function showView(state) {
             if (states.indexOf(state) === -1) return;

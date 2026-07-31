@@ -170,7 +170,7 @@ test("loads and safely crops the footer portrait as the header avatar", async fu
     assert.equal(avatar.tagName, "IMG");
     assert.match(
         avatar.getAttribute("src"),
-        /^http:\/\/localhost\/widgets\/footer\/newsletter-people\.png\?v=/
+        /^http:\/\/localhost\/widgets\/chat-flotante\/Images\/valeria\.webp\?v=/
     );
     assert.match(styles, /\.gpk-chat__avatar\s*\{[^}]*overflow:\s*hidden;/s);
     assert.match(styles, /\.gpk-chat__avatar\s*\{[^}]*pointer-events:\s*none;/s);
@@ -183,7 +183,7 @@ test("loads and safely crops the footer portrait as the header avatar", async fu
     var productionAvatar = productionApp.document.querySelector("[data-gpk-chat-avatar]");
     assert.match(
         productionAvatar.getAttribute("src"),
-        /^https:\/\/grupak-widgets\.vercel\.app\/widgets\/footer\/newsletter-people\.png\?v=/
+        /^https:\/\/grupak-widgets\.vercel\.app\/widgets\/chat-flotante\/Images\/valeria\.webp\?v=/
     );
 });
 
@@ -293,7 +293,7 @@ test("resolves preview assets from the script URL", async function () {
     var avatar = app.document.querySelector("[data-gpk-chat-avatar]");
 
     assert.match(stylesheet.href, /^http:\/\/localhost:8026\/subruta\/widgets\/chat-flotante\/chat-flotante\.css\?v=/);
-    assert.match(avatar.src, /^http:\/\/localhost:8026\/subruta\/widgets\/footer\/newsletter-people\.png\?v=/);
+    assert.match(avatar.src, /^http:\/\/localhost:8026\/subruta\/widgets\/chat-flotante\/Images\/valeria\.webp\?v=/);
 });
 
 test("keeps a failed fetch terminal until an explicit script retry", async function () {
