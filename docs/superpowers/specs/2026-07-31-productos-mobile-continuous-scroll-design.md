@@ -137,3 +137,35 @@ experiencia de escritorio permanecen sin cambios.
 - Revisar hero, índice, Papel y Láminas en 320, 375, 390, 430 y 768 px.
 - Confirmar que ningún texto, imagen, botón o pill se superpone o sale de su card.
 - Confirmar por comparación visual y reglas CSS que el escritorio no cambia.
+
+## Refinamiento visual aprobado: Láminas, Cajas y Energía
+
+### Láminas técnicas
+
+- Las especificaciones “Ancho de la corrugadora” y “Opciones de corrugado y
+  anchos de papel” serán bloques independientes en flujo normal.
+- Cada bloque mostrará primero su card de texto y después su imagen, con 24 px de
+  separación antes del siguiente bloque.
+- Se eliminarán en móvil alturas, transformaciones y posiciones absolutas
+  heredadas que permitan a una imagen invadir otra card.
+
+### Cajas
+
+- Cada imagen permanecerá asociada visualmente a su card de texto.
+- Habrá 28 px de separación vertical entre una pareja texto/imagen y la siguiente.
+- Ninguna imagen usará márgenes negativos ni posiciones absolutas en el flujo móvil.
+
+### Energía
+
+- Se reutilizarán las tres imágenes presentes en escritorio: eficiencia energética,
+  impacto ambiental y suministro confiable.
+- Cada fila será un bloque editorial con imagen panorámica arriba y texto debajo.
+- Los tres bloques usarán separadores ligeros y espacio vertical, evitando nuevas
+  cards pesadas y manteniendo la lectura continua.
+
+### Verificación adicional de estos bloques
+
+- Confirmar que las imágenes de Láminas no intersectan las cards adyacentes.
+- Confirmar al menos 28 px entre grupos visuales de Cajas.
+- Confirmar que Energía muestra tres imágenes con proporción preservada y texto
+  inmediatamente relacionado debajo.
