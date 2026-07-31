@@ -112,6 +112,7 @@
         const mobileProgressFill = root.querySelector("#mobile-progress-fill");
         const mobileContinuousSections = [
             { id: "mobile-intro", label: "Introducción", selectors: ["#intro-pane"] },
+            { id: "mobile-slide-zero", label: "Quiénes somos", selectors: ["#intro-pane"] },
             { id: "mobile-products-index", label: "Productos", selectors: ["#overview-pane"] },
             { id: "mobile-papel", label: "Papel", selectors: ["#pane-papel"] },
             { id: "mobile-lamina", label: "Lámina", selectors: ["#pane-laminas", "#pane-laminas-specs"] },
@@ -200,9 +201,18 @@
             });
         }
 
-        const introMobileImage = board ? board.querySelector(".intro-mobile-img") : null;
-        if (introMobileImage) {
-            introMobileImage.src = `${widgetBaseURL}/images/hero-new.webp`;
+        const introMobileVideo = board ? board.querySelector(".intro-mobile-video") : null;
+        if (introMobileVideo) {
+            const introMp4 = introMobileVideo.querySelector('source[type="video/mp4"]');
+            const introWebm = introMobileVideo.querySelector('source[type="video/webm"]');
+            if (introWebm) introWebm.src = `${widgetBaseURL}/videos/hero-video.webm`;
+            if (introMp4) introMp4.src = `${widgetBaseURL}/videos/hero-video.mp4`;
+            introMobileVideo.poster = `${widgetBaseURL}/images/hero-new.webp`;
+            introMobileVideo.load();
+            const introPlayAttempt = introMobileVideo.play();
+            if (introPlayAttempt && typeof introPlayAttempt.catch === "function") {
+                introPlayAttempt.catch(() => {});
+            }
         }
 
         const cajasMainImage = board ? board.querySelector(".cajas-main-image") : null;
@@ -533,6 +543,14 @@
                     button.replaceWith(link);
                 });
                 flow.appendChild(wrapper);
+                wrapper.querySelectorAll("video[autoplay]").forEach(video => {
+                    video.muted = true;
+                    video.load();
+                    const playAttempt = video.play();
+                    if (playAttempt && typeof playAttempt.catch === "function") {
+                        playAttempt.catch(() => {});
+                    }
+                });
             });
         }
 

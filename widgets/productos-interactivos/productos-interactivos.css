@@ -19,6 +19,90 @@
     overflow: visible;
 }
 
+/* ==========================================================================
+   SLIDE 0 PRODUCTION KPIS — shared desktop/mobile layout
+   ========================================================================== */
+#gpk-products-widget .intro-kpis-grid-new {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 60px !important;
+}
+
+@media (max-width: 1024px) {
+    #gpk-products-widget #mobile-intro .intro-kpis-grid-new {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-top: 18px !important;
+    }
+}
+
+/* MOBILE SLIDE 0 VISIBILITY OVERRIDE */
+@media (max-width: 768px) {
+    #gpk-products-widget #mobile-intro .intro-kpis-grid-new {
+        display: none !important;
+    }
+}
+
+/* MOBILE SLIDE 0 SEPARATION - FINAL LAYER */
+@media (max-width: 768px) {
+    #gpk-products-widget #mobile-intro .intro-title-new,
+    #gpk-products-widget #mobile-intro .intro-kpis-grid-new {
+        display: none !important;
+    }
+
+    #gpk-products-widget #mobile-slide-zero.mobile-flow-section {
+        padding: 52px 20px 64px !important;
+        background: #f7f7f3 !important;
+        color: #6e6e6e !important;
+    }
+
+    #gpk-products-widget #mobile-slide-zero .products-intro-pane {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    #gpk-products-widget #mobile-slide-zero .intro-title-new {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        color: #8a8a8a !important;
+        font-size: clamp(22px, 6.2vw, 30px) !important;
+        line-height: 1.55 !important;
+        font-weight: 400 !important;
+    }
+
+    #gpk-products-widget #mobile-slide-zero .intro-title-new .desktop-only {
+        display: inline !important;
+    }
+
+    #gpk-products-widget #mobile-slide-zero .intro-title-new br.desktop-only {
+        display: none !important;
+    }
+
+    #gpk-products-widget #mobile-slide-zero .intro-mobile-img-container,
+    #gpk-products-widget #mobile-slide-zero .intro-mobile-desc,
+    #gpk-products-widget #mobile-slide-zero .mobile-hero-kpis {
+        display: none !important;
+    }
+
+    #gpk-products-widget #mobile-slide-zero .intro-kpis-grid-new {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+}
+
 /* MOBILE VISUAL REFINEMENT - FINAL LAYER */
 @media (max-width: 768px) {
     #gpk-products-widget {
@@ -10083,5 +10167,91 @@
     #gpk-products-widget #mobile-products-index .overview-col-btn {
         pointer-events: auto !important;
         cursor: pointer !important;
+    }
+}
+
+/* MOBILE INTRO HERO - FINAL LAYER */
+@media (max-width: 768px) {
+    #gpk-products-widget {
+        --mobile-site-header-clearance: 88px;
+    }
+
+    #gpk-products-widget #mobile-intro.mobile-flow-section {
+        padding-top: calc(var(--mobile-site-header-clearance) + env(safe-area-inset-top)) !important;
+        background: #383838 !important;
+        color: #f7f7f3 !important;
+    }
+
+    #gpk-products-widget #mobile-intro h1,
+    #gpk-products-widget #mobile-intro p,
+    #gpk-products-widget #mobile-intro .intro-mobile-desc {
+        color: #f7f7f3 !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-mobile-desc {
+        position: relative !important;
+        margin: 0 !important;
+        margin-bottom: 24px !important;
+        border-color: rgba(255, 255, 255, 0.18) !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+    }
+
+    #gpk-products-widget #mobile-intro .mobile-hero-kpis {
+        position: relative !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    #gpk-products-widget #mobile-intro .mobile-hero-kpi {
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 132px !important;
+    }
+
+    #gpk-products-widget .intro-mobile-img-container {
+        min-height: 0 !important;
+        padding: 0 !important;
+    }
+
+    #gpk-products-widget .intro-mobile-video {
+        display: block !important;
+        width: 100% !important;
+        aspect-ratio: 1.86 / 1 !important;
+        object-fit: cover !important;
+    }
+
+    #gpk-products-widget #mobile-intro .intro-kpis-grid-new {
+        display: none !important;
+    }
+}
+
+/* ==========================================================================
+   SLIDE 0 PRODUCTION KPIS - FINAL SHARED LAYOUT
+   ========================================================================== */
+#gpk-products-widget .intro-kpis-grid-new {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 60px !important;
+}
+
+@media (max-width: 1024px) {
+    #gpk-products-widget #mobile-intro .intro-kpis-grid-new {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-top: 18px !important;
+    }
+}
+
+/* MOBILE SLIDE 0 VISIBILITY OVERRIDE */
+@media (max-width: 768px) {
+    #gpk-products-widget #mobile-intro .intro-kpis-grid-new {
+        display: none !important;
     }
 }
