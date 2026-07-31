@@ -319,21 +319,26 @@
 
 .gpk-footer__col-title {
     display: block;
-    color: var(--gpk-footer-green);
+    color: #2b2b2b;
     font-size: 16px;
     font-weight: 700;
 }
 
 a.gpk-footer__col-title:hover {
+    color: var(--gpk-footer-green);
     text-decoration: underline;
 }
 
 .gpk-footer__sub-title {
     display: block;
-    color: var(--gpk-footer-green);
-    font-size: 14px;
+    color: #767676;
+    font-size: 12px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3.6px;
     margin-top: -8px;
+    cursor: default;
+    user-select: none;
 }
 
 .gpk-footer__col-list {
