@@ -89,3 +89,51 @@ arquitectura de scroll aprobada.
 - La barra sticky orienta sin cubrir contenido.
 - Los saltos del índice llegan a la categoría correcta.
 - Desktop conserva diseño, dimensiones, animaciones y navegación existentes.
+
+## Refinamiento visual aprobado: hero y categorías
+
+Este refinamiento sustituye únicamente las decisiones visuales móviles que se
+contradigan con los puntos siguientes. La arquitectura de scroll continuo y la
+experiencia de escritorio permanecen sin cambios.
+
+### Hero móvil
+
+- Solo el hero utilizará fondo carbón `#383838`; las secciones posteriores
+  conservarán su fondo claro.
+- La información será idéntica a la del hero de escritorio y mostrará sus cuatro
+  KPIs: `3 Plantas`, `6 Abastecedoras`, `Fundada en 1957 / 69 Años` y
+  `100% Fibra reciclada biodegradable`.
+- Los indicadores `+300,000 toneladas de papel reciclado` y `+234,000 toneladas
+  de cartón corrugado` no formarán parte del hero móvil.
+- Los cuatro KPIs se organizarán en una cuadrícula móvil 2 × 2, con contraste y
+  lectura suficientes sobre el fondo oscuro.
+
+### Índice “Nuestros productos”
+
+- Cada categoría será una card vertical sin elementos superpuestos.
+- Título y descripción ocuparán una zona de texto independiente; la imagen tendrá
+  su propia zona centrada y el botón se ubicará al final.
+- Los botones tendrán ancho ajustado al contenido, altura táctil mínima de 44 px y
+  no competirán con la imagen.
+
+### Cards de Papel
+
+- Habrá separación visible entre los textos introductorios y la primera card
+  ClassicPak, conservada también entre cards sucesivas.
+- La etiqueta “Este papel se usa para” se centrará verticalmente dentro de su pill.
+- Imagen, título, descripción, pill y texto de uso permanecerán en flujo normal,
+  sin posiciones absolutas ni solapes.
+
+### Láminas de cartón corrugado
+
+- El título “Amplia gama de resistencias” permanecerá íntegramente dentro de su card.
+- El bloque de texto tendrá ancho suficiente y no compartirá fila estrecha con las
+  imágenes.
+- Las dos imágenes se mostrarán más grandes, en una fila horizontal debajo de la
+  card de texto, manteniendo su relación de aspecto.
+
+### Verificación adicional
+
+- Revisar hero, índice, Papel y Láminas en 320, 375, 390, 430 y 768 px.
+- Confirmar que ningún texto, imagen, botón o pill se superpone o sale de su card.
+- Confirmar por comparación visual y reglas CSS que el escritorio no cambia.
