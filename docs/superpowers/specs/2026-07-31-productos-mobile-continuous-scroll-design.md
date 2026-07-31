@@ -236,3 +236,15 @@ experiencia de escritorio permanecen sin cambios.
 - Confirmar en móvil el orden hero → slide 0 → productos.
 - Confirmar que el video está visible, muted, loop, playsinline y reproduciéndose.
 - Confirmar que el hero queda debajo del menú sin solaparse en Safari móvil.
+
+## Refinamiento aprobado: cuadrícula KPI del hero móvil
+
+- El hero móvil conservará sus cuatro KPI dentro del bloque `mobile-intro`.
+- Los KPI usarán una cuadrícula fija de dos columnas y dos filas desde 320 px
+  hasta 768 px, siguiendo la referencia visual entregada.
+- La descripción, el video y la cuadrícula permanecerán en flujo normal, con
+  separación vertical propia; no se permitirá superposición entre ellos.
+- Las cuatro tarjetas tendrán ancho uniforme, contenido alineado a la izquierda
+  y altura suficiente para que sus etiquetas y descripciones no se recorten.
+- El slide 0 de escritorio conservará exclusivamente los KPI de producción
+  `+300,000` y `+234,000`; este refinamiento no modificará desktop.
