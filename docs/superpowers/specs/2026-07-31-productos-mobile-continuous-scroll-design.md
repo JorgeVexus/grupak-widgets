@@ -200,3 +200,39 @@ experiencia de escritorio permanecen sin cambios.
 - Papel tendrá espacio inferior suficiente para que su último contenido no quede
   oculto por la barra de 72 px.
 - La corrección se aplicará únicamente hasta 768 px.
+
+## Refinamiento estructural aprobado: hero real y slide 0
+
+### Orden móvil
+
+1. El hero principal será el primer bloque y mostrará su video real en autoplay.
+2. El hero conservará sin cambios sus cuatro KPIs: 3 Plantas, 6 Abastecedoras,
+   Fundada en 1957 / 69 Años y 100% Fibra reciclada biodegradable.
+3. El slide 0 “Somos fabricantes mexicanos…” aparecerá debajo del hero.
+4. “Nuestros productos” y el resto del flujo continuo aparecerán después.
+
+### Hero móvil
+
+- El elemento `<video>` existente será visible, `autoplay`, `muted`, `loop` y
+  `playsinline`; la imagen funcionará únicamente como poster/fallback.
+- El hero estará en flujo normal móvil y no usará posición fija.
+- Tendrá espacio superior suficiente para no quedar debajo del menú del sitio
+  live, incluyendo `safe-area-inset-top`.
+- El inicio del video se solicitará nuevamente desde JavaScript después de montar
+  el widget; un fallo de autoplay conservará el poster sin romper el contenido.
+
+### Slide 0 y KPIs de producción
+
+- El slide 0 mostrará únicamente `+300,000 toneladas de papel reciclado` y
+  `+234,000 toneladas de cartón corrugado`.
+- En escritorio ambos KPIs conservarán el diseño horizontal de la referencia:
+  número gris grande, línea verde, “Toneladas” en negritas y descripción debajo.
+- En móvil usarán los mismos datos en dos columnas responsive.
+- Los cuatro KPIs del hero principal no se reutilizarán dentro del slide 0.
+
+### Verificación
+
+- Confirmar en escritorio que el hero mantiene cuatro KPIs y el slide 0 solo dos.
+- Confirmar en móvil el orden hero → slide 0 → productos.
+- Confirmar que el video está visible, muted, loop, playsinline y reproduciéndose.
+- Confirmar que el hero queda debajo del menú sin solaparse en Safari móvil.
