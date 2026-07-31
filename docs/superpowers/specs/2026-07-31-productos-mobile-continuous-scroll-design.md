@@ -180,3 +180,23 @@ experiencia de escritorio permanecen sin cambios.
 - La card del hero que comienza con “Integrando toda la cadena” tendrá 20 px de
   padding izquierdo y derecho, y 18 px de padding vertical.
 - Los tres cambios serán exclusivos de viewports de hasta 768 px.
+
+## Refinamiento funcional aprobado: anclas y capa sticky
+
+### Navegación desde “Nuestros productos”
+
+- Los cuatro controles “Saber más” conservarán anchors nativos y ejecutarán un
+  desplazamiento explícito hacia `mobile-papel`, `mobile-lamina`, `mobile-cajas`
+  y `mobile-grabados`, respectivamente.
+- El desplazamiento será suave salvo cuando el usuario prefiera movimiento
+  reducido, y mantendrá 18 px de separación respecto al borde superior.
+- La navegación por slides de escritorio no se modificará.
+
+### Protección de la barra inferior en Papel
+
+- La barra sticky utilizará una capa aislada superior y fondo opaco para impedir
+  que imágenes o cards móviles aparezcan sobre ella o se transparenten.
+- Los elementos visuales de Papel se mantendrán en la capa de contenido normal.
+- Papel tendrá espacio inferior suficiente para que su último contenido no quede
+  oculto por la barra de 72 px.
+- La corrección se aplicará únicamente hasta 768 px.
