@@ -110,6 +110,21 @@
         const mobileSectionName = root.querySelector("#mobile-section-name");
         const mobileSlideCount = root.querySelector("#mobile-slide-count");
         const mobileProgressFill = root.querySelector("#mobile-progress-fill");
+        const mobileContinuousSections = [
+            { id: "mobile-intro", label: "Introducción", selectors: ["#intro-pane"] },
+            { id: "mobile-products-index", label: "Productos", selectors: ["#overview-pane"] },
+            { id: "mobile-papel", label: "Papel", selectors: ["#pane-papel"] },
+            { id: "mobile-lamina", label: "Lámina", selectors: ["#pane-laminas", "#pane-laminas-specs"] },
+            { id: "mobile-cajas", label: "Cajas", selectors: ["#pane-cajas"] },
+            { id: "mobile-grabados", label: "Grabados", selectors: ["#pane-grabados"] },
+            { id: "mobile-energia", label: "Energía", selectors: ["#pane-energia"] }
+        ];
+        const mobileSlideTargets = {
+            2: "mobile-papel",
+            4: "mobile-lamina",
+            5: "mobile-cajas",
+            8: "mobile-grabados"
+        };
         const widgetProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
         const widgetBaseURL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
             ? "/widgets/productos-interactivos"
@@ -486,6 +501,93 @@
             updateSlideZeroRevealOnScroll(lastScrollProgress);
         }
 
+        function buildMobileContinuousFlow() {
+            const flow = root.querySelector("#mobile-continuous-flow");
+            if (!flow || flow.childElementCount) return;
+
+            mobileContinuousSections.forEach(section => {
+                const wrapper = document.createElement("section");
+                wrapper.id = section.id;
+                wrapper.className = "mobile-flow-section";
+                wrapper.dataset.mobileSection = section.id.replace("mobile-", "");
+                wrapper.dataset.mobileLabel = section.label;
+
+                section.selectors.forEach(selector => {
+                    const source = board.querySelector(selector);
+                    if (source) wrapper.appendChild(source.cloneNode(true));
+                });
+                wrapper.querySelectorAll("[data-target-slide]").forEach(button => {
+                    const targetId = mobileSlideTargets[Number(button.dataset.targetSlide)];
+                    if (!targetId) return;
+                    const link = document.createElement("a");
+                    link.className = button.className;
+                    link.href = `#${targetId}`;
+                    link.dataset.scrollTarget = targetId;
+                    link.innerHTML = button.innerHTML;
+                    link.addEventListener("click", event => {
+                        if (!window.matchMedia("(max-width: 768px)").matches) return;
+                        event.preventDefault();
+                        event.stopPropagation();
+                        scrollToMobileTarget(targetId);
+                    });
+                    button.replaceWith(link);
+                });
+                flow.appendChild(wrapper);
+            });
+        }
+
+        function scrollToMobileTarget(targetId) {
+            const target = targetId && root.querySelector(`#${targetId}`);
+            if (!target) return;
+            const targetTop = target.getBoundingClientRect().top
+                + (window.pageYOffset || document.documentElement.scrollTop)
+                - 18;
+            window.location.hash = targetId;
+            window.requestAnimationFrame(() => {
+                window.scrollTo({
+                    top: targetTop,
+                    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+                });
+            });
+        }
+
+        function initMobileContinuousNavigation() {
+            const flow = root.querySelector("#mobile-continuous-flow");
+            const label = root.querySelector("#mobile-continuous-section");
+            const progress = root.querySelector("#mobile-continuous-progress");
+            const sections = Array.from(root.querySelectorAll(".mobile-flow-section"));
+            if (!flow || !label || !progress || !sections.length) return;
+
+            root.addEventListener("click", event => {
+                if (!window.matchMedia("(max-width: 768px)").matches) return;
+                const trigger = event.target.closest("[data-target-slide], [data-scroll-target]");
+                if (!trigger || !flow.contains(trigger) && !trigger.closest(".mobile-scroll-status")) return;
+                if (trigger.matches('a[href^="#mobile-"]')) return;
+
+                const targetId = trigger.dataset.scrollTarget
+                    || mobileSlideTargets[Number(trigger.dataset.targetSlide)];
+                event.preventDefault();
+                event.stopPropagation();
+                scrollToMobileTarget(targetId);
+            }, true);
+
+            const observer = new IntersectionObserver(entries => {
+                const visible = entries
+                    .filter(entry => entry.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+                if (!visible) return;
+
+                const index = sections.indexOf(visible.target);
+                label.textContent = visible.target.dataset.mobileLabel;
+                progress.style.transform = `scaleX(${(index + 1) / sections.length})`;
+            }, {
+                rootMargin: "-18% 0px -68% 0px",
+                threshold: [0, 0.2, 0.5]
+            });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
         // --- Scroll-driven Papel text blocks (Mode 2) ---
         function updatePaperTextBlocksOnScroll(progress) {
             const textBlocks = root.querySelectorAll(".papel-text-block");
@@ -540,7 +642,7 @@
             prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
             nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
 
-            root.querySelectorAll(".overview-col-btn").forEach(btn => {
+            board.querySelectorAll(".overview-col-btn").forEach(btn => {
                 btn.addEventListener("click", () => {
                     const target = parseInt(btn.getAttribute("data-target-slide"));
                     goToSlide(target);
@@ -731,6 +833,8 @@
 
         // --- Initialize ---
         function init() {
+            buildMobileContinuousFlow();
+            initMobileContinuousNavigation();
             buildDots();
             scaleBoard();
             setupEvents();
