@@ -169,3 +169,14 @@ experiencia de escritorio permanecen sin cambios.
 - Confirmar al menos 28 px entre grupos visuales de Cajas.
 - Confirmar que Energía muestra tres imágenes con proporción preservada y texto
   inmediatamente relacionado debajo.
+
+## Refinamiento visual aprobado: espaciado y escala final
+
+- El bloque “Cajas, empaques, exhibidores en Impresión digital” tendrá 44 px de
+  separación entre su card de texto y la imagen asociada.
+- Las cuatro imágenes del índice “Nuestros productos” usarán una zona visual de
+  148 px de alto y podrán crecer hasta 180 px de ancho, siempre centradas y sin
+  superponerse con texto o botones.
+- La card del hero que comienza con “Integrando toda la cadena” tendrá 20 px de
+  padding izquierdo y derecho, y 18 px de padding vertical.
+- Los tres cambios serán exclusivos de viewports de hasta 768 px.
