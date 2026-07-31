@@ -1,12 +1,28 @@
 <section id="gpk-formulario-widget" class="gpk-form-widget">
     <div class="gpk-form-shell">
-        <div class="gpk-form-tabs" role="tablist" aria-label="Formularios Grupak">
-            <button type="button" class="gpk-form-tab is-active" data-gpk-tab="contacto" role="tab" aria-selected="true">Contacto</button>
-            <button type="button" class="gpk-form-tab" data-gpk-tab="proveedor" role="tab" aria-selected="false">Quiero ser proveedor</button>
-            <button type="button" class="gpk-form-tab" data-gpk-tab="trabajo" role="tab" aria-selected="false">Quiero trabajar en Grupak</button>
+        <div class="gpk-form-chooser">
+            <p class="gpk-form-helper">Selecciona una opción para mostrar el formulario correspondiente.</p>
+
+            <div class="gpk-form-tabs" role="tablist" aria-label="Formularios Grupak">
+                <button type="button" class="gpk-form-tab" data-gpk-tab="contacto" role="tab" aria-selected="false">
+                    <span class="gpk-form-tab-title">Solicitar cotización</span>
+                    <span class="gpk-form-tab-desc">Productos y soluciones</span>
+                    <span class="gpk-form-tab-arrow" aria-hidden="true">→</span>
+                </button>
+                <button type="button" class="gpk-form-tab" data-gpk-tab="proveedor" role="tab" aria-selected="false">
+                    <span class="gpk-form-tab-title">Quiero ser proveedor</span>
+                    <span class="gpk-form-tab-desc">Registro comercial</span>
+                    <span class="gpk-form-tab-arrow" aria-hidden="true">→</span>
+                </button>
+                <button type="button" class="gpk-form-tab" data-gpk-tab="trabajo" role="tab" aria-selected="false">
+                    <span class="gpk-form-tab-title">Quiero trabajar en Grupak</span>
+                    <span class="gpk-form-tab-desc">Talento y vacantes</span>
+                    <span class="gpk-form-tab-arrow" aria-hidden="true">→</span>
+                </button>
+            </div>
         </div>
 
-        <form class="gpk-form-panel is-active" data-gpk-panel="contacto" data-gpk-form="contacto" role="tabpanel">
+        <form class="gpk-form-panel" data-gpk-panel="contacto" data-gpk-form="contacto" role="tabpanel">
             <input type="text" name="_gotcha" class="gpk-honeypot" tabindex="-1" autocomplete="off">
 
             <h3 class="gpk-section-title">Datos personales</h3>

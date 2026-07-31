@@ -34,46 +34,97 @@
     overflow: hidden;
 }
 
-.gpk-form-tabs {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+.gpk-form-chooser {
+    padding: 42px 48px 46px;
+    background: var(--gpk-form-field);
     border-bottom: 1px dashed var(--gpk-form-line);
-    padding: 0;
-    width: 100%;
+}
+
+.gpk-form-helper {
+    max-width: 65ch;
+    margin: 0 0 24px;
+    color: var(--gpk-form-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.gpk-form-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
 }
 
 .gpk-form-tab {
     appearance: none;
-    border: 0;
-    background: transparent;
+    min-width: 0;
+    min-height: 142px;
+    padding: 22px;
+    border: 1px solid var(--gpk-form-line);
+    border-radius: 12px;
+    background: var(--gpk-form-white);
     color: var(--gpk-form-ink);
     cursor: pointer;
     font: inherit;
     font-family: var(--gpk-form-font-title);
-    font-size: 17px;
-    padding: 18px 4px;
-    position: relative;
-    flex: 1 1 0px;
-    width: 33.333%;
-    text-align: center;
-    white-space: nowrap;
+    text-align: left;
+    transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.gpk-form-tab:hover {
+    border-color: var(--gpk-form-green);
+    transform: translateY(-2px);
+}
+
+.gpk-form-tab:active {
+    transform: translateY(0) scale(.98);
+}
+
+.gpk-form-tab:focus-visible {
+    outline: 3px solid rgba(95, 157, 47, .32);
+    outline-offset: 3px;
 }
 
 .gpk-form-tab.is-active {
-    color: var(--gpk-form-green);
+    border-color: var(--gpk-form-green);
+    background: var(--gpk-form-green);
+    color: var(--gpk-form-white);
     font-family: var(--gpk-form-font-black);
-    font-weight: 700;
 }
 
-.gpk-form-tab.is-active::after {
-    background: var(--gpk-form-green);
-    bottom: -1px;
-    content: "";
-    height: 3px;
-    left: 0;
-    position: absolute;
-    right: 0;
+.gpk-form-tab-title,
+.gpk-form-tab-desc,
+.gpk-form-tab-arrow {
+    display: block;
+}
+
+.gpk-form-tab-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-wrap: balance;
+}
+
+.gpk-form-tab-desc {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: .78;
+}
+
+.gpk-form-tab-arrow {
+    margin-top: 18px;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.gpk-form-tabs.has-selection .gpk-form-tab {
+    min-height: 94px;
+    padding: 16px 18px;
+}
+
+.gpk-form-tabs.has-selection .gpk-form-tab-desc,
+.gpk-form-tabs.has-selection .gpk-form-tab-arrow {
+    display: none;
 }
 
 .gpk-form-panel {
@@ -480,13 +531,22 @@
         width: calc(100% - 20px);
     }
 
+    .gpk-form-chooser {
+        padding: 30px 18px 32px;
+    }
+
     .gpk-form-tabs {
-        gap: 22px;
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .gpk-form-tab {
-        font-size: 14px;
-        padding: 15px 0;
+        min-height: 104px;
+        padding: 18px;
+    }
+
+    .gpk-form-tabs.has-selection .gpk-form-tab {
+        min-height: 64px;
     }
 
     .gpk-form-panel {
@@ -506,6 +566,17 @@
 
     .gpk-product-card {
         min-height: 82px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gpk-form-tab {
+        transition: none;
+    }
+
+    .gpk-form-tab:hover,
+    .gpk-form-tab:active {
+        transform: none;
     }
 }
 

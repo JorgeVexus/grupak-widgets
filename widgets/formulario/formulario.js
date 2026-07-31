@@ -156,7 +156,7 @@
         tabs.forEach(function (tab) {
             tab.addEventListener("click", function () {
                 var target = tab.getAttribute("data-gpk-tab");
-                selectTab(widget, target, false);
+                selectTab(widget, target, true);
             });
         });
     }
@@ -175,12 +175,18 @@
 
         if (!found) return false;
 
+        var tabsContainer = widget.querySelector(".gpk-form-tabs");
+        if (tabsContainer) tabsContainer.classList.add("has-selection");
+
+        var activePanel = null;
         panels.forEach(function (panel) {
-            panel.classList.toggle("is-active", panel.getAttribute("data-gpk-panel") === target);
+            var active = panel.getAttribute("data-gpk-panel") === target;
+            panel.classList.toggle("is-active", active);
+            if (active) activePanel = panel;
         });
 
-        if (shouldScroll) {
-            widget.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (shouldScroll && activePanel) {
+            activePanel.scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
         return true;
