@@ -8,6 +8,7 @@ const vm = require('node:vm');
 const htmlPath = path.join(__dirname, 'slider-certificaciones.html');
 const cssPath = path.join(__dirname, 'slider-certificaciones.css');
 const jsPath = path.join(__dirname, 'slider-certificaciones.js');
+const previewPath = path.join(__dirname, 'preview.html');
 
 async function loadMarkup() {
   return readFile(htmlPath, 'utf8');
@@ -20,6 +21,20 @@ async function loadStyles() {
 async function loadController() {
   return readFile(jsPath, 'utf8');
 }
+
+test('provides a responsive standalone preview without duplicating production markup', async () => {
+  assert.equal(existsSync(previewPath), true, 'preview.html must exist');
+  const preview = await readFile(previewPath, 'utf8');
+
+  assert.match(preview, /^<!doctype html>/i);
+  assert.match(preview, /<html\b[^>]*lang=["']es["']/i);
+  assert.match(preview, /<meta\b[^>]*charset=["']utf-8["']/i);
+  assert.match(preview, /<meta\b[^>]*name=["']viewport["'][^>]*content=["'][^"']*width=device-width[^"']*initial-scale=1[^"']*["']/i);
+  assert.match(preview, /<div\b[^>]*id=["']gpk-slider-certificaciones-widget-root["'][^>]*><\/div>/i);
+  assert.match(preview, /<script\b[^>]*src=["']\.\/slider-certificaciones\.js["'][^>]*><\/script>/i);
+  assert.match(preview, /padding:\s*clamp\(/i);
+  assert.doesNotMatch(preview, /\bgpk-cert-widget\b/i);
+});
 
 function createControllerFixture(js) {
   class Target {
