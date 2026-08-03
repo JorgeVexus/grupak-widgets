@@ -292,11 +292,12 @@ test('styles image modifiers, accessible controls, and reduced motion', async ()
   const css = await loadStyles();
   const html = await loadMarkup();
 
-  assert.match(css, /\.gpk-cert-card--iso\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*44\.0141%\s*;/i);
-  assert.match(css, /\.gpk-cert-card--peta\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*301px\s*;[\s\S]*?height:\s*302px\s*;/i);
-  assert.match(css, /\.gpk-cert-card--rspo\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*323px\s*;[\s\S]*?height:\s*323px\s*;/i);
-  assert.match(css, /\.gpk-cert-card--ocean\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*323px\s*;[\s\S]*?height:\s*330px\s*;/i);
-  assert.match(css, /\.gpk-cert-card--carbon\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*487px\s*;[\s\S]*?height:\s*378px\s*;/i);
+  assert.match(css, /\.gpk-cert-card--iso\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*44\.0141%\s*;[\s\S]*?height:\s*auto\s*;/i);
+  assert.match(css, /\.gpk-cert-card--peta\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*52\.9930%\s*;[\s\S]*?height:\s*auto\s*;/i);
+  assert.match(css, /\.gpk-cert-card--rspo\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*56\.8662%\s*;[\s\S]*?height:\s*auto\s*;/i);
+  assert.match(css, /\.gpk-cert-card--ocean\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*56\.8662%\s*;[\s\S]*?height:\s*auto\s*;/i);
+  assert.match(css, /\.gpk-cert-card--carbon\s+\.gpk-cert-media\s+img\s*{[\s\S]*?width:\s*85\.7394%\s*;[\s\S]*?height:\s*auto\s*;/i);
+  assert.doesNotMatch(css, /\.gpk-cert-card--(?:iso|peta|rspo|ocean|carbon)[^{]*{[^}]*height:\s*\d+(?:\.\d+)?px/i);
   assert.equal((html.match(/\bgpk-cert-card--carbon\b/g) || []).length, 2);
   assert.doesNotMatch(css, /nth-child\([^)]*\)[^{]*\.gpk-cert-media/i);
   assert.match(css, /\.gpk-cert-(?:prev|next):focus-visible\s*{[\s\S]*?outline:/i);
