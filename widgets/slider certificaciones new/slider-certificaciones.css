@@ -16,6 +16,7 @@
   width: 100%;
   overflow: hidden;
   border-radius: 2px;
+  touch-action: pan-y;
 }
 
 .gpk-cert-widget .gpk-cert-viewport:focus-visible {

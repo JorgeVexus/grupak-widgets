@@ -3,9 +3,11 @@ const { existsSync } = require('node:fs');
 const { readFile } = require('node:fs/promises');
 const path = require('node:path');
 const test = require('node:test');
+const vm = require('node:vm');
 
 const htmlPath = path.join(__dirname, 'slider-certificaciones.html');
 const cssPath = path.join(__dirname, 'slider-certificaciones.css');
+const jsPath = path.join(__dirname, 'slider-certificaciones.js');
 
 async function loadMarkup() {
   return readFile(htmlPath, 'utf8');
@@ -14,6 +16,231 @@ async function loadMarkup() {
 async function loadStyles() {
   return readFile(cssPath, 'utf8');
 }
+
+async function loadController() {
+  return readFile(jsPath, 'utf8');
+}
+
+function createControllerFixture(js) {
+  class Target {
+    constructor() { this.listeners = new Map(); }
+    addEventListener(type, listener) {
+      const listeners = this.listeners.get(type) || [];
+      listeners.push(listener);
+      this.listeners.set(type, listeners);
+    }
+    removeEventListener(type, listener) {
+      this.listeners.set(type, (this.listeners.get(type) || []).filter((item) => item !== listener));
+    }
+    emit(type, values = {}) {
+      const event = { type, preventDefault() {}, ...values };
+      (this.listeners.get(type) || []).slice().forEach((listener) => listener(event));
+    }
+  }
+  class Element extends Target {
+    constructor() {
+      super();
+      this.dataset = {};
+      this.attributes = {};
+      this.children = [];
+      this.style = { values: {}, setProperty: (key, value) => { this.style.values[key] = value; } };
+      this.classList = { add: (value) => { this.missingClass = value; } };
+    }
+    setAttribute(key, value) { this.attributes[key] = value; }
+    removeAttribute(key) { delete this.attributes[key]; }
+    getAttribute(key) { return this.attributes[key]; }
+    getBoundingClientRect() { return { width: 100 }; }
+  }
+  const windowTarget = new Target();
+  const observers = [];
+  const widgets = [];
+  class Observer {
+    constructor(callback) { this.callback = callback; this.disconnected = false; observers.push(this); }
+    observe() {}
+    disconnect() { this.disconnected = true; }
+    trigger() { this.callback(); }
+  }
+  Object.assign(windowTarget, {
+    getComputedStyle(element) {
+      return element.isWidget
+        ? { getPropertyValue: () => String(element.visible || 1) }
+        : { columnGap: '20px', gap: '20px' };
+    },
+    ResizeObserver: Observer,
+    MutationObserver: Observer,
+  });
+  const document = {
+    currentScript: { src: 'https://example.test/widgets/slider%20certificaciones%20new/slider-certificaciones.js' },
+    baseURI: 'https://example.test/',
+    documentElement: { contains: (node) => node.connected },
+    querySelectorAll: () => widgets.filter((widget) => widget.connected),
+  };
+  const context = {
+    URL,
+    console: { error() {} },
+    document,
+    location: { protocol: 'https:', hostname: 'example.test', origin: 'https://example.test' },
+    module: { exports: {} },
+    window: windowTarget,
+  };
+  vm.runInNewContext(js, context);
+
+  function widgetFixture({ complete = true } = {}) {
+    const widget = new Element();
+    widget.isWidget = true;
+    widget.visible = 2;
+    widget.connected = true;
+    const viewport = new Element();
+    viewport.captureCalls = [];
+    viewport.setPointerCapture = (id) => viewport.captureCalls.push(id);
+    const track = new Element();
+    track.children = Array.from({ length: 4 }, () => new Element());
+    const previous = new Element();
+    const next = new Element();
+    const status = new Element();
+    status.textContent = 'initial';
+    const image = new Element();
+    image.attributes.src = 'Images/iso.png';
+    const nodes = complete ? {
+      '.gpk-cert-viewport': viewport,
+      '.gpk-cert-track': track,
+      '.gpk-cert-prev': previous,
+      '.gpk-cert-next': next,
+      '.gpk-cert-status': status,
+    } : {};
+    widget.querySelector = (selector) => nodes[selector] || null;
+    widget.querySelectorAll = (selector) => selector === 'img[src]' ? [image] : [];
+    widgets.push(widget);
+    return { widget, viewport, track, previous, next, status, image };
+  }
+  return { api: context.module.exports, observers, widgetFixture, windowTarget };
+}
+
+test('executes navigation, pointer, resize, and clean reinsertion behavior', async () => {
+  const fixture = createControllerFixture(await loadController());
+  assert.equal(typeof fixture.api.initWidget, 'function');
+  const malformed = fixture.widgetFixture({ complete: false });
+  fixture.api.initWidget(malformed.widget);
+  assert.equal(malformed.widget.dataset.gpkCertInitialized, undefined);
+
+  const view = fixture.widgetFixture();
+  fixture.api.initWidget(view.widget);
+  assert.match(view.image.src, /Images\/iso\.png$/);
+  view.image.emit('error');
+  assert.equal(view.image.missingClass, 'is-missing');
+  assert.equal(view.next.disabled, false);
+  view.next.emit('click');
+  assert.equal(view.widget.style.values['--gpk-cert-offset'], '-120px');
+  view.viewport.emit('keydown', { key: 'ArrowRight' });
+  assert.equal(view.widget.style.values['--gpk-cert-offset'], '-240px');
+  view.viewport.emit('pointerdown', { pointerId: 8, isPrimary: false, button: 0, clientX: 100 });
+  view.viewport.emit('pointerdown', { pointerId: 9, isPrimary: true, button: 1, clientX: 100 });
+  assert.equal(view.viewport.captureCalls.length, 0);
+  view.viewport.emit('pointerdown', { pointerId: 1, isPrimary: true, button: 0, clientX: 100 });
+  view.viewport.emit('pointerup', { pointerId: 2, isPrimary: true, clientX: 0 });
+  assert.equal(view.widget.style.values['--gpk-cert-offset'], '-240px');
+  view.previous.emit('click');
+  view.viewport.emit('pointerdown', { pointerId: 1, isPrimary: true, button: 0, clientX: 100 });
+  view.viewport.emit('pointerup', { pointerId: 1, isPrimary: true, clientX: 50 });
+  assert.equal(view.widget.style.values['--gpk-cert-offset'], '-120px');
+  view.viewport.setPointerCapture = undefined;
+  view.viewport.emit('pointerdown', { pointerId: 3, isPrimary: true, button: 0, clientX: 100 });
+  view.viewport.emit('pointerup', { pointerId: 3, isPrimary: true, clientX: 0 });
+  assert.equal(view.widget.style.values['--gpk-cert-offset'], '-240px');
+
+  view.widget.visible = 3;
+  fixture.observers.find((observer) => !observer.disconnected).trigger();
+  assert.equal(view.widget.style.values['--gpk-cert-offset'], '-120px');
+  const globalObserver = fixture.api.observeWidgets();
+  view.widget.connected = false;
+  fixture.observers.filter((observer) => !observer.disconnected).forEach((observer) => observer.trigger());
+  assert.equal(view.widget.dataset.gpkCertInitialized, undefined);
+  const clicksBefore = (view.next.listeners.get('click') || []).length;
+  assert.equal(clicksBefore, 0);
+  view.widget.connected = true;
+  globalObserver.trigger();
+  assert.equal((view.next.listeners.get('click') || []).length, 1);
+});
+
+test('loads the certifications embed once from local or Vercel assets', async () => {
+  const js = await loadController();
+
+  assert.match(js, /^\(function\s*\([^)]*\)\s*{[\s\S]*?['"]use strict['"];?/);
+  assert.match(js, /location\.protocol\s*===\s*['"]file:['"]|localhost|127\.0\.0\.1/);
+  assert.match(js, /slider%20certificaciones%20new/);
+  assert.match(js, /slider-certificaciones\.css/);
+  assert.match(js, /slider-certificaciones\.html/);
+  assert.match(js, /gpk-slider-certificaciones-widget-root/);
+  assert.match(js, /querySelectorAll\(['"]\.gpk-cert-widget['"]\)/);
+  assert.match(js, /dataset\.gpkCertInitialized/);
+  assert.match(js, /new URL\([^\n]+baseURL/);
+  assert.match(js, /classList\.add\(['"]is-missing['"]\)/);
+  assert.match(js, /console\.error\(['"]\[Grupack Certifications\]/);
+});
+
+test('resolves localhost from the site root and file assets beside the current script', async () => {
+  const js = await loadController();
+  const source = js.match(/function resolveBaseURL\(protocol, hostname, origin, scriptSource\)\s*{[\s\S]*?\n  }/)?.[0];
+
+  assert.ok(source, 'a pure URL resolver must be available for runtime verification');
+  const resolveBaseURL = vm.runInNewContext(`(${source})`, { URL });
+  assert.equal(
+    resolveBaseURL('http:', 'localhost', 'http://localhost:8026', ''),
+    'http://localhost:8026/widgets/slider%20certificaciones%20new/',
+  );
+  assert.equal(
+    resolveBaseURL('file:', '', 'null', 'file:///C:/site/widgets/slider%20certificaciones%20new/slider-certificaciones.js'),
+    'file:///C:/site/widgets/slider%20certificaciones%20new/',
+  );
+  assert.equal(
+    resolveBaseURL('https:', 'example.com', 'https://example.com', ''),
+    'https://grupak-widgets.vercel.app/widgets/slider%20certificaciones%20new/',
+  );
+  assert.match(js, /['"]\/widgets\/slider%20certificaciones%20new['"]/);
+  assert.match(js, /document\.currentScript/);
+  assert.match(js, /currentScript[\s\S]*?\.src/);
+  assert.match(js, /new URL\(['"]\.['"],\s*scriptSource\)/);
+  assert.doesNotMatch(js, /isLocal\s*\?\s*WIDGET_PATH/);
+});
+
+test('marks only valid widgets ready and tolerates optional pointer capture', async () => {
+  const js = await loadController();
+  const validation = js.indexOf('if (!viewport || !track || !previous || !next || !cards.length)');
+  const marker = js.indexOf('widget.dataset.gpkCertInitialized = "true"');
+
+  assert.ok(validation >= 0, 'required markup validation must exist');
+  assert.ok(marker > validation, 'ready marker must follow required markup validation');
+  assert.match(js, /typeof viewport\.setPointerCapture\s*===\s*['"]function['"]/);
+  assert.match(js, /Math\.abs\(distance\)\s*>\s*50/);
+  assert.doesNotMatch(js, /Math\.abs\(distance\)\s*>=\s*50/);
+});
+
+test('implements bounded, accessible, manual carousel interactions without timers', async () => {
+  const js = await loadController();
+  const css = await loadStyles();
+
+  assert.match(js, /--gpk-cert-visible/);
+  assert.match(js, /--gpk-cert-offset/);
+  assert.match(js, /getBoundingClientRect\(\)\.width/);
+  assert.match(js, /columnGap|\.gap/);
+  assert.match(js, /Math\.min[\s\S]*Math\.max|Math\.max[\s\S]*Math\.min/);
+  assert.match(js, /aria-hidden/);
+  assert.match(js, /\.disabled\s*=/);
+  assert.match(js, /ArrowLeft/);
+  assert.match(js, /ArrowRight/);
+  assert.match(js, /pointerdown/);
+  assert.match(js, /pointerup/);
+  assert.match(js, /pointercancel/);
+  assert.match(js, /setPointerCapture/);
+  assert.match(js, /50/);
+  assert.match(js, /ResizeObserver/);
+  assert.match(js, /addEventListener\(['"]resize['"]/);
+  assert.match(js, /removeEventListener\(['"]resize['"]/);
+  assert.doesNotMatch(js, /\bset(?:Interval|Timeout)\s*\(/);
+  assert.doesNotMatch(js, /\bautoplay\b/i);
+  assert.doesNotMatch(js, /\bloop\b/i);
+  assert.match(css, /\.gpk-cert-viewport\s*{[\s\S]*?touch-action:\s*pan-y\s*;/i);
+});
 
 test('styles the responsive carousel to the approved visual contract', async () => {
   const css = await loadStyles();
