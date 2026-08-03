@@ -109,7 +109,13 @@ function createControllerFixture(js) {
     viewport.captureCalls = [];
     viewport.setPointerCapture = (id) => viewport.captureCalls.push(id);
     const track = new Element();
-    track.children = Array.from({ length: 4 }, () => new Element());
+    const articles = Array.from({ length: 4 }, () => new Element());
+    track.children = articles.map((article) => {
+      const slide = new Element();
+      slide.querySelector = (selector) => selector === '.gpk-cert-card' ? article : null;
+      return slide;
+    });
+    track.querySelectorAll = (selector) => selector === '.gpk-cert-card' ? articles : [];
     const previous = new Element();
     const next = new Element();
     const status = new Element();
@@ -126,7 +132,7 @@ function createControllerFixture(js) {
     widget.querySelector = (selector) => nodes[selector] || null;
     widget.querySelectorAll = (selector) => selector === 'img[src]' ? [image] : [];
     widgets.push(widget);
-    return { widget, viewport, track, previous, next, status, image };
+    return { widget, viewport, track, articles, previous, next, status, image };
   }
   return { api: context.module.exports, observers, widgetFixture, windowTarget };
 }
@@ -140,12 +146,20 @@ test('executes navigation, pointer, resize, and clean reinsertion behavior', asy
 
   const view = fixture.widgetFixture();
   fixture.api.initWidget(view.widget);
+  assert.deepEqual(
+    view.articles.map((article) => article.attributes['aria-hidden']),
+    ['false', 'false', 'true', 'true'],
+  );
   assert.match(view.image.src, /Images\/iso\.png$/);
   view.image.emit('error');
   assert.equal(view.image.missingClass, 'is-missing');
   assert.equal(view.next.disabled, false);
   view.next.emit('click');
   assert.equal(view.widget.style.values['--gpk-cert-offset'], '-120px');
+  assert.deepEqual(
+    view.articles.map((article) => article.attributes['aria-hidden']),
+    ['true', 'false', 'false', 'true'],
+  );
   view.viewport.emit('keydown', { key: 'ArrowRight' });
   assert.equal(view.widget.style.values['--gpk-cert-offset'], '-240px');
   view.viewport.emit('pointerdown', { pointerId: 8, isPrimary: false, button: 0, clientX: 100 });
@@ -220,7 +234,7 @@ test('resolves localhost from the site root and file assets beside the current s
 
 test('marks only valid widgets ready and tolerates optional pointer capture', async () => {
   const js = await loadController();
-  const validation = js.indexOf('if (!viewport || !track || !previous || !next || !cards.length)');
+  const validation = js.indexOf('if (!viewport || !track || !previous || !next || !slides.length');
   const marker = js.indexOf('widget.dataset.gpkCertInitialized = "true"');
 
   assert.ok(validation >= 0, 'required markup validation must exist');

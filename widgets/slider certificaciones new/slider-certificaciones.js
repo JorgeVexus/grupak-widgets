@@ -59,12 +59,13 @@
 
     var viewport = widget.querySelector(".gpk-cert-viewport");
     var track = widget.querySelector(".gpk-cert-track");
-    var cards = Array.prototype.slice.call(track ? track.children : []);
+    var slides = Array.prototype.slice.call(track ? track.children : []);
+    var cards = Array.prototype.slice.call(track ? track.querySelectorAll(".gpk-cert-card") : []);
     var previous = widget.querySelector(".gpk-cert-prev");
     var next = widget.querySelector(".gpk-cert-next");
     var status = widget.querySelector(".gpk-cert-status");
     var state = { index: 0, visible: 1, step: 0, dragStart: null, pointerId: null };
-    if (!viewport || !track || !previous || !next || !cards.length) {
+    if (!viewport || !track || !previous || !next || !slides.length || cards.length !== slides.length) {
       report("Widget markup is incomplete.");
       return;
     }
@@ -74,7 +75,7 @@
     resolveImages(widget);
 
     function lastIndex() {
-      return Math.max(0, cards.length - state.visible);
+      return Math.max(0, slides.length - state.visible);
     }
 
     function render(announce) {
@@ -88,7 +89,7 @@
       });
       if (announce && status) {
         status.textContent = "Certificaciones " + (state.index + 1) + " a " +
-          Math.min(cards.length, state.index + state.visible) + " de " + cards.length;
+          Math.min(slides.length, state.index + state.visible) + " de " + slides.length;
       }
     }
 
@@ -96,7 +97,7 @@
       var styles = window.getComputedStyle(widget);
       var trackStyles = window.getComputedStyle(track);
       state.visible = Math.max(1, parseInt(styles.getPropertyValue("--gpk-cert-visible"), 10) || 1);
-      state.step = cards[0].getBoundingClientRect().width +
+      state.step = slides[0].getBoundingClientRect().width +
         (parseFloat(trackStyles.columnGap || trackStyles.gap) || 0);
       render(false);
     }
