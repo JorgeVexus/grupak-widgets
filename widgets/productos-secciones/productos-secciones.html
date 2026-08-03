@@ -1,0 +1,28 @@
+<!--
+    GRUPACK - PRODUCTOS INTERACTIVOS (v2: SECCIONES)
+    Segundo widget, independiente del original (widgets/productos-interactivos). No lo modifica.
+
+    Un solo sistema para todos los tamaños de pantalla: cada "modo" original del widget
+    (mismas clases .products-board.mode-N, mismo contenido/imágenes) es ahora su propia
+    sección apilada en el documento, revelada agregando su clase mode-N cuando entra en
+    pantalla (IntersectionObserver) — sin scroll-jacking, sin reproducir pantallas
+    intermedias al navegar, y la animación se repite cada vez que vuelves a esa sección.
+
+    El layout interno de cada sección es el desktop original: mismas posiciones absolutas
+    dentro del canvas de 1850x1030, escalado para caber en el ancho disponible.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+<div id="gpk-ps-widget" class="gpk-products-widget-container">
+    <!-- Desktop: left quick-nav -->
+    <nav class="ps-side-nav" aria-label="Navegación de secciones de productos">
+        <ul id="ps-side-nav-list"></ul>
+    </nav>
+
+    <!-- One section per original "mode", built by JS. Same DOM/CSS at every width. -->
+    <div id="ps-flow-desktop" class="ps-flow-desktop"></div>
+
+</div>
