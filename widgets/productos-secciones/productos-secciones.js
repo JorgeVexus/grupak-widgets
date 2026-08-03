@@ -18,7 +18,7 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-16";
+    const assetVersion = "seccion-reveal-18";
     [["gpk-ps-vendor-styles", "productos-secciones-vendor.css"], ["gpk-ps-styles", "productos-secciones.css"]].forEach(([id, file]) => {
         if (document.getElementById(id)) return;
         const link = document.createElement("link");
@@ -112,6 +112,7 @@
         scaleDesktopBoards(root);
         setupReveal(root);
         setupSideNav(root);
+        setupSideNavVisibility(root);
 
         window.addEventListener("resize", () => scaleDesktopBoards(root));
 
@@ -191,8 +192,10 @@
         const flow = root.querySelector("#ps-flow-desktop");
         if (!flow) return;
         const width = flow.clientWidth || window.innerWidth;
+        const desktopGutter = width >= 1025 ? 96 : 0;
+        const usableWidth = Math.max(width - desktopGutter, 0);
 
-        const scale = Math.min(width / 1850, 1);
+        const scale = Math.min(usableWidth / 1850, 1);
         root.querySelectorAll(".ps-screen").forEach(screen => {
             const board = screen.querySelector(".products-board");
             if (!board) return;
@@ -379,6 +382,21 @@
 
         screens.forEach(s => observer.observe(s));
         setActive(0);
+    }
+
+    function setupSideNavVisibility(root) {
+        if (typeof IntersectionObserver === "undefined") {
+            root.classList.add("ps-nav-visible");
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                root.classList.toggle("ps-nav-visible", entry.isIntersecting);
+            });
+        }, { threshold: 0 });
+
+        observer.observe(root);
     }
 
 })();

@@ -18,11 +18,11 @@
 #gpk-ps-widget .ps-screen .products-board.ps-board-clone {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
     width: 1850px;
     height: 1030px;
-    transform: scale(var(--board-scale, 1));
-    transform-origin: top left;
+    transform: translateX(-50%) scale(var(--board-scale, 1));
+    transform-origin: top center;
 }
 
 #gpk-ps-widget .ps-side-nav {
@@ -38,6 +38,16 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+#gpk-ps-widget.ps-nav-visible .ps-side-nav {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
 }
 
 #gpk-ps-widget .ps-side-nav ul {
