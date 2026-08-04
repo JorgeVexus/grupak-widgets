@@ -1,0 +1,201 @@
+@media (max-width: 767px) {
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 {
+        height: auto !important;
+        min-height: 0;
+        overflow: hidden;
+        background: #f7f8f6;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .products-board.ps-board-clone {
+        position: relative;
+        inset: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        transform: none;
+        overflow: visible;
+        background: #f7f8f6;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .products-intro-pane {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        padding: clamp(30px, 8vw, 42px) clamp(18px, 5vw, 24px) clamp(36px, 10vw, 52px);
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        background: #f7f8f6;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-title-new {
+        order: 1;
+        max-width: 13ch;
+        margin: 0;
+        font-size: clamp(26px, 7.2vw, 34px);
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+        color: #6e6e6e;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-title-new .text-green {
+        font-size: inherit;
+        line-height: inherit;
+        color: var(--color-green, #5f9d2f);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-title-new > .desktop-only,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-title-new br.desktop-only,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-mobile-img-container,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .mobile-hero-kpis {
+        display: none !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-mobile-desc {
+        order: 2;
+        display: block !important;
+        margin: clamp(18px, 5vw, 24px) 0 0;
+        max-width: 44ch;
+        font-size: clamp(11px, 3vw, 14px);
+        line-height: 1.45;
+        color: #6e6e6e;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #pillars-container {
+        order: 3;
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1.72 / 1;
+        margin: clamp(22px, 6vw, 32px) 0 clamp(18px, 5vw, 26px);
+        z-index: 1;
+        overflow: visible;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #pillars-container .pillar-wrapper {
+        position: absolute;
+        display: block;
+        margin: 0;
+        opacity: 1;
+        pointer-events: none;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #pillars-container .pillar-inner {
+        width: 100%;
+        height: 100%;
+        transform: none;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-rollo {
+        left: 1%;
+        top: 0;
+        width: 29%;
+        height: 72%;
+        z-index: 10;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-lamina {
+        left: 20%;
+        top: 21%;
+        width: 42%;
+        height: 63%;
+        z-index: 20;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-caja {
+        left: 48%;
+        top: 38%;
+        width: 38%;
+        height: 52%;
+        z-index: 30;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-grabados {
+        left: 75%;
+        top: 64%;
+        width: 25%;
+        height: 28%;
+        z-index: 40;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .pillar-label,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .cajas-stacked-group {
+        display: none !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .pillar-contour-img,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .pillar-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: none;
+        transform-origin: center;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .products-board.mode-0 .pillar-contour-img {
+        opacity: 0;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .products-board.mode-0.ps-pillars-play .pillar-contour-img {
+        animation-name: gpkPillarContourInOut;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .products-board.mode-0 .pillar-img {
+        clip-path: inset(100% 0 0 0);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .products-board.mode-0.ps-pillars-play .pillar-img {
+        animation-name: gpkPillarFillIn;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-kpis-grid-new {
+        order: 4;
+        display: grid !important;
+        grid-template-columns: 1fr;
+        flex-wrap: initial !important;
+        gap: clamp(28px, 8vw, 40px);
+        align-items: start;
+        margin: 0;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .kpi-item-new {
+        width: 100%;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .kpi-number-new {
+        margin: 0 0 4px;
+        font-size: clamp(34px, 10vw, 46px);
+        line-height: 1;
+        color: #6e6e6e;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .kpi-line-new {
+        width: min(100%, 190px);
+        margin: 5px 0 8px;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .kpi-label-top,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .kpi-label-bottom {
+        font-size: clamp(12px, 3.4vw, 16px);
+    }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .pillar-contour-img {
+        display: none;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .pillar-img {
+        opacity: 1;
+        clip-path: none;
+        animation: none !important;
+    }
+}

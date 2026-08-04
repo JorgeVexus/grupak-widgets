@@ -9,6 +9,10 @@ const html = read("productos-secciones.html");
 const css = read("productos-secciones.css");
 const vendor = read("productos-secciones-vendor.css");
 const js = read("productos-secciones.js");
+const mobileIntroPath = path.join(dir, "productos-secciones-mobile-intro.css");
+const mobileIntro = fs.existsSync(mobileIntroPath)
+    ? fs.readFileSync(mobileIntroPath, "utf8")
+    : "";
 
 test("el widget no contiene navegación móvil", () => {
     assert.doesNotMatch(html, /ps-mobile-(?:bar|nav)/);
@@ -48,4 +52,36 @@ test("la navegación lateral solo aparece mientras el widget está visible", () 
     assert.match(css, /\.ps-nav-visible\s+\.ps-side-nav\s*\{[^}]*visibility:\s*visible[^}]*pointer-events:\s*auto/s);
     assert.match(js, /function setupSideNavVisibility\(root\)/);
     assert.match(js, /root\.classList\.toggle\("ps-nav-visible",\s*entry\.isIntersecting\)/);
+});
+
+test("la adaptación móvil se carga como hoja independiente", () => {
+    assert.match(js, /gpk-ps-mobile-intro-styles/);
+    assert.match(js, /productos-secciones-mobile-intro\.css/);
+});
+
+test("solo el modo 0 recibe la adaptación móvil", () => {
+    assert.match(js, /if \(entry\.mode === 0\) screen\.classList\.add\("ps-mobile-intro-v1"\)/);
+    assert.doesNotMatch(js, /entry\.mode !== 0[^\n]*ps-mobile-intro-v1/);
+});
+
+test("el CSS móvil está encapsulado y usa un solo breakpoint", () => {
+    assert.match(mobileIntro, /@media \(max-width: 767px\)/);
+    assert.doesNotMatch(mobileIntro, /@media[^\{]*(?:768|1024|480|390|375|360|320)/);
+    const widgetSelectors = mobileIntro.match(/#gpk-ps-widget[^\{]+(?=\{)/g) || [];
+    assert.ok(widgetSelectors.length > 0);
+    widgetSelectors.forEach(selector => {
+        assert.match(selector, /\.ps-screen\[data-mode="0"\]\.ps-mobile-intro-v1/);
+    });
+});
+
+test("solo el modo 0 cede su altura al CSS móvil", () => {
+    assert.match(js, /const isMobileIntro = entryMode === "0"[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
+    assert.match(js, /screen\.style\.height = isMobileIntro[\s\S]*\? "auto"[\s\S]*: `\$\{Math\.round\(1030 \* scale\)\}px`/);
+});
+
+test("la composición conserva cuatro productos independientes", () => {
+    ["p-rollo", "p-lamina", "p-caja", "p-grabados"].forEach(id => {
+        assert.match(mobileIntro, new RegExp(`#${id}\\s*\\{`));
+    });
+    assert.match(mobileIntro, /ps-pillars-play/);
 });
