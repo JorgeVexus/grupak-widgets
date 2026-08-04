@@ -127,6 +127,7 @@
         setupMobileCajasReveal(root);
         prepareMobileGrabadosContent(root);
         setupMobileGrabadosReveal(root);
+        prepareMobileEnergiaContent(root);
         setupSideNav(root);
         setupSideNavVisibility(root);
 
@@ -560,6 +561,24 @@
             const description = card.querySelector(".grabados-card-desc");
             if (title) title.textContent = copy.title;
             if (description) description.textContent = copy.description;
+        });
+    }
+
+    function prepareMobileEnergiaContent(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const screen = root.querySelector('.ps-screen[data-mode="14"].ps-mobile-energia-v1');
+        if (!screen) return;
+
+        const descriptions = [
+            "Alcanzamos hasta un 80% de rendimiento energético mediante nuestra tecnología de cogeneración simultánea.",
+            "Al aprovechar mejor el combustible, reducimos emisiones y mejoramos nuestra huella de carbono industrial.",
+            "Generamos parte importante de la energía que utilizamos, asegurando continuidad operativa total en planta."
+        ];
+
+        screen.querySelectorAll(".energia-row").forEach((row, index) => {
+            const paragraph = row.querySelector(".energia-row-content p");
+            if (paragraph && descriptions[index]) paragraph.textContent = descriptions[index];
         });
     }
 

@@ -446,3 +446,12 @@ test("Energía móvil reproduce las superficies del Figma", () => {
     assert.match(mobileEnergia, /border-radius:\s*12px/);
     assert.match(mobileEnergia, /grid-template-columns:\s*80px minmax\(0, 1fr\)/);
 });
+
+test("Energía móvil usa la copia del Figma sin alterar el HTML fuente", () => {
+    assert.match(js, /function prepareMobileEnergiaContent\(root\)/);
+    assert.match(js, /Alcanzamos hasta un 80% de rendimiento energético/);
+    assert.match(js, /reducimos emisiones y mejoramos nuestra huella de carbono industrial/);
+    assert.match(js, /asegurando continuidad operativa total en planta/);
+    assert.match(sourceHtml, /centrales térmicas convencionales/);
+    assert.match(sourceHtml, /fabricación de papel y empaques/);
+});
