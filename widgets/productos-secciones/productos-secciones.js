@@ -18,11 +18,12 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-19";
+    const assetVersion = "seccion-reveal-20";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
-        ["gpk-ps-mobile-intro-styles", "productos-secciones-mobile-intro.css"]
+        ["gpk-ps-mobile-intro-styles", "productos-secciones-mobile-intro.css"],
+        ["gpk-ps-mobile-overview-styles", "productos-secciones-mobile-overview.css"]
     ].forEach(([id, file]) => {
         if (document.getElementById(id)) return;
         const link = document.createElement("link");
@@ -143,6 +144,7 @@
             screen.dataset.mode = String(entry.mode);
             screen.dataset.label = entry.label;
             if (entry.mode === 0) screen.classList.add("ps-mobile-intro-v1");
+            if (entry.mode === 1) screen.classList.add("ps-mobile-overview-v1");
             if (entry.laminaSpecsSequence) screen.dataset.laminaSpecsSequence = "1";
             if (entry.papelBlocks) screen.dataset.papelBlocks = "1";
             if (entry.grabadosSequence) screen.dataset.grabadosSequence = "1";
@@ -205,10 +207,10 @@
             const board = screen.querySelector(".products-board");
             if (!board) return;
             const entryMode = screen.dataset.mode;
-            const isMobileIntro = entryMode === "0"
+            const isAdaptedMobile = ["0", "1"].includes(entryMode)
                 && window.matchMedia("(max-width: 767px)").matches;
             board.style.setProperty("--board-scale", scale);
-            screen.style.height = isMobileIntro
+            screen.style.height = isAdaptedMobile
                 ? "auto"
                 : `${Math.round(1030 * scale)}px`;
         });

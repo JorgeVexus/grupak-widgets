@@ -13,6 +13,10 @@ const mobileIntroPath = path.join(dir, "productos-secciones-mobile-intro.css");
 const mobileIntro = fs.existsSync(mobileIntroPath)
     ? fs.readFileSync(mobileIntroPath, "utf8")
     : "";
+const mobileOverviewPath = path.join(dir, "productos-secciones-mobile-overview.css");
+const mobileOverview = fs.existsSync(mobileOverviewPath)
+    ? fs.readFileSync(mobileOverviewPath, "utf8")
+    : "";
 
 test("el widget no contiene navegación móvil", () => {
     assert.doesNotMatch(html, /ps-mobile-(?:bar|nav)/);
@@ -74,9 +78,8 @@ test("el CSS móvil está encapsulado y usa un solo breakpoint", () => {
     });
 });
 
-test("solo el modo 0 cede su altura al CSS móvil", () => {
-    assert.match(js, /const isMobileIntro = entryMode === "0"[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
-    assert.match(js, /screen\.style\.height = isMobileIntro[\s\S]*\? "auto"[\s\S]*: `\$\{Math\.round\(1030 \* scale\)\}px`/);
+test("las secciones no adaptadas y desktop conservan la altura del lienzo", () => {
+    assert.match(js, /screen\.style\.height = isAdaptedMobile[\s\S]*\? "auto"[\s\S]*: `\$\{Math\.round\(1030 \* scale\)\}px`/);
 });
 
 test("la composición conserva cuatro productos independientes", () => {
@@ -84,4 +87,39 @@ test("la composición conserva cuatro productos independientes", () => {
         assert.match(mobileIntro, new RegExp(`#${id}\\s*\\{`));
     });
     assert.match(mobileIntro, /ps-pillars-play/);
+});
+
+test("la sección 2 móvil carga una hoja independiente", () => {
+    assert.match(js, /gpk-ps-mobile-overview-styles/);
+    assert.match(js, /productos-secciones-mobile-overview\.css/);
+});
+
+test("solo el modo 1 recibe la clase móvil de productos", () => {
+    assert.match(js, /if \(entry\.mode === 1\) screen\.classList\.add\("ps-mobile-overview-v1"\)/);
+    assert.doesNotMatch(js, /entry\.mode !== 1[^\n]*ps-mobile-overview-v1/);
+});
+
+test("las dos secciones adaptadas usan altura automática solo en móvil", () => {
+    assert.match(js, /const isAdaptedMobile = \["0", "1"\]\.includes\(entryMode\)[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
+    assert.match(js, /screen\.style\.height = isAdaptedMobile[\s\S]*\? "auto"/);
+});
+
+test("el CSS de sección 2 está encapsulado en modo 1", () => {
+    assert.match(mobileOverview, /@media \(max-width: 767px\)/);
+    assert.doesNotMatch(mobileOverview, /@media[^\{]*(?:768|1024|480|440|390|375|360|320)/);
+    const selectors = mobileOverview.match(/#gpk-ps-widget[^\{]+(?=\{)/g) || [];
+    assert.ok(selectors.length > 0);
+    selectors.forEach(selector => {
+        assert.match(selector, /\.ps-screen\[data-mode="1"\]\.ps-mobile-overview-v1/);
+    });
+});
+
+test("la sección 2 reutiliza cuatro columnas e imágenes móviles", () => {
+    assert.match(mobileOverview, /\.overview-grid-new/);
+    assert.match(mobileOverview, /\.overview-col-new/);
+    assert.match(mobileOverview, /\.overview-mobile-img/);
+    assert.match(mobileOverview, /#pillars-container/);
+    assert.equal((html.match(/class="overview-col-new"/g) || []).length, 0);
+    const sourceHtml = fs.readFileSync(path.join(dir, "../productos-interactivos/productos-interactivos.html"), "utf8");
+    assert.equal((sourceHtml.match(/class="overview-col-new"/g) || []).length, 4);
 });
