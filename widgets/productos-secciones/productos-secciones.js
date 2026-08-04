@@ -117,6 +117,7 @@
         buildFlow(root, source);
 
         resolveAssetURLs(root);
+        prepareMobileCajasContent(root);
         scaleDesktopBoards(root);
         setupReveal(root);
         setupMobilePaperCatalogReveal(root);
@@ -204,6 +205,31 @@
 
     function rebuildAssetURL(relativePath) {
         return `${sourceBaseURL}/` + relativePath.split("/").map(encodeURIComponent).join("/");
+    }
+
+    function prepareMobileCajasContent(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const intro = root.querySelector('.ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1');
+        const conventional = root.querySelector('.ps-screen[data-mode="8"].ps-mobile-cajas-conventional-v1');
+        const digital = root.querySelector('.ps-screen[data-mode="9"].ps-mobile-cajas-digital-v1');
+        if (!intro || !conventional || !digital) return;
+
+        const introHeadings = intro.querySelectorAll(".cajas-column h2");
+        if (introHeadings[0]) introHeadings[0].textContent = "Soluciones Convencionales";
+        if (introHeadings[1]) introHeadings[1].textContent = "Impresión Digital";
+
+        const idealCard = conventional.querySelector(".cajas-paragraph-2");
+        if (idealCard && !idealCard.querySelector(".ps-cajas-card-label")) {
+            const copy = idealCard.textContent.trim().replace(/^Ideales para\s*/i, "");
+            idealCard.innerHTML = `<strong class="ps-cajas-card-label">Ideales para:</strong>${copy}`;
+        }
+
+        const technologyCard = digital.querySelector(".digital-paragraph-2");
+        if (technologyCard && !technologyCard.querySelector(".ps-cajas-card-label")) {
+            const copy = technologyCard.textContent.trim();
+            technologyCard.innerHTML = `<strong class="ps-cajas-card-label">Tecnología Single Pass</strong>${copy}`;
+        }
     }
 
     // Fit the fixed 1850x1030 desktop canvas to the available width, capped at 1:1.

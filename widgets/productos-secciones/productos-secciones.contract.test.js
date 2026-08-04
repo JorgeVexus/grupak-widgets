@@ -264,3 +264,29 @@ test("el CSS de Cajas está encapsulado en los modos 7, 8 y 9", () => {
         assert.match(selector, /\.ps-screen\[data-mode="(?:7|8|9)"\]\.ps-mobile-cajas-(?:intro|conventional|digital)-v1/);
     });
 });
+
+test("Cajas móvil reutiliza las imágenes y contenidos existentes", () => {
+    assert.match(sourceHtml, /class="cajas-mobile-hero-img"/);
+    assert.match(sourceHtml, /Cajas y empaques 1\.webp/);
+    assert.match(sourceHtml, /Cajas y empaques 2-1\.webp/);
+    assert.match(mobileCajas, /\.cajas-mobile-hero-img/);
+    assert.match(mobileCajas, /\.cajas-main-image/);
+    assert.match(mobileCajas, /\.digital-main-image/);
+});
+
+test("cada modo de Cajas oculta sus paneles hermanos", () => {
+    assert.match(mobileCajas, /data-mode="7"[^\{]+#cajas-convencionales-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(mobileCajas, /data-mode="7"[^\{]+#cajas-digital-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(mobileCajas, /data-mode="8"[^\{]+#cajas-intro-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(mobileCajas, /data-mode="8"[^\{]+#cajas-digital-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(mobileCajas, /data-mode="9"[^\{]+#cajas-intro-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(mobileCajas, /data-mode="9"[^\{]+#cajas-convencionales-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
+});
+
+test("las tarjetas informativas móviles tienen etiquetas propias", () => {
+    assert.match(js, /Soluciones Convencionales/);
+    assert.match(js, /Impresión Digital/);
+    assert.match(js, /ps-cajas-card-label/);
+    assert.match(js, /Tecnología Single Pass/);
+    assert.match(mobileCajas, /\.ps-cajas-card-label/);
+});
