@@ -18,12 +18,13 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-20";
+    const assetVersion = "seccion-reveal-21";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
         ["gpk-ps-mobile-intro-styles", "productos-secciones-mobile-intro.css"],
-        ["gpk-ps-mobile-overview-styles", "productos-secciones-mobile-overview.css"]
+        ["gpk-ps-mobile-overview-styles", "productos-secciones-mobile-overview.css"],
+        ["gpk-ps-mobile-paper-styles", "productos-secciones-mobile-paper.css"]
     ].forEach(([id, file]) => {
         if (document.getElementById(id)) return;
         const link = document.createElement("link");
@@ -145,6 +146,8 @@
             screen.dataset.label = entry.label;
             if (entry.mode === 0) screen.classList.add("ps-mobile-intro-v1");
             if (entry.mode === 1) screen.classList.add("ps-mobile-overview-v1");
+            if (entry.mode === 2) screen.classList.add("ps-mobile-paper-intro-v1");
+            if (entry.mode === 3) screen.classList.add("ps-mobile-paper-catalog-v1");
             if (entry.laminaSpecsSequence) screen.dataset.laminaSpecsSequence = "1";
             if (entry.papelBlocks) screen.dataset.papelBlocks = "1";
             if (entry.grabadosSequence) screen.dataset.grabadosSequence = "1";
@@ -203,11 +206,12 @@
         const usableWidth = Math.max(width - desktopGutter, 0);
 
         const scale = Math.min(usableWidth / 1850, 1);
+        const adaptedMobileModes = new Set(["0", "1", "2", "3"]);
         root.querySelectorAll(".ps-screen").forEach(screen => {
             const board = screen.querySelector(".products-board");
             if (!board) return;
             const entryMode = screen.dataset.mode;
-            const isAdaptedMobile = ["0", "1"].includes(entryMode)
+            const isAdaptedMobile = adaptedMobileModes.has(entryMode)
                 && window.matchMedia("(max-width: 767px)").matches;
             board.style.setProperty("--board-scale", scale);
             screen.style.height = isAdaptedMobile
