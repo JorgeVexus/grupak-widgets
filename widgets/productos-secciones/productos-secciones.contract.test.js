@@ -455,3 +455,31 @@ test("Energía móvil usa la copia del Figma sin alterar el HTML fuente", () => 
     assert.match(sourceHtml, /centrales térmicas convencionales/);
     assert.match(sourceHtml, /fabricación de papel y empaques/);
 });
+
+test("Energía móvil revela cada bloque una sola vez", () => {
+    assert.match(js, /function setupMobileEnergiaReveal\(root\)/);
+    assert.match(js, /threshold:\s*0\.2/);
+    assert.match(js, /},\s*150\)/);
+    assert.match(js, /observer\.unobserve\(element\)/);
+    assert.match(js, /element\.classList\.add\("ps-energia-revealed"\)/);
+});
+
+test("Energía alterna sus tres entradas laterales", () => {
+    assert.match(mobileEnergia, /data-index="1"[^\{]*\{[^}]*translateX\(-70px\)/s);
+    assert.match(mobileEnergia, /data-index="2"[^\{]*\{[^}]*translateX\(70px\)/s);
+    assert.match(mobileEnergia, /data-index="3"[^\{]*\{[^}]*translateX\(-70px\)/s);
+    assert.match(mobileEnergia, /\[data-ps-energia-reveal\]\.ps-energia-revealed/);
+    assert.match(mobileEnergia, /prefers-reduced-motion:\s*reduce/);
+});
+
+test("Energía móvil sustituye los panoramas por los tres assets cuadrados del Figma", () => {
+    [
+        "energia-mobile-eficiencia.png",
+        "energia-mobile-impacto.png",
+        "energia-mobile-suministro.png"
+    ].forEach(file => {
+        assert.ok(fs.existsSync(path.join(dir, "images", file)), `${file} debe existir`);
+        assert.match(js, new RegExp(file.replace(".", "\\.")));
+    });
+    assert.match(js, /image\.src = `\$\{selfBaseURL\}\/images\/\$\{mobileImages\[index\]\}`/);
+});

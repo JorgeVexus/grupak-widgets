@@ -18,7 +18,7 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-27";
+    const assetVersion = "seccion-reveal-28";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -128,6 +128,7 @@
         prepareMobileGrabadosContent(root);
         setupMobileGrabadosReveal(root);
         prepareMobileEnergiaContent(root);
+        setupMobileEnergiaReveal(root);
         setupSideNav(root);
         setupSideNavVisibility(root);
 
@@ -575,11 +576,53 @@
             "Al aprovechar mejor el combustible, reducimos emisiones y mejoramos nuestra huella de carbono industrial.",
             "Generamos parte importante de la energía que utilizamos, asegurando continuidad operativa total en planta."
         ];
+        const mobileImages = [
+            "energia-mobile-eficiencia.png",
+            "energia-mobile-impacto.png",
+            "energia-mobile-suministro.png"
+        ];
 
         screen.querySelectorAll(".energia-row").forEach((row, index) => {
             const paragraph = row.querySelector(".energia-row-content p");
+            const image = row.querySelector(".energia-mobile-image");
             if (paragraph && descriptions[index]) paragraph.textContent = descriptions[index];
+            if (image && mobileImages[index]) {
+                image.src = `${selfBaseURL}/images/${mobileImages[index]}`;
+            }
         });
+    }
+
+    function setupMobileEnergiaReveal(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const screen = root.querySelector('.ps-screen[data-mode="14"].ps-mobile-energia-v1');
+        if (!screen) return;
+
+        [
+            screen.querySelector(".energia-main-title"),
+            screen.querySelector(".energia-intro-text"),
+            ...screen.querySelectorAll(".energia-row")
+        ].filter(Boolean).forEach(element => element.dataset.psEnergiaReveal = "1");
+
+        const elements = Array.from(screen.querySelectorAll("[data-ps-energia-reveal]"));
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof IntersectionObserver === "undefined") {
+            elements.forEach(element => element.classList.add("ps-energia-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const element = entry.target;
+                observer.unobserve(element);
+                window.setTimeout(() => {
+                    element.classList.add("ps-energia-revealed");
+                }, 150);
+            });
+        }, { threshold: 0.2 });
+
+        elements.forEach(element => observer.observe(element));
     }
 
     function goToMode(root, labelOrMode) {
