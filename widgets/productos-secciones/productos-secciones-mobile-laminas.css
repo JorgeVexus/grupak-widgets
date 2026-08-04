@@ -1,0 +1,238 @@
+@media (max-width: 767px) {
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 {
+        height: auto !important;
+        min-height: 0;
+        overflow: hidden;
+        background: #f7f8f6;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 #pane-laminas,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 #pane-laminas-specs {
+        padding: 0;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .products-board.ps-board-clone,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .products-board.ps-board-clone,
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 #pane-laminas,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 #pane-laminas-specs {
+        position: relative;
+        inset: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        overflow: visible;
+        background: #f7f8f6;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 #pane-laminas-specs,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 #laminas-intro-content {
+        display: none !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-intro-content,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .laminas-specs-container {
+        position: relative;
+        inset: unset;
+        width: auto;
+        align-self: stretch;
+        height: auto;
+        padding: clamp(34px, 9vw, 48px) clamp(18px, 5vw, 24px) clamp(48px, 12vw, 64px);
+        opacity: 1;
+        transform: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-title-wrapper,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .laminas-title-wrapper {
+        margin: 0;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-main-title,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .laminas-main-title {
+        margin: 0 0 clamp(26px, 7vw, 36px);
+        font-size: clamp(30px, 8.5vw, 40px);
+        line-height: 1.05;
+        text-align: left;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-intro-text {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-intro-left,
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-intro-right {
+        width: 100%;
+        padding: clamp(16px, 4.5vw, 22px);
+        border: 1px solid #e2e5df;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-intro-right {
+        background: #effaf1;
+        border-color: #cfe8d1;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-intro-left p,
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-intro-right p {
+        margin: 0;
+        font-size: clamp(13px, 3.65vw, 16px);
+        line-height: 1.48;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-bottom-layout {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(24px, 7vw, 34px);
+        margin-top: clamp(28px, 8vw, 40px);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-resistencia-box {
+        display: none;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-stack-container {
+        width: 100%;
+        height: auto;
+        opacity: 1;
+        transform: none;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-stack-img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .laminas-specs-stage-content {
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(22px, 6vw, 32px);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .laminas-spec-group {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        overflow: hidden;
+        border: 1px solid #e2e5df;
+        border-radius: 12px;
+        background: #fff;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-image-box {
+        order: 1;
+        width: 100%;
+        height: clamp(178px, 52vw, 240px);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-frame-wrapper,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-group-1 .spec-frame-wrapper,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-group-2 .spec-frame-wrapper,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-frame-wrapper {
+        padding: 0;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-vector-frame {
+        display: none;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-img {
+        object-fit: cover;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-text-box,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-group-1 .spec-text-box,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-group-2 .spec-text-box {
+        order: 2;
+        width: 100%;
+        padding: clamp(16px, 4.5vw, 22px);
+        text-align: left;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-title {
+        margin: 0 0 8px;
+        color: #5b9f31;
+        font-size: clamp(18px, 5vw, 23px);
+        line-height: 1.1;
+        text-align: left;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-desc {
+        margin: 0;
+        font-size: clamp(13px, 3.65vw, 16px);
+        line-height: 1.45;
+        text-align: left;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .ps-laminas-measure {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-size: clamp(24px, 7vw, 32px);
+        line-height: 1;
+        font-weight: 700;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 [data-ps-laminas-reveal],
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 [data-ps-laminas-reveal] {
+        opacity: 0;
+        transition: opacity 650ms cubic-bezier(0.25, 1, 0.5, 1),
+                    transform 650ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 [data-ps-laminas-reveal] {
+        transform: translateY(32px);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-group-1 {
+        transform: translateX(-70px);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .spec-group-2 {
+        transform: translateX(70px);
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .ps-laminas-revealed,
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .ps-laminas-revealed {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 [data-ps-laminas-reveal],
+    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 [data-ps-laminas-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none !important;
+    }
+}

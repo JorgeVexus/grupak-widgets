@@ -18,13 +18,14 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-22";
+    const assetVersion = "seccion-reveal-25";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
         ["gpk-ps-mobile-intro-styles", "productos-secciones-mobile-intro.css"],
         ["gpk-ps-mobile-overview-styles", "productos-secciones-mobile-overview.css"],
-        ["gpk-ps-mobile-paper-styles", "productos-secciones-mobile-paper.css"]
+        ["gpk-ps-mobile-paper-styles", "productos-secciones-mobile-paper.css"],
+        ["gpk-ps-mobile-laminas-styles", "productos-secciones-mobile-laminas.css"]
     ].forEach(([id, file]) => {
         if (document.getElementById(id)) return;
         const link = document.createElement("link");
@@ -118,6 +119,7 @@
         scaleDesktopBoards(root);
         setupReveal(root);
         setupMobilePaperCatalogReveal(root);
+        setupMobileLaminasReveal(root);
         setupSideNav(root);
         setupSideNavVisibility(root);
 
@@ -149,6 +151,8 @@
             if (entry.mode === 1) screen.classList.add("ps-mobile-overview-v1");
             if (entry.mode === 2) screen.classList.add("ps-mobile-paper-intro-v1");
             if (entry.mode === 3) screen.classList.add("ps-mobile-paper-catalog-v1");
+            if (entry.mode === 4) screen.classList.add("ps-mobile-laminas-intro-v1");
+            if (entry.mode === 5) screen.classList.add("ps-mobile-laminas-specs-v1");
             if (entry.laminaSpecsSequence) screen.dataset.laminaSpecsSequence = "1";
             if (entry.papelBlocks) screen.dataset.papelBlocks = "1";
             if (entry.grabadosSequence) screen.dataset.grabadosSequence = "1";
@@ -207,7 +211,7 @@
         const usableWidth = Math.max(width - desktopGutter, 0);
 
         const scale = Math.min(usableWidth / 1850, 1);
-        const adaptedMobileModes = new Set(["0", "1", "2", "3"]);
+        const adaptedMobileModes = new Set(["0", "1", "2", "3", "4", "5"]);
         root.querySelectorAll(".ps-screen").forEach(screen => {
             const board = screen.querySelector(".products-board");
             if (!board) return;
@@ -355,6 +359,51 @@
         }, { threshold: 0.2 });
 
         cards.forEach(card => observer.observe(card));
+    }
+
+    function setupMobileLaminasReveal(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const intro = root.querySelector('.ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1');
+        const specs = root.querySelector('.ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1');
+        if (!intro || !specs) return;
+
+        [
+            intro.querySelector(".laminas-main-title"),
+            intro.querySelector(".laminas-intro-left"),
+            intro.querySelector(".laminas-intro-right"),
+            intro.querySelector(".stack-1"),
+            intro.querySelector(".stack-2"),
+            specs.querySelector(".laminas-main-title"),
+            specs.querySelector(".spec-group-1"),
+            specs.querySelector(".spec-group-2")
+        ].filter(Boolean).forEach(element => element.dataset.psLaminasReveal = "1");
+
+        const firstDescription = specs.querySelector(".spec-group-1 .spec-desc");
+        if (firstDescription && !firstDescription.querySelector(".ps-laminas-measure")) {
+            const description = firstDescription.textContent.trim().replace(/^283 cm,\s*/i, "");
+            firstDescription.innerHTML = `<strong class="ps-laminas-measure">283 cm</strong>${description}`;
+        }
+
+        const elements = Array.from(root.querySelectorAll("[data-ps-laminas-reveal]"));
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof IntersectionObserver === "undefined") {
+            elements.forEach(element => element.classList.add("ps-laminas-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const element = entry.target;
+                observer.unobserve(element);
+                window.setTimeout(() => {
+                    element.classList.add("ps-laminas-revealed");
+                }, 150);
+            });
+        }, { threshold: 0.2 });
+
+        elements.forEach(element => observer.observe(element));
     }
 
     function goToMode(root, labelOrMode) {

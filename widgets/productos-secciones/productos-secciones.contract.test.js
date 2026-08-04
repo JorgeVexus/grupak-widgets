@@ -21,6 +21,10 @@ const mobilePaperPath = path.join(dir, "productos-secciones-mobile-paper.css");
 const mobilePaper = fs.existsSync(mobilePaperPath)
     ? fs.readFileSync(mobilePaperPath, "utf8")
     : "";
+const mobileLaminasPath = path.join(dir, "productos-secciones-mobile-laminas.css");
+const mobileLaminas = fs.existsSync(mobileLaminasPath)
+    ? fs.readFileSync(mobileLaminasPath, "utf8")
+    : "";
 const sourceHtml = fs.readFileSync(
     path.join(dir, "../productos-interactivos/productos-interactivos.html"),
     "utf8"
@@ -141,8 +145,8 @@ test("los modos 2 y 3 reciben clases móviles diferentes", () => {
     assert.match(js, /if \(entry\.mode === 3\) screen\.classList\.add\("ps-mobile-paper-catalog-v1"\)/);
 });
 
-test("solo los modos adaptados 0 a 3 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3"\]\)/);
+test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5"\]\)/);
     assert.match(js, /const isAdaptedMobile = adaptedMobileModes\.has\(entryMode\)[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
 });
 
@@ -185,4 +189,53 @@ test("cada Pak móvil se revela individualmente al entrar en pantalla", () => {
     assert.match(js, /observer\.unobserve\(card\)/);
     assert.match(mobilePaper, /\.product-card\.ps-card-revealed\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translateX\(0\)/s);
     assert.doesNotMatch(mobilePaper, /\.products-board\.mode-3 \.product-card\s*\{[^}]*opacity:\s*1/s);
+});
+
+test("Láminas móvil carga una hoja independiente", () => {
+    assert.match(js, /gpk-ps-mobile-laminas-styles/);
+    assert.match(js, /productos-secciones-mobile-laminas\.css/);
+});
+
+test("los modos 4 y 5 reciben clases móviles diferentes", () => {
+    assert.match(js, /if \(entry\.mode === 4\) screen\.classList\.add\("ps-mobile-laminas-intro-v1"\)/);
+    assert.match(js, /if \(entry\.mode === 5\) screen\.classList\.add\("ps-mobile-laminas-specs-v1"\)/);
+});
+
+test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5"\]\)/);
+});
+
+test("el CSS de Láminas está encapsulado en los modos 4 y 5", () => {
+    assert.match(mobileLaminas, /@media \(max-width: 767px\)/);
+    assert.doesNotMatch(mobileLaminas, /@media[^\{]*(?:768|1024|480|440|390|375|360|320)/);
+    const selectors = mobileLaminas.match(/#gpk-ps-widget[^\{]+(?=\{)/g) || [];
+    assert.ok(selectors.length > 0);
+    selectors.forEach(selector => {
+        assert.match(selector, /\.ps-screen\[data-mode="(?:4|5)"\]\.ps-mobile-laminas-(?:intro|specs)-v1/);
+    });
+});
+
+test("Láminas móvil reutiliza textos, ilustraciones y especificaciones", () => {
+    assert.equal((sourceHtml.match(/class="laminas-intro-(?:left|right)"/g) || []).length, 2);
+    assert.equal((sourceHtml.match(/class="laminas-stack-container stack-[12]"/g) || []).length, 2);
+    assert.equal((sourceHtml.match(/class="laminas-spec-group spec-group-[12]"/g) || []).length, 2);
+    assert.match(mobileLaminas, /\.laminas-stack-container/);
+    assert.match(mobileLaminas, /\.laminas-spec-group/);
+});
+
+test("cada modo de Láminas oculta el contenido hermano", () => {
+    assert.match(mobileLaminas, /data-mode="4"[^\{]+#pane-laminas-specs[^\{]*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(mobileLaminas, /data-mode="5"[^\{]+#laminas-intro-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
+});
+
+test("Láminas móvil revela cada elemento durante el scroll", () => {
+    assert.match(js, /function setupMobileLaminasReveal\(root\)/);
+    assert.match(js, /threshold:\s*0\.2/);
+    assert.match(js, /},\s*150\)/);
+    assert.match(js, /observer\.unobserve\(element\)/);
+    assert.match(js, /element\.classList\.add\("ps-laminas-revealed"\)/);
+    assert.match(mobileLaminas, /data-mode="4"[^\{]+\[data-ps-laminas-reveal\][^\{]*\{[^}]*translateY\(32px\)/s);
+    assert.match(mobileLaminas, /spec-group-1[^\{]*\{[^}]*translateX\(-70px\)/s);
+    assert.match(mobileLaminas, /spec-group-2[^\{]*\{[^}]*translateX\(70px\)/s);
+    assert.match(mobileLaminas, /\.ps-laminas-revealed\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translate\(0,\s*0\)/s);
 });
