@@ -167,3 +167,11 @@ test("cada modo de Papel oculta el contenido hermano", () => {
     assert.match(mobilePaper, /data-mode="2"[^\{]+#papel-grid-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
     assert.match(mobilePaper, /data-mode="3"[^\{]+#papel-intro-content[^\{]*\{[^}]*display:\s*none\s*!important/s);
 });
+
+test("el catálogo móvil alterna entradas laterales de 70px", () => {
+    assert.match(mobilePaper, /data-index="1"[^\{]*\{[^}]*transform:\s*translateX\(-70px\)/s);
+    assert.match(mobilePaper, /data-index="2"[^\{]*\{[^}]*transform:\s*translateX\(70px\)/s);
+    assert.match(mobilePaper, /data-index="3"[^\{]*\{[^}]*transform:\s*translateX\(-70px\)/s);
+    assert.match(mobilePaper, /data-index="4"[^\{]*\{[^}]*transform:\s*translateX\(70px\)/s);
+    assert.match(mobilePaper, /\.products-board\.mode-3 \.product-card\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translateX\(0\)/s);
+});
