@@ -290,3 +290,33 @@ test("las tarjetas informativas móviles tienen etiquetas propias", () => {
     assert.match(js, /Tecnología Single Pass/);
     assert.match(mobileCajas, /\.ps-cajas-card-label/);
 });
+
+test("Cajas móvil revela elementos individuales una sola vez", () => {
+    assert.match(js, /function setupMobileCajasReveal\(root\)/);
+    assert.match(js, /threshold:\s*0\.2/);
+    assert.match(js, /},\s*150\)/);
+    assert.match(js, /observer\.unobserve\(element\)/);
+    assert.match(js, /element\.classList\.add\("ps-cajas-revealed"\)/);
+    assert.match(js, /prefers-reduced-motion: reduce/);
+});
+
+test("las entradas de Cajas respetan las direcciones aprobadas", () => {
+    assert.match(mobileCajas, /data-mode="7"[^\{]+\[data-ps-cajas-reveal\][^\{]*\{[^}]*translateY\(32px\)/s);
+    assert.match(mobileCajas, /data-mode="8"[^\{]+\.cajas-image-container[^\{]*\{[^}]*translateX\(-70px\)/s);
+    assert.match(mobileCajas, /data-mode="8"[^\{]+\.ps-cajas-main-copy[^\{]*\{[^}]*translateX\(70px\)/s);
+    assert.match(mobileCajas, /data-mode="9"[^\{]+\.digital-image-container[^\{]*\{[^}]*translateX\(-70px\)/s);
+    assert.match(mobileCajas, /data-mode="9"[^\{]+\.ps-cajas-main-copy[^\{]*\{[^}]*translateX\(70px\)/s);
+    assert.match(mobileCajas, /\.ps-cajas-revealed\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translate\(0,\s*0\)/s);
+});
+
+test("el estado revelado supera la especificidad de las direcciones", () => {
+    assert.match(mobileCajas, /\[data-ps-cajas-reveal\]\.ps-cajas-revealed/);
+});
+
+test("Cajas móvil elimina el fondo SVG fijo del lienzo desktop", () => {
+    assert.match(mobileCajas, /\.products-board::before[^\{]*\{[^}]*display:\s*none\s*!important/s);
+});
+
+test("el texto digital no conserva el margen negativo desktop", () => {
+    assert.match(mobileCajas, /\.digital-text-content[^\{]*\{[^}]*margin:\s*0\s*!important/s);
+});

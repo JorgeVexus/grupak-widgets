@@ -18,7 +18,7 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-25";
+    const assetVersion = "seccion-reveal-26";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -122,6 +122,7 @@
         setupReveal(root);
         setupMobilePaperCatalogReveal(root);
         setupMobileLaminasReveal(root);
+        setupMobileCajasReveal(root);
         setupSideNav(root);
         setupSideNavVisibility(root);
 
@@ -429,6 +430,53 @@
                 observer.unobserve(element);
                 window.setTimeout(() => {
                     element.classList.add("ps-laminas-revealed");
+                }, 150);
+            });
+        }, { threshold: 0.2 });
+
+        elements.forEach(element => observer.observe(element));
+    }
+
+    function setupMobileCajasReveal(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const intro = root.querySelector('.ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1');
+        const conventional = root.querySelector('.ps-screen[data-mode="8"].ps-mobile-cajas-conventional-v1');
+        const digital = root.querySelector('.ps-screen[data-mode="9"].ps-mobile-cajas-digital-v1');
+        if (!intro || !conventional || !digital) return;
+
+        const conventionalCopy = conventional.querySelector(".cajas-text-container");
+        const digitalCopy = digital.querySelector(".digital-text-content");
+        [conventionalCopy, digitalCopy]
+            .filter(Boolean)
+            .forEach(element => element.classList.add("ps-cajas-main-copy"));
+
+        [
+            intro.querySelector(".cajas-mobile-hero-container"),
+            intro.querySelector(".pane-header-centered"),
+            ...intro.querySelectorAll(".cajas-column"),
+            conventional.querySelector(".cajas-image-container"),
+            conventionalCopy,
+            conventional.querySelector(".cajas-paragraph-2"),
+            digital.querySelector(".digital-image-container"),
+            digitalCopy,
+            digital.querySelector(".digital-paragraph-2")
+        ].filter(Boolean).forEach(element => element.dataset.psCajasReveal = "1");
+
+        const elements = Array.from(root.querySelectorAll("[data-ps-cajas-reveal]"));
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof IntersectionObserver === "undefined") {
+            elements.forEach(element => element.classList.add("ps-cajas-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const element = entry.target;
+                observer.unobserve(element);
+                window.setTimeout(() => {
+                    element.classList.add("ps-cajas-revealed");
                 }, 150);
             });
         }, { threshold: 0.2 });
