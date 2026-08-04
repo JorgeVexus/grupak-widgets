@@ -367,3 +367,31 @@ test("Grabados móvil conserva título, introducción y cuatro servicios", () =>
     assert.match(mobileGrabados, /\.grabados-card-title/);
     assert.match(mobileGrabados, /\.grabados-card-desc/);
 });
+
+test("Grabados móvil revela cada bloque una sola vez", () => {
+    assert.match(js, /function setupMobileGrabadosReveal\(root\)/);
+    assert.match(js, /threshold:\s*0\.2/);
+    assert.match(js, /},\s*150\)/);
+    assert.match(js, /observer\.unobserve\(element\)/);
+    assert.match(js, /element\.classList\.add\("ps-grabados-revealed"\)/);
+    assert.match(js, /prefers-reduced-motion: reduce/);
+});
+
+test("Grabados alterna sus cuatro entradas laterales", () => {
+    assert.match(mobileGrabados, /data-index="1"[^\{]*\{[^}]*translateX\(-70px\)/s);
+    assert.match(mobileGrabados, /data-index="2"[^\{]*\{[^}]*translateX\(70px\)/s);
+    assert.match(mobileGrabados, /data-index="3"[^\{]*\{[^}]*translateX\(-70px\)/s);
+    assert.match(mobileGrabados, /data-index="4"[^\{]*\{[^}]*translateX\(70px\)/s);
+    assert.match(mobileGrabados, /\[data-ps-grabados-reveal\]\.ps-grabados-revealed/);
+});
+
+test("Grabados móvil oculta la navegación desktop y usa la copia del Figma", () => {
+    assert.match(mobileGrabados, /#gpk-ps-widget:has\(\.ps-screen\[data-mode="10"\]\.ps-mobile-grabados-v1\) \.ps-side-nav\s*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(js, /function prepareMobileGrabadosContent\(root\)/);
+    assert.match(js, /Preprensa y adaptación/);
+    assert.match(js, /Color Management/);
+    assert.match(js, /Montaje y ajuste de placas/);
+    assert.match(js, /Retoque y soporte en planta/);
+    assert.match(mobileGrabados, /\.grabados-service-image\.mobile-only\s*\{[^}]*border-radius:\s*0\s*!important/s);
+    assert.match(mobileGrabados, /\.grabados-card-text-wrapper\s*\{[^}]*text-align:\s*left\s*!important/s);
+});

@@ -18,7 +18,7 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-26";
+    const assetVersion = "seccion-reveal-27";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -124,6 +124,8 @@
         setupMobilePaperCatalogReveal(root);
         setupMobileLaminasReveal(root);
         setupMobileCajasReveal(root);
+        prepareMobileGrabadosContent(root);
+        setupMobileGrabadosReveal(root);
         setupSideNav(root);
         setupSideNavVisibility(root);
 
@@ -484,6 +486,79 @@
         }, { threshold: 0.2 });
 
         elements.forEach(element => observer.observe(element));
+    }
+
+    function setupMobileGrabadosReveal(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const screen = root.querySelector('.ps-screen[data-mode="10"].ps-mobile-grabados-v1');
+        if (!screen) return;
+
+        [
+            screen.querySelector(".grabados-main-title"),
+            screen.querySelector(".grabados-intro-text"),
+            ...screen.querySelectorAll(".grabados-green-card")
+        ].filter(Boolean).forEach(element => element.dataset.psGrabadosReveal = "1");
+
+        const elements = Array.from(screen.querySelectorAll("[data-ps-grabados-reveal]"));
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof IntersectionObserver === "undefined") {
+            elements.forEach(element => element.classList.add("ps-grabados-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const element = entry.target;
+                observer.unobserve(element);
+                window.setTimeout(() => {
+                    element.classList.add("ps-grabados-revealed");
+                }, 150);
+            });
+        }, { threshold: 0.2 });
+
+        elements.forEach(element => observer.observe(element));
+    }
+
+    function prepareMobileGrabadosContent(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const screen = root.querySelector('.ps-screen[data-mode="10"].ps-mobile-grabados-v1');
+        if (!screen) return;
+
+        const intro = screen.querySelector(".grabados-intro-text");
+        if (intro) {
+            intro.textContent = "Servicio integral de grabados y preprensa para la industria del empaque. Desarrollamos y montamos placas asegurando reproducción fiel de arte.";
+        }
+
+        const mobileCopy = [
+            {
+                title: "Preprensa y adaptación",
+                description: "Adaptación de arte al empaque para diferentes sustratos (corrugado, flexible, papel, etiquetas)."
+            },
+            {
+                title: "Color Management",
+                description: "Gestión de color y simulación de transparencias para mantener consistencia de marca entre líneas de producto."
+            },
+            {
+                title: "Montaje y ajuste de placas",
+                description: "Montaje en distintos espesores con corrección de distorsión y registro para altos volúmenes de impresión."
+            },
+            {
+                title: "Retoque y soporte en planta",
+                description: "Aplicando mejores prácticas para mejorar la calidad de impresión y eficiencia en arranques de prensa."
+            }
+        ];
+
+        screen.querySelectorAll(".grabados-green-card").forEach((card, index) => {
+            const copy = mobileCopy[index];
+            if (!copy) return;
+            const title = card.querySelector(".grabados-card-title");
+            const description = card.querySelector(".grabados-card-desc");
+            if (title) title.textContent = copy.title;
+            if (description) description.textContent = copy.description;
+        });
     }
 
     function goToMode(root, labelOrMode) {
