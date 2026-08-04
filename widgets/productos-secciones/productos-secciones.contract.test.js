@@ -33,6 +33,10 @@ const mobileGrabadosPath = path.join(dir, "productos-secciones-mobile-grabados.c
 const mobileGrabados = fs.existsSync(mobileGrabadosPath)
     ? fs.readFileSync(mobileGrabadosPath, "utf8")
     : "";
+const mobileEnergiaPath = path.join(dir, "productos-secciones-mobile-energia.css");
+const mobileEnergia = fs.existsSync(mobileEnergiaPath)
+    ? fs.readFileSync(mobileEnergiaPath, "utf8")
+    : "";
 const sourceHtml = fs.readFileSync(
     path.join(dir, "../productos-interactivos/productos-interactivos.html"),
     "utf8"
@@ -154,7 +158,7 @@ test("los modos 2 y 3 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10", "14"\]\)/);
     assert.match(js, /const isAdaptedMobile = adaptedMobileModes\.has\(entryMode\)[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
 });
 
@@ -210,7 +214,7 @@ test("los modos 4 y 5 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10", "14"\]\)/);
 });
 
 test("el CSS de Láminas está encapsulado en los modos 4 y 5", () => {
@@ -394,4 +398,27 @@ test("Grabados móvil oculta la navegación desktop y usa la copia del Figma", (
     assert.match(js, /Retoque y soporte en planta/);
     assert.match(mobileGrabados, /\.grabados-service-image\.mobile-only\s*\{[^}]*border-radius:\s*0\s*!important/s);
     assert.match(mobileGrabados, /\.grabados-card-text-wrapper\s*\{[^}]*text-align:\s*left\s*!important/s);
+});
+
+test("Energía móvil carga una hoja independiente", () => {
+    assert.match(js, /gpk-ps-mobile-energia-styles/);
+    assert.match(js, /productos-secciones-mobile-energia\.css/);
+});
+
+test("el modo 14 recibe una clase móvil exclusiva", () => {
+    assert.match(js, /if \(entry\.mode === 14\) screen\.classList\.add\("ps-mobile-energia-v1"\)/);
+});
+
+test("Energía se suma a los modos móviles con altura automática", () => {
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10", "14"\]\)/);
+});
+
+test("el CSS de Energía está encapsulado en modo 14", () => {
+    assert.match(mobileEnergia, /@media \(max-width: 767px\)/);
+    assert.doesNotMatch(mobileEnergia, /@media[^\{]*(?:768|1024|480|440|390|375|360|320)/);
+    const selectors = mobileEnergia.match(/#gpk-ps-widget[^\{]+(?=\{)/g) || [];
+    assert.ok(selectors.length > 0);
+    selectors.forEach(selector => {
+        assert.match(selector, /\.ps-screen\[data-mode="14"\]\.ps-mobile-energia-v1/);
+    });
 });
