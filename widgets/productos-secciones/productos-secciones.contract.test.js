@@ -422,3 +422,27 @@ test("el CSS de Energía está encapsulado en modo 14", () => {
         assert.match(selector, /\.ps-screen\[data-mode="14"\]\.ps-mobile-energia-v1/);
     });
 });
+
+test("Energía móvil reutiliza las tres imágenes preparadas", () => {
+    ["energia-eficiencia.webp", "energia-impacto.webp", "energia-suministro.webp"].forEach(file => {
+        assert.match(sourceHtml, new RegExp(file.replace(".", "\\.")));
+    });
+    assert.match(mobileEnergia, /\.energia-mobile-image-container/);
+    assert.match(mobileEnergia, /\.energia-mobile-image/);
+    assert.match(mobileEnergia, /width:\s*80px/);
+    assert.match(mobileEnergia, /height:\s*80px/);
+});
+
+test("Energía móvil elimina posiciones y fondos compuestos desktop", () => {
+    assert.match(mobileEnergia, /\.energia-row[^\{]*\{[^}]*position:\s*relative\s*!important/s);
+    assert.match(mobileEnergia, /\.energia-row[^\{]*\{[^}]*background-image:\s*none\s*!important/s);
+    assert.match(mobileEnergia, /\.products-board::before[^\{]*\{[^}]*display:\s*none\s*!important/s);
+});
+
+test("Energía móvil reproduce las superficies del Figma", () => {
+    assert.match(mobileEnergia, /#f9fafb/i);
+    assert.match(mobileEnergia, /#5f9d2f/i);
+    assert.match(mobileEnergia, /#e5e7eb/i);
+    assert.match(mobileEnergia, /border-radius:\s*12px/);
+    assert.match(mobileEnergia, /grid-template-columns:\s*80px minmax\(0, 1fr\)/);
+});

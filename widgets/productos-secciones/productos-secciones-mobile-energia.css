@@ -1,5 +1,145 @@
 @media (max-width: 767px) {
+  #gpk-ps-widget:has(.ps-screen[data-mode="14"].ps-mobile-energia-v1) .ps-side-nav {
+    display: none !important;
+  }
+
   #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 {
     overflow: hidden;
+    background: #f9fafb;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .products-board,
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 #pane-energia {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .products-board::before {
+    display: none !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 #pane-energia {
+    display: flex !important;
+    flex-direction: column;
+    gap: 28px;
+    padding: 24px clamp(16px, 5.13vw, 20px) 100px !important;
+    overflow: hidden !important;
+    opacity: 1 !important;
+    background: #f9fafb !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-header {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 28px;
+    width: 100% !important;
+    height: auto !important;
+    text-align: left !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-main-title {
+    margin: 0 !important;
+    color: #5f9d2f !important;
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-intro-text {
+    margin: 0 !important;
+    padding: 16px !important;
+    color: #6e6e6e !important;
+    font-size: 18px !important;
+    line-height: 20px !important;
+    text-align: left !important;
+    background: #fff !important;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-intro-text strong {
+    color: #6e6e6e !important;
+    font-weight: 700 !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-rows {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    width: 100% !important;
+    height: auto !important;
+    pointer-events: auto !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: 80px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-sizing: border-box;
+    opacity: 1 !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-mobile-image-container {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    width: 80px !important;
+    height: 80px !important;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-mobile-image {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 8px;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row-content {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    text-align: left;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row h3 {
+    margin: 0 0 4px !important;
+    color: #5f9d2f !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row p {
+    margin: 0 !important;
+    color: #6e6e6e !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
   }
 }
