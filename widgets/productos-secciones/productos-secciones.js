@@ -25,7 +25,8 @@
         ["gpk-ps-mobile-intro-styles", "productos-secciones-mobile-intro.css"],
         ["gpk-ps-mobile-overview-styles", "productos-secciones-mobile-overview.css"],
         ["gpk-ps-mobile-paper-styles", "productos-secciones-mobile-paper.css"],
-        ["gpk-ps-mobile-laminas-styles", "productos-secciones-mobile-laminas.css"]
+        ["gpk-ps-mobile-laminas-styles", "productos-secciones-mobile-laminas.css"],
+        ["gpk-ps-mobile-cajas-styles", "productos-secciones-mobile-cajas.css"]
     ].forEach(([id, file]) => {
         if (document.getElementById(id)) return;
         const link = document.createElement("link");
@@ -153,6 +154,9 @@
             if (entry.mode === 3) screen.classList.add("ps-mobile-paper-catalog-v1");
             if (entry.mode === 4) screen.classList.add("ps-mobile-laminas-intro-v1");
             if (entry.mode === 5) screen.classList.add("ps-mobile-laminas-specs-v1");
+            if (entry.mode === 7) screen.classList.add("ps-mobile-cajas-intro-v1");
+            if (entry.mode === 8) screen.classList.add("ps-mobile-cajas-conventional-v1");
+            if (entry.mode === 9) screen.classList.add("ps-mobile-cajas-digital-v1");
             if (entry.laminaSpecsSequence) screen.dataset.laminaSpecsSequence = "1";
             if (entry.papelBlocks) screen.dataset.papelBlocks = "1";
             if (entry.grabadosSequence) screen.dataset.grabadosSequence = "1";
@@ -211,7 +215,7 @@
         const usableWidth = Math.max(width - desktopGutter, 0);
 
         const scale = Math.min(usableWidth / 1850, 1);
-        const adaptedMobileModes = new Set(["0", "1", "2", "3", "4", "5"]);
+        const adaptedMobileModes = new Set(["0", "1", "2", "3", "4", "5", "7", "8", "9"]);
         root.querySelectorAll(".ps-screen").forEach(screen => {
             const board = screen.querySelector(".products-board");
             if (!board) return;

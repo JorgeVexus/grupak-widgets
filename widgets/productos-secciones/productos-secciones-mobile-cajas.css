@@ -1,0 +1,7 @@
+@media (max-width: 767px) {
+  #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1,
+  #gpk-ps-widget .ps-screen[data-mode="8"].ps-mobile-cajas-conventional-v1,
+  #gpk-ps-widget .ps-screen[data-mode="9"].ps-mobile-cajas-digital-v1 {
+    overflow: hidden;
+  }
+}

@@ -25,6 +25,10 @@ const mobileLaminasPath = path.join(dir, "productos-secciones-mobile-laminas.css
 const mobileLaminas = fs.existsSync(mobileLaminasPath)
     ? fs.readFileSync(mobileLaminasPath, "utf8")
     : "";
+const mobileCajasPath = path.join(dir, "productos-secciones-mobile-cajas.css");
+const mobileCajas = fs.existsSync(mobileCajasPath)
+    ? fs.readFileSync(mobileCajasPath, "utf8")
+    : "";
 const sourceHtml = fs.readFileSync(
     path.join(dir, "../productos-interactivos/productos-interactivos.html"),
     "utf8"
@@ -146,7 +150,7 @@ test("los modos 2 y 3 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9"\]\)/);
     assert.match(js, /const isAdaptedMobile = adaptedMobileModes\.has\(entryMode\)[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
 });
 
@@ -202,7 +206,7 @@ test("los modos 4 y 5 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9"\]\)/);
 });
 
 test("el CSS de Láminas está encapsulado en los modos 4 y 5", () => {
@@ -238,4 +242,25 @@ test("Láminas móvil revela cada elemento durante el scroll", () => {
     assert.match(mobileLaminas, /spec-group-1[^\{]*\{[^}]*translateX\(-70px\)/s);
     assert.match(mobileLaminas, /spec-group-2[^\{]*\{[^}]*translateX\(70px\)/s);
     assert.match(mobileLaminas, /\.ps-laminas-revealed\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translate\(0,\s*0\)/s);
+});
+
+test("Cajas móvil carga una hoja independiente", () => {
+    assert.match(js, /gpk-ps-mobile-cajas-styles/);
+    assert.match(js, /productos-secciones-mobile-cajas\.css/);
+});
+
+test("los modos 7, 8 y 9 reciben clases móviles diferentes", () => {
+    assert.match(js, /if \(entry\.mode === 7\) screen\.classList\.add\("ps-mobile-cajas-intro-v1"\)/);
+    assert.match(js, /if \(entry\.mode === 8\) screen\.classList\.add\("ps-mobile-cajas-conventional-v1"\)/);
+    assert.match(js, /if \(entry\.mode === 9\) screen\.classList\.add\("ps-mobile-cajas-digital-v1"\)/);
+});
+
+test("el CSS de Cajas está encapsulado en los modos 7, 8 y 9", () => {
+    assert.match(mobileCajas, /@media \(max-width: 767px\)/);
+    assert.doesNotMatch(mobileCajas, /@media[^\{]*(?:768|1024|480|440|390|375|360|320)/);
+    const selectors = mobileCajas.match(/#gpk-ps-widget[^\{]+(?=\{)/g) || [];
+    assert.ok(selectors.length > 0);
+    selectors.forEach(selector => {
+        assert.match(selector, /\.ps-screen\[data-mode="(?:7|8|9)"\]\.ps-mobile-cajas-(?:intro|conventional|digital)-v1/);
+    });
 });
