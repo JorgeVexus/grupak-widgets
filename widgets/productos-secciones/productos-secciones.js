@@ -18,7 +18,7 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-21";
+    const assetVersion = "seccion-reveal-22";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -117,6 +117,7 @@
         resolveAssetURLs(root);
         scaleDesktopBoards(root);
         setupReveal(root);
+        setupMobilePaperCatalogReveal(root);
         setupSideNav(root);
         setupSideNavVisibility(root);
 
@@ -326,6 +327,34 @@
         }, { threshold: 0, rootMargin: "-10% 0px -10% 0px" });
 
         screens.forEach(s => observer.observe(s));
+    }
+
+    function setupMobilePaperCatalogReveal(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const cards = Array.from(root.querySelectorAll(
+            '.ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-card'
+        ));
+        if (!cards.length) return;
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof IntersectionObserver === "undefined") {
+            cards.forEach(card => card.classList.add("ps-card-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const card = entry.target;
+                observer.unobserve(card);
+                window.setTimeout(() => {
+                    card.classList.add("ps-card-revealed");
+                }, 150);
+            });
+        }, { threshold: 0.2 });
+
+        cards.forEach(card => observer.observe(card));
     }
 
     function goToMode(root, labelOrMode) {

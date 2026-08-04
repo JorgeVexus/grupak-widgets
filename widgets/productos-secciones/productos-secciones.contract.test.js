@@ -173,5 +173,16 @@ test("el catálogo móvil alterna entradas laterales de 70px", () => {
     assert.match(mobilePaper, /data-index="2"[^\{]*\{[^}]*transform:\s*translateX\(70px\)/s);
     assert.match(mobilePaper, /data-index="3"[^\{]*\{[^}]*transform:\s*translateX\(-70px\)/s);
     assert.match(mobilePaper, /data-index="4"[^\{]*\{[^}]*transform:\s*translateX\(70px\)/s);
-    assert.match(mobilePaper, /\.products-board\.mode-3 \.product-card\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translateX\(0\)/s);
+    assert.match(mobilePaper, /\.product-card\.ps-card-revealed\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translateX\(0\)/s);
+});
+
+test("cada Pak móvil se revela individualmente al entrar en pantalla", () => {
+    assert.match(js, /function setupMobilePaperCatalogReveal\(root\)/);
+    assert.match(js, /window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
+    assert.match(js, /threshold:\s*0\.2/);
+    assert.match(js, /window\.setTimeout\(\(\) => \{\s*card\.classList\.add\("ps-card-revealed"\)/s);
+    assert.match(js, /},\s*150\)/);
+    assert.match(js, /observer\.unobserve\(card\)/);
+    assert.match(mobilePaper, /\.product-card\.ps-card-revealed\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translateX\(0\)/s);
+    assert.doesNotMatch(mobilePaper, /\.products-board\.mode-3 \.product-card\s*\{[^}]*opacity:\s*1/s);
 });
