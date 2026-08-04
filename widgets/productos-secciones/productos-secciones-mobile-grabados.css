@@ -1,0 +1,5 @@
+@media (max-width: 767px) {
+  #gpk-ps-widget .ps-screen[data-mode="10"].ps-mobile-grabados-v1 {
+    overflow: hidden;
+  }
+}

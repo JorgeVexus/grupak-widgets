@@ -29,6 +29,10 @@ const mobileCajasPath = path.join(dir, "productos-secciones-mobile-cajas.css");
 const mobileCajas = fs.existsSync(mobileCajasPath)
     ? fs.readFileSync(mobileCajasPath, "utf8")
     : "";
+const mobileGrabadosPath = path.join(dir, "productos-secciones-mobile-grabados.css");
+const mobileGrabados = fs.existsSync(mobileGrabadosPath)
+    ? fs.readFileSync(mobileGrabadosPath, "utf8")
+    : "";
 const sourceHtml = fs.readFileSync(
     path.join(dir, "../productos-interactivos/productos-interactivos.html"),
     "utf8"
@@ -150,7 +154,7 @@ test("los modos 2 y 3 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10"\]\)/);
     assert.match(js, /const isAdaptedMobile = adaptedMobileModes\.has\(entryMode\)[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
 });
 
@@ -206,7 +210,7 @@ test("los modos 4 y 5 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10"\]\)/);
 });
 
 test("el CSS de Láminas está encapsulado en los modos 4 y 5", () => {
@@ -319,4 +323,23 @@ test("Cajas móvil elimina el fondo SVG fijo del lienzo desktop", () => {
 
 test("el texto digital no conserva el margen negativo desktop", () => {
     assert.match(mobileCajas, /\.digital-text-content[^\{]*\{[^}]*margin:\s*0\s*!important/s);
+});
+
+test("Grabados móvil carga una hoja independiente", () => {
+    assert.match(js, /gpk-ps-mobile-grabados-styles/);
+    assert.match(js, /productos-secciones-mobile-grabados\.css/);
+});
+
+test("el modo 10 recibe una clase móvil exclusiva", () => {
+    assert.match(js, /if \(entry\.mode === 10\) screen\.classList\.add\("ps-mobile-grabados-v1"\)/);
+});
+
+test("el CSS de Grabados está encapsulado en modo 10", () => {
+    assert.match(mobileGrabados, /@media \(max-width: 767px\)/);
+    assert.doesNotMatch(mobileGrabados, /@media[^\{]*(?:768|1024|480|440|390|375|360|320)/);
+    const selectors = mobileGrabados.match(/#gpk-ps-widget[^\{]+(?=\{)/g) || [];
+    assert.ok(selectors.length > 0);
+    selectors.forEach(selector => {
+        assert.match(selector, /\.ps-screen\[data-mode="10"\]\.ps-mobile-grabados-v1/);
+    });
 });
