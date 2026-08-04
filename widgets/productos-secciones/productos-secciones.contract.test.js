@@ -343,3 +343,27 @@ test("el CSS de Grabados está encapsulado en modo 10", () => {
         assert.match(selector, /\.ps-screen\[data-mode="10"\]\.ps-mobile-grabados-v1/);
     });
 });
+
+test("Grabados móvil reutiliza las cuatro imágenes preparadas", () => {
+    ["mov 01.png", "mov 02.png", "mov 03.png", "mov 04.png"].forEach(file => {
+        assert.match(sourceHtml, new RegExp(file.replace(".", "\\.")));
+    });
+    assert.match(mobileGrabados, /\.grabados-service-image/);
+    assert.match(mobileGrabados, /width:\s*100%/);
+    assert.match(mobileGrabados, /height:\s*auto/);
+});
+
+test("Grabados móvil elimina fondos y posiciones desktop", () => {
+    assert.match(mobileGrabados, /\.grabados-green-card[^\{]*\{[^}]*background-image:\s*none\s*!important/s);
+    assert.match(mobileGrabados, /\.grabados-green-card[^\{]*\{[^}]*background-color:\s*transparent\s*!important/s);
+    assert.match(mobileGrabados, /\.products-board::before[^\{]*\{[^}]*display:\s*none\s*!important/s);
+    assert.match(mobileGrabados, /\.grabados-chat-icon[^\{]*\{[^}]*display:\s*none\s*!important/s);
+});
+
+test("Grabados móvil conserva título, introducción y cuatro servicios", () => {
+    assert.equal((sourceHtml.match(/class="grabados-green-card"/g) || []).length, 4);
+    assert.match(mobileGrabados, /\.grabados-left-content/);
+    assert.match(mobileGrabados, /\.grabados-cards-grid-new/);
+    assert.match(mobileGrabados, /\.grabados-card-title/);
+    assert.match(mobileGrabados, /\.grabados-card-desc/);
+});
