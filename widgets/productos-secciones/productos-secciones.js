@@ -18,7 +18,7 @@
     const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
     const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
 
-    const assetVersion = "seccion-reveal-28";
+    const assetVersion = "seccion-reveal-29";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -576,19 +576,9 @@
             "Al aprovechar mejor el combustible, reducimos emisiones y mejoramos nuestra huella de carbono industrial.",
             "Generamos parte importante de la energía que utilizamos, asegurando continuidad operativa total en planta."
         ];
-        const mobileImages = [
-            "energia-mobile-eficiencia.png",
-            "energia-mobile-impacto.png",
-            "energia-mobile-suministro.png"
-        ];
-
         screen.querySelectorAll(".energia-row").forEach((row, index) => {
             const paragraph = row.querySelector(".energia-row-content p");
-            const image = row.querySelector(".energia-mobile-image");
             if (paragraph && descriptions[index]) paragraph.textContent = descriptions[index];
-            if (image && mobileImages[index]) {
-                image.src = `${selfBaseURL}/images/${mobileImages[index]}`;
-            }
         });
     }
 

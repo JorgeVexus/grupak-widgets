@@ -472,14 +472,10 @@ test("Energía alterna sus tres entradas laterales", () => {
     assert.match(mobileEnergia, /prefers-reduced-motion:\s*reduce/);
 });
 
-test("Energía móvil sustituye los panoramas por los tres assets cuadrados del Figma", () => {
-    [
-        "energia-mobile-eficiencia.png",
-        "energia-mobile-impacto.png",
-        "energia-mobile-suministro.png"
-    ].forEach(file => {
-        assert.ok(fs.existsSync(path.join(dir, "images", file)), `${file} debe existir`);
-        assert.match(js, new RegExp(file.replace(".", "\\.")));
+test("Energía móvil conserva los tres panoramas proporcionados", () => {
+    ["energia-eficiencia.webp", "energia-impacto.webp", "energia-suministro.webp"].forEach(file => {
+        assert.match(sourceHtml, new RegExp(file.replace(".", "\\.")));
     });
-    assert.match(js, /image\.src = `\$\{selfBaseURL\}\/images\/\$\{mobileImages\[index\]\}`/);
+    assert.doesNotMatch(js, /energia-mobile-(?:eficiencia|impacto|suministro)\.png/);
+    assert.doesNotMatch(js, /image\.src = `\$\{selfBaseURL\}\/images\/\$\{mobileImages\[index\]\}`/);
 });
