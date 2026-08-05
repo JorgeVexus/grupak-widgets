@@ -216,3 +216,9 @@
 #gpk-ps-widget #gpk-preloader {
     display: none !important;
 }
+
+@media (max-width: 767px) {
+    #gpk-ps-widget .product-uses {
+        margin-left: 0;
+    }
+}
