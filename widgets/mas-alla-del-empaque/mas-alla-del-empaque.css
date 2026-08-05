@@ -405,11 +405,22 @@
     }
 
     .mas-alla-badge {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-image: url('images/Vector-badge-new.svg') !important;
+        background-size: 100% 100% !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
         font-size: 11px;
-        padding: 6px 36px 8px 20px;
+        line-height: 1 !important;
+        padding: 8px 16px 20px 16px !important;
         margin-top: 14px;
         margin-bottom: 4px;
         margin-left: 0;
+        width: auto !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .mas-alla-title {
@@ -517,6 +528,10 @@
         width: 100% !important;
         transform: none !important;
         margin-bottom: 2px;
+    }
+
+    .mas-alla-item-text strong br {
+        display: none !important;
     }
 
     .mas-alla-item-text p {
