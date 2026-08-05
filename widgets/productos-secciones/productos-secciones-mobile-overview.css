@@ -133,6 +133,10 @@
     #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .products-board.mode-1 .overview-col-new:nth-child(4) {
         transition-delay: 0.34s;
     }
+
+    #gpk-ps-widget .product-uses {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 767px) and (prefers-reduced-motion: reduce) {
