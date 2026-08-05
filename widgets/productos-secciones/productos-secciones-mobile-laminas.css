@@ -97,7 +97,24 @@
     }
 
     #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-resistencia-box {
-        display: none;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-resistencia-title {
+        font-family: var(--font-title);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--color-green, #5f9d2f);
+        margin: 0 0 8px;
+        line-height: 1.25;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-resistencia-desc {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        color: #6e6e6e;
+        margin: 0;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-stack-container {

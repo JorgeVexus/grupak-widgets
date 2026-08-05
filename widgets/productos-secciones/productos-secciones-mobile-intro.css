@@ -136,8 +136,16 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-        transform: none;
-        transform-origin: center;
+        transform: none !important;
+        transform-origin: center !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-rollo .pillar-contour-img,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-lamina .pillar-contour-img,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-caja .pillar-contour-img,
+    #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 #p-grabados .pillar-contour-img {
+        transform: none !important;
+        transform-origin: center !important;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .products-board.mode-0 .pillar-contour-img {

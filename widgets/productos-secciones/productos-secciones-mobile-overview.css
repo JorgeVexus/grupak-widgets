@@ -71,12 +71,32 @@
 
     #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .overview-mobile-img {
         display: block;
-        width: 100%;
         height: auto;
         max-height: clamp(210px, 64vw, 300px);
-        margin: 0 0 clamp(16px, 4vw, 22px);
+        margin: 0 auto clamp(16px, 4vw, 22px);
         object-fit: contain;
         object-position: center;
+    }
+
+    /* Jerarquía visual de tamaños por producto en móvil */
+    #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .overview-col-new:nth-child(1) .overview-mobile-img {
+        max-height: clamp(210px, 64vw, 300px);
+        width: 100%;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .overview-col-new:nth-child(2) .overview-mobile-img {
+        max-height: clamp(170px, 52vw, 245px);
+        width: 84%;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .overview-col-new:nth-child(3) .overview-mobile-img {
+        max-height: clamp(140px, 42vw, 200px);
+        width: 68%;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .overview-col-new:nth-child(4) .overview-mobile-img {
+        max-height: clamp(110px, 32vw, 155px);
+        width: 54%;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .overview-col-title {
