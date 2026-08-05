@@ -217,35 +217,48 @@
     display: none !important;
 }
 
-/* Custom Title & Green Line alignments for Cajas y empaques & Grabados */
+/* Alignment rules for Grabados & Energía (Desktop) */
 
-/* Grabados section title centering in desktop mode */
-#gpk-ps-widget .products-board.mode-10 #pane-grabados {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* Grabados: title and description aligned to left */
 #gpk-ps-widget .products-board.mode-10 .grabados-left-content {
-    left: 50% !important;
+    left: 100px !important;
     top: 95px !important;
-    transform: translateX(-50%) !important;
-    text-align: center !important;
-    align-items: center !important;
+    transform: none !important;
+    text-align: left !important;
+    align-items: flex-start !important;
 }
 
 #gpk-ps-widget .products-board.mode-10 .grabados-main-title {
-    text-align: center !important;
+    text-align: left !important;
     margin-bottom: 0 !important;
+}
+
+#gpk-ps-widget .products-board.mode-10 .grabados-intro-text p {
+    text-align: left !important;
+}
+
+/* Energía: header aligned to left */
+#gpk-ps-widget .products-board.mode-14 .energia-header {
+    left: 100px !important;
+    transform: translateX(0) !important;
+    text-align: left !important;
+    width: 1200px !important;
+}
+
+#gpk-ps-widget .products-board.mode-14 .energia-main-title,
+#gpk-ps-widget .products-board.mode-14 .energia-intro-text {
+    text-align: left !important;
+}
+
+/* Cajas Impresión Digital: Wider paragraph max-width to match Cajas y empaques convencionales */
+#gpk-ps-widget .digital-paragraph-1,
+#gpk-ps-widget .digital-paragraph-2 {
+    max-width: 720px !important;
 }
 
 /* Hide desktop green line for mode-10 Grabados */
 #gpk-ps-widget .products-board.mode-10 .grabados-green-line {
     display: none !important;
-}
-
-#gpk-ps-widget .products-board.mode-10 .grabados-intro-text p {
-    text-align: center !important;
 }
 
 /* Calibrated card offsets in desktop mode so they don't overlap header nor touch bottom */
@@ -258,3 +271,5 @@
 #gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="4"] {
     top: 405px !important;
 }
+
+
