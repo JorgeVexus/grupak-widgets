@@ -35,7 +35,7 @@
 
     #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-title-new {
         order: 1;
-        max-width: 13ch;
+        max-width: 100%;
         margin: 0;
         font-size: clamp(26px, 7.2vw, 34px);
         line-height: 1.08;
