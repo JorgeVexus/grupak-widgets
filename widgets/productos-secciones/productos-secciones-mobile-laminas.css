@@ -210,14 +210,6 @@
         text-align: left;
     }
 
-    #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 .ps-laminas-measure {
-        display: block;
-        margin-bottom: 8px;
-        color: #555;
-        font-size: clamp(24px, 7vw, 32px);
-        line-height: 1;
-        font-weight: 700;
-    }
 
     #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 [data-ps-laminas-reveal],
     #gpk-ps-widget .ps-screen[data-mode="5"].ps-mobile-laminas-specs-v1 [data-ps-laminas-reveal] {

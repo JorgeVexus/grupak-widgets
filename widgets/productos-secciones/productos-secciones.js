@@ -437,11 +437,6 @@
             specs.querySelector(".spec-group-2")
         ].filter(Boolean).forEach(element => element.dataset.psLaminasReveal = "1");
 
-        const firstDescription = specs.querySelector(".spec-group-1 .spec-desc");
-        if (firstDescription && !firstDescription.querySelector(".ps-laminas-measure")) {
-            const description = firstDescription.textContent.trim().replace(/^283 cm,\s*/i, "");
-            firstDescription.innerHTML = `<strong class="ps-laminas-measure">283 cm</strong>${description}`;
-        }
 
         const elements = Array.from(root.querySelectorAll("[data-ps-laminas-reveal]"));
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
