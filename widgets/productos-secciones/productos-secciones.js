@@ -118,6 +118,7 @@
     function build(root, source) {
         buildFlow(root, source);
 
+        swapLaminasStackImages(root);
         resolveAssetURLs(root);
         prepareMobileCajasContent(root);
         scaleDesktopBoards(root);
@@ -214,6 +215,22 @@
 
     function rebuildAssetURL(relativePath) {
         return `${sourceBaseURL}/` + relativePath.split("/").map(encodeURIComponent).join("/");
+    }
+
+    // Swap the two Láminas stack images (Kraft / Blanco) whose source PNGs are
+    // missing/broken for the updated webp assets shipped in this widget's own
+    // images/seccion-laminas folder. Runs before resolveAssetURLs so the
+    // swapped src points at selfBaseURL (this widget), not the shared source.
+    function swapLaminasStackImages(root) {
+        root.querySelectorAll("img[src]").forEach(img => {
+            const src = img.getAttribute("src") || "";
+            const marker = "images/slide-laminas/Láminas de cartón corrugado";
+            if (!src.includes(marker) || !src.endsWith(".png")) return;
+            const file = src
+                .replace(/^.*?images\/slide-laminas\//, "")
+                .replace(/\.png$/, ".webp");
+            img.src = `${selfBaseURL}/images/seccion-laminas/` + encodeURIComponent(file);
+        });
     }
 
     function prepareMobileCajasContent(root) {
