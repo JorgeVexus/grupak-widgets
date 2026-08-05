@@ -104,9 +104,10 @@
 #gpk-gestion-widget .gpk-gestion-card {
     position: relative;
     width: 100%;
-    aspect-ratio: 531 / 750;
+    aspect-ratio: 531 / 795;
+    min-height: 750px;
     background-size: cover;
-    background-position: center;
+    background-position: bottom center;
     background-repeat: no-repeat;
     border-radius: 16px;
     overflow: hidden;
@@ -122,43 +123,44 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 20px;
+    gap: 16px;
     box-sizing: border-box;
     z-index: 2;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.93) 58%, rgba(255, 255, 255, 0.5) 75%, transparent 100%);
 }
 
 #gpk-gestion-widget .gpk-gestion-card-logo.top-logo {
     margin-top: 0;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     align-items: flex-start;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-logo.top-logo img {
-    max-width: 360px;
-    max-height: 140px;
+    max-width: 280px;
+    max-height: 100px;
     width: auto;
     height: auto;
     object-fit: contain;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-logo.logo-epd img {
-    max-width: 330px;
-    max-height: 95px;
+    max-width: 260px;
+    max-height: 75px;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-header {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-title {
     margin: 0;
     color: #6E6E6E;
     font-family: "Neue Haas Grotesk Display Pro", "Open Sans", sans-serif;
-    font-size: 42px;
+    font-size: 34px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.18;
     letter-spacing: -0.5px;
 }
 
@@ -170,11 +172,11 @@
 #gpk-gestion-widget .gpk-gestion-card-body {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
     color: #6E6E6E;
     font-family: "Neue Haas Grotesk Display Pro", "Open Sans", sans-serif;
-    font-size: 15px;
-    line-height: 1.42;
+    font-size: 14.5px;
+    line-height: 1.38;
     text-align: justify;
 }
 
