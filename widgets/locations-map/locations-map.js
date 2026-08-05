@@ -104,18 +104,6 @@
                 lng: -98.6020
             },
             {
-                id: 'empaques-digital',
-                name: 'Empaques digital',
-                category: 'Planta',
-                categoryClass: 'planta-papel',
-                address: 'Carretera Federal Pachuca CD. Sahagún tramo Cd. Sahagún Emiliano Zapata Km. 20, Emiliano Zapata, C.P. 43960, Hidalgo.',
-                phone: '55 2581 0700',
-                imageUrl: 'widgets/locations-map/images/ubicaciones/Planta Hidalgo  Empaques digital.webp',
-                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carretera+Federal+Pachuca+Ciudad+Sahagun+Tramo+Ciudad+Sahagun+Emiliano+Zapata+Km+20+43960+Hidalgo',
-                lat: 19.8443,
-                lng: -98.6020
-            },
-            {
                 id: 'abastecimiento-cdmx',
                 name: 'Abastecimientos CDMX',
                 category: 'Abastecimiento',
