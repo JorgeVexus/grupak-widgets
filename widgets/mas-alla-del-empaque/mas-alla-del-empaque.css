@@ -383,7 +383,8 @@
     }
 
     .mas-alla-slide-img[data-index="0"] {
-        padding: 10px 10px 10px 0;
+        object-position: center center !important;
+        padding: 10px !important;
     }
 
     .mas-alla-content-section {
@@ -404,9 +405,9 @@
     }
 
     .mas-alla-badge {
-        font-size: 12px;
-        padding: 6px 26px 8px 16px;
-        margin-top: 24px;
+        font-size: 11px;
+        padding: 6px 36px 8px 20px;
+        margin-top: 14px;
         margin-bottom: 4px;
         margin-left: 0;
     }
@@ -476,12 +477,13 @@
 
     /* Item inner — mobile sizing */
     .mas-alla-item-inner {
-        grid-template-columns: 50px 1fr !important;
-        column-gap: 12px;
-        padding: 14px 16px !important;
-        padding-top: 0px !important;
-        min-height: 150px !important;
+        display: grid !important;
+        grid-template-columns: 42px 1fr !important;
+        column-gap: 8px !important;
+        padding: 14px 20px 14px 16px !important;
+        min-height: 120px !important;
         background-image: url('images/vector svg.svg') !important;
+        align-items: start !important;
     }
 
     .mas-alla-item.gpk-active .mas-alla-item-inner {
@@ -497,15 +499,30 @@
 
     .mas-alla-item-num {
         font-size: 24px;
+        width: auto !important;
+        transform: none !important;
+        margin-top: 2px;
+    }
+
+    .mas-alla-item-text {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+        width: 100% !important;
     }
 
     .mas-alla-item-text strong {
-        font-size: 17px;
+        font-size: 16px;
+        width: 100% !important;
+        transform: none !important;
+        margin-bottom: 2px;
     }
 
     .mas-alla-item-text p {
-        font-size: 14px;
-        line-height: 1.3;
+        font-size: 13.5px;
+        line-height: 1.35;
+        width: 100% !important;
     }
 
     /* --- Dots navigation --- */
