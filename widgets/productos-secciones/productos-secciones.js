@@ -132,6 +132,7 @@
         setupMobileEnergiaReveal(root);
         setupSideNav(root);
         setupSideNavVisibility(root);
+        setupOverviewButtons(root);
 
         window.addEventListener("resize", () => scaleDesktopBoards(root));
 
@@ -638,6 +639,18 @@
         }, { threshold: 0.2 });
 
         elements.forEach(element => observer.observe(element));
+    }
+
+    function setupOverviewButtons(root) {
+        root.querySelectorAll(".overview-col-btn[data-target-slide]").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                const slide = Number(btn.getAttribute("data-target-slide"));
+                if (!isNaN(slide)) {
+                    goToMode(root, slide);
+                }
+            });
+        });
     }
 
     function goToMode(root, labelOrMode) {

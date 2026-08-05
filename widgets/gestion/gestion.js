@@ -69,6 +69,21 @@
                     : baseURL.replace(/\/$/, "") + "/" + cleanSrc;
             }
         });
+
+        container.querySelectorAll("[style*='background-image']").forEach(function (el) {
+            var style = el.getAttribute("style") || "";
+            var match = style.match(/url\(['"]?([^'"]+)['"]?\)/i);
+            if (match && match[1]) {
+                var bgUrl = match[1];
+                if (bgUrl.indexOf("http") !== 0 && bgUrl.indexOf("data:") !== 0) {
+                    var cleanBg = bgUrl.charAt(0) === "/" ? bgUrl.slice(1) : bgUrl;
+                    var resolvedBg = isLocalhost
+                        ? "widgets/gestion/" + cleanBg
+                        : baseURL.replace(/\/$/, "") + "/" + cleanBg;
+                    el.style.backgroundImage = "url('" + resolvedBg + "')";
+                }
+            }
+        });
     }
 
     function initGestionWidget() {
