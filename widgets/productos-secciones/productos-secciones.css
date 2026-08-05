@@ -245,6 +245,7 @@
 
 #gpk-ps-widget .products-board.mode-10 .grabados-left-content {
     left: 50% !important;
+    top: 60px !important;
     transform: translateX(-50%) !important;
     text-align: center !important;
     align-items: center !important;
@@ -259,7 +260,7 @@
     width: 65px;
     height: 4px;
     background-color: var(--color-green);
-    margin: 16px auto 20px auto;
+    margin: 14px auto 18px auto;
     border-radius: 2px;
     opacity: 0;
     transform: translateY(50px);
@@ -277,4 +278,15 @@
 
 #gpk-ps-widget .products-board.mode-10 .grabados-intro-text p {
     text-align: center !important;
+}
+
+/* Lower cards in desktop mode so they don't overlap header text */
+#gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="1"],
+#gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="3"] {
+    top: 355px !important;
+}
+
+#gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="2"],
+#gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="4"] {
+    top: 425px !important;
 }
