@@ -225,11 +225,13 @@
         root.querySelectorAll("img[src]").forEach(img => {
             const src = img.getAttribute("src") || "";
             const marker = "images/slide-laminas/Láminas de cartón corrugado";
-            if (!src.includes(marker) || !src.endsWith(".png")) return;
-            const file = src
-                .replace(/^.*?images\/slide-laminas\//, "")
-                .replace(/\.png$/, ".webp");
-            img.src = `${selfBaseURL}/images/seccion-laminas/` + encodeURIComponent(file);
+            if (!src.includes(marker)) return;
+
+            if (src.includes("Amplia gama de resistencias")) {
+                img.src = `${selfBaseURL}/images/seccion-laminas/La%CC%81minas%20de%20carto%CC%81n%20corrugado%20%20Amplia%20gama%20de%20resistencias%201.webp`;
+            } else if (src.includes("Opciones de corrugado")) {
+                img.src = `${selfBaseURL}/images/seccion-laminas/La%CC%81minas%20de%20carto%CC%81n%20corrugado%20%20Opciones%20de%20corrugado%20y%20anchos%20de%20papel%201%201.webp`;
+            }
         });
     }
 
