@@ -140,8 +140,33 @@
             goToMode(root, labelOrMode);
         };
         window.gpkGoToProductsSlide = window.gpkGoToProductsSection;
+        openRequestedProductSection(root);
         window.dispatchEvent(new CustomEvent("gpkProductsSeccionesReady"));
         window.dispatchEvent(new CustomEvent("gpkProductsReady"));
+    }
+
+    function openRequestedProductSection(root) {
+        const params = new URLSearchParams(window.location.search);
+        let target = params.get("gpkProduct") || params.get("gpkSection");
+
+        if (!target && window.location.hash) {
+            const hash = window.location.hash.replace("#", "");
+            if (["papel", "cajas", "laminas", "grabados", "energia"].includes(hash)) {
+                target = hash;
+            }
+        }
+
+        if (target) {
+            const map = {
+                papel: 2,
+                laminas: 4,
+                cajas: 7,
+                grabados: 10,
+                energia: 14
+            };
+            const mode = map[target] !== undefined ? map[target] : target;
+            setTimeout(() => goToMode(root, mode), 300);
+        }
     }
 
     function cloneInto(wrapper, source, selectors) {

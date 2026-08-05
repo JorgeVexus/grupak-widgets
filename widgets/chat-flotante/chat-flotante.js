@@ -186,7 +186,7 @@
 
             var actionName = action.getAttribute("data-action");
 
-            // Navigation mappings for products
+            // Navigation mappings for product modes
             var productSectionMap = {
                 paper: 2,       // Papel
                 boxes: 7,       // Cajas y empaques
@@ -194,11 +194,24 @@
                 printing: 10    // Grabados para impresión
             };
 
+            var pageSectionMap = {
+                paper: "papel",
+                boxes: "cajas",
+                sheets: "laminas",
+                printing: "grabados"
+            };
+
             if (productSectionMap.hasOwnProperty(actionName)) {
                 var targetMode = productSectionMap[actionName];
                 var navigate = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
+                
                 if (typeof navigate === "function") {
+                    // We are on the page with the productos widget
                     navigate(targetMode);
+                } else {
+                    // Redirect to home / productos page with mode or section param
+                    var targetURL = "/?gpkProduct=" + pageSectionMap[actionName] + "#gpk-ps-widget-root";
+                    window.location.href = targetURL;
                 }
                 closeWidget();
                 return;
@@ -208,7 +221,33 @@
             if (actionName === "whatsapp" || actionName === "general-contact") {
                 if (typeof window.gpkOpenFormulario === "function") {
                     window.gpkOpenFormulario("contacto");
+                } else {
+                    window.location.href = "/contacto?gpkForm=contacto";
                 }
+                closeWidget();
+                return;
+            }
+
+            if (actionName === "phone") {
+                window.location.href = "tel:8000000000";
+                closeWidget();
+                return;
+            }
+
+            if (actionName === "sustainability") {
+                window.location.href = "/sustentabilidad";
+                closeWidget();
+                return;
+            }
+
+            if (actionName === "history") {
+                window.location.href = "/nosotros";
+                closeWidget();
+                return;
+            }
+
+            if (actionName === "news") {
+                window.location.href = "/noticias";
                 closeWidget();
                 return;
             }
