@@ -61,8 +61,9 @@
                 if (window.innerWidth <= 1024) {
                     if (saberMasBtn) {
                         e.preventDefault();
-                        if (window.gpkGoToProductsSlide) {
-                            window.gpkGoToProductsSlide(targetSlide);
+                        const navigate = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
+                        if (navigate) {
+                            navigate(targetSlide);
                         }
                     } else {
                         // Alternamos el estado activo del acordeón
@@ -75,8 +76,9 @@
                 } else {
                     // En escritorio, un clic en cualquier parte del item (o el link) navega directamente
                     e.preventDefault();
-                    if (window.gpkGoToProductsSlide) {
-                        window.gpkGoToProductsSlide(targetSlide);
+                    const navigate = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
+                    if (navigate) {
+                        navigate(targetSlide);
                     }
                 }
             });

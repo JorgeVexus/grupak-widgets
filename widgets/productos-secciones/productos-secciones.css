@@ -219,24 +219,7 @@
 
 /* Custom Title & Green Line alignments for Cajas y empaques & Grabados */
 
-/* Mode 7 Cajas y empaques title alignment & green line */
-#gpk-ps-widget .products-board.mode-7 .pane-header-centered {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#gpk-ps-widget .products-board.mode-7 .pane-header-centered::after {
-    content: "";
-    display: block;
-    width: 65px;
-    height: 4px;
-    background-color: var(--color-green);
-    margin: 16px auto 0 auto;
-    border-radius: 2px;
-}
-
-/* Grabados section title centering, left-content centering, and green line */
+/* Grabados section title centering in desktop mode */
 #gpk-ps-widget .products-board.mode-10 #pane-grabados {
     display: flex;
     flex-direction: column;
@@ -245,7 +228,7 @@
 
 #gpk-ps-widget .products-board.mode-10 .grabados-left-content {
     left: 50% !important;
-    top: 60px !important;
+    top: 95px !important;
     transform: translateX(-50%) !important;
     text-align: center !important;
     align-items: center !important;
@@ -256,37 +239,22 @@
     margin-bottom: 0 !important;
 }
 
+/* Hide desktop green line for mode-10 Grabados */
 #gpk-ps-widget .products-board.mode-10 .grabados-green-line {
-    width: 65px;
-    height: 4px;
-    background-color: var(--color-green);
-    margin: 14px auto 18px auto;
-    border-radius: 2px;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-#gpk-ps-widget .products-board.mode-10 .grabados-green-line,
-#gpk-ps-widget .products-board.mode-11 .grabados-green-line,
-#gpk-ps-widget .products-board.mode-12 .grabados-green-line,
-#gpk-ps-widget .products-board.mode-13 .grabados-green-line {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.15s;
+    display: none !important;
 }
 
 #gpk-ps-widget .products-board.mode-10 .grabados-intro-text p {
     text-align: center !important;
 }
 
-/* Lower cards in desktop mode so they don't overlap header text */
+/* Calibrated card offsets in desktop mode so they don't overlap header nor touch bottom */
 #gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="1"],
 #gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="3"] {
-    top: 355px !important;
+    top: 335px !important;
 }
 
 #gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="2"],
 #gpk-ps-widget .products-board.mode-10 .grabados-green-card[data-index="4"] {
-    top: 425px !important;
+    top: 405px !important;
 }

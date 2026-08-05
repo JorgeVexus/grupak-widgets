@@ -54,6 +54,17 @@
     line-height: 1.04 !important;
   }
 
+  #gpk-ps-widget .ps-screen[data-mode="10"].ps-mobile-grabados-v1 .grabados-green-line {
+    display: block !important;
+    width: 48px !important;
+    height: 3px !important;
+    background-color: var(--color-green, #5f9d2f) !important;
+    margin: 12px 0 0 0 !important;
+    border-radius: 1.5px !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   #gpk-ps-widget .ps-screen[data-mode="10"].ps-mobile-grabados-v1 .grabados-intro-text {
     margin-top: 18px !important;
     color: #4f5651 !important;

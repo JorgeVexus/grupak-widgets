@@ -138,7 +138,9 @@
         window.gpkGoToProductsSection = function (labelOrMode) {
             goToMode(root, labelOrMode);
         };
+        window.gpkGoToProductsSlide = window.gpkGoToProductsSection;
         window.dispatchEvent(new CustomEvent("gpkProductsSeccionesReady"));
+        window.dispatchEvent(new CustomEvent("gpkProductsReady"));
     }
 
     function cloneInto(wrapper, source, selectors) {
