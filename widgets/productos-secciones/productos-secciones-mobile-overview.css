@@ -154,13 +154,13 @@
         transition-delay: 0.34s;
     }
 
-    #gpk-ps-widget .product-uses {
+    #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .product-uses {
         margin-left: 0;
         font-size: 16px;
     }
 
-    #gpk-ps-widget .product-uses .uses-bubble,
-    #gpk-ps-widget .product-uses .uses-text {
+    #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .product-uses .uses-bubble,
+    #gpk-ps-widget .ps-screen[data-mode="1"].ps-mobile-overview-v1 .product-uses .uses-text {
         font-size: 16px;
     }
 }

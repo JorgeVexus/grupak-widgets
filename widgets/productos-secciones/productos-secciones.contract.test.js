@@ -359,7 +359,7 @@ test("Grabados móvil reutiliza las cuatro imágenes preparadas", () => {
 
 test("Grabados móvil elimina fondos y posiciones desktop", () => {
     assert.match(mobileGrabados, /\.grabados-green-card[^\{]*\{[^}]*background-image:\s*none\s*!important/s);
-    assert.match(mobileGrabados, /\.grabados-green-card[^\{]*\{[^}]*background-color:\s*transparent\s*!important/s);
+    assert.match(mobileGrabados, /\.grabados-green-card[^\{]*\{[^}]*background-color:\s*#FFF\s*!important/s);
     assert.match(mobileGrabados, /\.products-board::before[^\{]*\{[^}]*display:\s*none\s*!important/s);
     assert.match(mobileGrabados, /\.grabados-chat-icon[^\{]*\{[^}]*display:\s*none\s*!important/s);
 });
@@ -396,7 +396,7 @@ test("Grabados móvil oculta la navegación desktop y usa la copia del Figma", (
     assert.match(js, /Color Management/);
     assert.match(js, /Montaje y ajuste de placas/);
     assert.match(js, /Retoque y soporte en planta/);
-    assert.match(mobileGrabados, /\.grabados-service-image\.mobile-only\s*\{[^}]*border-radius:\s*0\s*!important/s);
+    assert.match(mobileGrabados, /\.grabados-service-image\.mobile-only\s*\{[^}]*border-radius:\s*12px 12px 0 0\s*!important/s);
     assert.match(mobileGrabados, /\.grabados-card-text-wrapper\s*\{[^}]*text-align:\s*left\s*!important/s);
 });
 
