@@ -136,6 +136,12 @@
 
     #gpk-ps-widget .product-uses {
         margin-left: 0;
+        font-size: 16px;
+    }
+
+    #gpk-ps-widget .product-uses .uses-bubble,
+    #gpk-ps-widget .product-uses .uses-text {
+        font-size: 16px;
     }
 }
 

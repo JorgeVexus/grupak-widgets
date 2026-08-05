@@ -103,7 +103,7 @@
 
   #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .cajas-column p {
     margin: 14px 0 0 !important;
-    font-size: clamp(15px, 4.1vw, 17px) !important;
+    font-size: 16px !important;
     line-height: 1.45 !important;
   }
 
@@ -162,16 +162,19 @@
   #gpk-ps-widget .ps-screen[data-mode="8"].ps-mobile-cajas-conventional-v1 .cajas-paragraph-1,
   #gpk-ps-widget .ps-screen[data-mode="9"].ps-mobile-cajas-digital-v1 .digital-paragraph-1 {
     margin: 0 !important;
-    font-size: clamp(16px, 4.5vw, 19px) !important;
+    font-size: 16px !important;
     line-height: 1.5 !important;
   }
 
-  #gpk-ps-widget .ps-screen[data-mode="8"].ps-mobile-cajas-conventional-v1 .cajas-paragraph-2 {
+  #gpk-ps-widget .ps-screen[data-mode="8"].ps-mobile-cajas-conventional-v1 .cajas-paragraph-2,
+  #gpk-ps-widget .ps-screen[data-mode="9"].ps-mobile-cajas-digital-v1 .digital-paragraph-2 {
     margin: 24px 0 0 !important;
     padding: 22px 20px !important;
     border-radius: 18px;
     background: #eaf3e5 !important;
     box-sizing: border-box;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="9"].ps-mobile-cajas-digital-v1 .pane-header-centered,
@@ -225,11 +228,7 @@
   }
 
   #gpk-ps-widget .ps-screen[data-mode="9"].ps-mobile-cajas-digital-v1 .digital-paragraph-2 {
-    margin: 24px 0 0 !important;
-    padding: 22px 20px !important;
-    border-radius: 18px;
     background: #fff !important;
-    box-sizing: border-box;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="8"].ps-mobile-cajas-conventional-v1 .ps-cajas-card-label,
