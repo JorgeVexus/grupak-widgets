@@ -278,9 +278,9 @@
 .com-state-2 .com-intro,
 .com-state-3 .com-intro,
 .com-state-4 .com-intro {
-    opacity: 0;
-    transform: translateY(-22px);
-    pointer-events: none;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .com-state-1 .com-accordion,
@@ -292,7 +292,7 @@
 }
 
 .com-state-1 .com-accordion {
-    top: 200px;
+    top: 300px;
     gap: 205px;
 }
 
@@ -313,7 +313,7 @@
 }
 
 .com-state-2 .com-accordion {
-    top: 200px;
+    top: 300px;
     gap: 22px;
 }
 
@@ -327,7 +327,7 @@
 }
 
 .com-state-3 .com-accordion {
-    top: 200px;
+    top: 300px;
     gap: 22px;
 }
 
@@ -341,7 +341,7 @@
 }
 
 .com-state-4 .com-accordion {
-    top: 280px;
+    top: 300px;
     gap: 56px;
 }
 
