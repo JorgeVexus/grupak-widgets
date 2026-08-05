@@ -195,6 +195,15 @@
                 }
             }
 
+            if (entry.mode === 10) {
+                const grabadosTitle = board.querySelector(".grabados-main-title");
+                if (grabadosTitle && !board.querySelector(".grabados-green-line")) {
+                    const line = document.createElement("div");
+                    line.className = "grabados-green-line";
+                    grabadosTitle.insertAdjacentElement("afterend", line);
+                }
+            }
+
             screen.appendChild(board);
             flow.appendChild(screen);
         });
