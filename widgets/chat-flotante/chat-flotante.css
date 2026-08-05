@@ -68,17 +68,7 @@
     padding: 9px 10px 9px 12px;
     color: #ffffff;
     background: linear-gradient(90deg, #285f19 0%, #37751d 100%);
-}
-
-.gpk-chat__header::after {
-    position: absolute;
-    bottom: -14px;
-    left: 0;
-    width: 20px;
-    height: 15px;
-    background: #ffffff;
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-    content: "";
+    border-radius: 7px 7px 0 0;
 }
 
 .gpk-chat__avatar {

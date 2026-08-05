@@ -182,8 +182,39 @@
 
         function handleWidgetClick(event) {
             var action = event.target.closest("[data-action]");
-            if (!action || action.hasAttribute("data-final-action")) return;
-            showView(action.getAttribute("data-action"));
+            if (!action) return;
+
+            var actionName = action.getAttribute("data-action");
+
+            // Navigation mappings for products
+            var productSectionMap = {
+                paper: 2,       // Papel
+                boxes: 7,       // Cajas y empaques
+                sheets: 4,      // Lámina de cartón corrugado
+                printing: 10    // Grabados para impresión
+            };
+
+            if (productSectionMap.hasOwnProperty(actionName)) {
+                var targetMode = productSectionMap[actionName];
+                var navigate = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
+                if (typeof navigate === "function") {
+                    navigate(targetMode);
+                }
+                closeWidget();
+                return;
+            }
+
+            // Navigation mappings for contact/form options
+            if (actionName === "whatsapp" || actionName === "general-contact") {
+                if (typeof window.gpkOpenFormulario === "function") {
+                    window.gpkOpenFormulario("contacto");
+                }
+                closeWidget();
+                return;
+            }
+
+            if (action.hasAttribute("data-final-action")) return;
+            showView(actionName);
         }
 
         function handleDocumentKeydown(event) {
