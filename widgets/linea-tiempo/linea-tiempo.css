@@ -934,7 +934,7 @@
 /* 2015 Slide Animations */
 #gpk-timeline-widget .photo-container-2015 {
   position: absolute;
-  left: 100px;
+  left: 0;
   top: 415px;
   width: 920px;
   height: 539px;
@@ -1104,7 +1104,7 @@
 /* 2023 Slide Animations */
 #gpk-timeline-widget .photo-container-2023 {
   position: absolute;
-  left: 100px;
+  left: 0;
   top: 415px;
   width: 920px;
   height: 539px;
