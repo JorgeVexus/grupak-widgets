@@ -327,7 +327,7 @@
     }
 
     #gpk-ps-widget .products-board.mode-3 .product-img {
-        max-height: 155px !important;
+        max-height: 195px !important;
         height: 100% !important;
         width: 100% !important;
         object-fit: contain !important;
@@ -342,7 +342,7 @@
     /* Left margin of -15px for product-uses block */
     #gpk-ps-widget .products-board.mode-3 .product-uses {
         margin-left: -15px !important;
-        margin-top: 6px !important;
+        margin-top: 34px !important;
         width: 100% !important;
     }
 
@@ -360,7 +360,7 @@
     #gpk-ps-widget .products-board.mode-3 .product-desc {
         font-size: 12.5px !important;
         line-height: 1.35 !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 12px !important;
         flex: 0 0 auto !important;
     }
 
