@@ -435,6 +435,15 @@ a.gpk-footer__col-title:hover {
     }
 }
 
+@media (min-width: 768px) and (max-width: 1025px) {
+    .gpk-footer__newsletter-people {
+        bottom: 0 !important;
+        max-height: calc(100% - 180px) !important;
+        object-fit: contain !important;
+        object-position: bottom center !important;
+    }
+}
+
 @media (max-width: 1200px) {
     .gpk-footer__inner {
         padding: 182px 48px 24px;
