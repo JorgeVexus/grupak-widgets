@@ -208,6 +208,7 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 360px;
+    text-decoration: none;
 }
 
 #gpk-gestion-widget .gpk-gestion-btn-epd:hover {
