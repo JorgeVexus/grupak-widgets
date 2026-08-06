@@ -204,6 +204,7 @@
         }
 
         viewport.addEventListener("pointerdown", function (event) {
+            if (event.target.closest("a, button, input, select, textarea")) return;
             dragging = true;
             startX = event.clientX;
             currentX = startX;
