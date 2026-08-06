@@ -237,17 +237,17 @@
     text-align: left !important;
 }
 
-/* Energía: header aligned to left */
+/* Energía: header centered in desktop */
 #gpk-ps-widget .products-board.mode-14 .energia-header {
-    left: 100px !important;
-    transform: translateX(0) !important;
-    text-align: left !important;
-    width: 1200px !important;
+    left: 50% !important;
+    transform: translate(-50%, 0) !important;
+    text-align: center !important;
+    width: 900px !important;
 }
 
 #gpk-ps-widget .products-board.mode-14 .energia-main-title,
 #gpk-ps-widget .products-board.mode-14 .energia-intro-text {
-    text-align: left !important;
+    text-align: center !important;
 }
 
 /* Cajas Impresión Digital: Wider paragraph max-width to match Cajas y empaques convencionales */
