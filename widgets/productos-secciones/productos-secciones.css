@@ -321,7 +321,7 @@
     }
 
     #gpk-ps-widget .products-board.mode-3 .product-image {
-        flex: 0 0 38% !important;
+        flex: 0 0 32% !important;
         padding: 4px !important;
         align-items: center !important;
     }
@@ -336,12 +336,14 @@
     #gpk-ps-widget .products-board.mode-3 .product-info {
         padding: 4px 8px !important;
         justify-content: flex-start !important;
+        flex: 1 1 auto !important;
     }
 
     /* Left margin of -15px for product-uses block */
     #gpk-ps-widget .products-board.mode-3 .product-uses {
         margin-left: -15px !important;
         margin-top: 6px !important;
+        width: 100% !important;
     }
 
     #gpk-ps-widget .products-board.mode-3 .product-name {
