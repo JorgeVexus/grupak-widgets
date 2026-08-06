@@ -348,17 +348,18 @@
         width: 100%;
         max-width: 100%;
         margin: 0 0 16px 0;
-        font-size: clamp(32px, 6vw, 42px);
-        line-height: 1.12;
+        font-size: clamp(26px, 4.2vw, 36px);
+        line-height: 1.2;
         text-align: left;
         align-self: flex-start;
     }
 
     #gpk-gestion-widget .gpk-gestion-copy h2 span,
     #gpk-gestion-widget .gpk-gestion-copy h2 strong {
-        display: block;
+        display: inline-block;
         text-align: left;
-        width: 100%;
+        width: auto;
+        margin-right: 0.22em;
     }
 
     #gpk-gestion-widget .gpk-gestion-copy p {
@@ -458,7 +459,15 @@
     }
 
     #gpk-gestion-widget .gpk-gestion-copy h2 {
-        font-size: clamp(30px, 10vw, 38px);
+        font-size: clamp(21px, 5.8vw, 26px);
+        line-height: 1.25;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-copy h2 span,
+    #gpk-gestion-widget .gpk-gestion-copy h2 strong {
+        display: inline-block;
+        width: auto;
+        margin-right: 0.22em;
     }
 
     #gpk-gestion-widget .gpk-gestion-copy p {
