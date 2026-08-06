@@ -310,8 +310,8 @@
     }
 
     #gpk-ps-widget .products-board.mode-3 .papel-products-grid {
-        gap: 16px 28px !important;
-        margin-top: 180px !important;
+        gap: 100px 28px !important;
+        margin-top: 130px !important;
     }
 
     /* Enlarge card image to match full height of text block while keeping card compact */

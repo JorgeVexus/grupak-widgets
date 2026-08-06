@@ -193,22 +193,30 @@
     }
 
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-info {
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-name {
         font-size: clamp(22px, 6.2vw, 28px);
         line-height: 1.08;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-uses {
         margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .uses-bubble {
         font-size: 14px !important;
         opacity: 1 !important;
         transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-subtitle,
@@ -218,6 +226,8 @@
         line-height: 1.45;
         opacity: 1 !important;
         transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
 }
