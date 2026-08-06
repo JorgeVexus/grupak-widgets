@@ -69,7 +69,7 @@
 
         // ── Detect mobile ──────────────────────────────────────────────────
         function isMobile() {
-            return window.innerWidth <= 768;
+            return window.innerWidth <= 1025;
         }
 
         // ── Dots navigation ────────────────────────────────────────────────

@@ -313,60 +313,9 @@
 }
 
 /* ==========================================================================
-   TABLET — 769px a 1024px
+   MOBILE & TABLET — ≤ 1025px — CAROUSEL TÁCTIL Y SCROLL ANIMADO
    ========================================================================== */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .mas-alla-sticky-wrapper {
-        flex-direction: column;
-        height: auto;
-        position: relative;
-        overflow: visible;
-    }
-    .mas-alla-image-section {
-        width: 100%;
-        height: 50vh;
-    }
-    .mas-alla-content-section {
-        width: 100%;
-        padding: 40px 32px;
-        clip-path: none;
-        height: auto;
-        overflow: visible;
-        justify-content: flex-start;
-    }
-    .mas-alla-title {
-        font-size: 36px;
-    }
-    .mas-alla-item {
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        transform: none !important;
-        margin-bottom: 8px;
-    }
-    .mas-alla-item-inner {
-        background-image: url('images/vector svg.svg') !important;
-        grid-template-columns: 80px 1fr;
-        padding: 14px 24px;
-    }
-    .mas-alla-item.gpk-active .mas-alla-item-inner {
-        background-image: url('images/vector_active.svg') !important;
-    }
-    .mas-alla-item.gpk-active .mas-alla-item-num {
-        color: rgba(255, 255, 255, 0.4) !important;
-    }
-    .mas-alla-item.gpk-active .mas-alla-item-text strong,
-    .mas-alla-item.gpk-active .mas-alla-item-text p {
-        color: #FFFFFF !important;
-    }
-    .mas-alla-scroll-spacer {
-        height: 0;
-    }
-}
-
-/* ==========================================================================
-   MOBILE — ≤ 768px — CAROUSEL TÁCTIL
-   ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     /* Keep sticky + 100vh: scroll drives the carousel, swipe is bonus */
     .mas-alla-sticky-wrapper {
         flex-direction: column;
@@ -424,21 +373,27 @@
     }
 
     .mas-alla-title {
-        font-size: 26px;
+        font-size: clamp(20px, 4vw, 28px);
         margin-bottom: 6px;
         letter-spacing: -0.5px;
-        line-height: 1.1;
+        line-height: 1.15;
+    }
+
+    .mas-alla-title br {
+        display: none;
+    }
+
+    .mas-alla-title .highlight {
+        display: inline;
+        margin-left: 0.22em;
     }
 
     .mas-alla-subtitle {
-        font-size: 13px;
-        line-height: 1.35;
-        /* Show truncated on mobile */
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        font-size: 13.5px;
+        line-height: 1.4;
+        display: block;
+        overflow: visible;
+        max-width: 100%;
     }
 
     .mas-alla-dash-divider {
