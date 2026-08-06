@@ -348,7 +348,7 @@
         width: 100%;
         max-width: 100%;
         margin: 0 0 16px 0;
-        font-size: clamp(26px, 4.2vw, 36px);
+        font-size: clamp(30px, 5vw, 42px);
         line-height: 1.2;
         text-align: left;
         align-self: flex-start;
@@ -459,7 +459,7 @@
     }
 
     #gpk-gestion-widget .gpk-gestion-copy h2 {
-        font-size: clamp(21px, 5.8vw, 26px);
+        font-size: clamp(26px, 7vw, 32px);
         line-height: 1.25;
     }
 
