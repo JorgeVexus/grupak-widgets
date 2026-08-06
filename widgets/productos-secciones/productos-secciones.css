@@ -272,6 +272,29 @@
     top: 380px !important;
 }
 
+/* Alignment & position adjustments for Papel (Section 3) desktop view */
+#gpk-ps-widget .papel-text-block.tl {
+    left: 100px !important;
+    top: 200px !important;
+}
+
+#gpk-ps-widget .papel-text-block.tr {
+    right: 100px !important;
+    left: auto !important;
+    top: 200px !important;
+}
+
+#gpk-ps-widget .papel-text-block.bl {
+    left: 260px !important;
+    bottom: 150px !important;
+}
+
+#gpk-ps-widget .papel-text-block.br {
+    right: 140px !important;
+    left: auto !important;
+    bottom: 120px !important;
+}
+
 /* Higher position for desktop intro pane (text & KPIs) */
 #gpk-ps-widget .products-board.mode-0 .products-intro-pane {
     padding-top: 140px !important;
