@@ -122,8 +122,14 @@
     border-radius: 8px;
   }
 
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row[data-index="2"] .energia-mobile-image-container {
+    background-image: url('https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a29943cfb0a8a01eb7cde0d_impacto.png');
+    background-size: cover;
+    background-position: 85% 50%;
+  }
+
   #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row[data-index="2"] .energia-mobile-image {
-    object-position: right center !important;
+    display: none !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row-content {
