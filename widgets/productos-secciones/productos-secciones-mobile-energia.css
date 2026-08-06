@@ -118,7 +118,12 @@
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+    object-position: center center !important;
     border-radius: 8px;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row[data-index="2"] .energia-mobile-image {
+    object-position: right center !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="14"].ps-mobile-energia-v1 .energia-row-content {

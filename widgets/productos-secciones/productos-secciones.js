@@ -14,11 +14,28 @@
     // canvas is always scaled down to fit; there is no alternate responsive reflow.
     const sourceProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
     const selfProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-secciones";
-    const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-    const sourceBaseURL = isLocalHost ? "/widgets/productos-interactivos" : sourceProductionBaseURL;
-    const selfBaseURL = isLocalHost ? "/widgets/productos-secciones" : selfProductionBaseURL;
+    const isLocalHost = window.location.protocol === "file:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
-    const assetVersion = "seccion-reveal-29";
+    let selfBaseURL = selfProductionBaseURL;
+    let sourceBaseURL = sourceProductionBaseURL;
+
+    if (isLocalHost) {
+        const currentScript = document.currentScript || document.querySelector('script[src*="productos-secciones.js"]');
+        if (currentScript && currentScript.src) {
+            try {
+                selfBaseURL = new URL(".", currentScript.src).href.replace(/\/$/, "");
+                sourceBaseURL = new URL("../productos-interactivos", currentScript.src).href.replace(/\/$/, "");
+            } catch (e) {
+                selfBaseURL = "widgets/productos-secciones";
+                sourceBaseURL = "widgets/productos-interactivos";
+            }
+        } else {
+            selfBaseURL = "widgets/productos-secciones";
+            sourceBaseURL = "widgets/productos-interactivos";
+        }
+    }
+
+    const assetVersion = "seccion-reveal-30";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
