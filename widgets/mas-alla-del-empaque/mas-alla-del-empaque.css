@@ -240,6 +240,10 @@
         transform: translateY(-7px);
     }
 
+    .mas-alla-item[data-index="2"] .mas-alla-item-text strong {
+        transform: translateY(-12px);
+    }
+
     .mas-alla-item[data-index="0"] .mas-alla-item-text p,
     .mas-alla-item[data-index="1"] .mas-alla-item-text p,
     .mas-alla-item[data-index="3"] .mas-alla-item-text p {
