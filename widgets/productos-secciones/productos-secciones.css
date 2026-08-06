@@ -302,5 +302,76 @@
     padding-top: 140px !important;
 }
 
+/* Section 4 (Mode 3 Papel Catalog) Desktop adjustments */
+@media (min-width: 768px) {
+    /* Hide green line under Papel title in desktop Mode 3 */
+    #gpk-ps-widget .products-board.mode-3 .papel-title-green-line {
+        display: none !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .papel-products-grid {
+        gap: 16px 28px !important;
+        margin-top: 180px !important;
+    }
+
+    /* Enlarge card image to match full height of text block while keeping card compact */
+    #gpk-ps-widget .products-board.mode-3 .product-card {
+        align-items: stretch !important;
+        padding: 4px !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .product-image {
+        flex: 0 0 38% !important;
+        padding: 4px !important;
+        align-items: center !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .product-img {
+        max-height: 155px !important;
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .product-info {
+        padding: 4px 8px !important;
+        justify-content: flex-start !important;
+    }
+
+    /* Left margin of -15px for product-uses block */
+    #gpk-ps-widget .products-board.mode-3 .product-uses {
+        margin-left: -15px !important;
+        margin-top: 6px !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .product-name {
+        font-size: 26px !important;
+        line-height: 1.1 !important;
+        margin-bottom: 2px !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .product-subtitle {
+        font-size: 15px !important;
+        margin-bottom: 4px !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .product-desc {
+        font-size: 12.5px !important;
+        line-height: 1.35 !important;
+        margin-bottom: 4px !important;
+        flex: 0 0 auto !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .uses-bubble {
+        font-size: 15px !important;
+        margin-bottom: 2px !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-3 .uses-text {
+        font-size: 12px !important;
+        line-height: 1.35 !important;
+    }
+}
+
 
 

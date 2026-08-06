@@ -201,11 +201,23 @@
         line-height: 1.08;
     }
 
+    #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-uses {
+        margin-left: 0 !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .uses-bubble {
+        font-size: 14px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-subtitle,
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .product-desc,
     #gpk-ps-widget .ps-screen[data-mode="3"].ps-mobile-paper-catalog-v1 .uses-text {
         font-size: clamp(13px, 3.6vw, 16px);
         line-height: 1.45;
+        opacity: 1 !important;
+        transform: none !important;
     }
 
 }
