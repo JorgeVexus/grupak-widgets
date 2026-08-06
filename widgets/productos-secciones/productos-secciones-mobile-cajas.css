@@ -64,7 +64,9 @@
   }
 
   #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .pane-header-centered {
-    justify-content: flex-start;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
     margin-top: 24px;
   }
 
@@ -74,6 +76,15 @@
     font-size: clamp(30px, 8.5vw, 38px) !important;
     line-height: 1.04 !important;
     text-align: left !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .cajas-intro-green-line {
+    display: block !important;
+    width: 48px !important;
+    height: 3px !important;
+    background-color: var(--color-green, #5f9d2f) !important;
+    margin: 14px 0 0 0 !important;
+    border-radius: 2px !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 #cajas-intro-content {
