@@ -65,8 +65,9 @@
 
   #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .pane-header-centered {
     flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
     margin-top: 24px;
   }
 
@@ -75,7 +76,7 @@
     color: #27352b !important;
     font-size: clamp(30px, 8.5vw, 38px) !important;
     line-height: 1.04 !important;
-    text-align: left !important;
+    text-align: center !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .cajas-intro-green-line {
@@ -83,7 +84,7 @@
     width: 48px !important;
     height: 3px !important;
     background-color: var(--color-green, #5f9d2f) !important;
-    margin: 14px 0 0 0 !important;
+    margin: 14px auto 0 auto !important;
     border-radius: 2px !important;
   }
 

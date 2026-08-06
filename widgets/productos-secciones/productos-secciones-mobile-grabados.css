@@ -44,6 +44,7 @@
 
   #gpk-ps-widget .ps-screen[data-mode="10"].ps-mobile-grabados-v1 .grabados-left-content {
     display: block !important;
+    text-align: center !important;
     opacity: 1 !important;
   }
 
@@ -52,6 +53,7 @@
     color: #27352b !important;
     font-size: clamp(30px, 8.5vw, 38px) !important;
     line-height: 1.04 !important;
+    text-align: center !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="10"].ps-mobile-grabados-v1 .grabados-green-line {
@@ -59,7 +61,7 @@
     width: 48px !important;
     height: 3px !important;
     background-color: var(--color-green, #5f9d2f) !important;
-    margin: 12px 0 0 0 !important;
+    margin: 12px auto 0 auto !important;
     border-radius: 1.5px !important;
     opacity: 1 !important;
     transform: none !important;
