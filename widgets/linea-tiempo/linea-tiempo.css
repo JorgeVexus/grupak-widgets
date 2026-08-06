@@ -1313,40 +1313,41 @@
     transform: none !important;
     pointer-events: auto !important;
     flex-direction: column !important;
-    padding-left: 36px !important; /* Space for year + line + node */
+    padding-left: 32px !important; /* Space for line + node */
+    padding-top: 42px !important; /* Space for year label above node */
     margin-bottom: 45px !important;
-    /* Default Grey Concentric Node Background centered at left:16px top:20px */
-    background-image: radial-gradient(circle at 16px 20px, var(--color-grey-light) 5px, var(--color-white) 5px, var(--color-white) 8px, rgba(110, 110, 110, 0.3) 8px, rgba(110, 110, 110, 0.3) 10px, transparent 10px) !important;
+    /* Default Grey Concentric Node Background centered at x=11px y=35px */
+    background-image: radial-gradient(circle at 11px 35px, var(--color-grey-light) 5px, var(--color-white) 5px, var(--color-white) 8px, rgba(110, 110, 110, 0.3) 8px, rgba(110, 110, 110, 0.3) 10px, transparent 10px) !important;
     background-repeat: no-repeat !important;
     background-size: 100% 100% !important;
   }
 
   #gpk-timeline-widget .timeline-slide.visible {
-    /* Active Green Concentric Node Background centered at left:16px top:20px */
-    background-image: radial-gradient(circle at 16px 20px, var(--color-green) 5px, var(--color-white) 5px, var(--color-white) 8px, var(--color-green) 8px, var(--color-green) 10px, transparent 10px) !important;
+    /* Active Green Concentric Node Background centered at x=11px y=35px */
+    background-image: radial-gradient(circle at 11px 35px, var(--color-green) 5px, var(--color-white) 5px, var(--color-white) 8px, var(--color-green) 8px, var(--color-green) 10px, transparent 10px) !important;
   }
 
-  /* Year Label above the node/content or stacked on left */
+  /* Year Label positioned above node circle, offset right for spacing from line */
   #gpk-timeline-widget .timeline-slide::before {
     content: attr(data-year);
     position: absolute;
-    left: 36px;
-    top: -2px;
+    left: 24px;
+    top: 10px;
     width: auto;
     text-align: left;
     font-family: var(--font-black);
     font-weight: 900;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1;
     color: var(--color-green);
   }
 
-  /* Static vertical timeline line on mobile aligned exactly at x=16px */
+  /* Static vertical timeline line on mobile — center at x=26px to match circle center */
   #gpk-timeline-widget .mobile-static-line {
     display: block !important;
     position: absolute;
-    left: 15px;
-    top: 20px;
+    left: 25px;
+    top: 35px;
     width: 2px;
     background-image: linear-gradient(to bottom, rgba(95, 157, 47, 0.3) 60%, transparent 60%);
     background-size: 2px 10px;
@@ -1354,12 +1355,12 @@
     z-index: 1;
   }
 
-  /* Active vertical timeline line on mobile aligned exactly at x=16px */
+  /* Active vertical timeline line on mobile — center at x=26px to match circle center */
   #gpk-timeline-widget .mobile-active-line {
     display: block !important;
     position: absolute;
-    left: 15px;
-    top: 20px;
+    left: 25px;
+    top: 35px;
     width: 2px;
     height: 0;
     background-image: linear-gradient(to bottom, var(--color-green) 60%, transparent 60%);
@@ -1441,6 +1442,8 @@
   #gpk-timeline-widget .vector-img-1985,
   #gpk-timeline-widget .vector-img-2003,
   #gpk-timeline-widget .vector-img-2015,
+  #gpk-timeline-widget .vector-2021-1,
+  #gpk-timeline-widget .vector-2021-2,
   #gpk-timeline-widget .map-base-1957,
   #gpk-timeline-widget .map-pinpoint-1957 {
     display: none !important;
@@ -1473,10 +1476,14 @@
   #gpk-timeline-widget .photo-wrapper-2015,
   #gpk-timeline-widget .photo-wrapper-2023,
   #gpk-timeline-widget .photo-wrapper-2024,
+  #gpk-timeline-widget .img-wrapper-2021-1,
+  #gpk-timeline-widget .img-wrapper-2021-2,
   #gpk-timeline-widget .map-wrapper-1957 {
     position: relative !important;
     width: 100% !important;
     height: auto !important;
+    inset: auto !important;
+    overflow: visible !important;
     transform: none !important;
     opacity: 1 !important;
   }
@@ -1523,11 +1530,16 @@
     flex-direction: column !important;
   }
 
+  #gpk-timeline-widget .info-section-2021-1 { order: 1; }
+  #gpk-timeline-widget .image-container-2021-1 { order: 2; margin-bottom: 12px !important; }
+  #gpk-timeline-widget .info-section-2021-2 { order: 3; }
+  #gpk-timeline-widget .image-container-2021-2 { order: 4; margin-bottom: 12px !important; }
+
   /* Slide 2024 mobile layout adjustment: force image to top */
   #gpk-timeline-widget .timeline-slide[data-year="2024"] {
     display: flex !important;
     flex-direction: column-reverse !important;
-    padding-top: 0 !important;
+    padding-top: 42px !important;
   }
 
   #gpk-timeline-widget .timeline-slide[data-year="2024"] .photo-container-2024 {

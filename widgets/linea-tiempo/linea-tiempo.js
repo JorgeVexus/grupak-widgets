@@ -64,7 +64,6 @@
         // Run image resolution
         resolveRelativeImages(root);
 
-        // Background shape and curve are inline SVGs in the widget markup to preserve Figma proportions.
         // Milestones Data matching Figma design system coordinates
         const milestones = [
           { year: "1957", label: "Inicio de operaciones", top: 86 },
@@ -84,8 +83,6 @@
         ];
 
         let currentIndex = 0;
-        let isAnimating = false;
-        const animationDuration = 600;
 
         const tracker = root.querySelector(".timeline-scroll-tracker");
         const board = root.querySelector("#timeline-board");
@@ -112,6 +109,7 @@
 
         // Generate the vertical year nodes matching Figma pixel positions
         function renderSidebarYears() {
+          if (!yearsSidebar) return;
           yearsSidebar.innerHTML = "";
           
           milestones.forEach((item, index) => {
@@ -119,17 +117,13 @@
             btn.className = "year-item";
             btn.setAttribute("data-index", index);
             btn.setAttribute("aria-label", `Hito ${item.year}: ${item.label}`);
-            
-            // Set vertical coordinates on desktop
             btn.style.top = `${item.top}px`;
             
-            // 1. Default green badge
             const badge = document.createElement("div");
             badge.className = "year-badge";
             badge.innerText = item.year;
             btn.appendChild(badge);
             
-            // 2. Selected expanded card
             const card = document.createElement("div");
             card.className = "year-item-card";
             
@@ -163,7 +157,7 @@
             yearsSidebar.appendChild(btn);
           });
           
-          totalIndicator.innerText = milestones.length;
+          if (totalIndicator) totalIndicator.innerText = milestones.length;
         }
 
         // Slide index navigator
@@ -173,13 +167,11 @@
           }
 
           if (window.innerWidth <= 768) {
-            // Mobile navigation: Update immediately
             currentIndex = index;
             updateTimeline();
             return;
           }
 
-          // Desktop: Scroll to the corresponding position in the scroll tracker
           const rect = tracker.getBoundingClientRect();
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           const trackerTop = rect.top + scrollTop;
@@ -200,7 +192,7 @@
 
         // Native Scroll handler for Desktop
         function handleScroll() {
-          if (window.innerWidth <= 768) return;
+          if (window.innerWidth <= 768 || !tracker) return;
 
           const rect = tracker.getBoundingClientRect();
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -226,7 +218,6 @@
           const progressRatio = currentIndex / (milestones.length - 1);
           const isMobile = window.innerWidth <= 768;
           
-          // 1. Update slides active class
           slides.forEach((slide, idx) => {
             if (idx === currentIndex) {
               slide.classList.add("active");
@@ -235,7 +226,6 @@
             }
           });
           
-          // 2. Select corresponding year item and center scroll on mobile
           yearButtons.forEach((btn, idx) => {
             if (idx === currentIndex) {
               btn.classList.add("selected");
@@ -247,72 +237,19 @@
             }
           });
           
-          // 3. Scale active vertical green line (1957 starts at 114px, 2024 ends at 939px)
-          if (!isMobile) {
+          if (!isMobile && activeLine) {
             const activeHeight = 114 + progressRatio * (939 - 114);
             activeLine.style.height = `${activeHeight}px`;
           }
           
-          // 4. Update scrollbar top offset (Figma bounds: 13px top to 775px top)
-          if (!isMobile) {
+          if (!isMobile && scrollbarIndicator) {
             const scrollbarTop = 13 + progressRatio * (775 - 13);
             scrollbarIndicator.style.top = `${scrollbarTop}px`;
           }
           
-          // 5. Update indicators
-          currentIndicator.innerText = currentIndex + 1;
-          
-          // 6. Navigation button disable state toggle
-          prevBtn.disabled = currentIndex === 0;
-          nextBtn.disabled = currentIndex === milestones.length - 1;
-        }
-
-        // Mobile Scroll and Card animations handler
-        function handleMobileScroll() {
-          if (window.innerWidth > 768) return;
-
-          const slidesContainer = root.querySelector("#slides-container");
-          const mobileActiveLine = root.querySelector(".mobile-active-line");
-          if (!slidesContainer || !mobileActiveLine) return;
-
-          const rect = slidesContainer.getBoundingClientRect();
-          const viewportHeight = window.innerHeight;
-          const triggerPoint = viewportHeight * 0.45; // Nodes fill when they are in the upper-middle screen
-
-          const slideElements = Array.from(slides);
-          if (slideElements.length === 0) return;
-
-          const firstSlide = slideElements[0];
-          const lastSlide = slideElements[slideElements.length - 1];
-
-          const firstNodeTop = 20; // Top offset of the first node
-          const lastInfoSection = lastSlide.querySelector(".info-section") || lastSlide.querySelector(".info-section-2021-1");
-          const lastNodeTop = lastSlide.offsetTop + (lastInfoSection ? lastInfoSection.offsetTop : 0) + 15;
-
-          const totalLineLength = lastNodeTop - firstNodeTop;
-
-          const lineStartPos = rect.top + firstNodeTop;
-          const lineEndPos = rect.top + lastNodeTop;
-
-          const totalScrollableDist = lineEndPos - lineStartPos;
-          const currentScrollDist = triggerPoint - lineStartPos;
-
-          let progress = currentScrollDist / totalScrollableDist;
-          progress = Math.max(0, Math.min(1, progress));
-
-          const activeHeight = progress * totalLineLength;
-          mobileActiveLine.style.height = `${activeHeight}px`;
-
-          // Check viewport entry for each slide to trigger node-activation and card transitions
-          slideElements.forEach((slide) => {
-            const slideRect = slide.getBoundingClientRect();
-            // If the element top is above the trigger point, mark as visible/active
-            if (slideRect.top <= triggerPoint + 60) {
-              slide.classList.add("visible");
-            } else {
-              slide.classList.remove("visible");
-            }
-          });
+          if (currentIndicator) currentIndicator.innerText = currentIndex + 1;
+          if (prevBtn) prevBtn.disabled = currentIndex === 0;
+          if (nextBtn) nextBtn.disabled = currentIndex === milestones.length - 1;
         }
 
         // Mobile Scroll and Card animations handler
@@ -326,17 +263,16 @@
 
           const rect = slidesContainer.getBoundingClientRect();
           const viewportHeight = window.innerHeight;
-          const triggerPoint = viewportHeight * 0.45; // Nodes fill when they are in the upper-middle screen
+          const triggerPoint = viewportHeight * 0.45;
 
           const slideElements = Array.from(slides);
           if (slideElements.length === 0) return;
 
-          const firstSlide = slideElements[0];
           const lastSlide = slideElements[slideElements.length - 1];
 
-          const firstNodeTop = 20; // Top offset of the first node
+          const firstNodeTop = 35;
           const lastInfoSection = lastSlide.querySelector(".info-section") || lastSlide.querySelector(".info-section-2021-1");
-          const lastNodeTop = lastSlide.offsetTop + (lastInfoSection ? lastInfoSection.offsetTop : 0) + 21; // 21px centers it on radial gradient
+          const lastNodeTop = lastSlide.offsetTop + (lastInfoSection ? lastInfoSection.offsetTop : 0) + 35;
 
           const totalLineLength = lastNodeTop - firstNodeTop;
           mobileStaticLine.style.height = `${totalLineLength}px`;
@@ -353,10 +289,8 @@
           const activeHeight = progress * totalLineLength;
           mobileActiveLine.style.height = `${activeHeight}px`;
 
-          // Check viewport entry for each slide to trigger node-activation and card transitions
           slideElements.forEach((slide) => {
             const slideRect = slide.getBoundingClientRect();
-            // If the element top is above the trigger point, mark as visible/active
             if (slideRect.top <= triggerPoint + 60) {
               slide.classList.add("visible");
             } else {
@@ -367,10 +301,9 @@
 
         // Setup DOM event listeners
         function setupEventListeners() {
-          prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
-          nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+          if (prevBtn) prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
+          if (nextBtn) nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
           
-          // Keyboard controls (only fire when widget container is on screen)
           document.addEventListener("keydown", (e) => {
             const rect = root.getBoundingClientRect();
             const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
@@ -383,7 +316,6 @@
             }
           });
 
-          // Bind page scroll listener for both desktop and mobile
           window.addEventListener("scroll", () => {
             if (window.innerWidth > 768) {
               handleScroll();
@@ -392,26 +324,6 @@
             }
           }, { passive: true });
 
-          // Mobile Touch Swiping Support (Disabled for mobile vertical feed layout)
-          let touchStartX = 0;
-          let touchEndX = 0;
-          const slidesContainer = root.querySelector("#slides-container");
-          
-          if (slidesContainer) {
-            slidesContainer.addEventListener("touchstart", (e) => {
-              touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            
-            slidesContainer.addEventListener("touchend", (e) => {
-              touchEndX = e.changedTouches[0].screenX;
-              handleSwipe();
-            }, { passive: true });
-          }
-
-          function handleSwipe() {
-            return;
-          }
-          
           window.addEventListener("resize", () => {
             scaleTimelineBoard();
             updateTimeline();
