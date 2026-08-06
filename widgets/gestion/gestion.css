@@ -288,7 +288,7 @@
     background: var(--gestion-white);
 }
 
-@media (min-width: 861px) {
+@media (min-width: 1026px) {
     #gpk-gestion-widget .gpk-gestion-slider {
         margin-top: 40px;
     }
@@ -298,7 +298,7 @@
     }
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1180px) and (min-width: 1026px) {
     #gpk-gestion-widget {
         min-height: 680px;
     }
@@ -315,7 +315,7 @@
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1025px) {
     #gpk-gestion-widget {
         min-height: auto;
         background: var(--gestion-green);
@@ -329,27 +329,43 @@
 
     #gpk-gestion-widget .gpk-gestion-inner {
         min-height: auto;
-        padding: 90px 20px 56px 20px;
+        padding: 56px 20px 48px 20px;
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        gap: 34px;
+        gap: 28px;
     }
 
     #gpk-gestion-widget .gpk-gestion-copy {
+        width: 100%;
         max-width: 100%;
+        align-self: flex-start;
+        text-align: left;
     }
 
     #gpk-gestion-widget .gpk-gestion-copy h2 {
-        max-width: 360px;
-        margin-bottom: 18px;
-        font-size: clamp(34px, 9vw, 44px);
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 16px 0;
+        font-size: clamp(32px, 6vw, 42px);
         line-height: 1.12;
+        text-align: left;
+        align-self: flex-start;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-copy h2 span,
+    #gpk-gestion-widget .gpk-gestion-copy h2 strong {
+        display: block;
+        text-align: left;
+        width: 100%;
     }
 
     #gpk-gestion-widget .gpk-gestion-copy p {
+        width: 100%;
         max-width: 560px;
         font-size: 16px;
+        text-align: left;
+        margin: 0;
     }
 
     #gpk-gestion-widget .gpk-gestion-slide {
@@ -358,8 +374,8 @@
     }
 
     #gpk-gestion-widget .gpk-gestion-card {
-        aspect-ratio: 531 / 920;
-        min-height: 680px;
+        aspect-ratio: 531 / 860;
+        min-height: 620px;
         background-position: bottom center;
     }
 
@@ -393,7 +409,39 @@
     }
 
     #gpk-gestion-widget .gpk-gestion-controls {
-        margin-top: 18px;
+        margin-top: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-arrow {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        background: #4e8524;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    }
+
+    #gpk-gestion-widget .gpk-gestion-arrow:hover {
+        background: #3c681b;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-arrow:disabled {
+        opacity: 0.45;
+        background: #5f9d2f;
+        box-shadow: none;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-arrow span {
+        width: 12px;
+        height: 12px;
+        border-left: 2.5px solid #ffffff;
+        border-bottom: 2.5px solid #ffffff;
     }
 }
 

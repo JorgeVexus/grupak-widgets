@@ -114,7 +114,7 @@
         var hasMeasured = false;
 
         function getPerView() {
-            return window.matchMedia("(min-width: 861px)").matches ? 2 : 1;
+            return window.matchMedia("(min-width: 1026px)").matches ? 2 : 1;
         }
 
         function measure() {
