@@ -60,8 +60,9 @@
         order: 2;
         display: block !important;
         margin: clamp(18px, 5vw, 24px) 0 0;
-        max-width: 44ch;
-        font-size: clamp(11px, 3vw, 14px);
+        width: 100%;
+        max-width: 100%;
+        font-size: clamp(11px, 3.4vw, 14px);
         line-height: 1.45;
         color: #6e6e6e;
     }
