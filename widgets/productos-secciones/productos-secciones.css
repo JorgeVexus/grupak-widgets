@@ -242,7 +242,8 @@
     left: 50% !important;
     transform: translate(-50%, 0) !important;
     text-align: center !important;
-    width: 900px !important;
+    width: 1180px !important;
+    max-width: 1200px !important;
 }
 
 #gpk-ps-widget .products-board.mode-14 .energia-main-title,
