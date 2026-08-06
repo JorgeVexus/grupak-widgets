@@ -272,5 +272,10 @@
     top: 380px !important;
 }
 
+/* Higher position for desktop intro pane (text & KPIs) */
+#gpk-ps-widget .products-board.mode-0 .products-intro-pane {
+    padding-top: 140px !important;
+}
+
 
 

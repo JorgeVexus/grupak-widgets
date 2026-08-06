@@ -37,15 +37,17 @@
         order: 1;
         max-width: 100%;
         margin: 0;
-        font-size: clamp(26px, 7.2vw, 34px);
-        line-height: 1.08;
-        letter-spacing: -0.025em;
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+        letter-spacing: -0.015em;
         color: #6e6e6e;
+        font-weight: 400;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-title-new .text-green {
         font-size: inherit;
         line-height: inherit;
+        font-weight: 700;
         color: var(--color-green, #5f9d2f);
     }
 
@@ -59,11 +61,11 @@
     #gpk-ps-widget .ps-screen[data-mode="0"].ps-mobile-intro-v1 .intro-mobile-desc {
         order: 2;
         display: block !important;
-        margin: clamp(18px, 5vw, 24px) 0 0;
+        margin: 4px 0 0;
         width: 100%;
         max-width: 100%;
-        font-size: clamp(11px, 3.4vw, 14px);
-        line-height: 1.45;
+        font-size: 18px !important;
+        line-height: 1.4 !important;
         color: #6e6e6e;
     }
 
