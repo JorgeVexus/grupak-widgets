@@ -84,7 +84,7 @@
         var spacer = widget.querySelector(".com-scroll-spacer");
         var currentState = -1;
         var stateCount = 5;
-        var mobileQuery = window.matchMedia("(max-width: 900px)");
+        var mobileQuery = window.matchMedia("(max-width: 1025px)");
         var mobileRevealObserver = null;
 
         if (!board || !spacer) return;
