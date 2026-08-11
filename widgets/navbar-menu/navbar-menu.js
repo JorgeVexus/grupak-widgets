@@ -9,8 +9,8 @@
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
     var assetVersion = "20260730-remove-nuestra-gente";
     var logoURL = isLocalhost
-        ? "widgets/navbar-menu/logoGrupak 2.svg"
-        : "https://grupak-widgets.vercel.app/widgets/navbar-menu/logoGrupak%202.svg";
+        ? "widgets/productos-interactivos/logoGrupak.svg"
+        : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
 
     ensureStyles();
     mountWidget();
