@@ -103,6 +103,8 @@
         { mode: 7, label: "Cajas y empaques", selectors: ["#pane-cajas"], pillars: true },
         { mode: 8, label: "Cajas y empaques", selectors: ["#pane-cajas"] },
         { mode: 9, label: "Cajas y empaques", selectors: ["#pane-cajas"] },
+        { mode: "9b", label: "Cajas y empaques", selectors: ["#pane-digital-why"] },
+        { mode: "9c", label: "Cajas y empaques", selectors: ["#pane-abastecimientos"] },
         // Modes 10-13 originally revealed one card each as you scrolled, but each
         // card's CSS rule already stays visible in every later mode (cumulative: by
         // mode-13 all 4 are showing). Kept as ONE section that plays 10 -> 13 on a timer.
@@ -125,8 +127,10 @@
         ] },
         { label: "Cajas y empaques", items: [
             { label: "Introducción", mode: 7 },
-            { label: "Convencionales", mode: 8 },
-            { label: "Impresión digital", mode: 9 }
+            { label: "Impresión flexográfica", mode: 8 },
+            { label: "Impresión digital", mode: 9 },
+            { label: "Ventajas digitales", mode: "9b" },
+            { label: "Abastecimientos", mode: "9c" }
         ] },
         { label: "Grabados", items: [{ label: "Grabados", mode: 10 }] },
         { label: "Energía", items: [{ label: "Energía", mode: 14 }] }
@@ -143,6 +147,8 @@
         setupMobilePaperCatalogReveal(root);
         setupMobileLaminasReveal(root);
         setupMobileCajasReveal(root);
+        setupMobileDigitalWhyReveal(root);
+        setupMobileAbastecimientosReveal(root);
         prepareMobileGrabadosContent(root);
         setupMobileGrabadosReveal(root);
         prepareMobileEnergiaContent(root);
@@ -211,6 +217,8 @@
             if (entry.mode === 7) screen.classList.add("ps-mobile-cajas-intro-v1");
             if (entry.mode === 8) screen.classList.add("ps-mobile-cajas-conventional-v1");
             if (entry.mode === 9) screen.classList.add("ps-mobile-cajas-digital-v1");
+            if (entry.mode === "9b") screen.classList.add("ps-mobile-digital-why-v1");
+            if (entry.mode === "9c") screen.classList.add("ps-mobile-abastecimientos-v1");
             if (entry.mode === 10) screen.classList.add("ps-mobile-grabados-v1");
             if (entry.mode === 14) screen.classList.add("ps-mobile-energia-v1");
             if (entry.laminaSpecsSequence) screen.dataset.laminaSpecsSequence = "1";
@@ -298,8 +306,8 @@
         if (!intro || !conventional || !digital) return;
 
         const introHeadings = intro.querySelectorAll(".cajas-column h2");
-        if (introHeadings[0]) introHeadings[0].textContent = "Soluciones Convencionales";
-        if (introHeadings[1]) introHeadings[1].textContent = "Impresión Digital";
+        if (introHeadings[0]) introHeadings[0].textContent = "Impresión Flexográfica";
+        if (introHeadings[1]) introHeadings[1].innerHTML = 'Impresión <span class="gpk-digital-rainbow">Digital</span>';
 
         const idealCard = conventional.querySelector(".cajas-paragraph-2");
         if (idealCard && !idealCard.querySelector(".ps-cajas-card-label")) {
@@ -323,7 +331,7 @@
         const usableWidth = Math.max(width - desktopGutter, 0);
 
         const scale = Math.min(usableWidth / 1850, 1);
-        const adaptedMobileModes = new Set(["0", "1", "2", "3", "4", "5", "7", "8", "9", "10", "14"]);
+        const adaptedMobileModes = new Set(["0", "1", "2", "3", "4", "5", "7", "8", "9", "9b", "9c", "10", "14"]);
         root.querySelectorAll(".ps-screen").forEach(screen => {
             const board = screen.querySelector(".products-board");
             if (!board) return;
@@ -358,7 +366,7 @@
             if (!board) return;
             clearTimers(board);
             board.className = board.className
-                .replace(/\bmode-\d+\b/g, "")
+                .replace(/\bmode-[a-z0-9]+\b/g, "")
                 .replace(/\bps-pillars-play\b/g, "")
                 .replace(/\s+/g, " ")
                 .trim();
@@ -440,7 +448,7 @@
                     resetScreen(entry.target);
                 }
             });
-        }, { threshold: 0, rootMargin: "-10% 0px -10% 0px" });
+        }, { threshold: 0, rootMargin: "0px" });
 
         screens.forEach(s => observer.observe(s));
     }
@@ -556,6 +564,76 @@
                 }, 150);
             });
         }, { threshold: 0.2 });
+
+        elements.forEach(element => observer.observe(element));
+    }
+
+    function setupMobileDigitalWhyReveal(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const screen = root.querySelector('.ps-screen[data-mode="9b"].ps-mobile-digital-why-v1');
+        if (!screen) return;
+
+        [
+            screen.querySelector(".digital-why-eyebrow"),
+            screen.querySelector(".digital-why-main-title"),
+            screen.querySelector(".digital-why-green-line"),
+            ...screen.querySelectorAll(".digital-why-card")
+        ].filter(Boolean).forEach(element => element.dataset.psDigitalWhyReveal = "1");
+
+        const elements = Array.from(screen.querySelectorAll("[data-ps-digital-why-reveal]"));
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof IntersectionObserver === "undefined") {
+            elements.forEach(element => element.classList.add("ps-digital-why-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const element = entry.target;
+                observer.unobserve(element);
+                window.setTimeout(() => {
+                    element.classList.add("ps-digital-why-revealed");
+                }, 150);
+            });
+        }, { threshold: 0.15 });
+
+        elements.forEach(element => observer.observe(element));
+    }
+
+    function setupMobileAbastecimientosReveal(root) {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+        const screen = root.querySelector('.ps-screen[data-mode="9c"].ps-mobile-abastecimientos-v1');
+        if (!screen) return;
+
+        [
+            screen.querySelector(".abastecimientos-eyebrow"),
+            screen.querySelector(".abastecimientos-main-title"),
+            screen.querySelector(".abastecimientos-dashed-line"),
+            screen.querySelector(".abastecimientos-hero-box"),
+            screen.querySelector(".abastecimientos-card"),
+            screen.querySelector(".abastecimientos-cta-card")
+        ].filter(Boolean).forEach(element => element.dataset.psAbastecimientosReveal = "1");
+
+        const elements = Array.from(screen.querySelectorAll("[data-ps-abastecimientos-reveal]"));
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || typeof IntersectionObserver === "undefined") {
+            elements.forEach(element => element.classList.add("ps-abastecimientos-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const element = entry.target;
+                observer.unobserve(element);
+                window.setTimeout(() => {
+                    element.classList.add("ps-abastecimientos-revealed");
+                }, 150);
+            });
+        }, { threshold: 0.15 });
 
         elements.forEach(element => observer.observe(element));
     }
@@ -696,12 +774,21 @@
     }
 
     function goToMode(root, labelOrMode) {
-        let mode = labelOrMode;
-        if (typeof labelOrMode === "string" && isNaN(Number(labelOrMode))) {
+        let screen = root.querySelector(`.ps-screen[data-mode="${labelOrMode}"]`);
+        if (!screen && typeof labelOrMode === "string") {
             const group = navGroups.find(g => g.label === labelOrMode);
-            mode = group ? group.items[0].mode : 0;
+            if (group) {
+                screen = root.querySelector(`.ps-screen[data-mode="${group.items[0].mode}"]`);
+            } else {
+                for (const g of navGroups) {
+                    const item = g.items.find(i => i.label === labelOrMode);
+                    if (item) {
+                        screen = root.querySelector(`.ps-screen[data-mode="${item.mode}"]`);
+                        break;
+                    }
+                }
+            }
         }
-        const screen = root.querySelector(`.ps-screen[data-mode="${mode}"]`);
         if (!screen) return;
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         screen.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -747,12 +834,9 @@
         if (typeof IntersectionObserver === "undefined" || !screens.length) return;
 
         function setActive(mode) {
-            let activeMode = 0;
-            navGroups.forEach(g => g.items.forEach(item => {
-                if (item.mode <= mode) activeMode = item.mode;
-            }));
+            const targetMode = String(mode);
             list.querySelectorAll("button").forEach(btn => {
-                btn.classList.toggle("ps-active", Number(btn.dataset.psMode) === activeMode);
+                btn.classList.toggle("ps-active", String(btn.dataset.psMode) === targetMode);
             });
         }
 
@@ -760,7 +844,7 @@
             const visible = entries
                 .filter(e => e.isIntersecting)
                 .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-            if (visible) setActive(Number(visible.target.dataset.mode));
+            if (visible) setActive(visible.target.dataset.mode);
         }, { rootMargin: "-20% 0px -55% 0px", threshold: [0, 0.2, 0.5, 0.8] });
 
         screens.forEach(s => observer.observe(s));

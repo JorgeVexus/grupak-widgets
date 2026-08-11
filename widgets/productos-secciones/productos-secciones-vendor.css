@@ -1622,6 +1622,7 @@
     max-width: none;
     max-height: 650px;
     object-fit: contain;
+    filter: brightness(1.2) contrast(1.04);
 }
 
 /* Active Entrance in Mode 9 */
@@ -3478,10 +3479,688 @@
     gap: 60px !important;
 }
 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: var(--color-grey-light, #d9d9d9);
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* White background overlay */
+#gpk-ps-widget .preloader-white-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-white, #ffffff);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Shape container */
+#gpk-ps-widget .preloader-shape-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1061px;
+    height: 665px;
+    transform: translate(-50%, -50%) scale(5);
+    transform-origin: center center;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Preloader SVG */
+#gpk-ps-widget .preloader-shape-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* SVG Fill Path */
+#gpk-ps-widget .shape-fill-path {
+    fill: var(--color-grey-light, #d9d9d9);
+    opacity: 1;
+}
+
+/* SVG Stroke Path */
+#gpk-ps-widget .shape-stroke-path {
+    stroke: var(--color-grey-medium, #6E6E6E);
+    opacity: 0;
+}
+
+/* Preloader Logo */
+#gpk-ps-widget .preloader-logo {
+    position: relative;
+    z-index: 15;
+    max-width: 420px;
+    height: auto;
+    opacity: 0;
+}
+
+/* Board outline overlay */
+#gpk-ps-widget .preloader-board-outline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('fondo-outline.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Hide content during preloading */
+#gpk-ps-widget .products-board.preloading .products-intro-pane,
+#gpk-ps-widget .products-board.preloading .floating-pillars-container,
+#gpk-ps-widget .products-board.preloading .products-nav-footer,
+#gpk-ps-widget .products-board.preloading .details-pane {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Ensure slide 0 transitions back in smoothly */
+#gpk-ps-widget .products-intro-pane,
+#gpk-ps-widget .floating-pillars-container,
+#gpk-ps-widget .products-nav-footer {
+    transition: opacity 0.5s ease;
+}
+
+
+
+/* Responsive overrides for preloader shape */
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE RESPONSIVE — MODES 7-14 (Láminas Specs, Cajas, Grabados, Energía)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   MOBILE GLOBAL RESET — force all pane elements visible (override desktop 0-opacity init)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   MOBILE PRODUCT EXPERIENCE POLISH
+   Scoped below 768px so desktop/tablet compositions keep their current timing.
+   ========================================================================== */
+
+
+
+
+/* ==========================================================================
+   MOBILE EDITORIAL REDESIGN
+   Product-specific compositions; desktop remains governed by the rules above.
+   ========================================================================== */
+
+
+@keyframes gpkMobileMaterialEnter {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0) scale(0.985);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+
+
+
+
+/* Mobile review adjustments: compact Papel grid, Digital spacing, production Energia. */
+
+
+
+
+/* Mobile imagery stays unframed: transparent surfaces with no artificial depth. */
+
+
+/* MOBILE EDITORIAL REDESIGN - FINAL CASCADE GUARD */
+
+
+/* MOBILE CONTINUOUS FLOW - CASCADE GUARD */
+
+
+/* MOBILE VISUAL REFINEMENT - CASCADE GUARD */
+
+
+/* MOBILE MEDIA FLOW REFINEMENT - FINAL LAYER */
+
+
+/* MOBILE FINAL SPACING - FINAL LAYER */
+
+
+/* MOBILE ANCHORS AND STICKY PROTECTION - FINAL LAYER */
+
+
+/* MOBILE INTRO HERO - FINAL LAYER */
+
+
+/* ==========================================================================
+   SLIDE 0 PRODUCTION KPIS - FINAL SHARED LAYOUT
+   ========================================================================== */
+#gpk-ps-widget .intro-kpis-grid-new {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 60px !important;
+}
+
 
 
 /* MOBILE SLIDE 0 VISIBILITY OVERRIDE */
 
 
 /* MOBILE HERO INITIAL STABILITY - CASCADE OVERRIDE */
+
+/* CMYK Digital Print Rainbow Effect for "Digital" */
+.gpk-digital-rainbow {
+    background: linear-gradient(90deg, #00AEEF 0%, #EC008C 35%, #FFD700 70%, #00E5FF 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    display: inline-block !important;
+    padding-bottom: 0.25em !important;
+    margin-bottom: -0.25em !important;
+    font-weight: inherit !important;
+}
+
+/* ==========================================
+   PANE 2.5: ¿POR QUÉ USAR TECNOLOGÍA DIGITAL? (ANTI-SLOP BENTO DESIGN)
+   ========================================== */
+#gpk-ps-widget .pane-digital-why {
+    position: absolute;
+    inset: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#gpk-ps-widget .products-board.mode-9b .pane-digital-why {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#gpk-ps-widget .digital-why-content-wrapper {
+    width: 100%;
+    max-width: 1320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gpk-ps-widget .digital-why-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+#gpk-ps-widget .digital-why-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-green, #5f9d2f);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+#gpk-ps-widget .digital-why-main-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--color-grey-dark, #222222);
+    margin: 0 0 10px 0;
+    letter-spacing: -0.6px;
+    text-align: center;
+    line-height: 1.15;
+}
+
+#gpk-ps-widget .digital-why-green-line {
+    width: 120px;
+    height: 3px;
+    background-color: var(--color-green, #5f9d2f);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Bento Grid */
+#gpk-ps-widget .digital-why-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+/* Base Card Style */
+#gpk-ps-widget .digital-why-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 16px;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#gpk-ps-widget .digital-why-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 36px rgba(95, 157, 47, 0.12);
+    border-color: rgba(95, 157, 47, 0.3);
+}
+
+/* Top Row inside Card: Number + Icon */
+#gpk-ps-widget .digital-why-card-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+#gpk-ps-widget .digital-why-num {
+    font-family: monospace, sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: rgba(95, 157, 47, 0.25);
+    letter-spacing: -1px;
+}
+
+#gpk-ps-widget .digital-why-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: rgba(95, 157, 47, 0.08);
+    color: var(--color-green, #5f9d2f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#gpk-ps-widget .digital-why-card:hover .digital-why-card-icon {
+    background-color: var(--color-green, #5f9d2f);
+    color: #ffffff;
+}
+
+/* Tag / Category Badge */
+#gpk-ps-widget .digital-why-card-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    color: var(--color-green, #5f9d2f);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+/* Card Title */
+#gpk-ps-widget .digital-why-card-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--color-grey-dark, #222222);
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+}
+
+/* Card Description */
+#gpk-ps-widget .digital-why-card-desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #555555;
+    margin: 0 0 16px 0;
+    flex-grow: 1;
+}
+
+/* Bottom Badge / Pill inside Card */
+#gpk-ps-widget .digital-why-card-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444444;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#gpk-ps-widget .digital-why-card-stat {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-green, #5f9d2f);
+    background: rgba(95, 157, 47, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#gpk-ps-widget .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-green, #5f9d2f);
+}
+
+/* Hero / Highlight Card Variation (Bento Card 1) */
+#gpk-ps-widget .digital-why-card.bento-hero-card {
+    background: linear-gradient(145deg, #ffffff 0%, rgba(95, 157, 47, 0.04) 100%);
+    border-top: 4px solid var(--color-green, #5f9d2f);
+}
+
+/* ==========================================
+   PANE 2.6: ABASTECIMIENTOS & ECONOMÍA CIRCULAR
+   ========================================== */
+#gpk-ps-widget .pane-abastecimientos {
+    position: absolute;
+    inset: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#gpk-ps-widget .products-board.mode-9c .pane-abastecimientos {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#gpk-ps-widget .abastecimientos-content-wrapper {
+    width: 100%;
+    max-width: 1380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gpk-ps-widget .abastecimientos-header {
+    text-align: center;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gpk-ps-widget .abastecimientos-eyebrow {
+    font-family: monospace, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    color: var(--color-green, #5f9d2f);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+#gpk-ps-widget .abastecimientos-main-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--color-grey-dark, #222222);
+    margin: 0 0 14px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+}
+
+#gpk-ps-widget .abastecimientos-dashed-line {
+    width: 90px;
+    height: 0;
+    border-bottom: 3px dashed var(--color-green, #5f9d2f);
+    margin-top: 4px;
+}
+
+#gpk-ps-widget .abastecimientos-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    width: 100%;
+    align-items: stretch;
+}
+
+#gpk-ps-widget .abastecimientos-hero-box {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    min-height: 380px;
+    display: flex;
+}
+
+#gpk-ps-widget .abastecimientos-image-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+#gpk-ps-widget .abastecimientos-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#gpk-ps-widget .abastecimientos-hero-box:hover .abastecimientos-hero-img {
+    transform: scale(1.03);
+}
+
+#gpk-ps-widget .abastecimientos-img-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(18, 30, 49, 0.85);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#gpk-ps-widget .abastecimientos-frame-dashed-border {
+    position: absolute;
+    inset: 12px;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+#gpk-ps-widget .abastecimientos-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+#gpk-ps-widget .abastecimientos-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px 28px 24px 28px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gpk-ps-widget .abastecimientos-card.circular-card {
+    background: linear-gradient(145deg, #ffffff 0%, rgba(95, 157, 47, 0.03) 100%);
+    border-top: 4px solid var(--color-green, #5f9d2f);
+}
+
+#gpk-ps-widget .abastecimientos-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+#gpk-ps-widget .abastecimientos-pill-badge {
+    background: var(--color-grey-dark, #222222);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+
+#gpk-ps-widget .abastecimientos-icon-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(95, 157, 47, 0.1);
+    color: var(--color-green, #5f9d2f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gpk-ps-widget .abastecimientos-card-text {
+    font-size: 15px;
+    line-height: 1.55;
+    color: #444444;
+    margin: 0 0 20px 0;
+}
+
+#gpk-ps-widget .abastecimientos-card-text strong {
+    color: var(--color-green, #5f9d2f);
+    font-weight: 700;
+}
+
+#gpk-ps-widget .abastecimientos-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+#gpk-ps-widget .abastecimientos-stat-pill {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444444;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#gpk-ps-widget .abastecimientos-cta-card {
+    background: rgba(95, 157, 47, 0.04);
+    border: 2px dashed var(--color-green, #5f9d2f);
+    border-radius: 16px;
+    padding: 24px 26px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gpk-ps-widget .abastecimientos-cta-card:hover {
+    background: rgba(95, 157, 47, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(95, 157, 47, 0.12);
+}
+
+#gpk-ps-widget .cta-card-content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+}
+
+#gpk-ps-widget .cta-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--color-green, #5f9d2f);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#gpk-ps-widget .cta-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#gpk-ps-widget .cta-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--color-grey-dark, #222222);
+    margin: 0;
+    line-height: 1.3;
+}
+
+#gpk-ps-widget .cta-action-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-green, #5f9d2f);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s ease;
+}
+
+#gpk-ps-widget .abastecimientos-cta-card:hover .cta-action-link {
+    gap: 10px;
+}
 

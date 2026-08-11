@@ -3043,6 +3043,7 @@
     max-width: none;
     max-height: 650px;
     object-fit: contain;
+    filter: brightness(1.2) contrast(1.04);
 }
 
 /* Active Entrance in Mode 9 */
@@ -10356,3 +10357,667 @@
         margin: 0 !important;
     }
 }
+
+/* CMYK Digital Print Rainbow Effect for "Digital" */
+.gpk-digital-rainbow {
+    background: linear-gradient(90deg, #00AEEF 0%, #EC008C 35%, #FFD700 70%, #00E5FF 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    display: inline-block !important;
+    padding-bottom: 0.25em !important;
+    margin-bottom: -0.25em !important;
+    padding-right: 0.05em !important;
+    line-height: normal !important;
+    font-weight: inherit !important;
+}
+
+/* ==========================================
+   PANE 2.5: ¿POR QUÉ USAR TECNOLOGÍA DIGITAL? (ANTI-SLOP BENTO DESIGN)
+   ========================================== */
+#gpk-ps-widget .pane-digital-why,
+#gpk-products-widget .pane-digital-why {
+    position: absolute;
+    inset: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#gpk-ps-widget .products-board.mode-9b .pane-digital-why,
+#gpk-products-widget .products-board.mode-9b .pane-digital-why {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#gpk-ps-widget .digital-why-content-wrapper,
+#gpk-products-widget .digital-why-content-wrapper {
+    width: 100%;
+    max-width: 1320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gpk-ps-widget .digital-why-header,
+#gpk-products-widget .digital-why-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+#gpk-ps-widget .digital-why-eyebrow,
+#gpk-products-widget .digital-why-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-green, #5f9d2f);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+#gpk-ps-widget .digital-why-main-title,
+#gpk-products-widget .digital-why-main-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--color-grey-dark, #222222);
+    margin: 0 0 10px 0;
+    letter-spacing: -0.6px;
+    text-align: center;
+    line-height: 1.15;
+}
+
+#gpk-ps-widget .digital-why-green-line,
+#gpk-products-widget .digital-why-green-line {
+    width: 120px;
+    height: 3px;
+    background-color: var(--color-green, #5f9d2f);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Bento Grid */
+#gpk-ps-widget .digital-why-bento-grid,
+#gpk-products-widget .digital-why-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+/* Base Card Style */
+#gpk-ps-widget .digital-why-card,
+#gpk-products-widget .digital-why-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 16px;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#gpk-ps-widget .digital-why-card:hover,
+#gpk-products-widget .digital-why-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 36px rgba(95, 157, 47, 0.12);
+    border-color: rgba(95, 157, 47, 0.3);
+}
+
+/* Top Row inside Card: Number + Icon */
+#gpk-ps-widget .digital-why-card-top,
+#gpk-products-widget .digital-why-card-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+#gpk-ps-widget .digital-why-num,
+#gpk-products-widget .digital-why-num {
+    font-family: monospace, sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: rgba(95, 157, 47, 0.25);
+    letter-spacing: -1px;
+}
+
+#gpk-ps-widget .digital-why-card-icon,
+#gpk-products-widget .digital-why-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: rgba(95, 157, 47, 0.08);
+    color: var(--color-green, #5f9d2f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#gpk-ps-widget .digital-why-card:hover .digital-why-card-icon,
+#gpk-products-widget .digital-why-card:hover .digital-why-card-icon {
+    background-color: var(--color-green, #5f9d2f);
+    color: #ffffff;
+}
+
+/* Tag / Category Badge */
+#gpk-ps-widget .digital-why-card-tag,
+#gpk-products-widget .digital-why-card-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    color: var(--color-green, #5f9d2f);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+/* Card Title */
+#gpk-ps-widget .digital-why-card-title,
+#gpk-products-widget .digital-why-card-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--color-grey-dark, #222222);
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+}
+
+/* Card Description */
+#gpk-ps-widget .digital-why-card-desc,
+#gpk-products-widget .digital-why-card-desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #555555;
+    margin: 0 0 16px 0;
+    flex-grow: 1;
+}
+
+/* Bottom Badge / Pill inside Card */
+#gpk-ps-widget .digital-why-card-badge,
+#gpk-products-widget .digital-why-card-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444444;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#gpk-ps-widget .digital-why-card-stat,
+#gpk-products-widget .digital-why-card-stat {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-green, #5f9d2f);
+    background: rgba(95, 157, 47, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#gpk-ps-widget .badge-dot,
+#gpk-products-widget .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-green, #5f9d2f);
+}
+
+/* Hero / Highlight Card Variation (Bento Card 1) */
+#gpk-ps-widget .digital-why-card.bento-hero-card,
+#gpk-products-widget .digital-why-card.bento-hero-card {
+    background: linear-gradient(145deg, #ffffff 0%, rgba(95, 157, 47, 0.04) 100%);
+    border-top: 4px solid var(--color-green, #5f9d2f);
+}
+
+/* Mobile Styling (< 767px) - Encapsulated to mode-9b only */
+@media (max-width: 767px) {
+    #gpk-ps-widget .ps-screen[data-mode="9b"].ps-mobile-digital-why-v1 {
+        display: block !important;
+        height: auto !important;
+        padding: 40px 20px 60px 20px !important;
+        background-color: var(--color-grey-light, #d9d9d9) !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .pane-digital-why,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .pane-digital-why {
+        position: relative !important;
+        inset: auto !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        padding: 0 !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .digital-why-header,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .digital-why-header {
+        margin-bottom: 28px !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .digital-why-main-title,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .digital-why-main-title {
+        font-size: 26px !important;
+        letter-spacing: -0.4px !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .digital-why-bento-grid,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .digital-why-bento-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .digital-why-card,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .digital-why-card {
+        padding: 22px 20px !important;
+        border-radius: 14px !important;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .digital-why-card.ps-digital-why-revealed,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .digital-why-card.ps-digital-why-revealed,
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .digital-why-main-title.ps-digital-why-revealed,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .digital-why-main-title.ps-digital-why-revealed,
+    #gpk-ps-widget .ps-screen[data-mode="9b"] .digital-why-green-line.ps-digital-why-revealed,
+    #gpk-products-widget .ps-screen[data-mode="9b"] .digital-why-green-line.ps-digital-why-revealed {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+}
+
+/* ==========================================
+   PANE 2.6: ABASTECIMIENTOS & ECONOMÍA CIRCULAR (ANTI-SLOP BENTO DESIGN)
+   ========================================== */
+#gpk-ps-widget .pane-abastecimientos,
+#gpk-products-widget .pane-abastecimientos {
+    position: absolute;
+    inset: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#gpk-ps-widget .products-board.mode-9c .pane-abastecimientos,
+#gpk-products-widget .products-board.mode-9c .pane-abastecimientos {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#gpk-ps-widget .abastecimientos-content-wrapper,
+#gpk-products-widget .abastecimientos-content-wrapper {
+    width: 100%;
+    max-width: 1380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gpk-ps-widget .abastecimientos-header,
+#gpk-products-widget .abastecimientos-header {
+    text-align: center;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gpk-ps-widget .abastecimientos-eyebrow,
+#gpk-products-widget .abastecimientos-eyebrow {
+    font-family: monospace, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    color: var(--color-green, #5f9d2f);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+#gpk-ps-widget .abastecimientos-main-title,
+#gpk-products-widget .abastecimientos-main-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--color-grey-dark, #222222);
+    margin: 0 0 14px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+}
+
+#gpk-ps-widget .abastecimientos-dashed-line,
+#gpk-products-widget .abastecimientos-dashed-line {
+    width: 90px;
+    height: 0;
+    border-bottom: 3px dashed var(--color-green, #5f9d2f);
+    margin-top: 4px;
+}
+
+#gpk-ps-widget .abastecimientos-grid,
+#gpk-products-widget .abastecimientos-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* Left Hero Box */
+#gpk-ps-widget .abastecimientos-hero-box,
+#gpk-products-widget .abastecimientos-hero-box {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    min-height: 380px;
+    display: flex;
+}
+
+#gpk-ps-widget .abastecimientos-image-frame,
+#gpk-products-widget .abastecimientos-image-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+#gpk-ps-widget .abastecimientos-hero-img,
+#gpk-products-widget .abastecimientos-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#gpk-ps-widget .abastecimientos-hero-box:hover .abastecimientos-hero-img,
+#gpk-products-widget .abastecimientos-hero-box:hover .abastecimientos-hero-img {
+    transform: scale(1.03);
+}
+
+#gpk-ps-widget .abastecimientos-img-badge,
+#gpk-products-widget .abastecimientos-img-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(18, 30, 49, 0.85);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#gpk-ps-widget .abastecimientos-frame-dashed-border,
+#gpk-products-widget .abastecimientos-frame-dashed-border {
+    position: absolute;
+    inset: 12px;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+/* Right Info Column */
+#gpk-ps-widget .abastecimientos-info-column,
+#gpk-products-widget .abastecimientos-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+#gpk-ps-widget .abastecimientos-card,
+#gpk-products-widget .abastecimientos-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px 28px 24px 28px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gpk-ps-widget .abastecimientos-card.circular-card,
+#gpk-products-widget .abastecimientos-card.circular-card {
+    background: linear-gradient(145deg, #ffffff 0%, rgba(95, 157, 47, 0.03) 100%);
+    border-top: 4px solid var(--color-green, #5f9d2f);
+}
+
+#gpk-ps-widget .abastecimientos-card-header,
+#gpk-products-widget .abastecimientos-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+#gpk-ps-widget .abastecimientos-pill-badge,
+#gpk-products-widget .abastecimientos-pill-badge {
+    background: var(--color-grey-dark, #222222);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+
+#gpk-ps-widget .abastecimientos-icon-circle,
+#gpk-products-widget .abastecimientos-icon-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(95, 157, 47, 0.1);
+    color: var(--color-green, #5f9d2f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gpk-ps-widget .abastecimientos-card-text,
+#gpk-products-widget .abastecimientos-card-text {
+    font-size: 15px;
+    line-height: 1.55;
+    color: #444444;
+    margin: 0 0 20px 0;
+}
+
+#gpk-ps-widget .abastecimientos-card-text strong,
+#gpk-products-widget .abastecimientos-card-text strong {
+    color: var(--color-green, #5f9d2f);
+    font-weight: 700;
+}
+
+#gpk-ps-widget .abastecimientos-card-footer,
+#gpk-products-widget .abastecimientos-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+#gpk-ps-widget .abastecimientos-stat-pill,
+#gpk-products-widget .abastecimientos-stat-pill {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444444;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* CTA Proveedores Card with Dashed Border Theme */
+#gpk-ps-widget .abastecimientos-cta-card,
+#gpk-products-widget .abastecimientos-cta-card {
+    background: rgba(95, 157, 47, 0.04);
+    border: 2px dashed var(--color-green, #5f9d2f);
+    border-radius: 16px;
+    padding: 24px 26px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gpk-ps-widget .abastecimientos-cta-card:hover,
+#gpk-products-widget .abastecimientos-cta-card:hover {
+    background: rgba(95, 157, 47, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(95, 157, 47, 0.12);
+}
+
+#gpk-ps-widget .cta-card-content,
+#gpk-products-widget .cta-card-content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+}
+
+#gpk-ps-widget .cta-icon-box,
+#gpk-products-widget .cta-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--color-green, #5f9d2f);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#gpk-ps-widget .cta-text-wrapper,
+#gpk-products-widget .cta-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#gpk-ps-widget .cta-title,
+#gpk-products-widget .cta-title {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--color-grey-dark, #222222);
+    margin: 0;
+    line-height: 1.3;
+}
+
+#gpk-ps-widget .cta-action-link,
+#gpk-products-widget .cta-action-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-green, #5f9d2f);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s ease;
+}
+
+#gpk-ps-widget .abastecimientos-cta-card:hover .cta-action-link,
+#gpk-products-widget .abastecimientos-cta-card:hover .cta-action-link {
+    gap: 10px;
+}
+
+/* Mobile Styling (< 767px) - Encapsulated to mode-9c only */
+@media (max-width: 767px) {
+    #gpk-ps-widget .ps-screen[data-mode="9c"].ps-mobile-abastecimientos-v1,
+    #gpk-products-widget .ps-screen[data-mode="9c"].ps-mobile-abastecimientos-v1 {
+        display: block !important;
+        height: auto !important;
+        padding: 40px 20px 60px 20px !important;
+        background-color: var(--color-grey-light, #d9d9d9) !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .pane-abastecimientos,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .pane-abastecimientos {
+        position: relative !important;
+        inset: auto !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        padding: 0 !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-header,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-header {
+        margin-bottom: 24px !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-main-title,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-main-title {
+        font-size: 26px !important;
+        letter-spacing: -0.4px !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-grid,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-hero-box,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-hero-box {
+        min-height: 240px !important;
+        max-height: 280px !important;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-card,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-card,
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-hero-box,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-hero-box,
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-cta-card,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-cta-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-card.ps-abastecimientos-revealed,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-card.ps-abastecimientos-revealed,
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-hero-box.ps-abastecimientos-revealed,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-hero-box.ps-abastecimientos-revealed,
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-cta-card.ps-abastecimientos-revealed,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-cta-card.ps-abastecimientos-revealed,
+    #gpk-ps-widget .ps-screen[data-mode="9c"] .abastecimientos-main-title.ps-abastecimientos-revealed,
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-main-title.ps-abastecimientos-revealed {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+}
+
+

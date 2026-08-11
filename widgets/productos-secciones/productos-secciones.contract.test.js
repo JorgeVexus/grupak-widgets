@@ -158,7 +158,7 @@ test("los modos 2 y 3 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10", "14"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "9b", "9c", "10", "14"\]\)/);
     assert.match(js, /const isAdaptedMobile = adaptedMobileModes\.has\(entryMode\)[\s\S]*window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
 });
 
@@ -214,7 +214,7 @@ test("los modos 4 y 5 reciben clases móviles diferentes", () => {
 });
 
 test("solo los modos adaptados 0 a 5 usan altura automática móvil", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10", "14"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "9b", "9c", "10", "14"\]\)/);
 });
 
 test("el CSS de Láminas está encapsulado en los modos 4 y 5", () => {
@@ -292,8 +292,8 @@ test("cada modo de Cajas oculta sus paneles hermanos", () => {
 });
 
 test("las tarjetas informativas móviles tienen etiquetas propias", () => {
-    assert.match(js, /Soluciones Convencionales/);
-    assert.match(js, /Impresión Digital/);
+    assert.match(js, /Impresión [Ff]lexográfica/);
+    assert.match(js, /Impresión.*Digital/);
     assert.match(js, /ps-cajas-card-label/);
     assert.match(js, /Tecnología Single Pass/);
     assert.match(mobileCajas, /\.ps-cajas-card-label/);
@@ -410,7 +410,7 @@ test("el modo 14 recibe una clase móvil exclusiva", () => {
 });
 
 test("Energía se suma a los modos móviles con altura automática", () => {
-    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "10", "14"\]\)/);
+    assert.match(js, /const adaptedMobileModes = new Set\(\["0", "1", "2", "3", "4", "5", "7", "8", "9", "9b", "9c", "10", "14"\]\)/);
 });
 
 test("el CSS de Energía está encapsulado en modo 14", () => {
