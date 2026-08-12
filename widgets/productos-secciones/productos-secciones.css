@@ -443,7 +443,7 @@
 
 #gpk-ps-widget .digital-why-main-title {
     font-family: var(--font-title, 'Open Sans', sans-serif);
-    font-size: 38px;
+    font-size: 60px;
     font-weight: 800;
     color: var(--color-grey-dark, #222222);
     margin: 0 0 10px 0;
@@ -584,10 +584,76 @@
     background-color: var(--color-green, #5f9d2f);
 }
 
-/* Hero / Highlight Card Variation (Bento Card 1) */
+/* Card Specific Top Border Lines and Colored Badges (Left to Right: #8E94D8, #EF875F, #FDDF6E, #A4DBFE) */
+/* Card 1: #8E94D8 */
+#gpk-ps-widget .digital-why-card[data-index="1"],
 #gpk-ps-widget .digital-why-card.bento-hero-card {
-    background: linear-gradient(145deg, #ffffff 0%, rgba(95, 157, 47, 0.04) 100%);
-    border-top: 4px solid var(--color-green, #5f9d2f);
+    background: #ffffff;
+    border-top: 4px solid #8E94D8;
+}
+
+#gpk-ps-widget .digital-why-card[data-index="1"]:hover {
+    box-shadow: 0 16px 36px rgba(142, 148, 216, 0.22);
+    border-color: rgba(142, 148, 216, 0.4);
+}
+
+#gpk-ps-widget .digital-why-card[data-index="1"] .digital-why-card-badge {
+    background-color: #8E94D8;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+#gpk-ps-widget .digital-why-card[data-index="1"] .badge-dot {
+    background-color: #ffffff;
+}
+
+/* Card 2: #EF875F */
+#gpk-ps-widget .digital-why-card[data-index="2"] {
+    border-top: 4px solid #EF875F;
+}
+
+#gpk-ps-widget .digital-why-card[data-index="2"]:hover {
+    box-shadow: 0 16px 36px rgba(239, 135, 95, 0.22);
+    border-color: rgba(239, 135, 95, 0.4);
+}
+
+#gpk-ps-widget .digital-why-card[data-index="2"] .digital-why-card-badge,
+#gpk-ps-widget .digital-why-card[data-index="2"] .digital-why-card-stat {
+    background-color: #EF875F;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Card 3: #FDDF6E */
+#gpk-ps-widget .digital-why-card[data-index="3"] {
+    border-top: 4px solid #FDDF6E;
+}
+
+#gpk-ps-widget .digital-why-card[data-index="3"]:hover {
+    box-shadow: 0 16px 36px rgba(253, 223, 110, 0.35);
+    border-color: rgba(253, 223, 110, 0.6);
+}
+
+#gpk-ps-widget .digital-why-card[data-index="3"] .digital-why-card-badge {
+    background-color: #FDDF6E;
+    color: #222222;
+    font-weight: 700;
+}
+
+/* Card 4: #A4DBFE */
+#gpk-ps-widget .digital-why-card[data-index="4"] {
+    border-top: 4px solid #A4DBFE;
+}
+
+#gpk-ps-widget .digital-why-card[data-index="4"]:hover {
+    box-shadow: 0 16px 36px rgba(164, 219, 254, 0.30);
+    border-color: rgba(164, 219, 254, 0.5);
+}
+
+#gpk-ps-widget .digital-why-card[data-index="4"] .digital-why-card-badge {
+    background-color: #A4DBFE;
+    color: #113355;
+    font-weight: 700;
 }
 
 /* ==========================================

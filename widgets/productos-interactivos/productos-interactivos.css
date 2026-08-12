@@ -10425,7 +10425,7 @@
 #gpk-ps-widget .digital-why-main-title,
 #gpk-products-widget .digital-why-main-title {
     font-family: var(--font-title, 'Open Sans', sans-serif);
-    font-size: 38px;
+    font-size: 60px;
     font-weight: 800;
     color: var(--color-grey-dark, #222222);
     margin: 0 0 10px 0;
