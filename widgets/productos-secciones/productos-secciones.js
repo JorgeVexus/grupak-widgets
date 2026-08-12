@@ -719,7 +719,7 @@
 
         const descriptions = [
             "Alcanzamos hasta un 80% de rendimiento energético mediante nuestra tecnología de cogeneración simultánea.",
-            "Al aprovechar mejor el combustible, reducimos emisiones y mejoramos nuestra huella de carbono industrial.",
+            "Al aprovechar de forma más eficiente el combustible, contribuimos a la reducción de emisiones asociadas a nuestras operaciones.",
             "Generamos parte importante de la energía que utilizamos, asegurando continuidad operativa total en planta."
         ];
         screen.querySelectorAll(".energia-row").forEach((row, index) => {
