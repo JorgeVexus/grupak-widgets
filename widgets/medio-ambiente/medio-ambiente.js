@@ -201,13 +201,23 @@
     }
 
     function progressToState(progress) {
-      var thresholds = [0.055, 0.125, 0.205, 0.285, 0.365, 0.445, 0.525, 0.605, 0.685, 0.765, 0.845, 0.915, 0.965];
+      var stateMap = [
+        { limit: 0.03, state: 0 },
+        { limit: 0.12, state: 5 },
+        { limit: 0.24, state: 6 },
+        { limit: 0.36, state: 7 },
+        { limit: 0.48, state: 8 },
+        { limit: 0.60, state: 9 },
+        { limit: 0.72, state: 10 },
+        { limit: 0.84, state: 11 },
+        { limit: 0.92, state: 12 }
+      ];
 
-      for (var i = 0; i < thresholds.length; i += 1) {
-        if (progress < thresholds[i]) return i;
+      for (var i = 0; i < stateMap.length; i += 1) {
+        if (progress < stateMap[i].limit) return stateMap[i].state;
       }
 
-      return stateCount - 1;
+      return 13;
     }
 
     function applyState(state) {

@@ -215,21 +215,16 @@
         }
 
         function progressToState(p) {
-            if (p < 0.05) return 0;   // Logo
-            if (p < 0.12) return 1;   // Badge
-            if (p < 0.19) return 2;   // Badge + Title
-            if (p < 0.26) return 3;   // Col 1
-            if (p < 0.33) return 4;   // Col 2
-            if (p < 0.40) return 5;   // Col 3
-            if (p < 0.47) return 6;   // Wheel
-            if (p < 0.54) return 7;   // Step 1
-            if (p < 0.61) return 8;   // Step 2
-            if (p < 0.68) return 9;   // Step 3
-            if (p < 0.75) return 10;  // Step 4
-            if (p < 0.82) return 11;  // Step 5
-            if (p < 0.89) return 12;  // Step 6
-            if (p < 0.95) return 13;  // All steps grey
-            return 14;                // Shift up + stats green
+            if (p < 0.03) return 0;   // Landing
+            if (p < 0.12) return 6;   // Wheel
+            if (p < 0.24) return 7;   // Step 1
+            if (p < 0.36) return 8;   // Step 2
+            if (p < 0.48) return 9;   // Step 3
+            if (p < 0.60) return 10;  // Step 4
+            if (p < 0.72) return 11;  // Step 5
+            if (p < 0.84) return 12;  // Step 6
+            if (p < 0.92) return 13;  // Stat
+            return 14;
         }
 
         function updateUI() {
