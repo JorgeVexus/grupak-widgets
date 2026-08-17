@@ -127,7 +127,7 @@
         ] },
         { label: "Cajas y empaques", items: [
             { label: "Introducción", mode: 7 },
-            { label: "Impresión flexográfica", mode: 8 },
+            { label: "Cajas y empaques convencionales con soluciones de impresión flexográfica", mode: 8 },
             { label: "Impresión digital", mode: 9 },
             { label: "Ventajas digitales", mode: "9b" },
             { label: "Abastecimientos", mode: "9c" }
@@ -306,7 +306,7 @@
         if (!intro || !conventional || !digital) return;
 
         const introHeadings = intro.querySelectorAll(".cajas-column h2");
-        if (introHeadings[0]) introHeadings[0].textContent = "Impresión Flexográfica";
+        if (introHeadings[0]) introHeadings[0].textContent = "Cajas y empaques convencionales con soluciones de impresión flexográfica";
         if (introHeadings[1]) introHeadings[1].innerHTML = 'Impresión <span class="gpk-digital-rainbow">Digital</span>';
 
         const idealCard = conventional.querySelector(".cajas-paragraph-2");
@@ -577,7 +577,6 @@
         [
             screen.querySelector(".digital-why-eyebrow"),
             screen.querySelector(".digital-why-main-title"),
-            screen.querySelector(".digital-why-green-line"),
             ...screen.querySelectorAll(".digital-why-card")
         ].filter(Boolean).forEach(element => element.dataset.psDigitalWhyReveal = "1");
 
@@ -609,12 +608,9 @@
         if (!screen) return;
 
         [
-            screen.querySelector(".abastecimientos-eyebrow"),
             screen.querySelector(".abastecimientos-main-title"),
-            screen.querySelector(".abastecimientos-dashed-line"),
             screen.querySelector(".abastecimientos-hero-box"),
-            screen.querySelector(".abastecimientos-card"),
-            screen.querySelector(".abastecimientos-cta-card")
+            screen.querySelector(".abastecimientos-info-column")
         ].filter(Boolean).forEach(element => element.dataset.psAbastecimientosReveal = "1");
 
         const elements = Array.from(screen.querySelectorAll("[data-ps-abastecimientos-reveal]"));

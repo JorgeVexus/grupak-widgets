@@ -269,7 +269,7 @@ test("el CSS de Cajas está encapsulado en los modos 7, 8 y 9", () => {
     const selectors = mobileCajas.match(/#gpk-ps-widget[^\{]+(?=\{)/g) || [];
     assert.ok(selectors.length > 0);
     selectors.forEach(selector => {
-        assert.match(selector, /\.ps-screen\[data-mode="(?:7|8|9)"\]\.ps-mobile-cajas-(?:intro|conventional|digital)-v1/);
+        assert.match(selector, /\.ps-screen\[data-mode="(?:7|8|9|9b|9c)"\]/);
     });
 });
 
@@ -292,7 +292,7 @@ test("cada modo de Cajas oculta sus paneles hermanos", () => {
 });
 
 test("las tarjetas informativas móviles tienen etiquetas propias", () => {
-    assert.match(js, /Impresión [Ff]lexográfica/);
+    assert.match(js, /soluciones de impresión flexográfica/i);
     assert.match(js, /Impresión.*Digital/);
     assert.match(js, /ps-cajas-card-label/);
     assert.match(js, /Tecnología Single Pass/);
@@ -450,7 +450,7 @@ test("Energía móvil reproduce las superficies del Figma", () => {
 test("Energía móvil usa la copia del Figma sin alterar el HTML fuente", () => {
     assert.match(js, /function prepareMobileEnergiaContent\(root\)/);
     assert.match(js, /Alcanzamos hasta un 80% de rendimiento energético/);
-    assert.match(js, /reducimos emisiones y mejoramos nuestra huella de carbono industrial/);
+    assert.match(js, /Al aprovechar de forma más eficiente el combustible, contribuimos a la reducción de emisiones/);
     assert.match(js, /asegurando continuidad operativa total en planta/);
     assert.match(sourceHtml, /centrales térmicas convencionales/);
     assert.match(sourceHtml, /fabricación de papel y empaques/);

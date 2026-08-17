@@ -398,11 +398,11 @@
 }
 
 /* ==========================================
-   PANE 2.5: ¿POR QUÉ USAR TECNOLOGÍA DIGITAL? (ANTI-SLOP BENTO DESIGN)
+   PANE 2.5: ¿POR QUÉ USAR TECNOLOGÍA DIGITAL? (FIGMA DESIGN)
    ========================================== */
 #gpk-ps-widget .pane-digital-why {
     position: absolute;
-    inset: 0 80px;
+    inset: 0 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -420,7 +420,7 @@
 
 #gpk-ps-widget .digital-why-content-wrapper {
     width: 100%;
-    max-width: 1320px;
+    max-width: 1560px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -428,240 +428,204 @@
 
 #gpk-ps-widget .digital-why-header {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #gpk-ps-widget .digital-why-eyebrow {
-    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: var(--color-green, #5f9d2f);
+    color: #ffffff;
     text-transform: uppercase;
-    display: block;
-    margin-bottom: 6px;
+    background-color: #9d836b;
+    padding: 7px 22px 9px 22px;
+    position: relative;
+    clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% calc(100% - 5px),
+        calc(100% - 10px) calc(100% - 5px),
+        calc(100% - 10px) 100%,
+        calc(100% - 22px) 100%,
+        calc(100% - 22px) calc(100% - 5px),
+        22px calc(100% - 5px),
+        22px 100%,
+        10px 100%,
+        10px calc(100% - 5px),
+        0% calc(100% - 5px)
+    );
+    margin-bottom: 12px;
 }
 
 #gpk-ps-widget .digital-why-main-title {
-    font-family: var(--font-title, 'Open Sans', sans-serif);
-    font-size: 60px;
-    font-weight: 800;
-    color: var(--color-grey-dark, #222222);
-    margin: 0 0 10px 0;
-    letter-spacing: -0.6px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 68px;
+    font-weight: 400;
+    color: #6e6e6e;
+    margin: 0;
+    letter-spacing: -1px;
     text-align: center;
     line-height: 1.15;
 }
 
-#gpk-ps-widget .digital-why-green-line {
-    width: 120px;
-    height: 3px;
-    background-color: var(--color-green, #5f9d2f);
-    margin: 0 auto;
-    border-radius: 2px;
+#gpk-ps-widget .digital-why-main-title strong {
+    font-weight: 800;
+    color: #6e6e6e;
 }
 
-/* Bento Grid */
+/* Bento / Cards Row (Desktop 1510px canvas) */
 #gpk-ps-widget .digital-why-bento-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 50px;
     width: 100%;
+    max-width: 1510px;
 }
 
 /* Base Card Style */
 #gpk-ps-widget .digital-why-card {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.07);
-    border-radius: 16px;
-    padding: 26px 24px;
+    position: relative;
+    width: 340px;
+    height: 372px;
+    flex: 0 0 340px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
 #gpk-ps-widget .digital-why-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 36px rgba(95, 157, 47, 0.12);
-    border-color: rgba(95, 157, 47, 0.3);
+    transform: translateY(-6px);
 }
 
-/* Top Row inside Card: Number + Icon */
-#gpk-ps-widget .digital-why-card-top {
+/* Card Background Image (Vector border from Figma) */
+#gpk-ps-widget .digital-why-card-bg {
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Card Inner Content */
+#gpk-ps-widget .digital-why-card-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 12px 32px 32px 32px;
+}
+
+/* Top Row: Tag + Big Number */
+#gpk-ps-widget .digital-why-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    width: 100%;
+    min-height: 85px;
+    margin-bottom: 2px;
+}
+
+#gpk-ps-widget .digital-why-card-tag {
+    font-family: 'Inter', var(--font-primary, 'Open Sans', sans-serif);
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: normal;
+}
+
+#gpk-ps-widget .digital-why-card[data-index="1"] .digital-why-card-tag {
+    color: #8e94d8;
+}
+#gpk-ps-widget .digital-why-card[data-index="2"] .digital-why-card-tag {
+    color: #ef875f;
+}
+#gpk-ps-widget .digital-why-card[data-index="3"] .digital-why-card-tag {
+    color: #c97055;
+}
+#gpk-ps-widget .digital-why-card[data-index="4"] .digital-why-card-tag {
+    color: #56aae8;
 }
 
 #gpk-ps-widget .digital-why-num {
-    font-family: monospace, sans-serif;
-    font-size: 24px;
-    font-weight: 800;
-    color: rgba(95, 157, 47, 0.25);
-    letter-spacing: -1px;
+    font-family: 'Inter', var(--font-primary, 'Open Sans', sans-serif);
+    font-size: 70px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -2px;
 }
 
-#gpk-ps-widget .digital-why-card-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background-color: rgba(95, 157, 47, 0.08);
-    color: var(--color-green, #5f9d2f);
+#gpk-ps-widget .digital-why-card[data-index="1"] .digital-why-num {
+    color: rgba(142, 148, 216, 0.35);
+}
+#gpk-ps-widget .digital-why-card[data-index="2"] .digital-why-num {
+    color: rgba(239, 135, 95, 0.3);
+}
+#gpk-ps-widget .digital-why-card[data-index="3"] .digital-why-num {
+    color: rgba(201, 112, 85, 0.3);
+}
+#gpk-ps-widget .digital-why-card[data-index="4"] .digital-why-num {
+    color: rgba(164, 219, 254, 0.35);
+}
+
+/* Card Body */
+#gpk-ps-widget .digital-why-card-body {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
 }
 
-#gpk-ps-widget .digital-why-card:hover .digital-why-card-icon {
-    background-color: var(--color-green, #5f9d2f);
-    color: #ffffff;
-}
-
-/* Tag / Category Badge */
-#gpk-ps-widget .digital-why-card-tag {
-    font-size: 10.5px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-    color: var(--color-green, #5f9d2f);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-}
-
-/* Card Title */
 #gpk-ps-widget .digital-why-card-title {
     font-family: var(--font-title, 'Open Sans', sans-serif);
-    font-size: 19px;
+    font-size: 21px;
     font-weight: 700;
-    color: var(--color-grey-dark, #222222);
-    margin: 0 0 8px 0;
-    line-height: 1.25;
-}
-
-/* Card Description */
-#gpk-ps-widget .digital-why-card-desc {
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: #555555;
-    margin: 0 0 16px 0;
-    flex-grow: 1;
-}
-
-/* Bottom Badge / Pill inside Card */
-#gpk-ps-widget .digital-why-card-badge {
-    font-size: 11px;
-    font-weight: 700;
-    color: #444444;
-    background: rgba(0, 0, 0, 0.04);
-    padding: 4px 10px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-#gpk-ps-widget .digital-why-card-stat {
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--color-green, #5f9d2f);
-    background: rgba(95, 157, 47, 0.1);
-    padding: 4px 10px;
-    border-radius: 20px;
-    display: inline-flex;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: #6e6e6e;
+    line-height: 1.35;
+    margin: 0;
 }
 
-#gpk-ps-widget .badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--color-green, #5f9d2f);
+#gpk-ps-widget .digital-why-card-desc {
+    font-family: var(--font-primary, 'Open Sans', sans-serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: #6e6e6e;
+    line-height: 1.35;
+    margin: 0;
+    text-align: left;
 }
 
-/* Card Specific Top Border Lines and Colored Badges (Left to Right: #8E94D8, #EF875F, #FDDF6E, #A4DBFE) */
-/* Card 1: #8E94D8 */
-#gpk-ps-widget .digital-why-card[data-index="1"],
-#gpk-ps-widget .digital-why-card.bento-hero-card {
-    background: #ffffff;
-    border-top: 4px solid #8E94D8;
-}
-
-#gpk-ps-widget .digital-why-card[data-index="1"]:hover {
-    box-shadow: 0 16px 36px rgba(142, 148, 216, 0.22);
-    border-color: rgba(142, 148, 216, 0.4);
-}
-
-#gpk-ps-widget .digital-why-card[data-index="1"] .digital-why-card-badge {
-    background-color: #8E94D8;
-    color: #ffffff;
+/* Card Highlight */
+#gpk-ps-widget .digital-why-card-highlight {
+    font-family: var(--font-title, 'Open Sans', sans-serif);
+    font-size: 18px;
     font-weight: 700;
-}
-
-#gpk-ps-widget .digital-why-card[data-index="1"] .badge-dot {
-    background-color: #ffffff;
-}
-
-/* Card 2: #EF875F */
-#gpk-ps-widget .digital-why-card[data-index="2"] {
-    border-top: 4px solid #EF875F;
-}
-
-#gpk-ps-widget .digital-why-card[data-index="2"]:hover {
-    box-shadow: 0 16px 36px rgba(239, 135, 95, 0.22);
-    border-color: rgba(239, 135, 95, 0.4);
-}
-
-#gpk-ps-widget .digital-why-card[data-index="2"] .digital-why-card-badge,
-#gpk-ps-widget .digital-why-card[data-index="2"] .digital-why-card-stat {
-    background-color: #EF875F;
-    color: #ffffff;
-    font-weight: 700;
-}
-
-/* Card 3: #FDDF6E */
-#gpk-ps-widget .digital-why-card[data-index="3"] {
-    border-top: 4px solid #FDDF6E;
-}
-
-#gpk-ps-widget .digital-why-card[data-index="3"]:hover {
-    box-shadow: 0 16px 36px rgba(253, 223, 110, 0.35);
-    border-color: rgba(253, 223, 110, 0.6);
-}
-
-#gpk-ps-widget .digital-why-card[data-index="3"] .digital-why-card-badge {
-    background-color: #FDDF6E;
-    color: #222222;
-    font-weight: 700;
-}
-
-/* Card 4: #A4DBFE */
-#gpk-ps-widget .digital-why-card[data-index="4"] {
-    border-top: 4px solid #A4DBFE;
-}
-
-#gpk-ps-widget .digital-why-card[data-index="4"]:hover {
-    box-shadow: 0 16px 36px rgba(164, 219, 254, 0.30);
-    border-color: rgba(164, 219, 254, 0.5);
-}
-
-#gpk-ps-widget .digital-why-card[data-index="4"] .digital-why-card-badge {
-    background-color: #A4DBFE;
-    color: #113355;
-    font-weight: 700;
+    color: #6e6e6e;
+    line-height: 1.35;
+    margin: auto 0 0 0;
 }
 
 /* ==========================================
-   PANE 2.6: ABASTECIMIENTOS & ECONOMÍA CIRCULAR
+   PANE 2.6: ABASTECIMIENTOS (FIGMA DESIGN)
    ========================================== */
 #gpk-ps-widget .pane-abastecimientos {
     position: absolute;
-    inset: 0 80px;
+    inset: 0 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -679,259 +643,100 @@
 
 #gpk-ps-widget .abastecimientos-content-wrapper {
     width: 100%;
-    max-width: 1380px;
+    max-width: 1616px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-#gpk-ps-widget .abastecimientos-header {
-    text-align: center;
-    margin-bottom: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#gpk-ps-widget .abastecimientos-eyebrow {
-    font-family: monospace, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2.2px;
-    color: var(--color-green, #5f9d2f);
-    text-transform: uppercase;
-    margin-bottom: 8px;
+    gap: 40px;
 }
 
 #gpk-ps-widget .abastecimientos-main-title {
-    font-family: var(--font-title, 'Open Sans', sans-serif);
-    font-size: 40px;
-    font-weight: 800;
-    color: var(--color-grey-dark, #222222);
-    margin: 0 0 14px 0;
-    letter-spacing: -0.5px;
-    line-height: 1.15;
-}
-
-#gpk-ps-widget .abastecimientos-dashed-line {
-    width: 90px;
-    height: 0;
-    border-bottom: 3px dashed var(--color-green, #5f9d2f);
-    margin-top: 4px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 80px;
+    font-weight: 400;
+    color: #6e6e6e;
+    margin: 0;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    text-align: left;
 }
 
 #gpk-ps-widget .abastecimientos-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 32px;
-    width: 100%;
-    align-items: stretch;
-}
-
-#gpk-ps-widget .abastecimientos-hero-box {
-    position: relative;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #ffffff;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-    min-height: 380px;
     display: flex;
+    gap: 45px;
+    align-items: flex-start;
+    width: 100%;
 }
 
-#gpk-ps-widget .abastecimientos-image-frame {
-    position: relative;
+/* Left Hero Box */
+#gpk-ps-widget .abastecimientos-hero-box {
+    width: 863px;
+    height: 466px;
+    flex: 0 0 863px;
+    box-sizing: border-box;
+}
+
+#gpk-ps-widget .abastecimientos-dashed-frame {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    border: 2px dashed #6e6e6e;
+    box-sizing: border-box;
+    padding: 16px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
 }
 
 #gpk-ps-widget .abastecimientos-hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
 }
 
-#gpk-ps-widget .abastecimientos-hero-box:hover .abastecimientos-hero-img {
-    transform: scale(1.03);
-}
-
-#gpk-ps-widget .abastecimientos-img-badge {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(18, 30, 49, 0.85);
-    backdrop-filter: blur(8px);
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-#gpk-ps-widget .abastecimientos-frame-dashed-border {
-    position: absolute;
-    inset: 12px;
-    border: 2px dashed rgba(255, 255, 255, 0.5);
-    border-radius: 12px;
-    pointer-events: none;
-}
-
+/* Right Info Column */
 #gpk-ps-widget .abastecimientos-info-column {
+    flex: 1;
+    max-width: 708px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    justify-content: space-between;
+    gap: 40px;
+    padding-top: 10px;
 }
 
-#gpk-ps-widget .abastecimientos-card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 28px 28px 24px 28px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#gpk-ps-widget .abastecimientos-card.circular-card {
-    background: linear-gradient(145deg, #ffffff 0%, rgba(95, 157, 47, 0.03) 100%);
-    border-top: 4px solid var(--color-green, #5f9d2f);
-}
-
-#gpk-ps-widget .abastecimientos-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-}
-
-#gpk-ps-widget .abastecimientos-pill-badge {
-    background: var(--color-grey-dark, #222222);
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-    padding: 6px 14px;
-    border-radius: 30px;
-    text-transform: uppercase;
-}
-
-#gpk-ps-widget .abastecimientos-icon-circle {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: rgba(95, 157, 47, 0.1);
-    color: var(--color-green, #5f9d2f);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#gpk-ps-widget .abastecimientos-card-text {
-    font-size: 15px;
-    line-height: 1.55;
-    color: #444444;
-    margin: 0 0 20px 0;
-}
-
-#gpk-ps-widget .abastecimientos-card-text strong {
-    color: var(--color-green, #5f9d2f);
-    font-weight: 700;
-}
-
-#gpk-ps-widget .abastecimientos-card-footer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    padding-top: 14px;
-    border-top: 1px dashed rgba(0, 0, 0, 0.1);
-}
-
-#gpk-ps-widget .abastecimientos-stat-pill {
-    font-size: 11px;
-    font-weight: 700;
-    color: #444444;
-    background: rgba(0, 0, 0, 0.04);
-    padding: 4px 12px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-#gpk-ps-widget .abastecimientos-cta-card {
-    background: rgba(95, 157, 47, 0.04);
-    border: 2px dashed var(--color-green, #5f9d2f);
-    border-radius: 16px;
-    padding: 24px 26px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#gpk-ps-widget .abastecimientos-cta-card:hover {
-    background: rgba(95, 157, 47, 0.08);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(95, 157, 47, 0.12);
-}
-
-#gpk-ps-widget .cta-card-content {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    width: 100%;
-}
-
-#gpk-ps-widget .cta-icon-box {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--color-green, #5f9d2f);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-#gpk-ps-widget .cta-text-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-#gpk-ps-widget .cta-title {
-    font-family: var(--font-title, 'Open Sans', sans-serif);
-    font-size: 16.5px;
-    font-weight: 700;
-    color: var(--color-grey-dark, #222222);
+#gpk-ps-widget .abastecimientos-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #6e6e6e;
     margin: 0;
-    line-height: 1.3;
 }
 
-#gpk-ps-widget .cta-action-link {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--color-green, #5f9d2f);
+#gpk-ps-widget .abastecimientos-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    transition: gap 0.2s ease;
+    justify-content: center;
+    background-color: #5f9d2f;
+    border: 2px solid #5f9d2f;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 10px 24px;
+    width: fit-content;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
 
-#gpk-ps-widget .abastecimientos-cta-card:hover .cta-action-link {
-    gap: 10px;
+#gpk-ps-widget .abastecimientos-btn:hover {
+    background-color: #4e8226;
+    border-color: #4e8226;
+    transform: translateY(-2px);
 }
+
 
 
 
