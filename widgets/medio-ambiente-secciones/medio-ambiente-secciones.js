@@ -19,7 +19,7 @@
     }
   }
 
-  var assetVersion = "mas-figma-v3-" + new Date().getTime();
+  var assetVersion = "mas-viewport-v6-" + new Date().getTime();
 
   // 1. Inyectar estilos CSS si no están presentes
   if (!document.getElementById("gpk-mas-styles")) {
@@ -83,51 +83,58 @@
     if (!widget || widget.dataset.masReady === "true") return;
     widget.dataset.masReady = "true";
 
-    var diagramWrapper = widget.querySelector(".mas-diagram-wrapper");
-    var diagram = widget.querySelector("#mas-diagram");
+    var viewport = widget.querySelector(".mas-viewport");
+    var board = widget.querySelector("#mas-board");
+    var stepsContainer = widget.querySelector(".mas-steps");
     var steps = Array.prototype.slice.call(widget.querySelectorAll(".mas-step"));
     var mobileQuery = window.matchMedia("(max-width: 1172px)");
 
-    // Escalado responsivo del diagrama (1736px de Figma)
-    function scaleDiagram() {
-      if (!diagram || !diagramWrapper || mobileQuery.matches) {
-        if (diagram) diagram.style.removeProperty("--mas-scale");
-        if (diagramWrapper) diagramWrapper.style.removeProperty("--mas-scale");
+    // Escalado Proporcional Unificado (Ajusta alto y ancho para 100vh exacto)
+    function scaleBoard() {
+      if (!board || !viewport || mobileQuery.matches) {
+        if (board) board.style.removeProperty("--mas-scale");
         return;
       }
 
-      var availableWidth = diagramWrapper.clientWidth || window.innerWidth;
-      var scale = Math.min((availableWidth - 32) / 1736, 1);
-      scale = Math.max(scale, 0.45);
+      var availW = viewport.clientWidth || window.innerWidth;
+      var availH = viewport.clientHeight || window.innerHeight;
 
-      diagram.style.setProperty("--mas-scale", scale.toFixed(4));
-      diagramWrapper.style.setProperty("--mas-scale", scale.toFixed(4));
+      // Dimensiones base del tablero: 1850px x 1120px
+      var scaleX = (availW - 32) / 1850;
+      var scaleY = (availH - 24) / 1120;
+      var scale = Math.min(scaleX, scaleY);
+
+      scale = Math.min(Math.max(scale, 0.40), 1.05);
+
+      board.style.setProperty("--mas-scale", scale.toFixed(4));
     }
 
-    // Interacciones Hover / Focus para cada paso
+    // Interacciones Táctiles / Hover (Apple Design: Respuesta Inmediata)
     function setupInteractions() {
       steps.forEach(function (step) {
         var stepNum = step.getAttribute("data-step");
-        var line = widget.querySelector('.mas-line[data-line="' + stepNum + '"]');
+        var linePath = widget.querySelector('.mas-line-path[data-line="' + stepNum + '"]');
 
         function activate() {
+          if (stepsContainer) stepsContainer.classList.add("has-hover");
           step.classList.add("is-active");
-          if (line) line.classList.add("is-active");
+          if (linePath) linePath.classList.add("is-active");
         }
 
         function deactivate() {
+          if (stepsContainer) stepsContainer.classList.remove("has-hover");
           step.classList.remove("is-active");
-          if (line) line.classList.remove("is-active");
+          if (linePath) linePath.classList.remove("is-active");
         }
 
-        step.addEventListener("mouseenter", activate);
-        step.addEventListener("mouseleave", deactivate);
+        step.addEventListener("pointerenter", activate);
+        step.addEventListener("pointerleave", deactivate);
         step.addEventListener("focus", activate);
         step.addEventListener("blur", deactivate);
       });
     }
 
-    // Observador Scroll-Into-View
+    // Observador Scroll-Into-View (Entrada coreografiada)
     function setupScrollIntoView() {
       if (!window.IntersectionObserver) {
         widget.classList.add("mas-revealed");
@@ -141,19 +148,19 @@
           }
         });
       }, {
-        threshold: 0.12
+        threshold: 0.10
       });
 
       observer.observe(widget);
     }
 
     function onResize() {
-      scaleDiagram();
+      scaleBoard();
     }
 
     window.addEventListener("resize", onResize, { passive: true });
 
-    scaleDiagram();
+    scaleBoard();
     setupInteractions();
     setupScrollIntoView();
   }
