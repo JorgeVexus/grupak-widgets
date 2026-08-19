@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medio Ambiente Secciones — Vista Local Grupak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gpk-green: #5f9d2f;
+      --gpk-gray: #6e6e6e;
+      --gpk-dark: #2f302f;
+      --gpk-bg: #f8fafc;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #ffffff;
+      color: var(--gpk-dark);
+      scroll-behavior: smooth;
+    }
+
+    /* Secciones de demostración para probar el scroll-into-view */
+    .demo-hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f0f7ec 100%);
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    .demo-hero-badge {
+      background-color: var(--gpk-green);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(95, 157, 47, 0.25);
+    }
+
+    .demo-hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      color: var(--gpk-dark);
+      margin: 0 0 16px 0;
+      max-width: 800px;
+      line-height: 1.2;
+    }
+
+    .demo-hero p {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--gpk-gray);
+      max-width: 650px;
+      margin: 0 0 32px 0;
+      line-height: 1.6;
+    }
+
+    .demo-scroll-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--gpk-green);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(95, 157, 47, 0.3);
+    }
+
+    .demo-scroll-btn:hover {
+      background-color: #4f8526;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(95, 157, 47, 0.4);
+    }
+
+    .demo-scroll-btn svg {
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(6px); }
+      60% { transform: translateY(3px); }
+    }
+
+    /* Contenedor del Widget */
+    .widget-container-section {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+    }
+
+    /* Sección de pie para testear salida de scroll */
+    .demo-footer {
+      min-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 24px;
+      background-color: #1e293b;
+      color: #ffffff;
+    }
+
+    .demo-footer h2 {
+      font-size: 28px;
+      margin: 0 0 12px 0;
+      color: #ffffff;
+    }
+
+    .demo-footer p {
+      color: #94a3b8;
+      max-width: 500px;
+      margin: 0;
+    }
+
+    /* Barra de herramientas flotante */
+    .demo-toolbar {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 9999;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .demo-toolbar button {
+      background: var(--gpk-green);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .demo-toolbar button:hover {
+      background: #4f8526;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Herramientas Flotante -->
+  <div class="demo-toolbar" aria-label="Controles de prueba">
+    <span>🍃 Medio Ambiente Secciones</span>
+    <button onclick="replayAnimation()">🔄 Reiniciar Animación</button>
+  </div>
+
+  <!-- Hero de demostración -->
+  <section class="demo-hero">
+    <div class="demo-hero-badge">Vista Previa Local</div>
+    <h1>Ciclo de Vida del Producto — Grupak</h1>
+    <p>Desplázate hacia abajo para ver cómo la sección muestra todo el contenido integrado con títulos, descripciones y puntos interactivos.</p>
+    <a href="#widget-anchor" class="demo-scroll-btn">
+      Ver Sección Completa
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- Ancla y Contenedor del Widget -->
+  <div id="widget-anchor" class="widget-container-section">
+    <div id="gpk-mas-widget-root"></div>
+  </div>
+
+  <!-- Sección siguiente -->
+  <section class="demo-footer">
+    <h2>Siguiente sección de la página</h2>
+    <p>La sección del ciclo de vida se integra de forma natural y fluida en cualquier página web.</p>
+  </section>
+
+  <!-- Script del Widget -->
+  <script src="medio-ambiente-secciones.js"></script>
+
+  <!-- Helper para probar replay -->
+  <script>
+    function replayAnimation() {
+      const widget = document.getElementById("gpk-mas-widget");
+      if (!widget) return;
+      widget.classList.remove("mas-revealed");
+      void widget.offsetWidth;
+      widget.classList.add("mas-revealed");
+    }
+  </script>
+</body>
+</html>

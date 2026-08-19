@@ -1,0 +1,459 @@
+:root {
+  --mas-green: #5f9d2f;
+  --mas-gray: #6e6e6e;
+  --mas-gray-dark: #2f302f;
+  --mas-gray-light: #f8fafc;
+  --mas-gray-border: #e2e8f0;
+  --mas-white: #ffffff;
+  --mas-font-main: 'Neue Haas Grotesk Display Pro', 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mas-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --mas-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mas-widget,
+.mas-widget * {
+  box-sizing: border-box;
+}
+
+.mas-widget {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  color: var(--mas-gray);
+  font-family: var(--mas-font-main);
+  overflow: hidden;
+  padding: 60px 0 80px 0;
+  margin: 0;
+}
+
+.mas-container {
+  width: 100%;
+  max-width: 1850px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   1. ENCABEZADO (Figma: ma - hd)
+   ========================================================================== */
+.mas-header {
+  width: 100%;
+  max-width: 1102px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Insignia Verde (Figma: desta) */
+.mas-badge {
+  position: relative;
+  width: 225px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.mas-badge-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--mas-green);
+}
+
+.mas-badge span {
+  position: relative;
+  z-index: 2;
+  color: var(--mas-white);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 3.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Título Principal (Figma: 2493:18589) */
+.mas-title {
+  margin: 0 0 24px 0;
+  color: var(--mas-gray);
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+/* Párrafos Introductorios (Figma: ma - txt1) */
+.mas-intro-copy {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mas-intro-copy p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--mas-gray);
+  text-align: justify;
+}
+
+.mas-intro-copy strong {
+  font-weight: 700;
+  color: var(--mas-gray);
+}
+
+/* ==========================================================================
+   2. RESUMEN ESTADÍSTICO (Figma: 2493:18582)
+   ========================================================================== */
+.mas-stat {
+  width: 100%;
+  max-width: 981px;
+  margin: 20px auto 40px auto;
+  text-align: center;
+}
+
+.mas-stat p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--mas-green);
+  font-weight: 400;
+}
+
+.mas-stat strong {
+  font-weight: 700;
+  color: var(--mas-green);
+}
+
+/* ==========================================================================
+   3. DIAGRAMA INFOGRÁFICO (Figma: 2493:18592 - 1736px x 999px)
+   ========================================================================== */
+.mas-diagram-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  height: calc(999px * var(--mas-scale, 1));
+  min-height: 600px;
+}
+
+.mas-diagram {
+  position: relative;
+  width: 1736px;
+  height: 999px;
+  flex: 0 0 1736px;
+  transform: scale(var(--mas-scale, 1));
+  transform-origin: top center;
+  transition: transform 300ms ease;
+}
+
+/* Rueda Central (Figma: 655px x 655px) */
+.mas-wheel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 655px;
+  height: 655px;
+  margin: 0;
+  z-index: 5;
+}
+
+.mas-wheel-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* Líneas de Conexión (Figma: line01 a line06) */
+.mas-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.mas-line {
+  position: absolute;
+  overflow: visible;
+  opacity: 1;
+}
+
+.mas-line path {
+  fill: none;
+  stroke: var(--mas-gray);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 350ms ease, stroke-width 350ms ease, filter 350ms ease;
+}
+
+/* Posiciones exactas de líneas desde Figma */
+.mas-line-01 { left: 657px; top: 126px; width: 210px; height: 75px; }
+.mas-line-02 { left: 1121px; top: 408px; width: 208px; height: 9px; }
+.mas-line-03 { left: 1115px; top: 649px; width: 214px; height: 40px; }
+.mas-line-04 { left: 686px; top: 778px; width: 201px; height: 94px; }
+.mas-line-05 { left: 37px; top: 639px; width: 567px; height: 47px; }
+.mas-line-06 { left: 139px; top: 369px; width: 480px; height: 92px; }
+
+/* Estado Activo / Hover de Línea */
+.mas-line.is-active path {
+  stroke: var(--mas-green);
+  stroke-width: 2.5;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 5px rgba(95, 157, 47, 0.5));
+}
+
+/* Etapas / Pasos (Figma: Pasos Component) */
+.mas-steps {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+}
+
+.mas-step {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  cursor: pointer;
+  outline: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background-color 300ms ease;
+}
+
+/* Posiciones exactas de pasos desde Figma */
+.mas-step-01 { left: 586px; top: 0px; width: 549px; height: 125px; }
+.mas-step-02 { left: 1187px; top: 296px; width: 549px; height: 109px; }
+.mas-step-03 { left: 1183px; top: 691px; width: 549px; height: 109px; }
+.mas-step-04 { left: 580px; top: 854px; width: 575px; height: 145px; }
+.mas-step-05 { left: 37px; top: 692px; width: 549px; height: 109px; }
+.mas-step-06 { left: 0px; top: 329px; width: 549px; height: 109px; }
+
+/* Número de Etapa (Figma: 50px font, 90px on active) */
+.mas-step-num {
+  flex: 0 0 70px;
+  color: var(--mas-gray);
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  white-space: nowrap;
+  transition: font-size 350ms var(--mas-ease-spring), color 300ms ease, flex-basis 350ms ease;
+}
+
+/* Línea Divisoria Vertical (Figma: imgLine7 / 1px x 109px) */
+.mas-step-divider {
+  flex: 0 0 1px;
+  width: 1px;
+  height: 109px;
+  background-color: var(--mas-gray);
+  opacity: 0.35;
+  transition: background-color 300ms ease, opacity 300ms ease, width 300ms ease;
+}
+
+/* Contenido de Etapa (Figma: 407px width) */
+.mas-step-info {
+  width: 407px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.mas-step-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--mas-gray);
+  white-space: nowrap;
+  transition: color 300ms ease;
+}
+
+.mas-step-desc {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--mas-gray);
+  width: 353px;
+  text-align: left;
+}
+
+.mas-step-desc strong {
+  font-weight: 700;
+  color: var(--mas-gray);
+}
+
+/* ==========================================================================
+   INTERACCIÓN HOVER / FOCUS (Figma Variant 1: Active)
+   ========================================================================== */
+.mas-step:hover,
+.mas-step:focus-visible,
+.mas-step.is-active {
+  background-color: rgba(95, 157, 47, 0.04);
+}
+
+.mas-step:hover .mas-step-num,
+.mas-step:focus-visible .mas-step-num,
+.mas-step.is-active .mas-step-num {
+  font-size: 90px;
+  color: var(--mas-green);
+  flex-basis: 110px;
+}
+
+.mas-step:hover .mas-step-divider,
+.mas-step:focus-visible .mas-step-divider,
+.mas-step.is-active .mas-step-divider {
+  background-color: var(--mas-green);
+  opacity: 1;
+  width: 2px;
+}
+
+.mas-step:hover .mas-step-title,
+.mas-step:focus-visible .mas-step-title,
+.mas-step.is-active .mas-step-title {
+  color: var(--mas-green);
+}
+
+/* ==========================================================================
+   ANIMACIÓN SCROLL-INTO-VIEW (.mas-revealed)
+   ========================================================================== */
+.mas-header,
+.mas-stat,
+.mas-wheel,
+.mas-step,
+.mas-line {
+  opacity: 0;
+  transition: opacity 600ms ease, transform 700ms var(--mas-ease-out);
+}
+
+.mas-header { transform: translateY(-20px); }
+.mas-stat { transform: translateY(15px); }
+.mas-wheel { transform: translate(-50%, -50%) scale(0.85); }
+.mas-step { transform: scale(0.94); }
+
+.mas-revealed .mas-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 50ms;
+}
+
+.mas-revealed .mas-stat {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 200ms;
+}
+
+.mas-revealed .mas-wheel {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition-delay: 300ms;
+}
+
+.mas-revealed .mas-line {
+  opacity: 1;
+  transition-delay: 450ms;
+}
+
+.mas-revealed .mas-step-01 { opacity: 1; transform: scale(1); transition-delay: 400ms; }
+.mas-revealed .mas-step-02 { opacity: 1; transform: scale(1); transition-delay: 500ms; }
+.mas-revealed .mas-step-03 { opacity: 1; transform: scale(1); transition-delay: 600ms; }
+.mas-revealed .mas-step-04 { opacity: 1; transform: scale(1); transition-delay: 700ms; }
+.mas-revealed .mas-step-05 { opacity: 1; transform: scale(1); transition-delay: 800ms; }
+.mas-revealed .mas-step-06 { opacity: 1; transform: scale(1); transition-delay: 900ms; }
+
+/* ==========================================================================
+   RESPONSIVE MOBILE (<= 1172px)
+   ========================================================================== */
+@media (max-width: 1172px) {
+  .mas-widget {
+    padding: 40px 0 60px 0;
+  }
+
+  .mas-title {
+    font-size: clamp(30px, 6vw, 44px);
+    white-space: normal;
+  }
+
+  .mas-intro-copy p,
+  .mas-stat p {
+    font-size: 16px;
+  }
+
+  .mas-diagram-wrapper {
+    height: auto;
+    min-height: 0;
+    display: block;
+  }
+
+  .mas-diagram {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .mas-wheel {
+    position: static;
+    transform: none !important;
+    width: min(340px, 80vw);
+    height: min(340px, 80vw);
+    margin: 0 auto;
+  }
+
+  .mas-lines {
+    display: none;
+  }
+
+  .mas-steps {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .mas-step {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid var(--mas-gray-border);
+    border-radius: 12px;
+  }
+
+  .mas-step-num {
+    font-size: 36px !important;
+    flex-basis: 50px !important;
+  }
+
+  .mas-step-divider {
+    height: 70px;
+  }
+
+  .mas-step-info {
+    width: 100%;
+  }
+
+  .mas-step-desc {
+    width: 100%;
+    font-size: 14px;
+  }
+}
