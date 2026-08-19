@@ -105,8 +105,8 @@
             },
             {
                 id: 'abastecimiento-cdmx',
-                name: 'Abastecimientos CDMX',
-                category: 'Abastecimiento',
+                name: 'Abastecedora CDMX',
+                category: 'Abastecedora',
                 categoryClass: 'abastecimiento',
                 address: 'Calle Prol. José López Bonaga, fracción 1 No. Ext 57 Manzana única Int. 24B, San Lorenzo Tetlixtac, Coacalco de Berriozábal Edo. de Méx. C.P. 55718',
                 phone: '55 2581 0700',
@@ -117,8 +117,8 @@
             },
             {
                 id: 'abastecimiento-puebla',
-                name: 'Abastecimientos Puebla',
-                category: 'Abastecimiento',
+                name: 'Abastecedora Puebla',
+                category: 'Abastecedora',
                 categoryClass: 'abastecimiento',
                 address: 'Resurrección Oriente No. 17, Col. Industrial Resurrección C.P. 72228 Puebla, Puebla.',
                 phone: '55 2581 0700',
@@ -129,8 +129,8 @@
             },
             {
                 id: 'abastecimiento-cuautitlan',
-                name: 'Abastecimientos Cuautitlán',
-                category: 'Abastecimiento',
+                name: 'Abastecedora Cuautitlán',
+                category: 'Abastecedora',
                 categoryClass: 'abastecimiento',
                 address: 'Ebanistas 10, Industrial Xhala, C.P. 54714 Cuautitlán Izcalli; Edo. de México.',
                 phone: '55 2581 0700',
@@ -141,8 +141,8 @@
             },
             {
                 id: 'abastecimiento-queretaro',
-                name: 'Abastecimientos Querétaro',
-                category: 'Abastecimiento',
+                name: 'Abastecedora Querétaro',
+                category: 'Abastecedora',
                 categoryClass: 'abastecimiento',
                 address: 'Acceso II 4, Parque Industrial Benito Juárez, C.P. 76120 Querétaro, Qro.',
                 phone: '55 2581 0700',
@@ -153,8 +153,8 @@
             },
             {
                 id: 'abastecimiento-slp',
-                name: 'Abastecimientos San Luis Potosí',
-                category: 'Abastecimiento',
+                name: 'Abastecedora San Luis Potosí',
+                category: 'Abastecedora',
                 categoryClass: 'abastecimiento',
                 address: 'Carretera 57, 3990 Blvr. San Luis, Industrial San Luis, 78395 San Luis, S.L.P.',
                 phone: '55 2581 0700',
@@ -165,8 +165,8 @@
             },
             {
                 id: 'abastecimiento-toluca',
-                name: 'Abastecimientos Toluca',
-                category: 'Abastecimiento',
+                name: 'Abastecedora Toluca',
+                category: 'Abastecedora',
                 categoryClass: 'abastecimiento',
                 address: 'Calle San Antonio No. 36. Colonia Reforma, San Mateo Atenco. Edo de Mex. CP 52120',
                 phone: '55 2581 0700',
@@ -180,7 +180,7 @@
         // Categorías para filtros (una sola categoría de planta)
         const categories = [
             { id: 'all', name: 'Todas', color: '#6E6E6E' },
-            { id: 'abastecimiento', name: 'Abastecimientos', color: '#5F9D2F' },
+            { id: 'abastecimiento', name: 'Abastecedoras', color: '#5F9D2F' },
             { id: 'planta-papel', name: 'Plantas', color: '#F76D6D' },
             { id: 'corporativo', name: 'Corporativo', color: '#B5E062' }
         ];

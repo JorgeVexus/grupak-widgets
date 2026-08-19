@@ -69,7 +69,7 @@
           { year: "1957", label: "Inicio de operaciones", top: 86 },
           { year: "1962", label: "Apertura de planta", top: 154 },
           { year: "1966", label: "Fabricación de papel", top: 215 },
-          { year: "1983", label: "Abastecimientos", top: 276 },
+          { year: "1983", label: "Abastecedoras", top: 276 },
           { year: "1985", label: "Corporativos", top: 337 },
           { year: "2003", label: "Planta Toluca", top: 398 },
           { year: "2009", label: "Suministro Toluca", top: 459 },

@@ -130,7 +130,7 @@
             { label: "Cajas y empaques convencionales con soluciones de impresión flexográfica", mode: 8 },
             { label: "Impresión digital", mode: 9 },
             { label: "Ventajas digitales", mode: "9b" },
-            { label: "Abastecimientos", mode: "9c" }
+            { label: "Abastecedoras", mode: "9c" }
         ] },
         { label: "Grabados", items: [{ label: "Grabados", mode: 10 }] },
         { label: "Energía", items: [{ label: "Energía", mode: 14 }] }
