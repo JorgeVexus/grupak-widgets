@@ -27,68 +27,43 @@
   color: var(--mas-gray);
   font-family: var(--mas-font-main);
   overflow: hidden;
-  padding: 0;
+  padding: 60px 0 90px 0;
   margin: 0;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ==========================================================================
-   VIEWPORT DE PANTALLA COMPLETA (100vh)
-   ========================================================================== */
-.mas-viewport {
-  position: relative;
+.mas-container {
   width: 100%;
-  height: 100vh;
-  min-height: 600px;
+  max-width: 1850px;
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-/* Tablero Escala Unificada Desktop (1850px x 1120px) */
-.mas-board {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -925px; /* -1850px / 2 */
-  margin-top: -560px;  /* -1120px / 2 */
-  width: 1850px;
-  height: 1120px;
-  flex: 0 0 auto;
-  overflow: hidden;
-  background: #ffffff;
-  transform: scale(var(--mas-scale, 1));
-  transform-origin: center center;
-  transition: transform 300ms var(--mas-ease-apple);
 }
 
 /* ==========================================================================
-   1. ENCABEZADO (Figma: ma - hd) - CENTRADO EXACTO
+   1. ENCABEZADO (Figma: ma - hd)
    ========================================================================== */
 .mas-header {
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translate(-50%, -16px);
-  width: 1102px;
+  width: 100%;
+  max-width: 1102px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  z-index: 10;
+  margin-bottom: 24px;
 }
 
 /* Insignia Verde (Figma: desta) */
 .mas-badge {
   position: relative;
-  width: 190px;
-  height: 44px;
+  width: 220px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 .mas-badge-shape {
@@ -103,38 +78,40 @@
   position: relative;
   z-index: 2;
   color: var(--mas-white);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 3.2px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 /* Título Principal (Figma: 2493:18589) */
 .mas-title {
-  margin: 4px 0 10px 0;
+  margin: 8px 0 20px 0;
   color: var(--mas-gray);
-  font-size: 38px;
+  font-size: 46px;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.25;
   white-space: nowrap;
   text-align: center;
 }
 
-/* Párrafos Introductorios (Figma: ma - txt1) */
+/* Párrafos Introductorios Justificados (Figma: ma - txt1) */
 .mas-intro-copy {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+  margin-top: 4px;
 }
 
 .mas-intro-copy p {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.35;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--mas-gray);
   text-align: justify;
+  text-justify: inter-word;
 }
 
 .mas-intro-copy strong {
@@ -143,25 +120,24 @@
 }
 
 /* ==========================================================================
-   2. RESUMEN ESTADÍSTICO (Figma: 2493:18582) - CENTRADO EXACTO
+   2. RESUMEN ESTADÍSTICO JUSTIFICADO (Figma: 2493:18582)
    ========================================================================== */
 .mas-stat {
-  position: absolute;
-  top: 228px;
-  left: 50%;
-  transform: translate(-50%, 12px);
-  width: 1020px;
-  text-align: center;
-  z-index: 10;
+  width: 100%;
+  max-width: 1102px;
+  margin: 16px auto 52px auto;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .mas-stat p {
   margin: 0;
-  font-size: 14.5px;
-  line-height: 1.35;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--mas-green);
   font-weight: 400;
-  text-align: center;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .mas-stat strong {
@@ -170,15 +146,26 @@
 }
 
 /* ==========================================================================
-   3. DIAGRAMA INFOGRÁFICO PROPORCIONAL (1736px x 840px)
+   3. DIAGRAMA INFOGRÁFICO COMPACTO (1736px x 780px)
    ========================================================================== */
+.mas-diagram-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  height: calc(780px * var(--mas-scale, 1));
+  min-height: 560px;
+}
+
 .mas-diagram {
-  position: absolute;
-  top: 285px;
-  left: 50%;
-  transform: translate(-50%, 0);
+  position: relative;
   width: 1736px;
-  height: 840px;
+  height: 780px;
+  flex: 0 0 1736px;
+  transform: scale(var(--mas-scale, 1));
+  transform-origin: top center;
+  transition: transform 300ms var(--mas-ease-apple);
 }
 
 /* ==========================================================================
@@ -188,7 +175,7 @@
   position: absolute;
   inset: 0;
   width: 1736px;
-  height: 840px;
+  height: 780px;
   z-index: 4;
   pointer-events: none;
   overflow: visible;
@@ -219,15 +206,15 @@
 }
 
 /* ==========================================================================
-   RUEDA CENTRAL (z-index: 10 - Proporcional a 460px)
+   RUEDA CENTRAL (z-index: 10 - Compacta 440px)
    ========================================================================== */
 .mas-wheel {
   position: absolute;
   left: 50%;
-  top: 435px;
+  top: 390px;
   transform: translate(-50%, -50%);
-  width: 460px;
-  height: 460px;
+  width: 440px;
+  height: 440px;
   margin: 0;
   z-index: 10;
   border-radius: 50%;
@@ -244,7 +231,7 @@
 }
 
 /* ==========================================================================
-   ETAPAS / PASOS (z-index: 15)
+   ETAPAS / PASOS COMPACTOS (Apple Design Spatial Harmony)
    ========================================================================== */
 .mas-steps {
   position: absolute;
@@ -255,11 +242,11 @@
 .mas-step {
   position: absolute;
   display: flex;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 0;
   cursor: pointer;
   outline: none;
-  padding: 6px 10px;
+  padding: 6px 8px;
   border-radius: 12px;
   background-color: transparent;
   transition: background-color 200ms var(--mas-ease-apple), opacity 240ms var(--mas-ease-apple), transform 160ms var(--mas-ease-out);
@@ -273,38 +260,40 @@
   transition: transform 80ms var(--mas-ease-out);
 }
 
-/* Posiciones exactas en escala 1850x1120 con rueda de 460px */
-.mas-step-01 { left: 630px; top: 0px; width: 480px; height: 115px; }
-.mas-step-02 { left: 1210px; top: 245px; width: 500px; height: 100px; }
-.mas-step-03 { left: 1210px; top: 575px; width: 500px; height: 100px; }
-.mas-step-04 { left: 630px; top: 720px; width: 480px; height: 110px; }
-.mas-step-05 { left: 30px; top: 575px; width: 500px; height: 100px; }
-.mas-step-06 { left: 30px; top: 245px; width: 500px; height: 100px; }
+/* Posiciones exactas con 20px de holgura en cada lado de la línea */
+.mas-step-01 { left: 650px; top: 0px; width: 440px; height: 110px; }
+.mas-step-02 { left: 1220px; top: 215px; width: 460px; height: 95px; }
+.mas-step-03 { left: 1220px; top: 515px; width: 460px; height: 95px; }
+.mas-step-04 { left: 650px; top: 645px; width: 440px; height: 110px; }
+.mas-step-05 { left: 20px; top: 515px; width: 460px; height: 95px; }
+.mas-step-06 { left: 20px; top: 215px; width: 460px; height: 95px; }
 
-/* Número de Etapa (44px fijo) */
+/* Número de Etapa (54px de ancho + 20px de margen libre antes de la línea) */
 .mas-step-num {
-  flex: 0 0 58px;
-  width: 58px;
+  flex: 0 0 54px;
+  width: 54px;
   color: var(--mas-gray);
   font-size: 44px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.1;
   text-align: center;
   white-space: nowrap;
+  margin-right: 20px; /* 20px de aire exacto a la izquierda de la línea */
   transition: color 240ms var(--mas-ease-apple);
 }
 
-/* Espaciador invisible para preservar separación */
+/* Espaciador invisible */
 .mas-step-spacer {
   flex: 0 0 1px;
   width: 1px;
-  height: 95px;
+  height: 90px;
   visibility: hidden;
 }
 
-/* Contenido de Etapa */
+/* Contenido de Etapa (20px de margen libre después de la línea) */
 .mas-step-info {
   flex: 1;
+  margin-left: 20px; /* 20px de aire exacto a la derecha de la línea */
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -312,7 +301,7 @@
 
 .mas-step-title {
   margin: 0;
-  font-size: 16.5px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
   color: var(--mas-gray);
@@ -320,13 +309,15 @@
   transition: color 240ms var(--mas-ease-apple);
 }
 
+/* Textos de los puntos justificados */
 .mas-step-desc {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.35;
+  font-size: 13.5px;
+  line-height: 1.45;
   color: var(--mas-gray);
-  width: 345px;
-  text-align: left;
+  width: 340px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .mas-step-desc strong {
@@ -372,20 +363,20 @@
   will-change: opacity, transform;
 }
 
-.mas-header { transform: translate(-50%, -16px); }
-.mas-stat { transform: translate(-50%, 12px); }
+.mas-header { transform: translateY(-16px); }
+.mas-stat { transform: translateY(12px); }
 .mas-wheel { transform: translate(-50%, -50%) scale(0.94); }
 .mas-step { transform: translateY(8px); }
 
 .mas-revealed .mas-header {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
   transition-delay: 50ms;
 }
 
 .mas-revealed .mas-stat {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
   transition-delay: 150ms;
 }
 
@@ -411,62 +402,32 @@
    RESPONSIVE MOBILE (<= 1172px) - RECUADROS PUNTEADOS DENTADOS
    ========================================================================== */
 @media (max-width: 1172px) {
-  .mas-viewport {
-    height: auto;
-    min-height: 100vh;
-    display: block;
-    overflow: visible;
-  }
-
-  .mas-board {
-    position: relative;
-    left: auto;
-    top: auto;
-    margin-left: 0;
-    margin-top: 0;
-    width: 100%;
-    height: auto;
-    min-height: 100vh;
-    padding: clamp(32px, 6vw, 48px) clamp(16px, 4vw, 24px) 64px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    transform: none !important;
-    overflow: visible;
-  }
-
-  .mas-header {
-    position: static;
-    transform: none !important;
-    width: 100%;
+  .mas-widget {
+    padding: 40px 0 60px 0;
   }
 
   .mas-title {
-    font-size: clamp(28px, 6vw, 40px);
+    font-size: clamp(30px, 6vw, 42px);
     white-space: normal;
   }
 
-  .mas-intro-copy p {
-    font-size: 15px;
-  }
-
-  .mas-stat {
-    position: static;
-    transform: none !important;
-    width: 100%;
-  }
-
+  .mas-intro-copy p,
   .mas-stat p {
-    font-size: 15px;
+    font-size: 15.5px;
+    line-height: 1.5;
+  }
+
+  .mas-diagram-wrapper {
+    height: auto;
+    min-height: 0;
+    display: block;
   }
 
   .mas-diagram {
     position: relative;
-    top: auto;
-    left: auto;
-    transform: none !important;
     width: 100%;
     height: auto;
+    transform: none !important;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -475,8 +436,8 @@
   .mas-wheel {
     position: static;
     transform: none !important;
-    width: min(340px, 80vw);
-    height: min(340px, 80vw);
+    width: min(320px, 80vw);
+    height: min(320px, 80vw);
     margin: 0 auto;
   }
 
@@ -527,6 +488,7 @@
     color: var(--mas-green) !important;
     line-height: 1;
     padding-top: 2px;
+    margin-right: 0 !important;
   }
 
   /* Línea divisoria vertical punteada en móvil */
@@ -547,6 +509,7 @@
 
   .mas-step-info {
     width: 100%;
+    margin-left: 0 !important;
     gap: 8px;
   }
 

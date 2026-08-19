@@ -19,7 +19,7 @@
     }
   }
 
-  var assetVersion = "mas-viewport-v6-" + new Date().getTime();
+  var assetVersion = "mas-spaced-v7-" + new Date().getTime();
 
   // 1. Inyectar estilos CSS si no están presentes
   if (!document.getElementById("gpk-mas-styles")) {
@@ -83,33 +83,29 @@
     if (!widget || widget.dataset.masReady === "true") return;
     widget.dataset.masReady = "true";
 
-    var viewport = widget.querySelector(".mas-viewport");
-    var board = widget.querySelector("#mas-board");
+    var diagramWrapper = widget.querySelector(".mas-diagram-wrapper");
+    var diagram = widget.querySelector("#mas-diagram");
     var stepsContainer = widget.querySelector(".mas-steps");
     var steps = Array.prototype.slice.call(widget.querySelectorAll(".mas-step"));
     var mobileQuery = window.matchMedia("(max-width: 1172px)");
 
-    // Escalado Proporcional Unificado (Ajusta alto y ancho para 100vh exacto)
-    function scaleBoard() {
-      if (!board || !viewport || mobileQuery.matches) {
-        if (board) board.style.removeProperty("--mas-scale");
+    // Escalado Proporcional del Diagrama
+    function scaleDiagram() {
+      if (!diagram || !diagramWrapper || mobileQuery.matches) {
+        if (diagram) diagram.style.removeProperty("--mas-scale");
+        if (diagramWrapper) diagramWrapper.style.removeProperty("--mas-scale");
         return;
       }
 
-      var availW = viewport.clientWidth || window.innerWidth;
-      var availH = viewport.clientHeight || window.innerHeight;
+      var availableWidth = diagramWrapper.clientWidth || window.innerWidth;
+      var scale = Math.min((availableWidth - 32) / 1736, 1);
+      scale = Math.max(scale, 0.45);
 
-      // Dimensiones base del tablero: 1850px x 1120px
-      var scaleX = (availW - 32) / 1850;
-      var scaleY = (availH - 24) / 1120;
-      var scale = Math.min(scaleX, scaleY);
-
-      scale = Math.min(Math.max(scale, 0.40), 1.05);
-
-      board.style.setProperty("--mas-scale", scale.toFixed(4));
+      diagram.style.setProperty("--mas-scale", scale.toFixed(4));
+      diagramWrapper.style.setProperty("--mas-scale", scale.toFixed(4));
     }
 
-    // Interacciones Táctiles / Hover (Apple Design: Respuesta Inmediata)
+    // Interacciones Táctiles / Hover (Apple Design)
     function setupInteractions() {
       steps.forEach(function (step) {
         var stepNum = step.getAttribute("data-step");
@@ -134,7 +130,7 @@
       });
     }
 
-    // Observador Scroll-Into-View (Entrada coreografiada)
+    // Observador Scroll-Into-View
     function setupScrollIntoView() {
       if (!window.IntersectionObserver) {
         widget.classList.add("mas-revealed");
@@ -155,12 +151,12 @@
     }
 
     function onResize() {
-      scaleBoard();
+      scaleDiagram();
     }
 
     window.addEventListener("resize", onResize, { passive: true });
 
-    scaleBoard();
+    scaleDiagram();
     setupInteractions();
     setupScrollIntoView();
   }
