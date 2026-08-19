@@ -10514,7 +10514,7 @@
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    padding: 12px 32px 32px 32px;
+    padding: 12px 32px 44px 32px;
 }
 
 /* Top Row: Tag + Big Number */
@@ -10594,7 +10594,7 @@
 #gpk-products-widget .digital-why-card-title {
     font-family: var(--font-title, 'Open Sans', sans-serif);
     font-size: 21px;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     color: #6e6e6e;
     line-height: 1.35;
@@ -10612,7 +10612,7 @@
     text-align: left;
 }
 
-/* Card Highlight */
+/* Card Highlight (Elevated above bottom border) */
 #gpk-ps-widget .digital-why-card-highlight,
 #gpk-products-widget .digital-why-card-highlight {
     font-family: var(--font-title, 'Open Sans', sans-serif);
@@ -10620,7 +10620,7 @@
     font-weight: 700;
     color: #6e6e6e;
     line-height: 1.35;
-    margin: auto 0 0 0;
+    margin: auto 0 16px 0;
 }
 
 /* Mobile Styling (< 767px) - Encapsulated to mode-9b only */
