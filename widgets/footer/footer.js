@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/footer" : productionBaseURL;
-    var assetVersion = "20260729-bg-webp-1";
+    var assetVersion = "20260821-footer-links-1";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -96,8 +96,10 @@
     function bindProductLinks(footer) {
         footer.querySelectorAll('[data-gpk-action="product"]').forEach(function (link) {
             link.addEventListener("click", function (event) {
-                var slide = parseInt(link.getAttribute("data-gpk-slide"), 10);
-                if (Number.isNaN(slide)) return;
+                var rawSlide = link.getAttribute("data-gpk-slide");
+                if (!rawSlide) return;
+                var parsed = parseInt(rawSlide, 10);
+                var slide = String(parsed) === rawSlide ? parsed : rawSlide;
 
                 event.preventDefault();
                 goToProductSlide(slide);
@@ -106,8 +108,9 @@
     }
 
     function goToProductSlide(slide) {
-        if (typeof window.gpkGoToProductsSlide === "function") {
-            window.gpkGoToProductsSlide(slide);
+        var navFunc = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
+        if (typeof navFunc === "function") {
+            navFunc(slide);
             return;
         }
 
@@ -164,8 +167,13 @@
             pending = null;
         }
 
-        if (pending !== null && typeof window.gpkGoToProductsSlide === "function") {
-            window.gpkGoToProductsSlide(parseInt(pending, 10));
+        if (pending !== null) {
+            var navFunc = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
+            if (typeof navFunc === "function") {
+                var parsed = parseInt(pending, 10);
+                var slide = String(parsed) === pending ? parsed : pending;
+                navFunc(slide);
+            }
         }
     });
 })();
