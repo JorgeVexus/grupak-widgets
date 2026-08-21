@@ -35,7 +35,7 @@
         }
     }
 
-    const assetVersion = "seccion-reveal-37";
+    const assetVersion = "seccion-reveal-45";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -614,9 +614,13 @@
         if (!screen) return;
 
         [
+            screen.querySelector(".abastecimientos-eyebrow"),
             screen.querySelector(".abastecimientos-main-title"),
+            screen.querySelector(".abastecimientos-green-line"),
+            screen.querySelector(".abastecimientos-desc"),
+            screen.querySelector(".abastecimientos-cta-row"),
             screen.querySelector(".abastecimientos-hero-box"),
-            screen.querySelector(".abastecimientos-info-column")
+            screen.querySelector(".abastecimientos-kpi-block")
         ].filter(Boolean).forEach(element => element.dataset.psAbastecimientosReveal = "1");
 
         const elements = Array.from(screen.querySelectorAll("[data-ps-abastecimientos-reveal]"));
