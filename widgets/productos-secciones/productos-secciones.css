@@ -229,15 +229,32 @@
         transform: none !important;
         text-align: left !important;
         align-items: flex-start !important;
+        max-width: 1040px !important;
+        width: 1040px !important;
     }
 
     #gpk-ps-widget .products-board.mode-10 .grabados-main-title {
         text-align: left !important;
-        margin-bottom: 0 !important;
+        margin-bottom: 12px !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-10 .grabados-intro-text {
+        max-width: 1040px !important;
+        width: 1040px !important;
     }
 
     #gpk-ps-widget .products-board.mode-10 .grabados-intro-text p {
         text-align: left !important;
+        max-width: 1040px !important;
+        font-size: 18px !important;
+        line-height: 1.45 !important;
+        color: #6e6e6e !important;
+        margin-bottom: 6px !important;
+    }
+
+    #gpk-ps-widget .products-board.mode-10 .grabados-intro-text strong {
+        font-weight: 700 !important;
+        color: #27352b !important;
     }
 
     /* Energía: header centered in desktop */

@@ -35,7 +35,7 @@
         }
     }
 
-    const assetVersion = "seccion-reveal-45";
+    const assetVersion = "seccion-reveal-47";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -685,7 +685,7 @@
 
         const intro = screen.querySelector(".grabados-intro-text");
         if (intro) {
-            intro.textContent = "Servicio integral de grabados y preprensa para la industria del empaque. Desarrollamos y montamos placas asegurando reproducción fiel de arte.";
+            intro.innerHTML = "<p>Servicio integral de grabados y preprensa para la industria del empaque.</p><p><strong>Desarrollamos y montamos placas para</strong> corrugado, etiquetas, material flexible, bolsas de papel y barnices offset, <strong>asegurando una reproducción fiel del arte, control de color y óptimos resultados en prensa.</strong></p>";
         }
 
         const mobileCopy = [
