@@ -35,7 +35,7 @@
         }
     }
 
-    const assetVersion = "seccion-reveal-32";
+    const assetVersion = "seccion-reveal-37";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -263,11 +263,16 @@
     }
 
     function resolveAssetURLs(root) {
-        const assetPrefix = "widgets/productos-interactivos/";
+        const sourcePrefix = "widgets/productos-interactivos/";
+        const selfPrefix = "widgets/productos-secciones/";
         root.querySelectorAll("img[src]").forEach(img => {
             const src = img.getAttribute("src");
-            if (!src || !src.startsWith(assetPrefix)) return;
-            img.src = rebuildAssetURL(src.slice(assetPrefix.length));
+            if (!src) return;
+            if (src.startsWith(sourcePrefix)) {
+                img.src = rebuildAssetURL(src.slice(sourcePrefix.length), sourceBaseURL);
+            } else if (src.startsWith(selfPrefix)) {
+                img.src = rebuildAssetURL(src.slice(selfPrefix.length), selfBaseURL);
+            }
         });
         root.querySelectorAll(".grabados-green-card[data-index]").forEach(card => {
             const index = card.getAttribute("data-index");
@@ -275,8 +280,9 @@
         });
     }
 
-    function rebuildAssetURL(relativePath) {
-        return `${sourceBaseURL}/` + relativePath.split("/").map(encodeURIComponent).join("/");
+    function rebuildAssetURL(relativePath, baseURL) {
+        const base = baseURL || sourceBaseURL;
+        return `${base}/` + relativePath.split("/").map(encodeURIComponent).join("/");
     }
 
     // Swap the two Láminas stack images (Kraft / Blanco) whose source PNGs are
