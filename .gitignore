@@ -11,3 +11,7 @@
 # Ignore IDE metadata
 .claude/
 .gemini/
+
+# Ignore assets
+assets/
+

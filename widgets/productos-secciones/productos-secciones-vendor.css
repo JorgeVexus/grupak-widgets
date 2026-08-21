@@ -2439,16 +2439,16 @@
 #gpk-ps-widget .products-board.mode-2 .papel-hero-image {
     opacity: 1;
     left: 50%;
-    top: 45%;
-    width: 520px;
-    height: 380px;
+    top: 48%;
+    width: 320px;
+    height: 480px;
     transform: translate(-50%, -50%);
     transition-delay: 0s;
 }
 
 #gpk-ps-widget .products-board.mode-2 .papel-main-image {
-    transform: rotate(-90deg);
-    filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.15));
+    transform: rotate(0deg);
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
 }
 
 /* Controlled by JS and scroll inside Mode 2 */
@@ -2476,16 +2476,17 @@
 /* Transition to top-left when entering Mode 3 */
 #gpk-ps-widget .products-board.mode-3 .papel-hero-image {
     opacity: 1;
-    left: 420px;
-    top: 75px;
-    width: 160px;
+    left: 320px;
+    top: 90px;
+    width: 75px;
+    height: 115px;
     transform: translate(0, 0);
     transition-delay: 0s;
 }
 
 #gpk-ps-widget .products-board.mode-3 .papel-main-image {
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
-    transform: rotate(-90deg);
+    transform: rotate(0deg);
 }
 
 #gpk-ps-widget .products-board.mode-3 .papel-shared-title {

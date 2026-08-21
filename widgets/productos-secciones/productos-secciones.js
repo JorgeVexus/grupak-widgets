@@ -35,7 +35,7 @@
         }
     }
 
-    const assetVersion = "seccion-reveal-30";
+    const assetVersion = "seccion-reveal-32";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
