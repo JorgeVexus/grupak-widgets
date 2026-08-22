@@ -35,7 +35,7 @@
         }
     }
 
-    const assetVersion = "seccion-reveal-47";
+    const assetVersion = "seccion-reveal-48";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -725,12 +725,12 @@
 
         const descriptions = [
             "Alcanzamos hasta un 80% de rendimiento energético mediante nuestra tecnología de cogeneración simultánea.",
-            "Al aprovechar de forma más eficiente el combustible, contribuimos a la reducción de emisiones asociadas a nuestras operaciones.",
+            "Al aprovechar mejor el combustible, <strong>reducimos emisiones</strong> y mejoramos nuestra huella de carbono.",
             "Generamos parte importante de la energía que utilizamos, asegurando continuidad operativa total en planta."
         ];
         screen.querySelectorAll(".energia-row").forEach((row, index) => {
             const paragraph = row.querySelector(".energia-row-content p");
-            if (paragraph && descriptions[index]) paragraph.textContent = descriptions[index];
+            if (paragraph && descriptions[index]) paragraph.innerHTML = descriptions[index];
         });
     }
 

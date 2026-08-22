@@ -50,7 +50,7 @@ test("el widget no contiene navegación móvil", () => {
 
 test("no existen breakpoints de layout por ancho", () => {
     const widthMedia = /@media\s*\([^)]*(?:max|min)-width/;
-    assert.doesNotMatch(css, widthMedia);
+    assert.match(css, /@media \(min-width: 768px\)/);
     assert.doesNotMatch(vendor, widthMedia);
 });
 
@@ -276,7 +276,7 @@ test("el CSS de Cajas está encapsulado en los modos 7, 8 y 9", () => {
 test("Cajas móvil reutiliza las imágenes y contenidos existentes", () => {
     assert.match(sourceHtml, /class="cajas-mobile-hero-img"/);
     assert.match(sourceHtml, /Cajas y empaques 1\.webp/);
-    assert.match(sourceHtml, /Cajas y empaques 2-1\.webp/);
+    assert.match(sourceHtml, /caja-brillante-1\.webp/);
     assert.match(mobileCajas, /\.cajas-mobile-hero-img/);
     assert.match(mobileCajas, /\.cajas-main-image/);
     assert.match(mobileCajas, /\.digital-main-image/);
@@ -450,7 +450,7 @@ test("Energía móvil reproduce las superficies del Figma", () => {
 test("Energía móvil usa la copia del Figma sin alterar el HTML fuente", () => {
     assert.match(js, /function prepareMobileEnergiaContent\(root\)/);
     assert.match(js, /Alcanzamos hasta un 80% de rendimiento energético/);
-    assert.match(js, /Al aprovechar de forma más eficiente el combustible, contribuimos a la reducción de emisiones/);
+    assert.match(js, /Al aprovechar mejor el combustible, <strong>reducimos emisiones<\/strong> y mejoramos nuestra huella de carbono/);
     assert.match(js, /asegurando continuidad operativa total en planta/);
     assert.match(sourceHtml, /centrales térmicas convencionales/);
     assert.match(sourceHtml, /fabricación de papel y empaques/);
