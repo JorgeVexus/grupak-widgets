@@ -16,7 +16,7 @@
     var productionWidgetsURL = new URL("https://grupak-widgets.vercel.app/widgets/");
     var widgetsBaseURL = isProduction ? productionWidgetsURL : scriptBaseURL && new URL("../", scriptBaseURL);
     var chatBaseURL = isProduction ? new URL("chat-flotante/", productionWidgetsURL) : scriptBaseURL;
-    var assetVersion = "20260725-task-5";
+    var assetVersion = "20260907-contact-links";
     var controllerKey = "gpkFloatingChatController";
     var mountGeneration = 0;
     var observedRoot = null;
@@ -218,18 +218,28 @@
             }
 
             // Navigation mappings for contact/form options
-            if (actionName === "whatsapp" || actionName === "general-contact") {
-                if (typeof window.gpkOpenFormulario === "function") {
-                    window.gpkOpenFormulario("contacto");
-                } else {
-                    window.location.href = "/contacto?gpkForm=contacto";
+            if (actionName === "whatsapp") {
+                var waURL = "https://wa.me/5214776873939";
+                var opened = typeof window.open === "function" ? window.open(waURL, "_blank", "noopener,noreferrer") : null;
+                if (!opened) {
+                    window.location.href = waURL;
                 }
                 closeWidget();
                 return;
             }
 
             if (actionName === "phone") {
-                window.location.href = "tel:8000000000";
+                window.location.href = "tel:+5214776873939";
+                closeWidget();
+                return;
+            }
+
+            if (actionName === "general-contact") {
+                if (typeof window.gpkOpenFormulario === "function") {
+                    window.gpkOpenFormulario("contacto");
+                } else {
+                    window.location.href = "/contacto?gpkForm=contacto";
+                }
                 closeWidget();
                 return;
             }
