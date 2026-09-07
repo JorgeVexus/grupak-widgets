@@ -6,13 +6,13 @@
     --com-orange: #f15a24;
     --com-font: 'Open Sans', sans-serif;
     --com-ease: cubic-bezier(0.25, 1, 0.5, 1);
-    --com-dur: 760ms;
+    --com-dur: 420ms;
 }
 
 .com-widget {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    height: 400vh;
     background: var(--com-bg);
     color: var(--com-gray);
     font-family: var(--com-font);
@@ -352,11 +352,13 @@
 }
 
 .com-scroll-spacer {
-    height: 500vh;
+    display: none !important;
+    height: 0 !important;
 }
 
 @media (max-width: 1025px) {
     .com-widget {
+        height: auto;
         min-height: 0;
         overflow: visible;
     }
