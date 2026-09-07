@@ -16,7 +16,7 @@
     var productionWidgetsURL = new URL("https://grupak-widgets.vercel.app/widgets/");
     var widgetsBaseURL = isProduction ? productionWidgetsURL : scriptBaseURL && new URL("../", scriptBaseURL);
     var chatBaseURL = isProduction ? new URL("chat-flotante/", productionWidgetsURL) : scriptBaseURL;
-    var assetVersion = "20260907-contact-links-2";
+    var assetVersion = "20260907-contact-links-4";
     var controllerKey = "gpkFloatingChatController";
     var mountGeneration = 0;
     var observedRoot = null;
@@ -220,16 +220,15 @@
             // Navigation mappings for contact/form options
             if (actionName === "whatsapp") {
                 var waURL = "https://wa.me/+525551823271";
-                var opened = typeof window.open === "function" ? window.open(waURL, "_blank", "noopener,noreferrer") : null;
-                if (!opened) {
-                    window.location.href = waURL;
+                var a = document.createElement("a");
+                a.href = waURL;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                document.body.appendChild(a);
+                a.click();
+                if (a.parentNode) {
+                    a.parentNode.removeChild(a);
                 }
-                closeWidget();
-                return;
-            }
-
-            if (actionName === "phone") {
-                window.location.href = "tel:+525588427438";
                 closeWidget();
                 return;
             }

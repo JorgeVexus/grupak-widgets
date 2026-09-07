@@ -145,7 +145,6 @@ test("renders the complete five-view specification with inert final choices", as
         "Hablar con un asesor",
         "Información de productos",
         "WhatsApp",
-        "Teléfono",
         "Papel",
         "Cajas y empaques",
         "Lámina de cartón corrugado",
@@ -158,7 +157,7 @@ test("renders the complete five-view specification with inert final choices", as
         assert.ok(renderedText.includes(label), "Missing action: " + label);
     });
     assert.equal(document.querySelectorAll("a").length, 0);
-    assert.equal(document.querySelectorAll("button[type=\"button\"][data-final-action]").length, 10);
+    assert.equal(document.querySelectorAll("button[type=\"button\"][data-final-action]").length, 9);
     assert.doesNotMatch(renderedText, /[\u{1F300}-\u{1FAFF}]/u);
 });
 
