@@ -11,6 +11,7 @@
 .mas-alla-container {
     position: relative;
     width: 100%;
+    height: 400vh;
     font-family: var(--font-main);
     background-color: #fff;
 }
@@ -324,10 +325,11 @@
 }
 
 /* ==========================================================================
-   SCROLL SPACER
+   SCROLL SPACER (Unificado en .mas-alla-container)
    ========================================================================== */
 .mas-alla-scroll-spacer {
-    height: 400vh;
+    display: none !important;
+    height: 0 !important;
 }
 
 /* ==========================================================================
@@ -538,8 +540,9 @@
         width: 20px;
     }
 
-    /* Scroll spacer stays at 400vh to drive carousel via scroll */
+    /* Scroll spacer unificado en contenedor */
     .mas-alla-scroll-spacer {
-        height: 400vh;
+        display: none !important;
+        height: 0 !important;
     }
 }

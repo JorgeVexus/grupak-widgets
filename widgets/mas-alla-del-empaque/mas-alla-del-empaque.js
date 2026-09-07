@@ -6,7 +6,7 @@
     const baseURL = isLocalhost 
         ? "/widgets/mas-alla-del-empaque" 
         : "https://grupak-widgets.vercel.app/widgets/mas-alla-del-empaque";
-    const internalBuild = "20260907-snap-v1";
+    const internalBuild = "20260907-snap-v2";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-mas-alla-styles")) {
@@ -64,7 +64,6 @@
 
         const images = widget.querySelectorAll(".mas-alla-slide-img");
         const items = widget.querySelectorAll(".mas-alla-item");
-        const spacer = widget.querySelector(".mas-alla-scroll-spacer");
         const wrapper = widget.querySelector(".mas-alla-sticky-wrapper");
         const itemsContainer = widget.querySelector(".mas-alla-items-container");
 
@@ -128,21 +127,19 @@
 
             updateActiveState(index);
 
-            if (!spacer) return;
+            if (!widget) return;
             setNavigating(350);
 
-            const spacerRect = spacer.getBoundingClientRect();
+            const rect = widget.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const spacerTop = spacerRect.top + scrollTop;
-            const spacerHeight = spacer.offsetHeight;
-            const viewportHeight = window.innerHeight;
-            const scrollableRange = spacerHeight - viewportHeight;
+            const widgetTop = rect.top + scrollTop;
+            const scrollHeight = rect.height - window.innerHeight;
 
-            if (scrollableRange <= 0) return;
+            if (scrollHeight <= 0) return;
 
-            // Target the midpoint of the index's range
-            const targetProgress = (index + 0.5) / TOTAL;
-            const targetScrollY = Math.round(spacerTop + targetProgress * scrollableRange);
+            // Target the exact progress without dead zones (0 to 1)
+            const targetProgress = index / (TOTAL - 1);
+            const targetScrollY = Math.round(widgetTop + targetProgress * scrollHeight);
 
             window.scrollTo(0, targetScrollY);
         }
@@ -175,13 +172,23 @@
 
         // ── Scroll handler (for manual page scroll / scrollbar dragging) ───
         function handleScroll() {
-            if (!spacer || isNavigating) return;
-            const rect = spacer.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            const scrollProgress = -rect.top / (rect.height - viewportHeight);
-            const progress = Math.max(0, Math.min(1, scrollProgress));
-            const index = Math.min(Math.floor(progress * TOTAL), TOTAL - 1);
-            updateActiveState(index);
+            if (!widget || isNavigating) return;
+            const rect = widget.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const widgetTop = rect.top + scrollTop;
+            const scrollHeight = rect.height - window.innerHeight;
+
+            if (scrollHeight <= 0) return;
+            if (scrollTop < widgetTop - 10 || scrollTop > widgetTop + scrollHeight + 10) return;
+
+            const relativeScroll = scrollTop - widgetTop;
+            let progress = relativeScroll / scrollHeight;
+            progress = Math.max(0, Math.min(1, progress));
+
+            const targetIndex = Math.min(Math.round(progress * (TOTAL - 1)), TOTAL - 1);
+            if (targetIndex !== currentIndex) {
+                updateActiveState(targetIndex);
+            }
         }
 
         // ── Gesture Wheel Stepper ──────────────────────────────────────────
@@ -189,7 +196,7 @@
             if (isMobile()) return;
 
             const rect = widget.getBoundingClientRect();
-            const isPinned = rect.top <= 4 && rect.bottom >= window.innerHeight - 4;
+            const isPinned = rect.top <= 30 && rect.bottom >= window.innerHeight - 30;
             if (!isPinned) return;
 
             const delta = e.deltaY;
@@ -246,7 +253,7 @@
             if (!isVisible) return;
 
             if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "ArrowDown" || e.key === "ArrowRight") {
-                const isPinned = rect.top <= 4 && rect.bottom >= window.innerHeight - 4;
+                const isPinned = rect.top <= 30 && rect.bottom >= window.innerHeight - 30;
                 if (!isPinned) return;
 
                 const now = performance.now();
