@@ -6,7 +6,7 @@
     const baseURL = isLocalhost 
         ? "/widgets/mas-alla-del-empaque" 
         : "https://grupak-widgets.vercel.app/widgets/mas-alla-del-empaque";
-    const internalBuild = "20260907-snap-v2";
+    const internalBuild = "20260907-snap-v3";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-mas-alla-styles")) {
@@ -78,7 +78,7 @@
         let wheelAccumulator = 0;
         let lastKeyTime = 0;
 
-        function setNavigating(duration = 350) {
+        function setNavigating(duration = 400) {
             isNavigating = true;
             clearTimeout(navigatingTimer);
             navigatingTimer = setTimeout(() => {
@@ -128,7 +128,8 @@
             updateActiveState(index);
 
             if (!widget) return;
-            setNavigating(350);
+            lastStepTime = performance.now();
+            setNavigating(400);
 
             const rect = widget.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -202,14 +203,22 @@
             const delta = e.deltaY;
             if (Math.abs(delta) < 0.5) return;
 
-            // Escape en extremos superior (0) e inferior (TOTAL - 1) para permitir scroll continuo de la página
+            const now = performance.now();
+
+            // Si estamos en transición activa o absorbiendo inercia del paso anterior, no permitir escapes prematuros
+            if (isNavigating || (now - lastStepTime < 400)) {
+                e.preventDefault();
+                wheelAccumulator = 0;
+                return;
+            }
+
+            // Escape en extremos: SOLO si el usuario YA estaba reposando en el extremo (no durante la llegada)
             if (currentIndex === 0 && delta < 0) return;
             if (currentIndex === TOTAL - 1 && delta > 0) return;
 
             // Evitar scroll nativo mientras navegamos dentro del widget
             e.preventDefault();
 
-            const now = performance.now();
             const isMouseWheel = e.deltaMode !== 0 || Math.abs(delta) >= 50;
             const cooldown = isMouseWheel ? 260 : 380;
 
