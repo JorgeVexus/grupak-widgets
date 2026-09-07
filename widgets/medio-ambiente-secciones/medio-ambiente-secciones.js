@@ -19,7 +19,7 @@
     }
   }
 
-  var assetVersion = "mas-spaced-v7-" + new Date().getTime();
+  var assetVersion = "20260907-zoom-fix-v2";
 
   // 1. Inyectar estilos CSS si no están presentes
   if (!document.getElementById("gpk-mas-styles")) {
@@ -89,15 +89,20 @@
     var steps = Array.prototype.slice.call(widget.querySelectorAll(".mas-step"));
     var mobileQuery = window.matchMedia("(max-width: 1172px)");
 
-    // Escalado Proporcional del Diagrama
+    // Escalado Proporcional del Diagrama (Protegido contra zoom 125%, 150%, etc.)
     function scaleDiagram() {
-      if (!diagram || !diagramWrapper || mobileQuery.matches) {
+      var isMobile = window.innerWidth <= 1172 || (mobileQuery && mobileQuery.matches);
+      if (!diagram || !diagramWrapper || isMobile) {
         if (diagram) diagram.style.removeProperty("--mas-scale");
         if (diagramWrapper) diagramWrapper.style.removeProperty("--mas-scale");
         return;
       }
 
-      var availableWidth = diagramWrapper.clientWidth || window.innerWidth;
+      var availableWidth = diagramWrapper.clientWidth || (widget ? widget.clientWidth : 0) || window.innerWidth;
+      if (!availableWidth || availableWidth < 200) {
+        availableWidth = window.innerWidth;
+      }
+
       var scale = Math.min((availableWidth - 32) / 1736, 1);
       scale = Math.max(scale, 0.45);
 
@@ -155,6 +160,22 @@
     }
 
     window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("orientationchange", onResize, { passive: true });
+
+    if (mobileQuery) {
+      if (typeof mobileQuery.addEventListener === "function") {
+        mobileQuery.addEventListener("change", onResize);
+      } else if (typeof mobileQuery.addListener === "function") {
+        mobileQuery.addListener(onResize);
+      }
+    }
+
+    if (window.ResizeObserver && diagramWrapper) {
+      var resizeObs = new ResizeObserver(function () {
+        scaleDiagram();
+      });
+      resizeObs.observe(diagramWrapper);
+    }
 
     scaleDiagram();
     setupInteractions();

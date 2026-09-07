@@ -125,7 +125,7 @@
 .mas-stat {
   width: 100%;
   max-width: 1102px;
-  margin: 16px auto 52px auto;
+  margin: 20px auto clamp(40px, 4.5vw, 64px) auto;
   text-align: justify;
   text-justify: inter-word;
 }
@@ -149,21 +149,25 @@
    3. DIAGRAMA INFOGRÁFICO COMPACTO (1736px x 780px)
    ========================================================================== */
 .mas-diagram-wrapper {
+  position: relative;
   width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   overflow: visible;
   height: calc(780px * var(--mas-scale, 1));
-  min-height: 560px;
+  margin-top: clamp(28px, 4vw, 64px);
+  margin-bottom: 40px;
 }
 
 .mas-diagram {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 0;
   width: 1736px;
   height: 780px;
-  flex: 0 0 1736px;
-  transform: scale(var(--mas-scale, 1));
+  transform: translateX(-50%) scale(var(--mas-scale, 1));
   transform-origin: top center;
   transition: transform 300ms var(--mas-ease-apple);
 }
@@ -421,10 +425,14 @@
     height: auto;
     min-height: 0;
     display: block;
+    margin-top: 24px;
+    margin-bottom: 0;
   }
 
   .mas-diagram {
     position: relative;
+    left: auto;
+    top: auto;
     width: 100%;
     height: auto;
     transform: none !important;
