@@ -5,7 +5,7 @@
     const baseURL = isLocalhost 
         ? "/widgets/linea-tiempo" 
         : "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
-    const internalBuild = "20260907-fluid-v2";
+    const internalBuild = "20260907-sync-instant-v5";
     const scriptSearch = document.currentScript ? new URL(document.currentScript.src).search : "";
     const assetVersion = scriptSearch 
         ? `${scriptSearch}&build=${internalBuild}`
@@ -90,9 +90,7 @@
         let isNavigating = false;
         let navTimer = null;
         let wheelAccumulator = 0;
-        let lastWheelStepTime = 0;
-        const WHEEL_THRESHOLD = 35;
-        const WHEEL_COOLDOWN = 420;
+        let lastStepTime = 0;
 
         const tracker = root.querySelector(".timeline-scroll-tracker");
         const viewport = root.querySelector(".timeline-viewport");
@@ -192,7 +190,7 @@
             return;
           }
 
-          setNavigating(480);
+          setNavigating(350);
           const rect = tracker.getBoundingClientRect();
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           const trackerTop = rect.top + scrollTop;
@@ -202,10 +200,7 @@
           const targetProgress = index / (totalSlides - 1);
           const targetScrollY = Math.round(trackerTop + targetProgress * scrollHeight);
 
-          window.scrollTo({
-            top: targetScrollY,
-            behavior: "smooth"
-          });
+          window.scrollTo(0, targetScrollY);
         }
 
         // Native Scroll handler for Desktop
@@ -232,7 +227,7 @@
           }
         }
 
-        // Apple-style Gesture Wheel Stepper (evita brincos bruscos y scrolls excesivos)
+        // Gesture Wheel Stepper: respuesta inmediata a 1 sola muesca de mouse rueda y absorción de inercia de trackpad
         function handleWheel(e) {
           if (window.innerWidth <= 768 || !tracker) return;
 
@@ -241,28 +236,49 @@
           if (!isPinned) return;
 
           const delta = e.deltaY;
-          const now = performance.now();
+          if (Math.abs(delta) < 0.5) return;
 
-          // Escape de límites superior e inferior
+          // Escape en extremos superior (1957) e inferior (2024) para permitir scroll continuo de la página
           if (currentIndex === 0 && delta < 0) return;
           if (currentIndex === milestones.length - 1 && delta > 0) return;
 
+          // Evitar scroll nativo mientras navegamos dentro del widget
           e.preventDefault();
 
-          if (now - lastWheelStepTime < WHEEL_COOLDOWN) {
+          const now = performance.now();
+          const isMouseWheel = e.deltaMode !== 0 || Math.abs(delta) >= 50;
+          const cooldown = isMouseWheel ? 260 : 380;
+
+          // Si estamos dentro de la ventana de enfriamiento del paso anterior
+          if (now - lastStepTime < cooldown) {
+            wheelAccumulator = 0;
             return;
           }
 
-          wheelAccumulator += delta;
+          // En trackpads, ignorar micro-inercia residual de baja intensidad (< 14px)
+          if (!isMouseWheel && Math.abs(delta) < 14) {
+            wheelAccumulator = 0;
+            return;
+          }
 
-          if (wheelAccumulator > WHEEL_THRESHOLD) {
+          // En mouse convencional, 1 sola muesca (notch) avanza de inmediato al siguiente año
+          if (isMouseWheel) {
+            lastStepTime = now;
             wheelAccumulator = 0;
-            lastWheelStepTime = now;
-            goToSlide(currentIndex + 1, true);
-          } else if (wheelAccumulator < -WHEEL_THRESHOLD) {
+            const step = delta > 0 ? 1 : -1;
+            goToSlide(currentIndex + step, true);
+            return;
+          }
+
+          // Para trackpad / touchpad continuo, acumular delta con umbral suave
+          wheelAccumulator += delta;
+          const TRACKPAD_THRESHOLD = 30;
+
+          if (Math.abs(wheelAccumulator) >= TRACKPAD_THRESHOLD) {
+            const step = wheelAccumulator > 0 ? 1 : -1;
             wheelAccumulator = 0;
-            lastWheelStepTime = now;
-            goToSlide(currentIndex - 1, true);
+            lastStepTime = now;
+            goToSlide(currentIndex + step, true);
           }
         }
 
@@ -360,18 +376,31 @@
           
           const wheelTarget = viewport || root;
           wheelTarget.addEventListener("wheel", handleWheel, { passive: false });
+          if (root && root !== wheelTarget) {
+            root.addEventListener("wheel", handleWheel, { passive: false });
+          }
 
+          let lastKeyTime = 0;
           document.addEventListener("keydown", (e) => {
             const rect = root.getBoundingClientRect();
             const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
             if (!isVisible) return;
 
-            if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-              e.preventDefault();
-              goToSlide(currentIndex - 1);
-            } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-              e.preventDefault();
-              goToSlide(currentIndex + 1);
+            if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "ArrowDown" || e.key === "ArrowRight") {
+              const now = performance.now();
+              if (now - lastKeyTime < 240) {
+                e.preventDefault();
+                return;
+              }
+              lastKeyTime = now;
+
+              if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                e.preventDefault();
+                goToSlide(currentIndex - 1);
+              } else {
+                e.preventDefault();
+                goToSlide(currentIndex + 1);
+              }
             }
           });
 
