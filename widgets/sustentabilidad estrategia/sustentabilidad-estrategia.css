@@ -63,6 +63,7 @@
   line-height: 1.55;
   color: var(--sust-text);
   margin: 0 0 18px 0;
+  text-align: justify;
 }
 
 .sust-copy p:last-child {

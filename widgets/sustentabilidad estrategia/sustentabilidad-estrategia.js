@@ -14,7 +14,7 @@
     ? "/widgets/sustentabilidad estrategia"
     : "https://grupak-widgets.vercel.app/widgets/sustentabilidad%20estrategia";
 
-  var assetVersion = "20260730-sust-static-1";
+  var assetVersion = "20260907-sust-justify-1";
 
   /* Inject CSS */
   if (!document.getElementById("gpk-sust-styles")) {
