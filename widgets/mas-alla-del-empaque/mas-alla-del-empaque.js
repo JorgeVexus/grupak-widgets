@@ -6,20 +6,25 @@
     const baseURL = isLocalhost 
         ? "/widgets/mas-alla-del-empaque" 
         : "https://grupak-widgets.vercel.app/widgets/mas-alla-del-empaque";
+    const internalBuild = "20260907-snap-v1";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-mas-alla-styles")) {
         const link = document.createElement("link");
         link.id = "gpk-mas-alla-styles";
         link.rel = "stylesheet";
-        link.href = isLocalhost ? "widgets/mas-alla-del-empaque/mas-alla-del-empaque.css" : `${baseURL}/mas-alla-del-empaque.css`;
+        link.href = isLocalhost 
+            ? `widgets/mas-alla-del-empaque/mas-alla-del-empaque.css?v=${internalBuild}` 
+            : `${baseURL}/mas-alla-del-empaque.css?v=${internalBuild}`;
         document.head.appendChild(link);
     }
 
     // 2. Fetch and inject HTML markup if root container exists
     const container = document.getElementById("gpk-mas-alla-widget-root");
     if (container) {
-        fetch(isLocalhost ? "widgets/mas-alla-del-empaque/mas-alla-del-empaque.html" : `${baseURL}/mas-alla-del-empaque.html`)
+        fetch(isLocalhost 
+            ? `widgets/mas-alla-del-empaque/mas-alla-del-empaque.html?v=${internalBuild}` 
+            : `${baseURL}/mas-alla-del-empaque.html?v=${internalBuild}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading Mas Allá widget HTML");
                 return res.text();
@@ -67,6 +72,21 @@
         let currentIndex = -1;
         let dots = null;
 
+        // Navigation state lock & gesture control
+        let isNavigating = false;
+        let navigatingTimer = null;
+        let lastStepTime = 0;
+        let wheelAccumulator = 0;
+        let lastKeyTime = 0;
+
+        function setNavigating(duration = 350) {
+            isNavigating = true;
+            clearTimeout(navigatingTimer);
+            navigatingTimer = setTimeout(() => {
+                isNavigating = false;
+            }, duration);
+        }
+
         // ── Detect mobile ──────────────────────────────────────────────────
         function isMobile() {
             return window.innerWidth <= 1025;
@@ -86,7 +106,7 @@
                 const dot = document.createElement("button");
                 dot.className = "mas-alla-dot" + (i === 0 ? " active" : "");
                 dot.setAttribute("aria-label", `Ir al punto ${i + 1}`);
-                dot.addEventListener("click", () => scrollToIndex(i));
+                dot.addEventListener("click", () => goToIndex(i));
                 dotsContainer.appendChild(dot);
             }
 
@@ -102,11 +122,18 @@
             });
         }
 
-        // ── Scroll to a specific index (for swipe & dot tap) ──────────────
-        function scrollToIndex(index) {
+        // ── Direct navigation with instant scroll positioning & lock ──────────
+        function goToIndex(index) {
+            if (index < 0 || index >= TOTAL) return;
+
+            updateActiveState(index);
+
             if (!spacer) return;
+            setNavigating(350);
+
             const spacerRect = spacer.getBoundingClientRect();
-            const spacerTop = window.scrollY + spacerRect.top;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const spacerTop = spacerRect.top + scrollTop;
             const spacerHeight = spacer.offsetHeight;
             const viewportHeight = window.innerHeight;
             const scrollableRange = spacerHeight - viewportHeight;
@@ -115,9 +142,9 @@
 
             // Target the midpoint of the index's range
             const targetProgress = (index + 0.5) / TOTAL;
-            const targetScrollY = spacerTop + targetProgress * scrollableRange;
+            const targetScrollY = Math.round(spacerTop + targetProgress * scrollableRange);
 
-            window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+            window.scrollTo(0, targetScrollY);
         }
 
         // ── Update active state (images + items + dots) ──────────
@@ -146,15 +173,101 @@
             updateDots(index);
         }
 
-        // ── Scroll handler ─────────────────────────────────────────────────
+        // ── Scroll handler (for manual page scroll / scrollbar dragging) ───
         function handleScroll() {
-            if (!spacer) return;
+            if (!spacer || isNavigating) return;
             const rect = spacer.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
             const scrollProgress = -rect.top / (rect.height - viewportHeight);
             const progress = Math.max(0, Math.min(1, scrollProgress));
             const index = Math.min(Math.floor(progress * TOTAL), TOTAL - 1);
             updateActiveState(index);
+        }
+
+        // ── Gesture Wheel Stepper ──────────────────────────────────────────
+        function handleWheel(e) {
+            if (isMobile()) return;
+
+            const rect = widget.getBoundingClientRect();
+            const isPinned = rect.top <= 4 && rect.bottom >= window.innerHeight - 4;
+            if (!isPinned) return;
+
+            const delta = e.deltaY;
+            if (Math.abs(delta) < 0.5) return;
+
+            // Escape en extremos superior (0) e inferior (TOTAL - 1) para permitir scroll continuo de la página
+            if (currentIndex === 0 && delta < 0) return;
+            if (currentIndex === TOTAL - 1 && delta > 0) return;
+
+            // Evitar scroll nativo mientras navegamos dentro del widget
+            e.preventDefault();
+
+            const now = performance.now();
+            const isMouseWheel = e.deltaMode !== 0 || Math.abs(delta) >= 50;
+            const cooldown = isMouseWheel ? 260 : 380;
+
+            // Si estamos dentro de la ventana de enfriamiento del paso anterior
+            if (now - lastStepTime < cooldown) {
+                wheelAccumulator = 0;
+                return;
+            }
+
+            // En trackpads, ignorar micro-inercia residual de baja intensidad (< 14px)
+            if (!isMouseWheel && Math.abs(delta) < 14) {
+                wheelAccumulator = 0;
+                return;
+            }
+
+            // En mouse convencional, 1 sola muesca (notch) avanza de inmediato al siguiente paso
+            if (isMouseWheel) {
+                lastStepTime = now;
+                wheelAccumulator = 0;
+                const step = delta > 0 ? 1 : -1;
+                goToIndex(currentIndex + step);
+                return;
+            }
+
+            // Para trackpad / touchpad continuo, acumular delta con umbral suave
+            wheelAccumulator += delta;
+            const TRACKPAD_THRESHOLD = 30;
+
+            if (Math.abs(wheelAccumulator) >= TRACKPAD_THRESHOLD) {
+                const step = wheelAccumulator > 0 ? 1 : -1;
+                wheelAccumulator = 0;
+                lastStepTime = now;
+                goToIndex(currentIndex + step);
+            }
+        }
+
+        // ── Keyboard arrow navigation ──────────────────────────────────────
+        function handleKeyDown(e) {
+            const rect = widget.getBoundingClientRect();
+            const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
+            if (!isVisible) return;
+
+            if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "ArrowDown" || e.key === "ArrowRight") {
+                const isPinned = rect.top <= 4 && rect.bottom >= window.innerHeight - 4;
+                if (!isPinned) return;
+
+                const now = performance.now();
+                if (now - lastKeyTime < 240) {
+                    e.preventDefault();
+                    return;
+                }
+                lastKeyTime = now;
+
+                if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                    if (currentIndex > 0) {
+                        e.preventDefault();
+                        goToIndex(currentIndex - 1);
+                    }
+                } else {
+                    if (currentIndex < TOTAL - 1) {
+                        e.preventDefault();
+                        goToIndex(currentIndex + 1);
+                    }
+                }
+            }
         }
 
         // ── Touch / Swipe (mobile) ─────────────────────────────────────────
@@ -178,10 +291,10 @@
 
             if (deltaX < 0 && currentIndex < TOTAL - 1) {
                 // Swipe left → next
-                scrollToIndex(currentIndex + 1);
+                goToIndex(currentIndex + 1);
             } else if (deltaX > 0 && currentIndex > 0) {
                 // Swipe right → prev
-                scrollToIndex(currentIndex - 1);
+                goToIndex(currentIndex - 1);
             }
         }, { passive: true });
 
@@ -208,19 +321,13 @@
             }, 200);
         });
 
-        // ── IntersectionObserver — only listen when widget is visible ──────
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    window.addEventListener("scroll", handleScroll, { passive: true });
-                    handleScroll(); // Initial sync
-                } else {
-                    window.removeEventListener("scroll", handleScroll);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        observer.observe(widget);
+        // ── Attach event listeners ─────────────────────────────────────────
+        widget.addEventListener("wheel", handleWheel, { passive: false });
+        if (wrapper && wrapper !== widget) {
+            wrapper.addEventListener("wheel", handleWheel, { passive: false });
+        }
+        document.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
         // Initial setup
         setupMobile();
