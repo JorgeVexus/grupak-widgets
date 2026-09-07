@@ -5,7 +5,11 @@
     const baseURL = isLocalhost 
         ? "/widgets/linea-tiempo" 
         : "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
-    const assetVersion = document.currentScript ? new URL(document.currentScript.src).search : "";
+    const internalBuild = "20260907-fluid-v2";
+    const scriptSearch = document.currentScript ? new URL(document.currentScript.src).search : "";
+    const assetVersion = scriptSearch 
+        ? `${scriptSearch}&build=${internalBuild}`
+        : `?v=${internalBuild}`;
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-timeline-styles")) {
@@ -83,8 +87,15 @@
         ];
 
         let currentIndex = 0;
+        let isNavigating = false;
+        let navTimer = null;
+        let wheelAccumulator = 0;
+        let lastWheelStepTime = 0;
+        const WHEEL_THRESHOLD = 35;
+        const WHEEL_COOLDOWN = 420;
 
         const tracker = root.querySelector(".timeline-scroll-tracker");
+        const viewport = root.querySelector(".timeline-viewport");
         const board = root.querySelector("#timeline-board");
         const yearsSidebar = root.querySelector("#years-sidebar");
         const slides = root.querySelectorAll(".timeline-slide");
@@ -95,10 +106,18 @@
         const currentIndicator = root.querySelector("#current-slide");
         const totalIndicator = root.querySelector("#total-slides");
 
+        function setNavigating(duration = 450) {
+          isNavigating = true;
+          if (navTimer) clearTimeout(navTimer);
+          navTimer = setTimeout(() => {
+            isNavigating = false;
+          }, duration);
+        }
+
         // Widescreen Scale Fitting Logic (Figma: 1850x1028 bounds)
         function scaleTimelineBoard() {
-          if (window.innerWidth <= 768) {
-            board.style.transform = "none";
+          if (window.innerWidth <= 768 || !board) {
+            if (board) board.style.transform = "none";
             return;
           }
           const scaleX = window.innerWidth / 1850;
@@ -161,28 +180,27 @@
         }
 
         // Slide index navigator
-        function goToSlide(index) {
+        function goToSlide(index, syncScroll = true) {
           if (index < 0 || index >= milestones.length) {
             return;
           }
 
-          if (window.innerWidth <= 768) {
-            currentIndex = index;
-            updateTimeline();
+          currentIndex = index;
+          updateTimeline(); // Respuesta visual inmediata en el primer cuadro
+
+          if (window.innerWidth <= 768 || !tracker || !syncScroll) {
             return;
           }
 
+          setNavigating(480);
           const rect = tracker.getBoundingClientRect();
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           const trackerTop = rect.top + scrollTop;
           const scrollHeight = rect.height - window.innerHeight;
 
           const totalSlides = milestones.length;
-          const targetProgress = (index + 0.5) / totalSlides;
-          const targetScrollY = trackerTop + targetProgress * scrollHeight;
-
-          currentIndex = index;
-          updateTimeline();
+          const targetProgress = index / (totalSlides - 1);
+          const targetScrollY = Math.round(trackerTop + targetProgress * scrollHeight);
 
           window.scrollTo({
             top: targetScrollY,
@@ -192,23 +210,59 @@
 
         // Native Scroll handler for Desktop
         function handleScroll() {
-          if (window.innerWidth <= 768 || !tracker) return;
+          if (window.innerWidth <= 768 || !tracker || isNavigating) return;
 
           const rect = tracker.getBoundingClientRect();
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           const trackerTop = rect.top + scrollTop;
           const scrollHeight = rect.height - window.innerHeight;
 
+          if (scrollTop < trackerTop - 10 || scrollTop > trackerTop + scrollHeight + 10) return;
+
           const relativeScroll = scrollTop - trackerTop;
           let progress = relativeScroll / scrollHeight;
           progress = Math.max(0, Math.min(1, progress));
 
           const totalSlides = milestones.length;
-          const targetSlide = Math.min(Math.floor(progress * totalSlides), totalSlides - 1);
+          const targetSlide = Math.min(Math.round(progress * (totalSlides - 1)), totalSlides - 1);
 
           if (targetSlide !== currentIndex) {
             currentIndex = targetSlide;
             updateTimeline();
+          }
+        }
+
+        // Apple-style Gesture Wheel Stepper (evita brincos bruscos y scrolls excesivos)
+        function handleWheel(e) {
+          if (window.innerWidth <= 768 || !tracker) return;
+
+          const rect = tracker.getBoundingClientRect();
+          const isPinned = rect.top <= 4 && rect.bottom >= window.innerHeight - 4;
+          if (!isPinned) return;
+
+          const delta = e.deltaY;
+          const now = performance.now();
+
+          // Escape de límites superior e inferior
+          if (currentIndex === 0 && delta < 0) return;
+          if (currentIndex === milestones.length - 1 && delta > 0) return;
+
+          e.preventDefault();
+
+          if (now - lastWheelStepTime < WHEEL_COOLDOWN) {
+            return;
+          }
+
+          wheelAccumulator += delta;
+
+          if (wheelAccumulator > WHEEL_THRESHOLD) {
+            wheelAccumulator = 0;
+            lastWheelStepTime = now;
+            goToSlide(currentIndex + 1, true);
+          } else if (wheelAccumulator < -WHEEL_THRESHOLD) {
+            wheelAccumulator = 0;
+            lastWheelStepTime = now;
+            goToSlide(currentIndex - 1, true);
           }
         }
 
@@ -304,14 +358,19 @@
           if (prevBtn) prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
           if (nextBtn) nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
           
+          const wheelTarget = viewport || root;
+          wheelTarget.addEventListener("wheel", handleWheel, { passive: false });
+
           document.addEventListener("keydown", (e) => {
             const rect = root.getBoundingClientRect();
             const isVisible = (rect.top < window.innerHeight && rect.bottom > 0);
             if (!isVisible) return;
 
             if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+              e.preventDefault();
               goToSlide(currentIndex - 1);
             } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+              e.preventDefault();
               goToSlide(currentIndex + 1);
             }
           });

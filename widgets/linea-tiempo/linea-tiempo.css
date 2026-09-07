@@ -31,7 +31,7 @@
    Widescreen Viewport Scaling System (Figma: 1850x1028)
    ========================================================================== */
 #gpk-timeline-widget .timeline-scroll-tracker {
-  height: 1400vh; /* 14 slides * 100vh */
+  height: 650vh; /* Recorrido calibrado: ~45vh por slide */
   position: relative;
   width: 100%;
 }
@@ -39,6 +39,7 @@
 #gpk-timeline-widget .timeline-viewport {
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,7 +143,7 @@
   background-image: linear-gradient(to bottom, var(--color-green) 55%, transparent 55%);
   background-size: 5px 18px;
   background-repeat: repeat-y;
-  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: height 0.42s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
@@ -186,7 +187,7 @@
   font-weight: 900;
   font-size: 14px;
   opacity: 1;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -207,7 +208,7 @@
   opacity: 0;
   pointer-events: none;
   transform: scale(0.9);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Mostrar la tarjeta (título con fondo gris + fecha pequeña) SOLO al hacer hover en un año inactivo */
@@ -316,8 +317,9 @@
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(18px);
+  transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 #gpk-timeline-widget .timeline-slide.active {
@@ -391,7 +393,7 @@
   height: 576px;
   opacity: 0;
   transform: scale(0.97);
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #gpk-timeline-widget .map-zoom-1957 {
@@ -402,7 +404,8 @@
   height: 623px;
   opacity: 0;
   clip-path: circle(0% at 45.9% 71.9%);
-  transition: opacity 0.4s ease, clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.35s ease, clip-path 0.95s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .map-pinpoint-1957 {
@@ -417,8 +420,8 @@
   z-index: 3;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
-  transition-delay: 0.4s;
+  transition: opacity 0.35s ease;
+  transition-delay: 0.25s;
 }
 
 #gpk-timeline-widget .map-pinpoint-1957::after {
@@ -446,7 +449,7 @@
 #gpk-timeline-widget .timeline-slide.active .map-zoom-1957 {
   opacity: 1;
   clip-path: circle(120% at 45.9% 71.9%);
-  transition-delay: 0.6s;
+  transition-delay: 0.2s;
 }
 
 #gpk-timeline-widget .timeline-slide.active .map-pinpoint-1957 {
@@ -481,7 +484,9 @@
   z-index: 1;
   opacity: 0;
   border-radius: 8px;
-  transition: opacity 0.6s ease;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .vector-img-1962 {
@@ -492,14 +497,15 @@
   height: 485px;
   z-index: 2;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
 }
 
 /* 1962 Text Slide-In From Bottom */
 #gpk-timeline-widget .timeline-slide[data-year="1962"] .info-section {
-  transform: translateY(80px);
+  transform: translateY(24px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="1962"].active .info-section {
@@ -510,11 +516,13 @@
 /* Trigger 1962 Image Animations */
 #gpk-timeline-widget .timeline-slide[data-year="1962"].active .vector-img-1962 {
   opacity: 1;
+  transition-delay: 0.1s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="1962"].active .photo-img-1962 {
   opacity: 1;
-  transition-delay: 0.5s;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.22s;
 }
 
 /* 1966 Slide Animations (Image Top, Text Bottom) */
@@ -532,8 +540,8 @@
   height: 485px;
   margin: 0 auto;
   opacity: 0;
-  transform: translateX(40px);
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transform: translateY(12px);
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #gpk-timeline-widget .photo-img-1966 {
@@ -543,6 +551,10 @@
   width: 1024px;
   height: 485px;
   z-index: 1;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .vector-img-1966 {
@@ -552,6 +564,8 @@
   width: 1024px;
   height: 485px;
   z-index: 2;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 /* 1966 Text (Bottom) Slide-In From Bottom */
@@ -561,10 +575,10 @@
   top: 660px;
   width: 950px;
   height: 176px;
-  transform: translateY(60px);
+  transform: translateY(20px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-  transition-delay: 0.2s;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
+  transition-delay: 0.08s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="1966"].active .info-section {
@@ -575,7 +589,18 @@
 /* Trigger 1966 Image Movement */
 #gpk-timeline-widget .timeline-slide[data-year="1966"].active .photo-wrapper-1966 {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1966"].active .vector-img-1966 {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1966"].active .photo-img-1966 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.22s;
 }
 
 /* 1985 Slide Animations (Side-by-Side) */
@@ -585,9 +610,9 @@
   left: 0;
   top: 155px;
   width: 620px;
-  transform: translateY(-20px);
+  transform: translateY(-12px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
 }
 
 #gpk-timeline-widget .top-title-1985 {
@@ -638,7 +663,9 @@
   z-index: 1;
   opacity: 0;
   border-radius: 8px;
-  transition: opacity 0.6s ease;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .vector-img-1985 {
@@ -650,7 +677,8 @@
   z-index: 2;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
 }
 
 /* 1985 Text (Right Side) Slide-In From Right */
@@ -661,10 +689,10 @@
   top: 480px;
   width: 740px;
   height: auto;
-  transform: translateX(40px);
+  transform: translateY(16px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-  transition-delay: 0.2s;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
+  transition-delay: 0.08s;
 }
 
 #gpk-timeline-widget .side-info-1985 .slide-title {
@@ -674,18 +702,20 @@
 
 #gpk-timeline-widget .timeline-slide[data-year="1985"].active .side-info-1985,
 #gpk-timeline-widget .timeline-slide[data-year="1985"].active .info-section {
-  transform: translateX(0);
+  transform: translateY(0);
   opacity: 1;
 }
 
 /* Trigger 1985 Image Animations */
 #gpk-timeline-widget .timeline-slide[data-year="1985"].active .vector-img-1985 {
   opacity: 1;
+  transition-delay: 0.1s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="1985"].active .photo-img-1985 {
   opacity: 1;
-  transition-delay: 0.3s;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.22s;
 }
 
 /* 2003 Slide Animations (vector + photo reveal like 1962) */
@@ -702,6 +732,8 @@
   width: 1024px;
   height: 485px;
   margin: 0 auto;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 #gpk-timeline-widget .photo-img-2003 {
@@ -714,7 +746,8 @@
   z-index: 1;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .vector-img-2003 {
@@ -725,7 +758,8 @@
   height: 485px;
   z-index: 2;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
 }
 
 /* 2003 Text Slide-In From Bottom */
@@ -734,9 +768,9 @@
 #gpk-timeline-widget .timeline-slide[data-year="2011"] .info-section,
 #gpk-timeline-widget .timeline-slide[data-year="2013"] .info-section,
 #gpk-timeline-widget .timeline-slide[data-year="2014"] .info-section {
-  transform: translateY(80px);
+  transform: translateY(24px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2003"].active .info-section,
@@ -755,6 +789,7 @@
 #gpk-timeline-widget .timeline-slide[data-year="2013"].active .vector-img-2003,
 #gpk-timeline-widget .timeline-slide[data-year="2014"].active .vector-img-2003 {
   opacity: 1;
+  transition-delay: 0.1s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2003"].active .photo-img-2003,
@@ -764,7 +799,7 @@
 #gpk-timeline-widget .timeline-slide[data-year="2014"].active .photo-img-2003 {
   opacity: 1;
   clip-path: inset(0 0% 0 0);
-  transition-delay: 0.5s;
+  transition-delay: 0.22s;
 }
 
 #gpk-timeline-widget .map-container {
@@ -957,7 +992,8 @@
   z-index: 1;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .vector-img-2015 {
@@ -969,13 +1005,14 @@
   z-index: 2;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2015"] .info-section {
-  transform: translateY(80px);
+  transform: translateY(24px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2015"].active .info-section {
@@ -985,12 +1022,13 @@
 
 #gpk-timeline-widget .timeline-slide[data-year="2015"].active .vector-img-2015 {
   opacity: 1;
+  transition-delay: 0.1s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2015"].active .photo-img-2015 {
   opacity: 1;
   clip-path: inset(0 0% 0 0);
-  transition-delay: 0.5s;
+  transition-delay: 0.22s;
 }
 
 /* 2021 Slide Animations (Staggered Stacking) */
@@ -1000,9 +1038,9 @@
   top: 230px;
   width: 400px;
   height: auto;
-  transform: translateY(40px);
+  transform: translateY(18px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
 }
 
 #gpk-timeline-widget .info-section-2021-2 {
@@ -1011,10 +1049,10 @@
   top: 610px;
   width: 420px;
   height: auto;
-  transform: translateY(40px);
+  transform: translateY(18px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-  transition-delay: 0.5s;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
+  transition-delay: 0.08s;
 }
 
 #gpk-timeline-widget .image-container-2021-1 {
@@ -1025,8 +1063,8 @@
   height: 330px;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-  transition-delay: 0.3s;
+  transition: clip-path 0.95s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .image-container-2021-2 {
@@ -1037,8 +1075,8 @@
   height: 294px;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-  transition-delay: 0.7s;
+  transition: clip-path 0.95s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .img-wrapper-2021-1,
@@ -1094,11 +1132,13 @@
 #gpk-timeline-widget .timeline-slide[data-year="2021"].active .image-container-2021-1 {
   opacity: 1;
   clip-path: inset(0 0% 0 0);
+  transition-delay: 0.2s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2021"].active .image-container-2021-2 {
   opacity: 1;
   clip-path: inset(0 0% 0 0);
+  transition-delay: 0.38s;
 }
 
 /* 2023 Slide Animations */
@@ -1127,7 +1167,8 @@
   z-index: 1;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .vector-img-2023 {
@@ -1139,13 +1180,14 @@
   z-index: 3;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2023"] .info-section {
-  transform: translateY(80px);
+  transform: translateY(24px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2023"].active .info-section {
@@ -1153,14 +1195,15 @@
   opacity: 1;
 }
 
+#gpk-timeline-widget .timeline-slide[data-year="2023"].active .vector-img-2023 {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
 #gpk-timeline-widget .timeline-slide[data-year="2023"].active .photo-img-2023 {
   opacity: 1;
   clip-path: inset(0 0% 0 0);
-  transition-delay: 0.5s;
-}
-
-#gpk-timeline-widget .timeline-slide[data-year="2023"].active .vector-img-2023 {
-  opacity: 1;
+  transition-delay: 0.22s;
 }
 
 /* 2024 Slide Animations (Image Top, Text Bottom) */
@@ -1189,7 +1232,9 @@
   object-position: top center;
   z-index: 1;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
 }
 
 #gpk-timeline-widget .vector-img-2024 {
@@ -1201,7 +1246,8 @@
   z-index: 3;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2024"] .info-section {
@@ -1210,10 +1256,10 @@
   top: 660px;
   width: 950px;
   height: auto;
-  transform: translateY(60px);
+  transform: translateY(20px);
   opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-  transition-delay: 0.2s;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
+  transition-delay: 0.08s;
 }
 
 #gpk-timeline-widget .timeline-slide[data-year="2024"].active .info-section {
@@ -1221,13 +1267,15 @@
   opacity: 1;
 }
 
-#gpk-timeline-widget .timeline-slide[data-year="2024"].active .photo-img-2024 {
-  opacity: 1;
-  transition-delay: 0.3s;
-}
-
 #gpk-timeline-widget .timeline-slide[data-year="2024"].active .vector-img-2024 {
   opacity: 1;
+  transition-delay: 0.1s;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="2024"].active .photo-img-2024 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.22s;
 }
 
 /* Base style for mobile active line (hidden on desktop) */
@@ -1545,5 +1593,16 @@
 
   #gpk-timeline-widget .timeline-slide[data-year="2024"] .photo-container-2024 {
     margin-bottom: 12px !important;
+  }
+}
+
+/* Accessibility: Reduced Motion (Apple Design) */
+@media (prefers-reduced-motion: reduce) {
+  #gpk-timeline-widget .timeline-slide,
+  #gpk-timeline-widget .timeline-line-active,
+  #gpk-timeline-widget .year-badge,
+  #gpk-timeline-widget .year-item-card {
+    transition: none !important;
+    transform: none !important;
   }
 }
