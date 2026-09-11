@@ -106,7 +106,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   gap: clamp(32px, 8vw, 182px);
 }
 
@@ -117,6 +117,8 @@
   max-width: 570px;
   flex: 1 1 480px;
   min-height: 182px;
+  display: flex;
+  flex-direction: column;
   cursor: default;
   outline: none;
   filter: var(--gpk-lqi-shadow-default);
@@ -131,6 +133,8 @@
   position: relative;
   width: 100%;
   min-height: 182px;
+  height: 100%;
+  flex: 1 1 auto;
   background-color: var(--gpk-lqi-color-card-bg);
   clip-path: polygon(
     0 7px,

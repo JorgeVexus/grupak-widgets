@@ -26,7 +26,7 @@
     }
   }
 
-  var assetVersion = '20260911-v1';
+  var assetVersion = '20260911-equal-height-2';
 
   // 1. Inyectar estilos CSS si no están presentes
   if (!document.getElementById('gpk-lqi-styles')) {
