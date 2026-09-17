@@ -94,6 +94,12 @@
     margin-top: 24px;
   }
 
+  /* The mobile hero image above the title already covers this slide;
+     skip the intro-only image so it isn't shown twice on mobile. */
+  #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .cajas-intro-image {
+    display: none !important;
+  }
+
   #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .cajas-column {
     position: relative !important;
     inset: auto !important;
