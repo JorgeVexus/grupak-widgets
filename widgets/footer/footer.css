@@ -434,10 +434,8 @@ a.gpk-footer__col-title:hover {
         width: calc(100% - 70px);
         max-height: calc(100% - 100px);
         height: auto;
-        bottom: 35px;
+        bottom: 0;
     }
-}
-
 }
 
 @media (max-width: 1200px) {
