@@ -2536,10 +2536,11 @@
     pointer-events: none !important;
 }
 
-/* Mode 7: Cajas intro hero box only */
+/* Mode 7: Cajas intro now uses its own .cajas-intro-image as the hero;
+   keep the pillar icon hidden here so it doesn't render behind it. */
 #gpk-products-widget .products-board.mode-7 #p-caja {
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 #gpk-products-widget .products-board.mode-7 #p-caja .pillar-inner {
@@ -3130,8 +3131,9 @@
     width: 560px;
     height: 460px;
     transform: translate(-50%, -50%);
-    opacity: 1;
-    pointer-events: auto;
+    /* Hidden: .cajas-intro-image is the hero here now. */
+    opacity: 0;
+    pointer-events: none;
     z-index: 50;
 }
 

@@ -1115,10 +1115,13 @@
     pointer-events: none !important;
 }
 
-/* Mode 7: Cajas intro hero box only */
+/* Mode 7: Cajas intro now uses its own .cajas-intro-image as the hero
+   (matches the same fix already applied to #p-rollo in Mode 3 and
+   #p-grabados in Modes 10-13) — keep the pillar icon hidden here so it
+   doesn't render behind/on top of the new image. */
 #gpk-ps-widget .products-board.mode-7 #p-caja {
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 #gpk-ps-widget .products-board.mode-7 #p-caja .pillar-inner {
@@ -1684,8 +1687,11 @@
     width: 560px;
     height: 460px;
     transform: translate(-50%, -50%);
-    opacity: 1;
-    pointer-events: auto;
+    /* Hidden: .cajas-intro-image is the hero here now (see the mode-7
+       #p-caja rule above, which this higher-specificity selector would
+       otherwise override back to visible). */
+    opacity: 0;
+    pointer-events: none;
     z-index: 50;
 }
 
