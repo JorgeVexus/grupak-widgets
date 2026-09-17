@@ -632,6 +632,14 @@
     var cards = widget.querySelectorAll('.gpk-lqi-card');
     var header = widget.querySelector('.gpk-lqi-header');
 
+    // Desfase aleatorio 1-3s antes de disparar la entrada: da margen para que
+    // el navegador pinte el estado inicial oculto antes de revelar (evita que
+    // la transición se salte por carga async) y hace el efecto claramente
+    // visible en cualquier dispositivo/conexión.
+    function gpkRevealDelay() {
+      return 1000 + Math.floor(Math.random() * 2000);
+    }
+
     if (!prefersReducedMotion) {
       // Entrada con IntersectionObserver
       if ('IntersectionObserver' in window) {
@@ -652,19 +660,21 @@
           function (entries, obs) {
             entries.forEach(function (entry) {
               if (entry.isIntersecting) {
-                if (header) {
-                  header.style.opacity = '1';
-                  header.style.transform = 'translateY(0)';
-                }
-                cards.forEach(function (card) {
-                  card.style.opacity = '1';
-                  card.style.transform = 'translateY(0)';
-                });
                 obs.unobserve(entry.target);
+                window.setTimeout(function () {
+                  if (header) {
+                    header.style.opacity = '1';
+                    header.style.transform = 'translateY(0)';
+                  }
+                  cards.forEach(function (card) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                  });
+                }, gpkRevealDelay());
               }
             });
           },
-          { threshold: 0.12 }
+          { threshold: 0.2 }
         );
 
         observer.observe(widget);

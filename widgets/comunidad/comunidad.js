@@ -95,6 +95,10 @@
         var wheelAccumulator = 0;
         var lastKeyTime = 0;
 
+        // Ligero retraso antes de disparar el paso: evita que el scroll (rueda
+        // del mouse o flechas) se sienta instantáneo/brusco al primer toque.
+        var STEP_DELAY = 120;
+
         function setNavigating(duration) {
             duration = duration || 400;
             isNavigating = true;
@@ -215,7 +219,8 @@
                 lastStepTime = now;
                 wheelAccumulator = 0;
                 var step = delta > 0 ? 1 : -1;
-                goToState(currentState + step);
+                var targetState = currentState + step;
+                setTimeout(function () { goToState(targetState); }, STEP_DELAY);
                 return;
             }
 
@@ -226,7 +231,8 @@
                 var step = wheelAccumulator > 0 ? 1 : -1;
                 wheelAccumulator = 0;
                 lastStepTime = now;
-                goToState(currentState + step);
+                var targetState = currentState + step;
+                setTimeout(function () { goToState(targetState); }, STEP_DELAY);
             }
         }
 
@@ -252,12 +258,14 @@
                 if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                     if (currentState > 0) {
                         e.preventDefault();
-                        goToState(currentState - 1);
+                        var targetState = currentState - 1;
+                        setTimeout(function () { goToState(targetState); }, STEP_DELAY);
                     }
                 } else {
                     if (currentState < stateCount - 1) {
                         e.preventDefault();
-                        goToState(currentState + 1);
+                        var targetState = currentState + 1;
+                        setTimeout(function () { goToState(targetState); }, STEP_DELAY);
                     }
                 }
             }
@@ -302,12 +310,14 @@
                     }
                 });
             }, {
-                rootMargin: "0px 0px -12% 0px",
-                threshold: 0.16
+                threshold: 0.2
             });
 
             revealItems.forEach(function (item, index) {
-                item.style.transitionDelay = Math.min(index * 90, 360) + "ms";
+                // Desfase base 1-3s (mas el stagger por elemento) para dar
+                // margen al navegador a pintar el estado oculto antes de
+                // revelar, y para que el efecto sea claramente visible.
+                item.style.transitionDelay = Math.min(1000 + index * 90, 3000) + "ms";
                 mobileRevealObserver.observe(item);
             });
         }

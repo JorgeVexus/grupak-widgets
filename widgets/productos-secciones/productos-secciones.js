@@ -35,6 +35,14 @@
         }
     }
 
+    // Desfase aleatorio 1-3s antes de disparar cada animación de entrada: da
+    // margen para que el navegador pinte el estado inicial oculto antes de
+    // revelar (evita que la transición se salte por carga async) y hace el
+    // efecto claramente visible en cualquier dispositivo/conexión.
+    function gpkRevealDelay() {
+        return 1000 + Math.floor(Math.random() * 2000);
+    }
+
     const assetVersion = "seccion-reveal-48";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
@@ -449,12 +457,17 @@
                     // animation is guaranteed to replay even if the exit event
                     // was missed (fast scroll, a direct nav jump, etc.).
                     resetScreen(entry.target);
-                    playScreen(entry.target);
+                    // Desfase 1-3s antes de reproducir la coreografía: tracked
+                    // via addTimer/clearTimers so a quick scroll-away cancels
+                    // it through the same resetScreen(entry.target) call below.
+                    const board = entry.target.querySelector(".products-board");
+                    const playTimer = window.setTimeout(() => playScreen(entry.target), gpkRevealDelay());
+                    if (board) addTimer(board, playTimer);
                 } else {
                     resetScreen(entry.target);
                 }
             });
-        }, { threshold: 0, rootMargin: "0px" });
+        }, { threshold: 0.2 });
 
         screens.forEach(s => observer.observe(s));
     }
@@ -480,7 +493,7 @@
                 observer.unobserve(card);
                 window.setTimeout(() => {
                     card.classList.add("ps-card-revealed");
-                }, 150);
+                }, gpkRevealDelay());
             });
         }, { threshold: 0.2 });
 
@@ -520,7 +533,7 @@
                 observer.unobserve(element);
                 window.setTimeout(() => {
                     element.classList.add("ps-laminas-revealed");
-                }, 150);
+                }, gpkRevealDelay());
             });
         }, { threshold: 0.2 });
 
@@ -567,7 +580,7 @@
                 observer.unobserve(element);
                 window.setTimeout(() => {
                     element.classList.add("ps-cajas-revealed");
-                }, 150);
+                }, gpkRevealDelay());
             });
         }, { threshold: 0.2 });
 
@@ -600,9 +613,9 @@
                 observer.unobserve(element);
                 window.setTimeout(() => {
                     element.classList.add("ps-digital-why-revealed");
-                }, 150);
+                }, gpkRevealDelay());
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.2 });
 
         elements.forEach(element => observer.observe(element));
     }
@@ -637,9 +650,9 @@
                 observer.unobserve(element);
                 window.setTimeout(() => {
                     element.classList.add("ps-abastecimientos-revealed");
-                }, 150);
+                }, gpkRevealDelay());
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.2 });
 
         elements.forEach(element => observer.observe(element));
     }
@@ -670,7 +683,7 @@
                 observer.unobserve(element);
                 window.setTimeout(() => {
                     element.classList.add("ps-grabados-revealed");
-                }, 150);
+                }, gpkRevealDelay());
             });
         }, { threshold: 0.2 });
 
@@ -760,7 +773,7 @@
                 observer.unobserve(element);
                 window.setTimeout(() => {
                     element.classList.add("ps-energia-revealed");
-                }, 150);
+                }, gpkRevealDelay());
             });
         }, { threshold: 0.2 });
 

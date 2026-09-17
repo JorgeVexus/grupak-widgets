@@ -78,6 +78,10 @@
         let wheelAccumulator = 0;
         let lastKeyTime = 0;
 
+        // Ligero retraso antes de disparar el paso: evita que el scroll (rueda
+        // del mouse o flechas) se sienta instantáneo/brusco al primer toque.
+        const STEP_DELAY = 120;
+
         function setNavigating(duration = 400) {
             isNavigating = true;
             clearTimeout(navigatingTimer);
@@ -239,7 +243,8 @@
                 lastStepTime = now;
                 wheelAccumulator = 0;
                 const step = delta > 0 ? 1 : -1;
-                goToIndex(currentIndex + step);
+                const targetIndex = currentIndex + step;
+                setTimeout(() => goToIndex(targetIndex), STEP_DELAY);
                 return;
             }
 
@@ -251,7 +256,8 @@
                 const step = wheelAccumulator > 0 ? 1 : -1;
                 wheelAccumulator = 0;
                 lastStepTime = now;
-                goToIndex(currentIndex + step);
+                const targetIndex = currentIndex + step;
+                setTimeout(() => goToIndex(targetIndex), STEP_DELAY);
             }
         }
 
@@ -275,12 +281,14 @@
                 if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                     if (currentIndex > 0) {
                         e.preventDefault();
-                        goToIndex(currentIndex - 1);
+                        const targetIndex = currentIndex - 1;
+                        setTimeout(() => goToIndex(targetIndex), STEP_DELAY);
                     }
                 } else {
                     if (currentIndex < TOTAL - 1) {
                         e.preventDefault();
-                        goToIndex(currentIndex + 1);
+                        const targetIndex = currentIndex + 1;
+                        setTimeout(() => goToIndex(targetIndex), STEP_DELAY);
                     }
                 }
             }

@@ -161,12 +161,14 @@
         });
       }, {
         root: null,
-        rootMargin: "0px 0px -8% 0px",
-        threshold: 0.12
+        threshold: 0.2
       });
 
       items.forEach(function (item, index) {
-        item.style.transitionDelay = Math.min(index * 35, 180) + "ms";
+        // Desfase base 1-3s (mas el stagger por elemento) para dar margen al
+        // navegador a pintar el estado oculto antes de revelar, y para que
+        // el efecto sea claramente visible.
+        item.style.transitionDelay = Math.min(1000 + index * 35, 3000) + "ms";
         mobileRevealObserver.observe(item);
       });
     }

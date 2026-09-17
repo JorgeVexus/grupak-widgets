@@ -79,6 +79,14 @@
     });
   }
 
+  // Desfase aleatorio 1-3s antes de disparar cada animación de entrada: da
+  // margen para que el navegador pinte el estado inicial oculto antes de
+  // revelar (evita que la transición se salte por carga async) y hace el
+  // efecto claramente visible en cualquier dispositivo/conexión.
+  function gpkRevealDelay() {
+    return 1000 + Math.floor(Math.random() * 2000);
+  }
+
   function initWidget(widget) {
     if (!widget || widget.dataset.masReady === "true") return;
     widget.dataset.masReady = "true";
@@ -142,14 +150,18 @@
         return;
       }
 
+      var revealTimer = null;
+
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            widget.classList.add("mas-revealed");
+          if (entry.isIntersecting && !revealTimer && !widget.classList.contains("mas-revealed")) {
+            revealTimer = window.setTimeout(function () {
+              widget.classList.add("mas-revealed");
+            }, gpkRevealDelay());
           }
         });
       }, {
-        threshold: 0.10
+        threshold: 0.2
       });
 
       observer.observe(widget);

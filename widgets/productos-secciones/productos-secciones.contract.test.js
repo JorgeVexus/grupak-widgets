@@ -197,7 +197,7 @@ test("cada Pak móvil se revela individualmente al entrar en pantalla", () => {
     assert.match(js, /window\.matchMedia\("\(max-width: 767px\)"\)\.matches/);
     assert.match(js, /threshold:\s*0\.2/);
     assert.match(js, /window\.setTimeout\(\(\) => \{\s*card\.classList\.add\("ps-card-revealed"\)/s);
-    assert.match(js, /},\s*150\)/);
+    assert.match(js, /},\s*gpkRevealDelay\(\)\)/);
     assert.match(js, /observer\.unobserve\(card\)/);
     assert.match(mobilePaper, /\.product-card\.ps-card-revealed\s*\{[^}]*opacity:\s*1[^}]*transform:\s*translateX\(0\)/s);
     assert.doesNotMatch(mobilePaper, /\.products-board\.mode-3 \.product-card\s*\{[^}]*opacity:\s*1/s);
@@ -243,7 +243,7 @@ test("cada modo de Láminas oculta el contenido hermano", () => {
 test("Láminas móvil revela cada elemento durante el scroll", () => {
     assert.match(js, /function setupMobileLaminasReveal\(root\)/);
     assert.match(js, /threshold:\s*0\.2/);
-    assert.match(js, /},\s*150\)/);
+    assert.match(js, /},\s*gpkRevealDelay\(\)\)/);
     assert.match(js, /observer\.unobserve\(element\)/);
     assert.match(js, /element\.classList\.add\("ps-laminas-revealed"\)/);
     assert.match(mobileLaminas, /data-mode="4"[^\{]+\[data-ps-laminas-reveal\][^\{]*\{[^}]*translateY\(32px\)/s);
@@ -302,7 +302,7 @@ test("las tarjetas informativas móviles tienen etiquetas propias", () => {
 test("Cajas móvil revela elementos individuales una sola vez", () => {
     assert.match(js, /function setupMobileCajasReveal\(root\)/);
     assert.match(js, /threshold:\s*0\.2/);
-    assert.match(js, /},\s*150\)/);
+    assert.match(js, /},\s*gpkRevealDelay\(\)\)/);
     assert.match(js, /observer\.unobserve\(element\)/);
     assert.match(js, /element\.classList\.add\("ps-cajas-revealed"\)/);
     assert.match(js, /prefers-reduced-motion: reduce/);
@@ -375,7 +375,7 @@ test("Grabados móvil conserva título, introducción y cuatro servicios", () =>
 test("Grabados móvil revela cada bloque una sola vez", () => {
     assert.match(js, /function setupMobileGrabadosReveal\(root\)/);
     assert.match(js, /threshold:\s*0\.2/);
-    assert.match(js, /},\s*150\)/);
+    assert.match(js, /},\s*gpkRevealDelay\(\)\)/);
     assert.match(js, /observer\.unobserve\(element\)/);
     assert.match(js, /element\.classList\.add\("ps-grabados-revealed"\)/);
     assert.match(js, /prefers-reduced-motion: reduce/);
@@ -459,7 +459,7 @@ test("Energía móvil usa la copia del Figma sin alterar el HTML fuente", () => 
 test("Energía móvil revela cada bloque una sola vez", () => {
     assert.match(js, /function setupMobileEnergiaReveal\(root\)/);
     assert.match(js, /threshold:\s*0\.2/);
-    assert.match(js, /},\s*150\)/);
+    assert.match(js, /},\s*gpkRevealDelay\(\)\)/);
     assert.match(js, /observer\.unobserve\(element\)/);
     assert.match(js, /element\.classList\.add\("ps-energia-revealed"\)/);
 });

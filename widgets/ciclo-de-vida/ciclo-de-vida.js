@@ -282,16 +282,23 @@
             }
 
             // 1. Fade-in entrance observer
+            // Desfase aleatorio 1-3s: da margen para que el navegador pinte el
+            // estado oculto antes de revelar y hace el efecto claramente
+            // visible en cualquier dispositivo/conexión.
+            const cardRevealTimers = new WeakMap();
             mobileObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add("in-view");
+                        if (cardRevealTimers.has(entry.target)) return;
+                        const timer = window.setTimeout(() => {
+                            entry.target.classList.add("in-view");
+                        }, 1000 + Math.floor(Math.random() * 2000));
+                        cardRevealTimers.set(entry.target, timer);
                     }
                 });
             }, {
                 root: null,
-                rootMargin: "0px 0px -10% 0px",
-                threshold: 0.1
+                threshold: 0.2
             });
 
             stepCards.forEach(card => {
