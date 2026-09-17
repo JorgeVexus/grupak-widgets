@@ -111,6 +111,15 @@
     box-sizing: border-box;
     opacity: 1 !important;
     transform: none !important;
+    /* Desktop aligns these left/right toward the center image; on the
+       stacked mobile layout both cards stay centered. */
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .cajas-column .highlight-line {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="7"].ps-mobile-cajas-intro-v1 .cajas-column h2 {

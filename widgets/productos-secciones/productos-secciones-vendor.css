@@ -1356,6 +1356,16 @@
     transition-delay: 0.15s;
 }
 
+#gpk-ps-widget .cajas-column.left {
+    align-items: flex-start;
+    text-align: left;
+}
+
+#gpk-ps-widget .cajas-column.right {
+    align-items: flex-end;
+    text-align: right;
+}
+
 #gpk-ps-widget .products-board.mode-7 .cajas-column {
     opacity: 1;
     transform: translateY(0);
@@ -1377,6 +1387,24 @@
     color: var(--color-grey-medium);
     max-width: 440px;
     margin: 0 auto;
+}
+
+#gpk-ps-widget .cajas-column.left .highlight-line {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+#gpk-ps-widget .cajas-column.right .highlight-line {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+#gpk-ps-widget .cajas-column.left p {
+    margin-left: 0;
+}
+
+#gpk-ps-widget .cajas-column.right p {
+    margin-right: 0;
 }
 
 #gpk-ps-widget .cajas-intro-content .highlight-line {

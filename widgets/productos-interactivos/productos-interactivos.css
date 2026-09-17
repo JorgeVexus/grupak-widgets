@@ -2775,6 +2775,16 @@
     transition-delay: 0.15s;
 }
 
+#gpk-products-widget .cajas-column.left {
+    align-items: flex-start;
+    text-align: left;
+}
+
+#gpk-products-widget .cajas-column.right {
+    align-items: flex-end;
+    text-align: right;
+}
+
 #gpk-products-widget .products-board.mode-7 .cajas-column {
     opacity: 1;
     transform: translateY(0);
@@ -2823,12 +2833,30 @@
     margin: 0 auto;
 }
 
+#gpk-products-widget .cajas-column.left p {
+    margin-left: 0;
+}
+
+#gpk-products-widget .cajas-column.right p {
+    margin-right: 0;
+}
+
 #gpk-products-widget .cajas-intro-content .highlight-line {
     width: 258px;
     height: 3px;
     background-color: var(--color-green);
     margin: 16px auto;
     border-radius: 1.5px;
+}
+
+#gpk-products-widget .cajas-column.left .highlight-line {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+#gpk-products-widget .cajas-column.right .highlight-line {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 /* Mode 8 (Screen 4) Layout & Transitions */
