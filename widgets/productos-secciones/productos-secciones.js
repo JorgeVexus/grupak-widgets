@@ -42,7 +42,7 @@
         return 150 + Math.floor(Math.random() * 200);
     }
 
-    const assetVersion = "seccion-reveal-48";
+    const assetVersion = "seccion-reveal-49";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],

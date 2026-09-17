@@ -2142,6 +2142,15 @@
     line-height: 1.3;
 }
 
+#gpk-products-widget .kpi-label-sub {
+    font-family: "Neue Haas Grotesk Display Pro", var(--font-body), sans-serif;
+    font-size: 14px;
+    font-weight: 400 !important;
+    color: #6E6E6E;
+    line-height: 1.3;
+    margin-top: 2px;
+}
+
 #gpk-products-widget .kpi-number {
     font-family: var(--font-title);
     font-size: 42px;
@@ -9763,7 +9772,8 @@
 
     #gpk-products-widget .intro-kpis-grid-new .kpi-number-new,
     #gpk-products-widget .intro-kpis-grid-new .kpi-label-top,
-    #gpk-products-widget .intro-kpis-grid-new .kpi-label-bottom {
+    #gpk-products-widget .intro-kpis-grid-new .kpi-label-bottom,
+    #gpk-products-widget .intro-kpis-grid-new .kpi-label-sub {
         grid-column: 1 !important;
         margin: 0 !important;
         text-align: center !important;
