@@ -35,12 +35,11 @@
         }
     }
 
-    // Desfase aleatorio 1-3s antes de disparar cada animación de entrada: da
-    // margen para que el navegador pinte el estado inicial oculto antes de
-    // revelar (evita que la transición se salte por carga async) y hace el
-    // efecto claramente visible en cualquier dispositivo/conexión.
+    // Ligero desfase antes de disparar cada animación de entrada: da margen
+    // para que el navegador pinte el estado inicial oculto antes de revelar
+    // (evita que la transición se salte por carga async) sin sentirse lento.
     function gpkRevealDelay() {
-        return 1000 + Math.floor(Math.random() * 2000);
+        return 150 + Math.floor(Math.random() * 200);
     }
 
     const assetVersion = "seccion-reveal-48";

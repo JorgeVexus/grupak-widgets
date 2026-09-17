@@ -292,7 +292,7 @@
                         if (cardRevealTimers.has(entry.target)) return;
                         const timer = window.setTimeout(() => {
                             entry.target.classList.add("in-view");
-                        }, 1000 + Math.floor(Math.random() * 2000));
+                        }, 150 + Math.floor(Math.random() * 200));
                         cardRevealTimers.set(entry.target, timer);
                     }
                 });

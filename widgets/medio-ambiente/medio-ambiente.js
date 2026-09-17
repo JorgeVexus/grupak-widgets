@@ -165,10 +165,10 @@
       });
 
       items.forEach(function (item, index) {
-        // Desfase base 1-3s (mas el stagger por elemento) para dar margen al
-        // navegador a pintar el estado oculto antes de revelar, y para que
-        // el efecto sea claramente visible.
-        item.style.transitionDelay = Math.min(1000 + index * 35, 3000) + "ms";
+        // Ligero desfase base (mas el stagger por elemento) para dar margen
+        // al navegador a pintar el estado oculto antes de revelar, sin
+        // sentirse lento.
+        item.style.transitionDelay = Math.min(150 + index * 35, 600) + "ms";
         mobileRevealObserver.observe(item);
       });
     }
