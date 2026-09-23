@@ -75,6 +75,8 @@
     max-width: none;
     pointer-events: none;
     transform: translateX(-50%);
+    object-fit: contain;
+    object-position: bottom center;
 }
 
 .gpk-footer__newsletter-panel {
