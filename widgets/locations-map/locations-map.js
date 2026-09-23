@@ -286,11 +286,17 @@
                 attributionControl: true
             }).setView([19.8, -99.3], 7);
 
-            // Capa de teselas CARTO claro (minimalista, combina con el diseño)
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                maxZoom: 19,
-                subdomains: 'abcd',
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            // Capa de teselas Esri "Light Gray" (minimalista, sin API key ni cuenta)
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 16,
+                maxNativeZoom: 16,
+                attribution: '&copy; <a href="https://www.esri.com">Esri</a>, HERE, Garmin, FAO, NOAA, USGS'
+            }).addTo(map);
+
+            // Capa de referencia con etiquetas (ciudades, carreteras) encima del base claro
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 16,
+                maxNativeZoom: 16
             }).addTo(map);
 
             // Crear un marcador por cada ubicación
