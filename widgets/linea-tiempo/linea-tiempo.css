@@ -603,6 +603,87 @@
   transition-delay: 0.22s;
 }
 
+/* ==========================================================================
+   1983 Slide Animations (Adquisición Abastecimientos Sta. Clara)
+   ========================================================================== */
+#gpk-timeline-widget .photo-container-1983 {
+  position: absolute;
+  left: 0;
+  top: 414px;
+  width: 1024px;
+  height: 485px;
+}
+
+#gpk-timeline-widget .photo-wrapper-1983 {
+  position: relative;
+  width: 1024px;
+  height: 485px;
+  margin: 0;
+}
+
+#gpk-timeline-widget .photo-img-1983 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  z-index: 1;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.0s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+  will-change: clip-path, opacity;
+}
+
+#gpk-timeline-widget .vector-img-1983 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
+}
+
+/* 1983 Text Slide-In From Bottom & Spacing */
+#gpk-timeline-widget .timeline-slide[data-year="1983"] .info-section {
+  top: 224px;
+  transform: translateY(24px);
+  opacity: 0;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1983"] .slide-title {
+  margin-bottom: 14px;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1983"] .slide-text {
+  max-width: 860px;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1983"].active .info-section {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Trigger 1983 Image Animations */
+#gpk-timeline-widget .timeline-slide[data-year="1983"].active .vector-img-1983 {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+#gpk-timeline-widget .timeline-slide[data-year="1983"].active .photo-img-1983 {
+  opacity: 1;
+  clip-path: inset(0 0% 0 0);
+  transition-delay: 0.22s;
+}
+
 /* 1985 Slide Animations (Side-by-Side) */
 /* 1985 Top Info Animation */
 #gpk-timeline-widget .top-info-1985 {
@@ -1488,6 +1569,7 @@
   /* Hide vector overlays and decorative maps */
   #gpk-timeline-widget .vector-img-1962,
   #gpk-timeline-widget .vector-img-1966,
+  #gpk-timeline-widget .vector-img-1983,
   #gpk-timeline-widget .vector-img-1985,
   #gpk-timeline-widget .vector-img-2003,
   #gpk-timeline-widget .vector-img-2015,
@@ -1520,6 +1602,7 @@
 
   #gpk-timeline-widget .photo-wrapper-1962,
   #gpk-timeline-widget .photo-wrapper-1966,
+  #gpk-timeline-widget .photo-wrapper-1983,
   #gpk-timeline-widget .photo-wrapper-1985,
   #gpk-timeline-widget .photo-wrapper-2003,
   #gpk-timeline-widget .photo-wrapper-2015,
@@ -1540,6 +1623,7 @@
   /* Image tag styling in mobile: clean alignment, width 100%, aspect ratio preserve */
   #gpk-timeline-widget .photo-img-1962,
   #gpk-timeline-widget .photo-img-1966,
+  #gpk-timeline-widget .photo-img-1983,
   #gpk-timeline-widget .photo-img-1985,
   #gpk-timeline-widget .photo-img-2003,
   #gpk-timeline-widget .photo-img-2015,
