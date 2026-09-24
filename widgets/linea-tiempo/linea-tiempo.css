@@ -1714,13 +1714,18 @@
   }
 
   /* Specific Slide Overrides */
-  /* Slide 1985 mobile layout adjustment */
+  /* Slide 1985 mobile layout adjustment: hide first paragraph and first image on mobile */
   #gpk-timeline-widget .timeline-slide[data-year="1985"] {
     display: flex !important;
     flex-direction: column !important;
   }
 
-  #gpk-timeline-widget .timeline-slide[data-year="1985"] .top-info-1985 {
+  #gpk-timeline-widget .timeline-slide[data-year="1985"] .top-info-1985,
+  #gpk-timeline-widget .timeline-slide[data-year="1985"] .photo-container-1985-top {
+    display: none !important;
+  }
+
+  #gpk-timeline-widget .timeline-slide[data-year="1985"] .side-info-1985 {
     order: 1;
     position: static !important;
     width: 100% !important;
@@ -1729,22 +1734,8 @@
     margin-bottom: 12px !important;
   }
 
-  #gpk-timeline-widget .timeline-slide[data-year="1985"] .photo-container-1985-top {
-    order: 2;
-    margin-bottom: 16px !important;
-  }
-
-  #gpk-timeline-widget .timeline-slide[data-year="1985"] .side-info-1985 {
-    order: 3;
-    position: static !important;
-    width: 100% !important;
-    transform: none !important;
-    opacity: 1 !important;
-    margin-bottom: 12px !important;
-  }
-
   #gpk-timeline-widget .timeline-slide[data-year="1985"] .photo-container-1985 {
-    order: 4;
+    order: 2;
     margin-bottom: 12px !important;
   }
 
