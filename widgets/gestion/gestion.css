@@ -115,11 +115,11 @@
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 30px 26px 24px 26px;
+    padding: 24px 22px 16px 22px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 10px;
     box-sizing: border-box;
     z-index: 2;
     background: transparent;
@@ -127,36 +127,36 @@
 
 #gpk-gestion-widget .gpk-gestion-card-logo.top-logo {
     margin-top: 0;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     align-items: flex-start;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-logo.top-logo img {
-    max-width: 280px;
-    max-height: 100px;
+    max-width: 240px;
+    max-height: 68px;
     width: auto;
     height: auto;
     object-fit: contain;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-logo.logo-epd img {
-    max-width: 260px;
-    max-height: 75px;
+    max-width: 220px;
+    max-height: 56px;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-header {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-title {
     margin: 0;
     color: #6E6E6E;
     font-family: "Neue Haas Grotesk Display Pro", "Open Sans", sans-serif;
-    font-size: 34px;
+    font-size: 28px;
     font-weight: 500;
-    line-height: 1.18;
+    line-height: 1.15;
     letter-spacing: -0.5px;
 }
 
@@ -168,11 +168,11 @@
 #gpk-gestion-widget .gpk-gestion-card-body {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     color: #6E6E6E;
     font-family: "Neue Haas Grotesk Display Pro", "Open Sans", sans-serif;
-    font-size: 14px;
-    line-height: 1.36;
+    font-size: 13px;
+    line-height: 1.34;
     text-align: justify;
 }
 
@@ -195,25 +195,65 @@
     background-color: var(--gestion-primary-green);
     border: 2px dashed #ffffff;
     color: #ffffff;
-    padding: 10px 18px;
+    padding: 8px 16px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     font-family: "Neue Haas Grotesk Display Pro", "Open Sans", sans-serif;
-    font-size: 14.5px;
+    font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.2s ease;
     box-sizing: border-box;
     width: 100%;
-    max-width: 360px;
+    max-width: 340px;
     text-decoration: none;
 }
 
 #gpk-gestion-widget .gpk-gestion-btn-epd:hover {
     background-color: #4e8524;
     transform: translateY(-1px);
+}
+
+/* Card 5 (Circularidad de los materiales): ajuste específico por volumen de texto */
+#gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-content,
+#gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-content {
+    padding: 20px 20px 12px 20px;
+    gap: 7px;
+}
+
+#gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-title,
+#gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-title {
+    font-size: 26px;
+    line-height: 1.14;
+}
+
+#gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-body,
+#gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-body {
+    font-size: 12.2px;
+    line-height: 1.30;
+    gap: 4px;
+}
+
+/* Card 6 (Reducción de impactos): ajuste específico para 4 párrafos */
+#gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-content,
+#gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-content {
+    padding: 22px 20px 12px 20px;
+    gap: 7px;
+}
+
+#gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-title,
+#gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-title {
+    font-size: 27px;
+    line-height: 1.14;
+}
+
+#gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-body,
+#gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-body {
+    font-size: 12.5px;
+    line-height: 1.31;
+    gap: 4.5px;
 }
 
 
@@ -384,28 +424,66 @@
     }
 
     #gpk-gestion-widget .gpk-gestion-card-content {
-        padding: 24px 20px 24px 20px;
-        gap: 12px;
+        padding: 20px 18px 14px 18px;
+        gap: 8px;
         background: transparent;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-title {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-body {
-        font-size: 13.5px;
-        gap: 10px;
+        font-size: 12.5px;
+        line-height: 1.30;
+        gap: 5px;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-logo.top-logo img {
-        max-width: 240px;
-        max-height: 85px;
+        max-width: 220px;
+        max-height: 60px;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-logo.logo-epd img {
-        max-width: 220px;
-        max-height: 65px;
+        max-width: 200px;
+        max-height: 50px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-content,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-content {
+        padding: 18px 16px 10px 16px;
+        gap: 6px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-title,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-title {
+        font-size: 23px;
+        line-height: 1.14;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-body,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-body {
+        font-size: 11.6px;
+        line-height: 1.27;
+        gap: 3.5px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-content,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-content {
+        padding: 18px 16px 10px 16px;
+        gap: 6px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-title,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-title {
+        font-size: 23px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-body,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-body {
+        font-size: 11.8px;
+        line-height: 1.28;
+        gap: 4px;
     }
 
     #gpk-gestion-widget .gpk-gestion-track {
@@ -486,33 +564,141 @@
     }
 
     #gpk-gestion-widget .gpk-gestion-card-content {
-        padding: 20px 16px 24px 16px;
-        gap: 12px;
+        padding: 16px 14px 12px 14px;
+        gap: 6px;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-title {
-        font-size: 24px;
+        font-size: 21px;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-body {
-        font-size: 12.5px;
-        gap: 8px;
+        font-size: 11.8px;
+        line-height: 1.28;
+        gap: 4px;
     }
 
-
     #gpk-gestion-widget .gpk-gestion-card-logo.top-logo img {
-        max-width: 210px;
-        max-height: 75px;
+        max-width: 200px;
+        max-height: 52px;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-logo.logo-epd img {
-        max-width: 190px;
-        max-height: 55px;
+        max-width: 180px;
+        max-height: 44px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-content,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-content {
+        padding: 14px 12px 8px 12px;
+        gap: 5px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-title,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-title {
+        font-size: 20px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-body,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-body {
+        font-size: 11px;
+        line-height: 1.24;
+        gap: 3px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-content,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-content {
+        padding: 14px 12px 8px 12px;
+        gap: 5px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-title,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-title {
+        font-size: 20px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-body,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-body {
+        font-size: 11.2px;
+        line-height: 1.25;
+        gap: 3.5px;
     }
 
     #gpk-gestion-widget .gpk-gestion-arrow {
         width: 38px;
         height: 38px;
+    }
+}
+
+/* Pantallas grandes (1400px+): escala armónica del texto y títulos para aprovechar el espacio blanco sin tocar la fotografía */
+@media (min-width: 1400px) {
+    #gpk-gestion-widget .gpk-gestion-card-content {
+        padding: 28px 24px 20px 24px;
+        gap: 12px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-title {
+        font-size: 31px;
+        line-height: 1.15;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-body {
+        font-size: 14px;
+        line-height: 1.36;
+        gap: 7px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-logo.top-logo img {
+        max-width: 260px;
+        max-height: 75px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-logo.logo-epd img {
+        max-width: 240px;
+        max-height: 62px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-btn-epd {
+        padding: 9px 18px;
+        font-size: 14px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-content,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-content {
+        padding: 24px 22px 14px 22px;
+        gap: 8px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-title,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-title {
+        font-size: 28px;
+        line-height: 1.14;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-circularidad .gpk-gestion-card-body,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(5) .gpk-gestion-card-body {
+        font-size: 12.8px;
+        line-height: 1.32;
+        gap: 5px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-content,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-content {
+        padding: 24px 22px 14px 22px;
+        gap: 8px;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-title,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-title {
+        font-size: 29px;
+        line-height: 1.14;
+    }
+
+    #gpk-gestion-widget .gpk-gestion-card-impactos .gpk-gestion-card-body,
+    #gpk-gestion-widget .gpk-gestion-slide:nth-child(6) .gpk-gestion-card-body {
+        font-size: 13.2px;
+        line-height: 1.33;
+        gap: 5.5px;
     }
 }
 
