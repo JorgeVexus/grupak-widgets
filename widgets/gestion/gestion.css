@@ -122,7 +122,7 @@
     gap: 12px;
     box-sizing: border-box;
     z-index: 2;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 62%, rgba(255, 255, 255, 0.75) 82%, transparent 100%);
+    background: transparent;
 }
 
 #gpk-gestion-widget .gpk-gestion-card-logo.top-logo {
@@ -386,7 +386,7 @@
     #gpk-gestion-widget .gpk-gestion-card-content {
         padding: 24px 20px 24px 20px;
         gap: 12px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 62%, rgba(255, 255, 255, 0.75) 82%, transparent 100%);
+        background: transparent;
     }
 
     #gpk-gestion-widget .gpk-gestion-card-title {
