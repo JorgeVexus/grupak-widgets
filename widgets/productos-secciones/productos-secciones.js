@@ -147,6 +147,7 @@
         buildFlow(root, source);
 
         swapLaminasStackImages(root);
+        swapCorrugadorasImages(root);
         resolveAssetURLs(root);
         prepareMobileCajasContent(root);
         scaleDesktopBoards(root);
@@ -306,6 +307,19 @@
                 img.src = `${selfBaseURL}/images/seccion-laminas/La%CC%81minas%20de%20carto%CC%81n%20corrugado%20%20Amplia%20gama%20de%20resistencias%201.webp`;
             } else if (src.includes("Opciones de corrugado")) {
                 img.src = `${selfBaseURL}/images/seccion-laminas/La%CC%81minas%20de%20carto%CC%81n%20corrugado%20%20Opciones%20de%20corrugado%20y%20anchos%20de%20papel%201%201.webp`;
+            }
+        });
+    }
+
+    function swapCorrugadorasImages(root) {
+        root.querySelectorAll(".pane-laminas-specs, #pane-laminas-specs").forEach(pane => {
+            const spec1 = pane.querySelector(".spec-group-1 .spec-img-1");
+            if (spec1) {
+                spec1.src = `${selfBaseURL}/images/seccion-laminas-2/corrugadora-01.webp`;
+            }
+            const spec2 = pane.querySelector(".spec-group-2 .spec-img-2");
+            if (spec2) {
+                spec2.src = `${selfBaseURL}/images/seccion-laminas-2/corrugadora-02.webp`;
             }
         });
     }
