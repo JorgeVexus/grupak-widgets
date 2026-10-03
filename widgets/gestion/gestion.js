@@ -26,10 +26,18 @@
             document.getElementById("grupak-gestion-root");
 
         if (root) {
+            var isEnglish =
+                root.getAttribute("data-lang") === "en" ||
+                window.location.pathname.indexOf("/en/") !== -1 ||
+                window.location.pathname.indexOf("/en") === 0;
+
+            var templateFile = isEnglish ? "/gestion-en.html" : "/gestion.html";
+            var localTemplateFile = isEnglish ? "widgets/gestion/gestion-en.html" : "widgets/gestion/gestion.html";
+
             fetch(
                 isLocalhost
-                    ? "widgets/gestion/gestion.html"
-                    : baseURL + "/gestion.html"
+                    ? localTemplateFile
+                    : baseURL + templateFile
             )
                 .then(function (res) {
                     if (!res.ok) throw new Error("Error loading Gestion widget HTML");

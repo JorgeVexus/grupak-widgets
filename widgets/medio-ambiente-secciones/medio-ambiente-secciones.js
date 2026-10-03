@@ -45,10 +45,14 @@
     resolveImages(existingWidget);
     initWidget(existingWidget);
   } else if (root) {
+    var isEnglish =
+      (root && root.getAttribute("data-lang") === "en") ||
+      window.location.pathname.indexOf("/en/") !== -1;
+    var templateFile = isEnglish ? "/medio-ambiente-secciones-en.html" : "/medio-ambiente-secciones.html";
     fetch(
       isLocalhost
-        ? baseURL + "/medio-ambiente-secciones.html?v=" + assetVersion
-        : selfProductionBaseURL + "/medio-ambiente-secciones.html?v=" + assetVersion
+        ? baseURL + templateFile + "?v=" + assetVersion
+        : selfProductionBaseURL + templateFile + "?v=" + assetVersion
     )
       .then(function (res) {
         if (!res.ok) throw new Error("Error loading Medio Ambiente Secciones widget HTML");

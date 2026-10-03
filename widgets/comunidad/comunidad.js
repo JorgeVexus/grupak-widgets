@@ -27,10 +27,22 @@
             document.getElementById("grupak-comunidad-root");
 
         if (root) {
+            var isEnglish =
+                root.getAttribute("data-lang") === "en" ||
+                window.location.pathname.indexOf("/en/") !== -1 ||
+                window.location.pathname.indexOf("/en") === 0;
+
+            var templateFile = isEnglish
+                ? "/comunidad-en.html?v=" + internalBuild
+                : "/comunidad.html?v=" + internalBuild;
+            var localTemplateFile = isEnglish
+                ? "widgets/comunidad/comunidad-en.html?v=" + internalBuild
+                : "widgets/comunidad/comunidad.html?v=" + internalBuild;
+
             fetch(
                 isLocalhost
-                    ? "widgets/comunidad/comunidad.html?v=" + internalBuild
-                    : baseURL + "/comunidad.html?v=" + internalBuild
+                    ? localTemplateFile
+                    : baseURL + templateFile
             )
                 .then(function (res) {
                     if (!res.ok) throw new Error("Error loading Comunidad widget HTML");

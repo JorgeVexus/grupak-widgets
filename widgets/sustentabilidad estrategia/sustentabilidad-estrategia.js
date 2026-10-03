@@ -33,10 +33,12 @@
       document.getElementById("grupak-sust-root");
 
     if (root) {
+      var isEnglish = (root && root.getAttribute("data-lang") === "en") || window.location.pathname.indexOf("/en/") !== -1;
+      var templateFile = isEnglish ? "/sustentabilidad-estrategia-en.html" : "/sustentabilidad-estrategia.html";
       fetch(
         isLocalhost
-          ? "widgets/sustentabilidad estrategia/sustentabilidad-estrategia.html?v=" + assetVersion
-          : baseURL + "/sustentabilidad-estrategia.html?v=" + assetVersion
+          ? "widgets/sustentabilidad estrategia" + templateFile + "?v=" + assetVersion
+          : baseURL + templateFile + "?v=" + assetVersion
       )
         .then(function (res) {
           if (!res.ok) throw new Error("Error loading Sustentabilidad widget HTML");
