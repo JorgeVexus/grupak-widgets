@@ -14,8 +14,10 @@
 
     // 2. Fetch and inject HTML markup if root container exists and hasn't been populated
     const container = document.getElementById("gpk-locations-widget-root");
+    const isEnglish = (container && container.getAttribute("data-lang") === "en") || window.location.pathname.includes("/en/");
     if (container) {
-        fetch(`${baseURL}/locations-map.html`)
+        const templateFile = isEnglish ? "locations-map-en.html" : "locations-map.html";
+        fetch(`${baseURL}/${templateFile}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading locations widget HTML");
                 return res.text();
@@ -177,8 +179,36 @@
             }
         ];
 
+        function locCategoryName(loc) {
+            if (!isEnglish) return loc.category;
+            if (loc.categoryClass === 'corporativo') return 'Corporate';
+            if (loc.categoryClass === 'planta-papel') return 'Plant';
+            if (loc.categoryClass === 'abastecimiento') return 'Supply Center';
+            return loc.category;
+        }
+
+        function locDisplayName(loc) {
+            if (!isEnglish) return loc.name;
+            if (loc.id === 'corporativo-cdmx') return 'Corporate';
+            if (loc.id === 'planta-toluca') return 'Toluca Plant';
+            if (loc.id === 'planta-cuernavaca') return 'Cuernavaca Plant';
+            if (loc.id === 'planta-hidalgo') return 'Hidalgo Plant';
+            if (loc.id === 'abastecimiento-cdmx') return 'CDMX Supply Center';
+            if (loc.id === 'abastecimiento-puebla') return 'Puebla Supply Center';
+            if (loc.id === 'abastecimiento-cuautitlan') return 'Cuautitlán Supply Center';
+            if (loc.id === 'abastecimiento-queretaro') return 'Querétaro Supply Center';
+            if (loc.id === 'abastecimiento-slp') return 'San Luis Potosí Supply Center';
+            if (loc.id === 'abastecimiento-toluca') return 'Toluca Supply Center';
+            return loc.name;
+        }
+
         // Categorías para filtros (una sola categoría de planta)
-        const categories = [
+        const categories = isEnglish ? [
+            { id: 'all', name: 'All', color: '#6E6E6E' },
+            { id: 'abastecimiento', name: 'Supply Centers', color: '#5F9D2F' },
+            { id: 'planta-papel', name: 'Plants', color: '#F76D6D' },
+            { id: 'corporativo', name: 'Corporate', color: '#B5E062' }
+        ] : [
             { id: 'all', name: 'Todas', color: '#6E6E6E' },
             { id: 'abastecimiento', name: 'Abastecedoras', color: '#5F9D2F' },
             { id: 'planta-papel', name: 'Plantas', color: '#F76D6D' },
@@ -363,13 +393,13 @@
                 </div>
                 <div class="popup-content">
                     <div class="popup-header">
-                        <h2 class="popup-name">${escapeHtml(loc.name)}</h2>
-                        <span class="popup-category ${loc.categoryClass}">${escapeHtml(loc.category)}</span>
+                        <h2 class="popup-name">${escapeHtml(locDisplayName(loc))}</h2>
+                        <span class="popup-category ${loc.categoryClass}">${escapeHtml(locCategoryName(loc))}</span>
                     </div>
                     <div class="popup-divider"></div>
                     <div class="popup-detail">
                         <img class="popup-detail-icon" src="${addressIcon}" alt="Dirección" aria-hidden="true">
-                        <span class="popup-detail-text"><a href="${mapUrl}" target="_blank" rel="noopener noreferrer" aria-label="Ver ${escapeHtml(loc.name)} en Google Maps">${escapeHtml(loc.address)}</a></span>
+                        <span class="popup-detail-text"><a href="${mapUrl}" target="_blank" rel="noopener noreferrer" aria-label="Ver ${escapeHtml(locDisplayName(loc))} en Google Maps">${escapeHtml(loc.address)}</a></span>
                     </div>
                     <div class="popup-detail">
                         <img class="popup-detail-icon" src="${phoneIcon}" alt="Teléfono" aria-hidden="true">
@@ -377,9 +407,9 @@
                     </div>
                     <div class="popup-hours">
                         <span class="status-dot" aria-hidden="true"></span>
-                        <span class="status-open">Abierto ahora</span>
+                        <span class="status-open">${isEnglish ? 'Open now' : 'Abierto ahora'}</span>
                         <span class="status-separator" aria-hidden="true">•</span>
-                        <span class="status-close">Cierra a las 20:00 hrs</span>
+                        <span class="status-close">${isEnglish ? 'Closes at 20:00 hrs' : 'Cierra a las 20:00 hrs'}</span>
                     </div>
                 </div>
             `;
@@ -471,8 +501,8 @@
                 elements.locationsList.innerHTML = `
                     <div class="locations-empty" role="status">
                         <span class="empty-icon" aria-hidden="true">🔍</span>
-                        <p class="empty-title">Sin resultados</p>
-                        <p class="empty-desc">No se encontraron ubicaciones que coincidan con tu búsqueda</p>
+                        <p class="empty-title">${isEnglish ? 'No results' : 'Sin resultados'}</p>
+                        <p class="empty-desc">${isEnglish ? 'No locations found matching your search' : 'No se encontraron ubicaciones que coincidan con tu búsqueda'}</p>
                     </div>
                 `;
                 return;
@@ -498,8 +528,8 @@
                     </div>
                     <div class="location-info-wrapper">
                         <div class="location-header-row">
-                            <h3 class="location-name">${escapeHtml(loc.name)}</h3>
-                            <span class="location-badge ${loc.categoryClass}">${escapeHtml(loc.category)}</span>
+                            <h3 class="location-name">${escapeHtml(locDisplayName(loc))}</h3>
+                            <span class="location-badge ${loc.categoryClass}">${escapeHtml(locCategoryName(loc))}</span>
                         </div>
                         <p class="location-address">${escapeHtml(loc.address)}</p>
                     </div>

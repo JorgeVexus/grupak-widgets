@@ -15,12 +15,74 @@
     var WEBHOOK_SOURCE = "landing-grupak-whatsapp";
     var WEBHOOK_CAMPAIGN_ID = "grupak-sitio-web";
     var WEBHOOK_CAMPAIGN_NAME = "Formulario sitio web Grupak";
+    var isEnglish = false;
     var WHATSAPP_CONSENT_TEXT = "Acepto recibir mensajes de WhatsApp de Grupak relacionados con mi solicitud de cotización y entiendo que puedo solicitar dejar de recibirlos.";
+    var WHATSAPP_CONSENT_TEXT_EN = "I agree to receive WhatsApp messages from Grupak regarding my quote request and understand I can opt out at any time.";
 
     var MX_STATES = "Aguascalientes,Baja California,Baja California Sur,Campeche,Chiapas,Chihuahua,Ciudad de Mexico,Coahuila,Colima,Durango,Estado de Mexico,Guanajuato,Guerrero,Hidalgo,Jalisco,Michoacan,Morelos,Nayarit,Nuevo Leon,Oaxaca,Puebla,Queretaro,Quintana Roo,San Luis Potosi,Sinaloa,Sonora,Tabasco,Tamaulipas,Tlaxcala,Veracruz,Yucatan,Zacatecas".split(",");
     var US_STATES = "Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming".split(",");
 
     var MINIMUMS_NOTE = "Trabajamos con volúmenes industriales. La cantidad mínima para cotización de cajas de cartón corrugado es de 1 tonelada. Si tu requerimiento es menor, te recomendamos contactar a un distribuidor local.";
+    var MINIMUMS_NOTE_EN = "We operate with industrial production volumes. The minimum order quantity for corrugated cardboard box quotes is 1 metric ton. If your requirement is below this threshold, we recommend contacting a local distributor.";
+
+    var PRODUCT_SPECS_EN = {
+        papel: {
+            label: "Paper rolls",
+            title: "Paper specifications",
+            note: true,
+            fields: [
+                field("select", "papel_tipo", "Paper type", ["Recycled Kraft", "Liner", "Medium", "Other"]),
+                field("text", "papel_gramaje", "Basis weight required (g/m²)"),
+                field("number", "papel_toneladas", "Estimated volume in metric tons *", null, true),
+                field("text", "papel_uso_final", "End use of paper"),
+                field("textarea", "papel_comentarios", "Additional comments", null, false, "full")
+            ]
+        },
+        lamina: {
+            label: "Corrugated sheets",
+            title: "Corrugated sheet specifications",
+            note: true,
+            fields: [
+                field("select", "lamina_tipo_corrugado", "Corrugation type", ["Single wall", "Double wall", "Other"]),
+                field("select", "lamina_flauta", "Flute profile", ["B", "C", "E", "BC", "Other"]),
+                field("text", "lamina_ancho", "Required width"),
+                field("select", "lamina_resistencia", "Strength rating", ["ECT", "Mullen", "Other"]),
+                field("number", "lamina_toneladas", "Estimated volume in metric tons *", null, true),
+                field("textarea", "lamina_comentarios", "Additional comments", null, false, "full")
+            ]
+        },
+        cajas: {
+            label: "Corrugated boxes",
+            title: "Box specifications",
+            note: true,
+            fields: [
+                field("select", "cajas_tipo", "Box style", ["Regular slotted (RSC)", "Die-cut", "Tray", "Other"]),
+                field("select", "cajas_color_liner", "Liner color", ["Kraft", "White", "Other"]),
+                field("select", "cajas_flauta", "Flute profile", ["B", "C", "E", "BC", "Other"]),
+                field("select", "cajas_numero_tintas", "Number of print colors", ["1", "2", "3", "4 or more"]),
+                field("text", "cajas_largo_cm", "Length (cm)", null, false, "third"),
+                field("text", "cajas_ancho_cm", "Width (cm)", null, false, "third"),
+                field("text", "cajas_alto_cm", "Height (cm)", null, false, "third"),
+                field("number", "cajas_toneladas", "Estimated volume in metric tons *", null, true),
+                field("text", "cajas_uso", "End use / product to be packaged"),
+                field("textarea", "cajas_comentarios", "Additional comments", null, false, "full")
+            ]
+        },
+        grabado: {
+            label: "Flexo & engraving",
+            title: "Flexo & engraving specifications",
+            note: true,
+            fields: [
+                field("text", "grabado_sustrato", "Substrate type"),
+                field("select", "grabado_arte_listo", "Do you have ready-to-print artwork?", ["Yes", "No", "In progress"]),
+                field("text", "grabado_numero_tintas", "Number of print colors"),
+                field("text", "grabado_tiraje", "Estimated run quantity / impressions"),
+                field("file", "grabado_archivo", "Upload file (pdf, docx, reference)", null, false, "full"),
+                field("text", "grabado_formatos", "Accepted formats: ai, pdf, png, jpg", null, false, "full", true),
+                field("textarea", "grabado_comentarios", "Additional comments", null, false, "full")
+            ]
+        }
+    };
 
     var PRODUCT_SPECS = {
         papel: {
@@ -112,13 +174,15 @@
             document.getElementById("grupak-formulario-root");
 
         if (root) {
+            isEnglish = (root && root.getAttribute("data-lang") === "en") || window.location.pathname.includes("/en/");
             var existingWidget = root.querySelector("#gpk-formulario-widget");
             if (existingWidget) {
                 initWidget(existingWidget);
                 return;
             }
 
-            fetch(baseURL + "/formulario.html")
+            var templateFile = isEnglish ? "formulario-en.html" : "formulario.html";
+            fetch(baseURL + "/" + templateFile)
                 .then(function (res) {
                     if (!res.ok) throw new Error("Error loading Formulario widget HTML");
                     return res.text();
@@ -133,7 +197,11 @@
             return;
         }
 
-        initWidget(document.getElementById("gpk-formulario-widget"));
+        var directWidget = document.getElementById("gpk-formulario-widget");
+        if (directWidget) {
+            isEnglish = (directWidget && directWidget.getAttribute("data-lang") === "en") || window.location.pathname.includes("/en/");
+            initWidget(directWidget);
+        }
     }
 
     function initWidget(widget) {
@@ -271,7 +339,7 @@
         if (config.note) {
             var note = document.createElement("p");
             note.className = "gpk-spec-note";
-            note.innerHTML = "<strong>Nota importante sobre minimos:</strong> " + MINIMUMS_NOTE;
+            note.innerHTML = isEnglish ? "<strong>Important note on minimums:</strong> " + MINIMUMS_NOTE_EN : "<strong>Nota importante sobre minimos:</strong> " + MINIMUMS_NOTE;
             container.appendChild(note);
         }
 
@@ -376,7 +444,7 @@
             stateSelect.disabled = false;
             stateSelect.required = true;
             stateSelect.name = "estado";
-            fillStateOptions(stateSelect, country.value === "México" ? MX_STATES : US_STATES);
+            fillStateOptions(stateSelect, (val === "México" || val === "Mexico") ? MX_STATES : US_STATES);
         });
     }
 
@@ -471,7 +539,7 @@
             medidas: "",
             comentarios: comentariosTexto,
             consent_whatsapp: !!(consentCheckbox && consentCheckbox.checked),
-            consent_text: WHATSAPP_CONSENT_TEXT,
+            consent_text: isEnglish ? WHATSAPP_CONSENT_TEXT_EN : WHATSAPP_CONSENT_TEXT,
             landing_url: window.location.href,
             referrer_url: document.referrer || "",
             utm_source: params.get("utm_source") || "",
@@ -511,7 +579,7 @@
             if (honeypot && honeypot.value) {
                 form.reset();
                 resetDynamicState(form);
-                showStatus(status, "ok", "Gracias. Tu información fue enviada correctamente. Nuestro equipo te contactará muy pronto.");
+                showStatus(status, "ok", successMsg);
                 return;
             }
 
@@ -556,13 +624,13 @@
                 })
                     .then(function (res) {
                         if (res.ok) {
-                            applyStatus("ok", "Gracias. Tu información fue enviada correctamente. Nuestro equipo te contactará muy pronto.");
+                            applyStatus("ok", successMsg);
                             return;
                         }
-                        applyStatus("error", "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.");
+                        applyStatus("error", errorMsg);
                     })
                     .catch(function () {
-                        applyStatus("error", "No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.");
+                        applyStatus("error", netErrorMsg);
                     })
                     .finally(function () {
                         restoreButton();
