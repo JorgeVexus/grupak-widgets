@@ -23,7 +23,9 @@
     // 2. Fetch and inject HTML markup if root container exists and hasn't been populated
     const container = document.getElementById("gpk-timeline-widget-root");
     if (container) {
-        fetch(isLocalhost ? "widgets/linea-tiempo/linea-tiempo.html" : `${baseURL}/linea-tiempo.html${assetVersion}`)
+        const isEnglish = (container && container.getAttribute("data-lang") === "en") || window.location.pathname.includes("/en/");
+        const templateFile = isEnglish ? "linea-tiempo-en.html" : "linea-tiempo.html";
+        fetch(isLocalhost ? `widgets/linea-tiempo/${templateFile}` : `${baseURL}/${templateFile}${assetVersion}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading timeline widget HTML");
                 return res.text();

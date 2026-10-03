@@ -22,9 +22,11 @@
     // 2. Fetch and inject HTML markup if root container exists
     const container = document.getElementById("gpk-mas-alla-widget-root");
     if (container) {
+        const isEnglish = (container && container.getAttribute("data-lang") === "en") || window.location.pathname.includes("/en/");
+        const templateFile = isEnglish ? "mas-alla-del-empaque-en.html" : "mas-alla-del-empaque.html";
         fetch(isLocalhost 
-            ? `widgets/mas-alla-del-empaque/mas-alla-del-empaque.html?v=${internalBuild}` 
-            : `${baseURL}/mas-alla-del-empaque.html?v=${internalBuild}`)
+            ? `widgets/mas-alla-del-empaque/${templateFile}?v=${internalBuild}` 
+            : `${baseURL}/${templateFile}?v=${internalBuild}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading Mas Allá widget HTML");
                 return res.text();

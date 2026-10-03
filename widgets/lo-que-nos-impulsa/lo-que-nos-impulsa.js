@@ -51,10 +51,15 @@
     resolveImages(existingWidget);
     initWidget(existingWidget);
   } else if (root) {
+    var isEnglish =
+      (root && root.getAttribute('data-lang') === 'en') ||
+      window.location.pathname.indexOf('/en/') !== -1;
+    var templateFile = isEnglish ? '/lo-que-nos-impulsa-en.html' : '/lo-que-nos-impulsa.html';
+
     fetch(
       isLocalhost
-        ? baseURL + '/lo-que-nos-impulsa.html?v=' + assetVersion
-        : selfProductionBaseURL + '/lo-que-nos-impulsa.html?v=' + assetVersion
+        ? baseURL + templateFile + '?v=' + assetVersion
+        : selfProductionBaseURL + templateFile + '?v=' + assetVersion
     )
       .then(function (res) {
         if (!res.ok) throw new Error('Error loading Lo Que Nos Impulsa widget HTML');
