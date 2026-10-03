@@ -29,12 +29,19 @@
             document.getElementById("gpk-navbar-menu-root") ||
             document.getElementById("grupak-navbar-menu-root");
 
+        var isEn = (
+            (root && (root.getAttribute("data-lang") || (root.dataset && root.dataset.lang))) ||
+            (window.location.pathname.startsWith("/en") ? "en" : "es")
+        ).toLowerCase() === "en";
+
         var theme = root
             ? (root.getAttribute("data-gpk-theme") || root.getAttribute("data-gpk-variant") || root.getAttribute("data-gpk-nav-mode"))
             : null;
 
+        var htmlFile = isEn ? "/navbar-menu-en.html" : "/navbar-menu.html";
+
         if (root) {
-            fetch(baseURL + "/navbar-menu.html?v=" + assetVersion)
+            fetch(baseURL + htmlFile + "?v=" + assetVersion)
                 .then(function (res) {
                     if (!res.ok) throw new Error("Error loading navbar menu HTML");
                     return res.text();

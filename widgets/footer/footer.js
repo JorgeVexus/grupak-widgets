@@ -27,8 +27,15 @@
     function mountWidget() {
         var root = document.getElementById("gpk-footer-root");
 
+        var isEn = (
+            (root && (root.getAttribute("data-lang") || (root.dataset && root.dataset.lang))) ||
+            (window.location.pathname.startsWith("/en") ? "en" : "es")
+        ).toLowerCase() === "en";
+
+        var htmlFile = isEn ? "/footer-en.html" : "/footer.html";
+
         if (root) {
-            fetch(baseURL + "/footer.html?v=" + assetVersion)
+            fetch(baseURL + htmlFile + "?v=" + assetVersion)
                 .then(function (res) {
                     if (!res.ok) throw new Error("Error loading footer HTML");
                     return res.text();
