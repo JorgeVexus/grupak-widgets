@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20261003-lang-switcher";
+    var assetVersion = "20261003-links-v2";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -256,7 +256,13 @@
             return;
         }
 
-        window.location.href = "https://grupak.webflow.io/#productos";
+        var root = document.getElementById("gpk-navbar-menu-root") || document.getElementById("grupak-navbar-menu-root");
+        var isEn = (
+            (root && (root.getAttribute("data-lang") || (root.dataset && root.dataset.lang))) ||
+            (window.location.pathname.startsWith("/en") ? "en" : "es")
+        ).toLowerCase() === "en";
+
+        window.location.href = isEn ? "https://grupak.webflow.io/en/home#productos" : "https://grupak.webflow.io/#productos";
     }
 
     function bindFormLinks(navbar) {

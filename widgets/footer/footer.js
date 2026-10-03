@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/footer" : productionBaseURL;
-    var assetVersion = "20260821-footer-links-1";
+    var assetVersion = "20261003-footer-links-v2";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -83,18 +83,24 @@
         var status = footer.querySelector("[data-gpk-newsletter-status]");
         if (!form || !status) return;
 
+        var root = document.getElementById("gpk-footer-root");
+        var isEn = (
+            (root && (root.getAttribute("data-lang") || (root.dataset && root.dataset.lang))) ||
+            (window.location.pathname.startsWith("/en") ? "en" : "es")
+        ).toLowerCase() === "en";
+
         form.addEventListener("submit", function (event) {
             event.preventDefault();
             var email = form.elements.email;
 
             if (!email || !email.validity.valid) {
-                status.textContent = "Ingresa un correo electrónico válido.";
+                status.textContent = isEn ? "Please enter a valid email address." : "Ingresa un correo electrónico válido.";
                 status.dataset.state = "error";
                 if (email) email.focus();
                 return;
             }
 
-            status.textContent = "Gracias. Tu correo quedó registrado.";
+            status.textContent = isEn ? "Thank you. Your email has been registered." : "Gracias. Tu correo quedó registrado.";
             status.dataset.state = "success";
             form.reset();
         });
@@ -133,7 +139,13 @@
             return;
         }
 
-        window.location.href = "https://grupak.webflow.io/#productos";
+        var root = document.getElementById("gpk-footer-root");
+        var isEn = (
+            (root && (root.getAttribute("data-lang") || (root.dataset && root.dataset.lang))) ||
+            (window.location.pathname.startsWith("/en") ? "en" : "es")
+        ).toLowerCase() === "en";
+
+        window.location.href = isEn ? "https://grupak.webflow.io/en/home#productos" : "https://grupak.webflow.io/#productos";
     }
 
     function bindFormLinks(footer) {
