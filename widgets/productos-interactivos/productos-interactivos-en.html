@@ -1,0 +1,891 @@
+<!-- 
+    GRUPACK - SECCIÓN DE PRODUCTOS INTERACTIVOS (EMBED PARA WEBFLOW)
+    Copia TODO este fragmento de código y pégalo en un elemento HTML Embed en Webflow.
+    CARACTERÍSTICAS:
+    - Scoped bajo el ID #gpk-products-widget para evitar conflictos de estilos.
+    - Carga fuentes premium (Outfit e Inter) y soporta auto-escalado responsive.
+    - Transiciones fluidas de los pilares visuales (Cajas, Láminas, Papel, Grabados).
+    - Adaptado para móviles con comportamiento de scroll nativo y animaciones al entrar en pantalla.
+-->
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+<div id="gpk-products-widget" class="gpk-products-widget-container">
+    <!-- Scroll tracker container for desktop sticky effect -->
+    <div class="products-scroll-tracker">
+        <div class="products-viewport">
+            <!-- Main Widescreen Board (Figma 1850x1030) -->
+            <div class="products-board mode-0 preloading" id="products-board">
+                <!-- Initial home hero shown before the preloader -->
+                <section id="gpk-hero-home" class="gpk-hero-home" aria-label="Protecting more than just products">
+                    <div class="gpk-hero-home-media">
+                        <video class="gpk-hero-home-video gpk-hero-home-img" autoplay loop muted playsinline
+                            poster="widgets/productos-interactivos/images/hero-home.webp">
+                            <source src="widgets/productos-interactivos/videos/hero-video.webm" type="video/webm">
+                            <source src="widgets/productos-interactivos/videos/hero-video.mp4" type="video/mp4">
+                            <img class="gpk-hero-home-img" src="widgets/productos-interactivos/images/hero-home.webp"
+                                alt="Grupak technician operating packaging machinery">
+                        </video>
+
+                        <!-- KPI 1: Top Left (3 Plantas) -->
+                        <div class="gpk-hero-kpi gpk-hero-kpi-left-top">
+                            <img class="gpk-hero-kpi-bg"
+                                src="widgets/productos-interactivos/images/vector hero home.svg" alt="">
+                            <div class="gpk-hero-kpi-content">
+                                <strong class="gpk-hero-kpi-number">3</strong>
+                                <span class="gpk-hero-kpi-copy">
+                                    <strong>Plants</strong>
+                                    <span>Manufacturing from base paper to corrugated packaging</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- KPI 2: Bottom Left (6 Abastecedoras) -->
+                        <div class="gpk-hero-kpi gpk-hero-kpi-left-bottom">
+                            <img class="gpk-hero-kpi-bg"
+                                src="widgets/productos-interactivos/images/vector hero home.svg" alt="">
+                            <div class="gpk-hero-kpi-content">
+                                <strong class="gpk-hero-kpi-number">6</strong>
+                                <span class="gpk-hero-kpi-copy">
+                                    <strong>Recovery Centers</strong>
+                                    <span>For recovered fiber & recycled corrugated material</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- KPI 3: Top Right (Fundada en 1957 / 69 Años) -->
+                        <div class="gpk-hero-kpi gpk-hero-kpi-top">
+                            <img class="gpk-hero-kpi-bg"
+                                src="widgets/productos-interactivos/images/vector hero home.svg" alt="">
+                            <div class="gpk-hero-kpi-content">
+                                <div class="gpk-hero-kpi-number-wrap">
+                                    <span class="gpk-hero-kpi-tag">FOUNDED IN</span>
+                                    <strong class="gpk-hero-kpi-number">1957</strong>
+                                </div>
+                                <span class="gpk-hero-kpi-copy">
+                                    <strong>69 Years</strong>
+                                    <span>In the recycled paper and corrugated market</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- KPI 4: Bottom Right (100% Fibra reciclada biodegradable) -->
+                        <div class="gpk-hero-kpi gpk-hero-kpi-right">
+                            <img class="gpk-hero-kpi-bg"
+                                src="widgets/productos-interactivos/images/vector hero home.svg" alt="">
+                            <div class="gpk-hero-kpi-content">
+                                <strong class="gpk-hero-kpi-number">100%</strong>
+                                <span class="gpk-hero-kpi-copy">
+                                    <strong>Recycled fiber</strong>
+                                    <span>biodegradable</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gpk-hero-home-banner">
+                        <h1>Protecting more<br>than just products</h1>
+                        <p>Integrated 100% recycled paper and packaging solutions with vertical integration, world-class technology, and sustainable operations.</p>
+                    </div>
+                </section>
+                <!-- Preloader element -->
+                <div id="gpk-preloader" class="gpk-preloader">
+                    <div class="preloader-white-bg"></div>
+                    <div class="preloader-shape-container">
+                        <svg class="preloader-shape-svg" viewBox="0 0 1061 665" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path class="shape-fill-path"
+                                d="M1.5 1.46729L1.55959 565.672C12.5044 565.701 24.8215 565.672 35.629 565.672C35.629 575.087 35.6016 600.678 35.5857 617.766C35.578 626.05 42.2709 632.755 50.5551 632.752C73.6755 632.746 114.697 632.732 123.325 632.732L235.233 632.581C243.534 632.57 250.251 625.824 250.247 617.524C250.239 600.741 250.274 579.387 250.274 569.719C259.738 576.234 295.178 601.388 310.285 612.417C313.101 614.473 316.757 614.937 320.019 613.703C332.595 608.946 345.005 605.1 356.442 600.974C366.681 600.974 382.266 600.959 392.888 600.974L501.107 601.002C592.8 600.988 686.11 599.991 777.703 601.287C778.743 678.981 783.555 661.885 847.695 661.842L847.758 634.952C885.084 634.554 922.411 634.525 959.737 634.839C959.762 640.319 959.136 657.7 961.216 661.273L961.892 661.757C1022.3 662.497 1027.64 675.906 1027.19 603.166C1036.07 589.799 1049.43 579.109 1059.41 565.529L1059.5 3.23953L21 1.49995"
+                                fill="#6E6E6E" />
+                            <path class="shape-stroke-path"
+                                d="M1.5 1.46729L1.55959 565.672C12.5044 565.701 24.8215 565.672 35.629 565.672C35.629 575.087 35.6016 600.678 35.5857 617.766C35.578 626.05 42.2709 632.755 50.5551 632.752C73.6755 632.746 114.697 632.732 123.325 632.732L235.233 632.581C243.534 632.57 250.251 625.824 250.247 617.524C250.239 600.741 250.274 579.387 250.274 569.719C259.738 576.234 295.178 601.388 310.285 612.417C313.101 614.473 316.757 614.937 320.019 613.703C332.595 608.946 345.005 605.1 356.442 600.974C366.681 600.974 382.266 600.959 392.888 600.974L501.107 601.002C592.8 600.988 686.11 599.991 777.703 601.287C778.743 678.981 783.555 661.885 847.695 661.842L847.758 634.952C885.084 634.554 922.411 634.525 959.737 634.839C959.762 640.319 959.136 657.7 961.216 661.273L961.892 661.757C1022.3 662.497 1027.64 675.906 1027.19 603.166C1036.07 589.799 1049.43 579.109 1059.41 565.529L1059.5 3.23953L21 1.49995"
+                                fill="none" stroke="#6E6E6E" stroke-width="3" stroke-dasharray="13 13" />
+                        </svg>
+                        <img class="preloader-logo" src="widgets/productos-interactivos/logoGrupak.svg"
+                            alt="Grupack Logo">
+                    </div>
+                    <!-- Outline background overlay -->
+                    <div class="preloader-board-outline"></div>
+                </div>
+                <!-- Background decoration vector lines -->
+                <div class="bg-decor-container">
+                    <svg viewBox="0 0 1850 1030" fill="none" class="bg-decor-svg">
+                        <path d="M-50,600 C350,450 650,850 1050,550 C1450,250 1750,750 2000,350" stroke="#5f9d2f"
+                            stroke-width="2" stroke-opacity="0.12" fill="none" />
+                        <path d="M-100,550 C300,400 600,800 1000,500 C1400,200 1700,700 1950,300" stroke="#6e6e6e"
+                            stroke-width="1.2" stroke-opacity="0.08" fill="none" />
+                    </svg>
+                </div>
+                <div class="products-intro-pane" id="intro-pane">
+                    <h1 class="intro-title-new">
+                        We are Mexican <span class="text-green">manufacturers</span> of<br class="desktop-only"><br class="mobile-only">
+                        <span class="text-green">recycled paper and corrugated boxes</span>,<br class="desktop-only">
+                        <span class="desktop-only">integrating the entire value chain: from collecting discarded<br class="desktop-only">
+                            corrugated material for recycling to delivering the final box<br class="desktop-only">
+                            that protects and ships your product, while caring for<br class="desktop-only">
+                            our people, the environment, and our communities.</span>
+                    </h1>
+
+                    <!-- Mobile-only image container -->
+                    <div class="intro-mobile-img-container mobile-only">
+                        <video class="intro-mobile-video" autoplay loop muted playsinline
+                            poster="widgets/productos-interactivos/images/hero-new.webp"
+                            aria-label="Grupak industrial operations">
+                            <source src="widgets/productos-interactivos/videos/hero-video.webm" type="video/webm">
+                            <source src="widgets/productos-interactivos/videos/hero-video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- Mobile-only description -->
+                    <p class="intro-mobile-desc mobile-only">
+                        Integrating the entire value chain: from collecting discarded corrugated material for recycling to delivering the final box that protects and ships your product, while caring for our people, the environment, and our communities.
+                    </p>
+
+                    <!-- Mobile hero: approved four-card KPI layout -->
+                    <div class="mobile-hero-kpis mobile-only" aria-label="Grupak Key Metrics">
+                        <article class="mobile-hero-kpi">
+                            <strong>3</strong>
+                            <span>Plantas</span>
+                            <small>Donde fabricamos desde el papel hasta cajas de cartón corrugado</small>
+                        </article>
+                        <article class="mobile-hero-kpi">
+                            <strong>6</strong>
+                            <span>Abastecedoras</span>
+                            <small>De fibra — cartón corrugado reciclado o desechado</small>
+                        </article>
+                        <article class="mobile-hero-kpi">
+                            <small class="mobile-hero-kpi-tag">Fundada en</small>
+                            <strong>1957</strong>
+                            <span>69 Años</span>
+                            <small>En el mercado de papel y cartón corrugado</small>
+                        </article>
+                        <article class="mobile-hero-kpi">
+                            <strong>100%</strong>
+                            <span>Fibra reciclada</span>
+                            <small>Biodegradable</small>
+                        </article>
+                    </div>
+
+                    <!-- Slide 0 production KPIs (desktop and mobile) -->
+                    <div class="intro-kpis-grid-new" aria-label="Producción de Grupak">
+                        <div class="kpi-item-new">
+                            <div class="kpi-number-new">+300,000</div>
+                            <div class="kpi-line-new"></div>
+                            <div class="kpi-label-top">Toneladas</div>
+                            <div class="kpi-label-bottom">de papel reciclado</div>
+                            <div class="kpi-label-sub">Capacidad instalada</div>
+                        </div>
+                        <div class="kpi-item-new">
+                            <div class="kpi-number-new">+234,000</div>
+                            <div class="kpi-line-new"></div>
+                            <div class="kpi-label-top">Toneladas</div>
+                            <div class="kpi-label-bottom">de cartón corrugado</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 1.5: PRODUCTS OVERVIEW PANE (Slide 1 / Mode 1) -->
+                <!-- ========================================== -->
+                <div class="products-overview-pane" id="overview-pane">
+                    <div class="overview-header">
+                        <h2 class="overview-title-new">Our <span class="text-green">Products</span></h2>
+                    </div>
+                    <div class="overview-grid-new">
+                        <!-- Column 1: Papel -->
+                        <div class="overview-col-new">
+                            <!-- Mobile only image -->
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/01.png" alt="Papel"
+                                class="overview-mobile-img">
+                            <h3 class="overview-col-title">Paper</h3>
+                            <p class="overview-col-desc">We offer a robust portfolio of linerboard and medium grades engineered specifically for corrugated packaging conversion.</p>
+                            <button class="overview-col-btn" data-target-slide="2">Learn more</button>
+                        </div>
+                        <!-- Column 2: Lámina -->
+                        <div class="overview-col-new">
+                            <!-- Mobile only image -->
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/02.png" alt="Lámina"
+                                class="overview-mobile-img">
+                            <h3 class="overview-col-title">Corrugated Sheets</h3>
+                            <p class="overview-col-desc">Corrugated sheets across multiple flutes, calipers, and custom dimensions, ideal for boxes, dividers, trays, and POP displays.</p>
+                            <button class="overview-col-btn" data-target-slide="4">Learn more</button>
+                        </div>
+                        <!-- Column 3: Cajas y empaques -->
+                        <div class="overview-col-new">
+                            <!-- Mobile only image -->
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/03.png"
+                                alt="Cajas y empaques" class="overview-mobile-img">
+                            <h3 class="overview-col-title">Packaging & Boxes</h3>
+                            <p class="overview-col-desc">High-performance corrugated boxes designed for shipping, distribution, and retail presentation.</p>
+                            <button class="overview-col-btn" data-target-slide="7">Learn more</button>
+                        </div>
+                        <!-- Column 4: Grabados -->
+                        <div class="overview-col-new">
+                            <!-- Mobile only image -->
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/04.png"
+                                alt="Grabados" class="overview-mobile-img">
+                            <h3 class="overview-col-title">Printing Plates</h3>
+                            <p class="overview-col-desc">Comprehensive flexographic prepress and high-definition plate making for packaging.</p>
+                            <button class="overview-col-btn" data-target-slide="10">Learn more</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- SHARED FLOATING ANIMATING PILLARS          -->
+                <!-- ========================================== -->
+                <div class="floating-pillars-container" id="pillars-container">
+                    <!-- Pillar 1: Paper Roll (Rollo) -->
+                    <div class="pillar-wrapper" id="p-rollo" data-pillar="rollo">
+                        <div class="pillar-inner">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/01 vector.png"
+                                alt="" aria-hidden="true" class="pillar-contour-img">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/01.png" alt="Papel"
+                                class="pillar-img">
+                        </div>
+                        <div class="pillar-label">Paper</div>
+                    </div>
+                    <!-- Pillar 2: Cardboard Sheets (Lámina) -->
+                    <div class="pillar-wrapper" id="p-lamina" data-pillar="lamina">
+                        <div class="pillar-inner">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/02 vector.png"
+                                alt="" aria-hidden="true" class="pillar-contour-img">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/02.png"
+                                alt="Hojas y láminas" class="pillar-img">
+                        </div>
+                        <div class="pillar-label">Corrugated Sheets</div>
+                    </div>
+                    <!-- Pillar 3: Isometric Box (Caja) -->
+                    <div class="pillar-wrapper" id="p-caja" data-pillar="caja">
+                        <div class="pillar-inner">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/03 vector.png"
+                                alt="" aria-hidden="true" class="pillar-contour-img">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/03.png"
+                                alt="Cajas y empaques" class="pillar-img">
+                        </div>
+                        <div class="pillar-label">Packaging & Boxes</div>
+                    </div>
+                    <!-- Pillar 4: Flexo Plates / Print Cylinder (Grabados) -->
+                    <div class="pillar-wrapper" id="p-grabados" data-pillar="grabados">
+                        <div class="pillar-inner">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/04 vector.png"
+                                alt="" aria-hidden="true" class="pillar-contour-img">
+                            <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/04.png"
+                                alt="Grabados" class="pillar-img">
+                        </div>
+                        <div class="pillar-label">Printing Plates</div>
+                    </div>
+                    <!-- Stepped Cardboard Boxes (Mode 2 visual stack using 3D SVGs) -->
+                    <div class="cajas-stacked-group" id="cajas-stacked-group">
+                        <!-- Box 1 -->
+                        <div class="stacked-box box-1">
+                            <svg class="pillar-svg" viewBox="0 0 400 400">
+                                <g filter="url(#box-shadow-filter)">
+                                    <path d="M 200,220 L 320,160 L 320,280 L 200,340 Z" fill="url(#box-front)" />
+                                    <path d="M 80,160 L 200,220 L 200,340 L 80,280 Z" fill="url(#box-side)" />
+                                    <path d="M 80,160 L 200,220 L 170,140 L 50,80 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 200,220 L 320,160 L 350,80 L 230,140 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 80,160 L 200,100 L 170,60 L 50,120 Z" fill="#754f24" opacity="0.8" />
+                                    <path d="M 200,100 L 320,160 L 290,120 L 170,60 Z" fill="#6a4720" opacity="0.8" />
+                                </g>
+                            </svg>
+                        </div>
+                        <!-- Box 2 -->
+                        <div class="stacked-box box-2">
+                            <svg class="pillar-svg" viewBox="0 0 400 400">
+                                <g filter="url(#box-shadow-filter)">
+                                    <path d="M 200,220 L 320,160 L 320,280 L 200,340 Z" fill="url(#box-front)" />
+                                    <path d="M 80,160 L 200,220 L 200,340 L 80,280 Z" fill="url(#box-side)" />
+                                    <path d="M 80,160 L 200,220 L 170,140 L 50,80 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 200,220 L 320,160 L 350,80 L 230,140 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 80,160 L 200,100 L 170,60 L 50,120 Z" fill="#754f24" opacity="0.8" />
+                                    <path d="M 200,100 L 320,160 L 290,120 L 170,60 Z" fill="#6a4720" opacity="0.8" />
+                                </g>
+                            </svg>
+                        </div>
+                        <!-- Box 3 -->
+                        <div class="stacked-box box-3">
+                            <svg class="pillar-svg" viewBox="0 0 400 400">
+                                <g filter="url(#box-shadow-filter)">
+                                    <path d="M 200,220 L 320,160 L 320,280 L 200,340 Z" fill="url(#box-front)" />
+                                    <path d="M 80,160 L 200,220 L 200,340 L 80,280 Z" fill="url(#box-side)" />
+                                    <path d="M 80,160 L 200,220 L 170,140 L 50,80 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 200,220 L 320,160 L 350,80 L 230,140 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 80,160 L 200,100 L 170,60 L 50,120 Z" fill="#754f24" opacity="0.8" />
+                                    <path d="M 200,100 L 320,160 L 290,120 L 170,60 Z" fill="#6a4720" opacity="0.8" />
+                                </g>
+                            </svg>
+                        </div>
+                        <!-- Box 4 -->
+                        <div class="stacked-box box-4">
+                            <svg class="pillar-svg" viewBox="0 0 400 400">
+                                <g filter="url(#box-shadow-filter)">
+                                    <path d="M 200,220 L 320,160 L 320,280 L 200,340 Z" fill="url(#box-front)" />
+                                    <path d="M 80,160 L 200,220 L 200,340 L 80,280 Z" fill="url(#box-side)" />
+                                    <path d="M 80,160 L 200,220 L 170,140 L 50,80 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 200,220 L 320,160 L 350,80 L 230,140 Z" fill="url(#box-top-left)"
+                                        opacity="0.9" />
+                                    <path d="M 80,160 L 200,100 L 170,60 L 50,120 Z" fill="#754f24" opacity="0.8" />
+                                    <path d="M 200,100 L 320,160 L 290,120 L 170,60 Z" fill="#6a4720" opacity="0.8" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Digital Print Display Stand (Mode 3 visual using 3D isometric SVG) -->
+                    <div class="digital-display-stand" id="digital-display-stand">
+                        <svg viewBox="0 0 400 550" class="stand-svg">
+                            <defs>
+                                <linearGradient id="stand-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#f5cc16" />
+                                    <stop offset="100%" stop-color="#d6ab05" />
+                                </linearGradient>
+                                <linearGradient id="stand-side-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#cc9a00" />
+                                    <stop offset="100%" stop-color="#997000" />
+                                </linearGradient>
+                                <filter id="stand-shadow">
+                                    <feDropShadow dx="0" dy="25" stdDeviation="15" flood-color="#000000"
+                                        flood-opacity="0.18" />
+                                </filter>
+                            </defs>
+                            <g filter="url(#stand-shadow)">
+                                <path d="M 120,100 L 280,60 L 280,480 L 120,520 Z" fill="url(#stand-body-grad)" />
+                                <path d="M 60,130 L 120,100 L 120,520 L 60,550 Z" fill="url(#stand-side-grad)" />
+                                <path d="M 100,50 L 300,10 L 300,120 L 100,160 Z" fill="#5f9d2f" stroke="#ffffff"
+                                    stroke-width="2.5" />
+                                <text x="200" y="105" transform="rotate(-11, 200, 105)" text-anchor="middle"
+                                    fill="#ffffff" font-family="'Open Sans', sans-serif" font-weight="900"
+                                    font-size="28" letter-spacing="1">WOWPAK</text>
+                                <path d="M 120,230 L 280,190 L 240,210 L 80,250 Z" fill="#997000" />
+                                <path d="M 80,250 L 240,210 L 240,225 L 80,265 Z" fill="#5f9d2f" />
+                                <path d="M 120,330 L 280,290 L 240,310 L 80,350 Z" fill="#997000" />
+                                <path d="M 80,350 L 240,310 L 240,325 L 80,365 Z" fill="#5f9d2f" />
+                                <path d="M 120,430 L 280,390 L 240,410 L 80,450 Z" fill="#997000" />
+                                <path d="M 80,450 L 240,410 L 240,425 L 80,465 Z" fill="#5f9d2f" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 2: CAJAS Y EMPAQUES DETAIL (Modes 1-3)-->
+                <!-- ========================================== -->
+                <div class="details-pane pane-cajas" id="pane-cajas">
+                    <div class="pane-header-centered">
+                        <h2 class="pane-title-centered">Packaging & Boxes</h2>
+                        <div class="cajas-intro-green-line mobile-only"></div>
+                    </div>
+                    <!-- Mobile only main image -->
+                    <div class="cajas-mobile-hero-container mobile-only">
+                        <img src="https://cdn.prod.website-files.com/6a0b725b7a7ea65e1b12360c/6a2980e7103dda97d11ba194_Caja%201.png"
+                            alt="Cajas y empaques" class="cajas-mobile-hero-img">
+                    </div>
+                    <!-- Mode 2 Content: Sub-sections list -->
+                    <div class="cajas-intro-content" id="cajas-intro-content">
+                        <div class="cajas-column left">
+                            <h2>Conventional packaging & boxes with flexographic printing solutions</h2>
+
+                            <div class="highlight-line"></div>
+                            <p>We produce two major packaging categories: <strong>regular slotted containers (RSC)</strong>, ideal for high-volume standard packaging, and <strong>die-cut boxes</strong>, allowing custom shapes, display windows, and retail-ready trays.</p>
+                        </div>
+                        <div class="cajas-intro-image">
+                            <img src="widgets/productos-interactivos/images/Cajas y empaques intro.webp"
+                                alt="Cajas y empaques" class="cajas-intro-main-image">
+                        </div>
+                        <div class="cajas-column right">
+                            <h2>Boxes, packaging, and displays with <strong class="gpk-digital-rainbow">digital</strong> printing</h2>
+
+                            <div class="highlight-line"></div>
+                            <p><strong>High-definition</strong> digital printing directly onto corrugated board—<strong>ideal for short to medium runs</strong>, on-demand manufacturing, and variable graphics tailored per retail store or client.</p>
+                        </div>
+                    </div>
+                    <!-- Mode 2 Content: Conventional details -->
+                    <div class="cajas-convencionales-content" id="cajas-convencionales-content">
+                        <!-- Left side image -->
+                        <div class="cajas-image-container fade-in-on-scroll">
+                            <img src="widgets/productos-interactivos/images/Cajas y empaques 1.webp"
+                                alt="Cajas y empaques convencionales con soluciones de impresión flexográfica" class="cajas-main-image">
+                        </div>
+                        <!-- Right side text content -->
+                        <div class="cajas-text-container fade-in-on-scroll">
+                            <h2 class="cajas-detail-title">Conventional packaging & boxes with flexographic printing solutions</h2>
+                            <div class="cajas-green-line"></div>
+                            <p class="cajas-paragraph-1">We manufacture two primary categories: <strong>regular slotted containers (RSC)</strong>,<br class="desktop-only">
+                                optimal for high-volume standardized packaging, and<br class="desktop-only">
+                                <strong>die-cut boxes</strong> engineered for custom profiles,<br class="desktop-only">
+                                structural windows, and retail display trays.</p>
+                            <p class="cajas-paragraph-2">Engineered for the food & beverage, grocery, and packaged goods industries requiring robust protection throughout manufacturing, warehousing, logistics, and retail display.</p>
+                        </div>
+                    </div>
+                    <!-- Mode 4 Content: Impresión Digital details (Screen 05) -->
+                    <div class="cajas-digital-content" id="cajas-digital-content">
+                        <div class="digital-content-wrapper">
+                            <!-- Left side: Text content -->
+                            <div class="digital-text-content">
+                                <h3 class="digital-subtitle">Boxes, packaging, and displays with <strong class="gpk-digital-rainbow">digital</strong> printing</h3>
+                                <div class="digital-green-line"></div>
+                                <p class="digital-paragraph-1"><strong>High-definition</strong> digital printing directly onto corrugated board—<strong>ideal for short and medium runs</strong>, on-demand fulfillment, and variable data per point of sale.</p>
+                                <p class="digital-paragraph-2">Powered by single-pass technology, enabling printing on formats up to 1.89 x 3 m <strong>in a single pass, without requiring plates or tooling</strong>.<br><br>Print resolution reaches up to 1,000 DPI with <strong>vibrant full-color graphics</strong> for boxes, retail displays, price clubs, and e-commerce packaging. It delivers superior cost optimization and rapid turnaround for large-format packaging.</p>
+                            </div>
+                            <!-- Right side: Image -->
+                            <div class="digital-image-container">
+                                <img src="widgets/productos-secciones/images/seccion-cajas-empaques/caja-brillante-1.webp"
+                                    alt="Impresión digital display stand" class="digital-main-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 2.5: ¿POR QUÉ USAR TECNOLOGÍA DIGITAL? -->
+                <!-- ========================================== -->
+                <div class="details-pane pane-digital-why" id="pane-digital-why">
+                    <div class="digital-why-content-wrapper">
+                        <!-- Header -->
+                        <div class="digital-why-header">
+                            <span class="digital-why-eyebrow">PRINTING TECHNOLOGY</span>
+                            <h2 class="digital-why-main-title">Why choose <strong>digital</strong> technology?</h2>
+                        </div>
+                        <!-- Bento Cards Grid -->
+                        <div class="digital-why-bento-grid">
+                            <!-- Card 1: Cantidad -->
+                            <div class="digital-why-card" data-index="1">
+                                <img src="widgets/productos-interactivos/images/digital-cards/card-border-1.webp" alt="" class="digital-why-card-bg">
+                                <div class="digital-why-card-inner">
+                                    <div class="digital-why-card-top">
+                                        <span class="digital-why-card-tag">QUANTITY</span>
+                                        <span class="digital-why-num">01</span>
+                                    </div>
+                                    <div class="digital-why-card-body">
+                                        <h3 class="digital-why-card-title"><strong>VARIABLE PRINTING</strong></h3>
+                                        <p class="digital-why-card-desc">Print variable graphics and serial data within the same production run without plate-change expenses.</p>
+                                    </div>
+                                    <p class="digital-why-card-highlight">No plates or tooling needed.</p>
+                                </div>
+                            </div>
+                            <!-- Card 2: Calidad -->
+                            <div class="digital-why-card" data-index="2">
+                                <img src="widgets/productos-interactivos/images/digital-cards/card-border-2.webp" alt="" class="digital-why-card-bg">
+                                <div class="digital-why-card-inner">
+                                    <div class="digital-why-card-top">
+                                        <span class="digital-why-card-tag">QUALITY</span>
+                                        <span class="digital-why-num">02</span>
+                                    </div>
+                                    <div class="digital-why-card-body">
+                                        <h3 class="digital-why-card-title"><strong>300 TO 1,000 DPIS</strong></h3>
+                                        <p class="digital-why-card-desc">High-definition, full-color reproduction with photographic clarity and accurate brand color fidelity.</p>
+                                    </div>
+                                    <p class="digital-why-card-highlight">High Definition.</p>
+                                </div>
+                            </div>
+                            <!-- Card 3: Material -->
+                            <div class="digital-why-card" data-index="3">
+                                <img src="widgets/productos-interactivos/images/digital-cards/card-border-3.webp" alt="" class="digital-why-card-bg">
+                                <div class="digital-why-card-inner">
+                                    <div class="digital-why-card-top">
+                                        <span class="digital-why-card-tag">MATERIAL</span>
+                                        <span class="digital-why-num">03</span>
+                                    </div>
+                                    <div class="digital-why-card-body">
+                                        <h3 class="digital-why-card-title"><strong>DIRECT-TO-BOARD</strong></h3>
+                                        <p class="digital-why-card-desc">Direct digital printing onto corrugated sheets without intermediate labels or mounting adhesives.</p>
+                                    </div>
+                                    <p class="digital-why-card-highlight">Direct-to-board process.</p>
+                                </div>
+                            </div>
+                            <!-- Card 4: Formatos -->
+                            <div class="digital-why-card" data-index="4">
+                                <img src="widgets/productos-interactivos/images/digital-cards/card-border-4.webp" alt="" class="digital-why-card-bg">
+                                <div class="digital-why-card-inner">
+                                    <div class="digital-why-card-top">
+                                        <span class="digital-why-card-tag">FORMATS</span>
+                                        <span class="digital-why-num">04</span>
+                                    </div>
+                                    <div class="digital-why-card-body">
+                                        <h3 class="digital-why-card-title"><strong>UP TO 1.89 X 3 M IN ONE PIECE</strong></h3>
+                                        <p class="digital-why-card-desc">One-piece packaging in large formats with maximum operational efficiency, cost optimization, and speed.</p>
+                                    </div>
+                                    <p class="digital-why-card-highlight">Continuous single-pass.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 2.6: ABASTECIMIENTOS & ECONOMÍA CIRCULAR (Mode 9c) -->
+                <!-- ========================================== -->
+                <div class="details-pane pane-abastecimientos" id="pane-abastecimientos">
+                    <div class="abastecimientos-content-wrapper">
+                        <!-- Left Column: Badge + Title + Green Line + Desc + CTA -->
+                        <div class="abastecimientos-left-column">
+                            <div class="abastecimientos-eyebrow">
+                                <span>Circular Economy</span>
+                            </div>
+                            <h2 class="abastecimientos-main-title">Fiber Recovery & Supply</h2>
+                            <div class="abastecimientos-green-line"></div>
+                            <p class="abastecimientos-desc">
+                                Our paper is <strong>100% recycled</strong>. We achieve full <strong>vertical integration</strong>, ensuring continuous and dependable supply for all our packaging partners.
+                            </p>
+                            <div class="abastecimientos-cta-row">
+                                <p class="abastecimientos-cta-text">Interested in supplying recovered fiber or corrugated cardboard?</p>
+                                <a href="/contacto?gpkForm=proveedor#gpk-formulario-widget" class="abastecimientos-btn">
+                                    Click here.
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Dashed Frame with Image + KPI -->
+                        <div class="abastecimientos-right-column">
+                            <div class="abastecimientos-hero-box">
+                                <div class="abastecimientos-dashed-frame">
+                                    <img src="widgets/productos-secciones/images/seccion-abastecedoras/abastecedoras.webp"
+                                        alt="Abastecedoras Grupack - Planta de producción" class="abastecimientos-hero-img">
+                                </div>
+                            </div>
+                            <div class="abastecimientos-kpi-block">
+                                <div class="abastecimientos-kpi-number"><strong>100%</strong></div>
+                                <div class="abastecimientos-kpi-line"></div>
+                                <p class="abastecimientos-kpi-label">Recycled fiber • Vertical integration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 3: LÁMINAS DE CARTÓN (Mode 4)         -->
+                <!-- ========================================== -->
+                <div class="details-pane pane-laminas" id="pane-laminas">
+                    <!-- Mode 4 Content: Láminas intro + 2 stack images (Figma design) -->
+                    <div class="laminas-intro-content" id="laminas-intro-content">
+                        <!-- Title wrapper -->
+                        <div class="laminas-title-wrapper">
+                            <h2 class="laminas-main-title">Corrugated <span class="text-green">Sheets</span>
+                            </h2>
+                        </div>
+                        <!-- Two column intro text -->
+                        <div class="laminas-intro-text">
+                            <div class="laminas-intro-left">
+                                <p>Corrugated sheets across multiple flutes, calipers, and dimensions—engineered for custom boxes, dividers, trays, and displays. Built for precision die-cutting and printing (flexo and digital), <strong>delivering high structural strength and optimal protection across all industrial sectors.</strong></p>
+                            </div>
+                            <div class="laminas-intro-right">
+                                <p>Our cutting-edge corrugator produces premium single and double-wall corrugated sheets with a <strong>wide selection of flute profiles and strengths</strong>, backed by rapid turnaround times starting at 24 hours.</p>
+                            </div>
+                        </div>
+                        <!-- Bottom layout: Left text block + 2 Stack images side-by-side -->
+                        <div class="laminas-bottom-layout">
+                            <!-- Left Resistencia Box -->
+                            <div class="laminas-resistencia-box">
+                                <h3 class="laminas-resistencia-title">Broad Range of Strengths</h3>
+                                <p class="laminas-resistencia-desc">We engineer sheets ranging from lightweight grades up to heavy-duty configurations classified up to 81 ECT, meeting demanding structural packaging requirements.</p>
+                            </div>
+                            <!-- Stack Image 1 (Kraft / Brown) -->
+                            <div class="laminas-stack-container stack-1">
+                                <img src="widgets/productos-interactivos/images/slide-laminas/Láminas de cartón corrugado  Amplia gama de resistencias 1.webp"
+                                    alt="Láminas corrugadas Kraft" class="laminas-stack-img">
+                            </div>
+                            <!-- Stack Image 2 (White Top) -->
+                            <div class="laminas-stack-container stack-2">
+                                <img src="widgets/productos-interactivos/images/slide-laminas/Láminas de cartón corrugado  Opciones de corrugado y anchos de papel 1 1.webp"
+                                    alt="Láminas corrugadas Blanco" class="laminas-stack-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 3.5: LÁMINAS ESPECIFICACIONES (Modes 5-6) -->
+                <!-- ========================================== -->
+                <div class="details-pane pane-laminas-specs" id="pane-laminas-specs">
+                    <div class="laminas-specs-container" id="laminas-specs-container">
+                        <!-- Title wrapper -->
+                        <div class="laminas-title-wrapper">
+                            <h2 class="laminas-main-title"><span class="text-green">Our</span> Corrugators
+                            </h2>
+                        </div>
+                        <!-- Two specs stage container -->
+                        <div class="laminas-specs-stage-content">
+                            <!-- Spec Group 1: Ancho de la corrugadora -->
+                            <div class="laminas-spec-group spec-group-1" data-index="1">
+                                <div class="spec-text-box">
+                                    <h3 class="spec-title">Corrugator Working Width</h3>
+                                    <p class="spec-desc">283 cm (111 in), engineered to maximize paper yield and optimize layout for custom packaging.</p>
+                                </div>
+                                <div class="spec-image-box">
+                                    <div class="spec-frame-wrapper">
+                                        <img src="widgets/productos-interactivos/images/slide-laminas-2/vector.png"
+                                            alt="" class="spec-vector-frame">
+                                        <img src="widgets/productos-secciones/images/seccion-laminas-2/corrugadora-01.webp"
+                                            alt="Ancho de la corrugadora" class="spec-img spec-img-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Spec Group 2: Opciones de corrugado y anchos de papel -->
+                            <div class="laminas-spec-group spec-group-2" data-index="2">
+                                <div class="spec-text-box">
+                                    <h3 class="spec-title">Flute Combinations & Paper Widths</h3>
+                                    <p class="spec-desc">Single and double wall sheets with paper roll widths of 250, 265, 275, and 283 cm, providing exceptional flexibility and tailored combinations for every project.</p>
+                                </div>
+                                <div class="spec-image-box">
+                                    <div class="spec-frame-wrapper">
+                                        <img src="widgets/productos-interactivos/images/slide-laminas-2/vector.png"
+                                            alt="" class="spec-vector-frame">
+                                        <img src="widgets/productos-secciones/images/seccion-laminas-2/corrugadora-02.webp"
+                                            alt="Opciones de corrugado y anchos de papel" class="spec-img spec-img-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 4: PAPEL LINER & MEDIUM (Modes 5-6)   -->
+                <!-- ========================================== -->
+                <div class="details-pane pane-papel" id="pane-papel">
+                    <!-- Shared Title & Green Line -->
+                    <h2 class="pane-title-centered papel-shared-title">
+                        Papel
+                        <div class="papel-title-green-line"></div>
+                    </h2>
+                    <!-- Shared Hero paper roll image -->
+                    <div class="papel-hero-image">
+                        <img src="widgets/productos-interactivos/images/slide 0 nuevas imagenes/01.png"
+                            alt="Rollo de papel kraft" class="papel-main-image">
+                    </div>
+                    <!-- Mode 5 Content: Paper roll with 4 text blocks (Screen 06) -->
+                    <div class="papel-intro-content" id="papel-intro-content">
+                        <!-- 4 Text blocks around the image -->
+                        <div class="papel-text-blocks">
+                            <!-- Top Left -->
+                            <div class="papel-text-block tl" data-index="1">
+                                <p>Grupak offers a comprehensive portfolio of <strong>linerboard and medium</strong> specifically formulated for <strong>corrugated containerboard manufacturing</strong> and packaging conversion.</p>
+                            </div>
+                            <!-- Bottom Left -->
+                            <div class="papel-text-block bl" data-index="2">
+                                <p>Each paper grade addresses distinct performance demands for <strong>strength, runnability, and print quality</strong>, ranging from standard retail packaging to heavy-duty industrial and agricultural applications.
+                                </p>
+                            </div>
+                            <!-- Top Right -->
+                            <div class="papel-text-block tr" data-index="3">
+                                <p>We place our clients at the core of our operations: providing weekly <strong>delivery confirmations</strong> and specialized <strong>technical consulting</strong> to <strong>enhance and optimize</strong> packaging performance and competitiveness.</p>
+                            </div>
+                            <!-- Bottom Right -->
+                            <div class="papel-text-block br" data-index="4">
+                                <p>Our containerboard serves diverse <strong>industrial applications</strong> as the prime raw material for <strong>corrugated board production</strong>, multiwall bags, food packaging, edge protectors, paper cores, and specialized product cushioning.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mode 6 Content: 2x2 paper subproducts grid (Screen 07) -->
+                    <div class="papel-grid-content" id="papel-grid-content">
+                        <!-- 4 Product cards -->
+                        <div class="papel-products-grid">
+                            <!-- ClassicPak N -->
+                            <div class="product-card fade-in-up" data-index="1">
+                                <div class="product-image">
+                                    <img src="widgets/productos-interactivos/images/slide-papel-classics/ClassicPak N.png"
+                                        alt="ClassicPak N" class="product-img">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">ClassicPak N</h3>
+                                    <p class="product-subtitle">Standard containerboard line</p>
+                                    <p class="product-desc">Multipurpose containerboard meeting nationwide market specifications, with basis weights from 120 gsm to 280 gsm.</p>
+                                    <div class="product-uses">
+                                        <div class="uses-bubble">Primary applications:</div>
+                                        <p class="uses-text">Paper bags, lightweight packaging, and general-purpose retail corrugated boxes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- UltraPak H -->
+                            <div class="product-card fade-in-up" data-index="2">
+                                <div class="product-image">
+                                    <img src="widgets/productos-interactivos/images/slide-papel-classics/UltraPak H.png"
+                                        alt="UltraPak H" class="product-img">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">UltraPak H</h3>
+                                    <p class="product-subtitle">High-performance containerboard line</p>
+                                    <p class="product-desc">Basis weights from 120 gsm to 200 gsm.</p>
+                                    <div class="product-uses">
+                                        <div class="uses-bubble">Primary applications:</div>
+                                        <p class="uses-text">Demanding applications requiring maximum tensile strength at lower basis weights, rivaling imported virgin-fiber performance.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FortePak R -->
+                            <div class="product-card fade-in-up" data-index="3">
+                                <div class="product-image">
+                                    <img src="widgets/productos-interactivos/images/slide-papel-classics/FortePak R.png"
+                                        alt="FortePak R" class="product-img">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">FortePak R</h3>
+                                    <p class="product-subtitle">Heavy-duty industrial containerboard</p>
+                                    <p class="product-desc">Basis weights from 130 gsm to 270 gsm.</p>
+                                    <div class="product-uses">
+                                        <div class="uses-bubble">Primary applications:</div>
+                                         <p class="uses-text">Heavy-duty boxes requiring high stacking strength for major appliances, automotive parts, and industrial goods.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- AgricoPak A -->
+                            <div class="product-card fade-in-up" data-index="4">
+                                <div class="product-image">
+                                    <img src="widgets/productos-interactivos/images/slide-papel-classics/AgricoPak A.png"
+                                        alt="AgricoPak A" class="product-img">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">AgricoPak A</h3>
+                                    <p class="product-subtitle">Agricultural containerboard line</p>
+                                    <p class="product-desc">Basis weights from 120 gsm to 260 gsm.</p>
+                                    <div class="product-uses">
+                                        <div class="uses-bubble">Primary applications:</div>
+                                        <p class="uses-text">Produce boxes transporting fresh fruits, vegetables, and moisture-exposed goods through cold-chain logistics.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 5: GRABADOS Y PREPRENSA (Mode 8)      -->
+                <!-- ========================================== -->
+                <div class="details-pane pane-grabados" id="pane-grabados">
+                    <!-- Left side vertical content (Title and Paragraph) -->
+                    <div class="grabados-left-content" id="grabados-left-content">
+                        <h2 class="grabados-main-title">Printing Plates & Tooling</h2>
+                        <div class="grabados-intro-text">
+                            <p>Comprehensive prepress and flexographic tooling for the packaging sector.</p>
+                            <p><strong>We engineer and mount flexographic plates for</strong> corrugated board, labels, flexible substrates, paper bags, and offset coatings, <strong>delivering faithful artwork reproduction, tight color control, and peak press efficiency.</strong></p>
+                        </div>
+                    </div>
+                    <!-- Four green service cards staggered horizontally -->
+                    <div class="grabados-cards-grid-new">
+                        <!-- Card 1: PREPRENSA Y ADAPTACIÓN DE ARTE AL EMPAQUE -->
+                        <div class="grabados-green-card" data-index="1">
+                            <img src="widgets/productos-interactivos/images/slide-grabados/celular/mov 01.png"
+                                alt="Preprensa y adaptacion de arte al empaque"
+                                class="grabados-service-image mobile-only">
+                            <div class="grabados-card-text-wrapper">
+                                <h3 class="grabados-card-title">PREPRESS & PACKAGING ARTWORK ADAPTATION</h3>
+                                <p class="grabados-card-desc">Engineered across multiple substrates (corrugated, flexible, paper, labels).</p>
+                            </div>
+                        </div>
+                        <!-- Card 2: COLOR MANAGEMENT -->
+                        <div class="grabados-green-card" data-index="2">
+                            <img src="widgets/productos-interactivos/images/slide-grabados/celular/mov 02.png"
+                                alt="Gestion profesional de color" class="grabados-service-image mobile-only">
+                            <div class="grabados-card-text-wrapper">
+                                <h3 class="grabados-card-title">COLOR MANAGEMENT & PROOFING</h3>
+                                <p class="grabados-card-desc">Comprehensive color management and simulation to maintain brand consistency across product lines.</p>
+                            </div>
+                        </div>
+                        <!-- Card 3: MONTAJE Y AJUSTE DE PLACAS -->
+                        <div class="grabados-green-card" data-index="3">
+                            <img src="widgets/productos-interactivos/images/slide-grabados/celular/mov 03.png"
+                                alt="Montaje y ajuste de placas" class="grabados-service-image mobile-only">
+                            <div class="grabados-card-text-wrapper">
+                                <h3 class="grabados-card-title">PLATE MOUNTING & CALIBRATION</h3>
+                                <p class="grabados-card-desc">Multi-thickness mounting with distortion compensation and tight registration for high-speed printing.</p>
+                            </div>
+                        </div>
+                        <!-- Card 4: RETOQUE DE IMÁGENES Y SOPORTE TÉCNICO EN PLANTA -->
+                        <div class="grabados-green-card" data-index="4">
+                            <img src="widgets/productos-interactivos/images/slide-grabados/celular/mov 04.png"
+                                alt="Retoque de imagenes y soporte tecnico" class="grabados-service-image mobile-only">
+                            <div class="grabados-card-text-wrapper">
+                                <h3 class="grabados-card-title">PRESSROOM RETOUCHING & TECHNICAL SUPPORT</h3>
+                                <p class="grabados-card-desc">On-site technical support to optimize print quality and minimize make-ready times.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat icon on grey background (bottom right) -->
+                    <div class="grabados-chat-icon" aria-label="Technical Support">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+                <!-- PANE 6: COGENERACIÓN ENERGÉTICA (Mode 8)   -->
+                <!-- ========================================== -->
+                <div class="details-pane pane-energia" id="pane-energia">
+                    <div class="energia-header" id="energia-header">
+                        <h2 class="energia-main-title">Energy</h2>
+                        <p class="energia-intro-text">
+                            We are committed to efficient electricity generation and environmental stewardship. Our on-site cogeneration plant enables the simultaneous production of <strong>clean electrical power and thermal energy</strong>.
+                        </p>
+                    </div>
+                    <div class="energia-rows">
+                        <div class="energia-row" data-index="1">
+                            <div class="energia-mobile-image-container">
+                                <img src="widgets/productos-interactivos/images/energia-eficiencia.webp"
+                                    alt="Eficiencia energética" class="energia-mobile-image">
+                            </div>
+                            <div class="energia-row-content">
+                                <h3>Superior Energy Efficiency</h3>
+                                <p>While conventional thermal power plants utilize only 34–40% of fuel energy, Grupak's cogeneration technology <strong>reaches up to 80% overall energy efficiency</strong>.</p>
+                            </div>
+                        </div>
+                        <div class="energia-row" data-index="2">
+                            <div class="energia-mobile-image-container">
+                                <img src="widgets/productos-interactivos/images/energia-impacto.webp"
+                                    alt="Menor impacto ambiental" class="energia-mobile-image">
+                            </div>
+                            <div class="energia-row-content">
+                                <h3>Reduced Environmental Impact</h3>
+                                <p>By maximizing fuel efficiency, <strong>we cut greenhouse emissions</strong> and lower our corporate carbon footprint.</p>
+                            </div>
+                        </div>
+                        <div class="energia-row" data-index="3">
+                            <div class="energia-mobile-image-container">
+                                <img src="widgets/productos-interactivos/images/energia-suministro.webp"
+                                    alt="Suministro confiable" class="energia-mobile-image">
+                            </div>
+                            <div class="energia-row-content">
+                                <h3>Reliable Supply & Continuity</h3>
+                                <p><strong>We generate a substantial portion of our operational power</strong>, ensuring <strong>uninterrupted manufacturing continuity</strong> for recycled paper and packaging production.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Navigation Panel -->
+                <div class="products-nav-footer">
+                    <button class="footer-arrow prev" id="p-prev-btn" aria-label="Previous">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor" />
+                        </svg>
+                    </button>
+                    <div class="footer-dots" id="footer-dots">
+                        <!-- Dots populated by JS -->
+                    </div>
+                    <div class="mobile-nav-progress" aria-live="polite">
+                        <div class="mobile-nav-meta">
+                            <span id="mobile-section-name">Introduction</span>
+                            <span id="mobile-slide-count">1 of 15</span>
+                        </div>
+                        <div class="mobile-progress-track" aria-hidden="true">
+                            <span id="mobile-progress-fill" class="mobile-progress-fill"></span>
+                        </div>
+                    </div>
+                    <button class="footer-arrow next" id="p-next-btn" aria-label="Next">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-continuous-flow" id="mobile-continuous-flow" aria-label="Grupak Products"></div>
+    <nav class="mobile-scroll-status" aria-label="Product navigation">
+        <button class="mobile-index-link" type="button" data-scroll-target="mobile-products-index">Products</button>
+        <span id="mobile-continuous-section">Introduction</span>
+        <span class="mobile-continuous-track" aria-hidden="true">
+            <span id="mobile-continuous-progress"></span>
+        </span>
+    </nav>
+</div>

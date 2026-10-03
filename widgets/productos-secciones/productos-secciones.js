@@ -63,6 +63,16 @@
     });
 
     const container = document.getElementById("gpk-ps-widget-root");
+    function getIsEn() {
+        const rootContainer = document.getElementById("gpk-ps-widget-root") || container;
+        const attrLang = rootContainer?.getAttribute("data-lang") || rootContainer?.dataset?.lang;
+        if (attrLang) return attrLang.toLowerCase() === "en";
+        const htmlLang = document.documentElement.lang;
+        if (htmlLang && htmlLang.toLowerCase().startsWith("en")) return true;
+        return window.location.pathname.startsWith("/en");
+    }
+    const isEn = getIsEn();
+
     if (container) {
         fetch(`${selfBaseURL}/productos-secciones.html`)
             .then(res => {
@@ -82,9 +92,10 @@
         const root = document.getElementById("gpk-ps-widget");
         if (!root) return;
 
-        fetch(`${sourceBaseURL}/productos-interactivos.html`)
+        const sourceFile = isEn ? "productos-interactivos-en.html" : "productos-interactivos.html";
+        fetch(`${sourceBaseURL}/${sourceFile}`)
             .then(res => {
-                if (!res.ok) throw new Error("Error loading source productos-interactivos.html");
+                if (!res.ok) throw new Error(`Error loading source ${sourceFile}`);
                 return res.text();
             })
             .then(html => {
@@ -97,50 +108,50 @@
 
     // One section per original "mode" (0-14), same content/classes as the source widget.
     const desktopModes = [
-        { mode: 0, label: "Introducción", selectors: ["#intro-pane"], pillars: true },
-        { mode: 1, label: "Productos", selectors: ["#overview-pane"], pillars: true },
-        { mode: 2, label: "Papel", selectors: ["#pane-papel"], papelBlocks: true },
-        { mode: 3, label: "Papel", selectors: ["#pane-papel"] },
-        { mode: 4, label: "Lámina", selectors: ["#pane-laminas"] },
+        { mode: 0, label: isEn ? "Introduction" : "Introducción", selectors: ["#intro-pane"], pillars: true },
+        { mode: 1, label: isEn ? "Products" : "Productos", selectors: ["#overview-pane"], pillars: true },
+        { mode: 2, label: isEn ? "Paper" : "Papel", selectors: ["#pane-papel"], papelBlocks: true },
+        { mode: 3, label: isEn ? "Paper" : "Papel", selectors: ["#pane-papel"] },
+        { mode: 4, label: isEn ? "Corrugated Sheets" : "Lámina", selectors: ["#pane-laminas"] },
         // Modes 5 & 6 were one continuous scroll-scrubbed transition (spec 1 shrinks
         // left, spec 2 slides in). Kept as ONE section that plays 5 -> 6 on a timer.
-        { mode: 5, label: "Lámina", selectors: ["#pane-laminas-specs"], laminaSpecsSequence: true },
+        { mode: 5, label: isEn ? "Corrugated Sheets" : "Lámina", selectors: ["#pane-laminas-specs"], laminaSpecsSequence: true },
         // Cajas intro shows the #p-caja pillar as its hero image (vendor CSS makes it
         // big and centered only for mode-7; modes 8/9 use their own dedicated photos).
-        { mode: 7, label: "Cajas y empaques", selectors: ["#pane-cajas"], pillars: true },
-        { mode: 8, label: "Cajas y empaques", selectors: ["#pane-cajas"] },
-        { mode: 9, label: "Cajas y empaques", selectors: ["#pane-cajas"] },
-        { mode: "9b", label: "Cajas y empaques", selectors: ["#pane-digital-why"] },
-        { mode: "9c", label: "Cajas y empaques", selectors: ["#pane-abastecimientos"] },
+        { mode: 7, label: isEn ? "Boxes & Packaging" : "Cajas y empaques", selectors: ["#pane-cajas"], pillars: true },
+        { mode: 8, label: isEn ? "Boxes & Packaging" : "Cajas y empaques", selectors: ["#pane-cajas"] },
+        { mode: 9, label: isEn ? "Boxes & Packaging" : "Cajas y empaques", selectors: ["#pane-cajas"] },
+        { mode: "9b", label: isEn ? "Boxes & Packaging" : "Cajas y empaques", selectors: ["#pane-digital-why"] },
+        { mode: "9c", label: isEn ? "Boxes & Packaging" : "Cajas y empaques", selectors: ["#pane-abastecimientos"] },
         // Modes 10-13 originally revealed one card each as you scrolled, but each
         // card's CSS rule already stays visible in every later mode (cumulative: by
         // mode-13 all 4 are showing). Kept as ONE section that plays 10 -> 13 on a timer.
-        { mode: 10, label: "Grabados", selectors: ["#pane-grabados"], grabadosSequence: true },
-        { mode: 14, label: "Energía", selectors: ["#pane-energia"] }
+        { mode: 10, label: isEn ? "Tooling & Pre-press" : "Grabados", selectors: ["#pane-grabados"], grabadosSequence: true },
+        { mode: 14, label: isEn ? "Energy" : "Energía", selectors: ["#pane-energia"] }
     ];
 
     // Nav groups shared by the desktop side-nav and the mobile bottom bar/sheet.
     // Multi-item groups (Papel, Lámina, Cajas y empaques) list every sub-section.
     const navGroups = [
-        { label: "Introducción", items: [{ label: "Introducción", mode: 0 }] },
-        { label: "Productos", items: [{ label: "Productos", mode: 1 }] },
-        { label: "Papel", items: [
-            { label: "Introducción", mode: 2 },
-            { label: "Catálogo", mode: 3 }
+        { label: isEn ? "Introduction" : "Introducción", items: [{ label: isEn ? "Introduction" : "Introducción", mode: 0 }] },
+        { label: isEn ? "Products" : "Productos", items: [{ label: isEn ? "Products" : "Productos", mode: 1 }] },
+        { label: isEn ? "Paper" : "Papel", items: [
+            { label: isEn ? "Introduction" : "Introducción", mode: 2 },
+            { label: isEn ? "Catalog" : "Catálogo", mode: 3 }
         ] },
-        { label: "Lámina", items: [
-            { label: "Introducción", mode: 4 },
-            { label: "Especificaciones", mode: 5 }
+        { label: isEn ? "Corrugated Sheets" : "Lámina", items: [
+            { label: isEn ? "Introduction" : "Introducción", mode: 4 },
+            { label: isEn ? "Specifications" : "Especificaciones", mode: 5 }
         ] },
-        { label: "Cajas y empaques", items: [
-            { label: "Introducción", mode: 7 },
-            { label: "Cajas y empaques convencionales con soluciones de impresión flexográfica", mode: 8 },
-            { label: "Impresión digital", mode: 9 },
-            { label: "Ventajas digitales", mode: "9b" },
-            { label: "Abastecedoras", mode: "9c" }
+        { label: isEn ? "Boxes & Packaging" : "Cajas y empaques", items: [
+            { label: isEn ? "Introduction" : "Introducción", mode: 7 },
+            { label: isEn ? "Conventional packaging with flexographic printing" : "Cajas y empaques convencionales con soluciones de impresión flexográfica", mode: 8 },
+            { label: isEn ? "Digital Printing" : "Impresión digital", mode: 9 },
+            { label: isEn ? "Digital Advantages" : "Ventajas digitales", mode: "9b" },
+            { label: isEn ? "Supply & Warehouses" : "Abastecedoras", mode: "9c" }
         ] },
-        { label: "Grabados", items: [{ label: "Grabados", mode: 10 }] },
-        { label: "Energía", items: [{ label: "Energía", mode: 14 }] }
+        { label: isEn ? "Tooling & Pre-press" : "Grabados", items: [{ label: isEn ? "Tooling & Pre-press" : "Grabados", mode: 10 }] },
+        { label: isEn ? "Energy" : "Energía", items: [{ label: isEn ? "Energy" : "Energía", mode: 14 }] }
     ];
 
     function build(root, source) {
@@ -181,8 +192,8 @@
         let target = params.get("gpkProduct") || params.get("gpkSection");
 
         if (!target && window.location.hash) {
-            const hash = window.location.hash.replace("#", "");
-            if (["papel", "cajas", "laminas", "grabados", "energia"].includes(hash)) {
+            const hash = window.location.hash.replace("#", "").toLowerCase();
+            if (["papel", "cajas", "laminas", "grabados", "energia", "paper", "boxes", "sheets", "tooling", "energy"].includes(hash)) {
                 target = hash;
             }
         }
@@ -190,12 +201,17 @@
         if (target) {
             const map = {
                 papel: 2,
+                paper: 2,
                 laminas: 4,
+                sheets: 4,
                 cajas: 7,
+                boxes: 7,
                 grabados: 10,
-                energia: 14
+                tooling: 10,
+                energia: 14,
+                energy: 14
             };
-            const mode = map[target] !== undefined ? map[target] : target;
+            const mode = map[target.toLowerCase()] !== undefined ? map[target.toLowerCase()] : target;
             setTimeout(() => goToMode(root, mode), 300);
         }
     }
@@ -333,19 +349,23 @@
         if (!intro || !conventional || !digital) return;
 
         const introHeadings = intro.querySelectorAll(".cajas-column h2");
-        if (introHeadings[0]) introHeadings[0].textContent = "Cajas y empaques convencionales con soluciones de impresión flexográfica";
-        if (introHeadings[1]) introHeadings[1].innerHTML = 'Impresión <span class="gpk-digital-rainbow">Digital</span>';
+        if (introHeadings[0]) introHeadings[0].textContent = isEn
+            ? "Conventional corrugated boxes and packaging with flexographic printing solutions"
+            : "Cajas y empaques convencionales con soluciones de impresión flexográfica";
+        if (introHeadings[1]) introHeadings[1].innerHTML = isEn
+            ? '<span class="gpk-digital-rainbow">Digital</span> Printing'
+            : 'Impresión <span class="gpk-digital-rainbow">Digital</span>';
 
         const idealCard = conventional.querySelector(".cajas-paragraph-2");
         if (idealCard && !idealCard.querySelector(".ps-cajas-card-label")) {
-            const copy = idealCard.textContent.trim().replace(/^Ideales para\s*/i, "");
-            idealCard.innerHTML = `<strong class="ps-cajas-card-label">Ideales para:</strong>${copy}`;
+            const copy = idealCard.textContent.trim().replace(/^(Ideales para|Ideal for)\s*/i, "");
+            idealCard.innerHTML = `<strong class="ps-cajas-card-label">${isEn ? "Ideal for:" : "Ideales para:"}</strong>${copy}`;
         }
 
         const technologyCard = digital.querySelector(".digital-paragraph-2");
         if (technologyCard && !technologyCard.querySelector(".ps-cajas-card-label")) {
-            const copy = technologyCard.textContent.trim();
-            technologyCard.innerHTML = `<strong class="ps-cajas-card-label">Tecnología Single Pass</strong>${copy}`;
+            const copy = technologyCard.textContent.trim().replace(/^Tecnología Single Pass\s*/i, "").replace(/^Single[- ]Pass Technology:?\s*/i, "");
+            technologyCard.innerHTML = `<strong class="ps-cajas-card-label">${isEn ? "Single-Pass Technology:" : "Tecnología Single Pass"}</strong>${copy}`;
         }
     }
 
@@ -711,10 +731,29 @@
 
         const intro = screen.querySelector(".grabados-intro-text");
         if (intro) {
-            intro.innerHTML = "<p>Servicio integral de grabados y preprensa para la industria del empaque.</p><p><strong>Desarrollamos y montamos placas para</strong> corrugado, etiquetas, material flexible, bolsas de papel y barnices offset, <strong>asegurando una reproducción fiel del arte, control de color y óptimos resultados en prensa.</strong></p>";
+            intro.innerHTML = isEn
+                ? "<p>Comprehensive tooling, pre-press and plate-mounting services for the packaging industry.</p><p><strong>We engineer and mount plates for</strong> corrugated boards, labels, flexible packaging, paper bags, and offset coating, <strong>guaranteeing faithful art reproduction, color accuracy, and peak press performance.</strong></p>"
+                : "<p>Servicio integral de grabados y preprensa para la industria del empaque.</p><p><strong>Desarrollamos y montamos placas para</strong> corrugado, etiquetas, material flexible, bolsas de papel y barnices offset, <strong>asegurando una reproducción fiel del arte, control de color y óptimos resultados en prensa.</strong></p>";
         }
 
-        const mobileCopy = [
+        const mobileCopy = isEn ? [
+            {
+                title: "Pre-press & Adaptation",
+                description: "Artwork adaptation to packaging structures across diverse substrates (corrugated, flexible, paper, labels)."
+            },
+            {
+                title: "Color Management",
+                description: "Color profiling and opacity simulation to maintain rigorous brand consistency across product lines."
+            },
+            {
+                title: "Plate Mounting & Distortion Correction",
+                description: "High-precision plate mounting with distortion compensation and register control for high-speed print runs."
+            },
+            {
+                title: "Press-side Support & Retouching",
+                description: "On-site industrial best practices to elevate print quality and press run efficiency."
+            }
+        ] : [
             {
                 title: "Preprensa y adaptación",
                 description: "Adaptación de arte al empaque para diferentes sustratos (corrugado, flexible, papel, etiquetas)."
@@ -749,7 +788,11 @@
         const screen = root.querySelector('.ps-screen[data-mode="14"].ps-mobile-energia-v1');
         if (!screen) return;
 
-        const descriptions = [
+        const descriptions = isEn ? [
+            "We achieve up to 80% thermal-electrical efficiency through our simultaneous cogeneration technology.",
+            "By maximizing fuel utilization, <strong>we cut emissions</strong> and optimize our carbon footprint.",
+            "We generate a substantial portion of our electricity demand, ensuring 100% operational continuity across plants."
+        ] : [
             "Alcanzamos hasta un 80% de rendimiento energético mediante nuestra tecnología de cogeneración simultánea.",
             "Al aprovechar mejor el combustible, <strong>reducimos emisiones</strong> y mejoramos nuestra huella de carbono.",
             "Generamos parte importante de la energía que utilizamos, asegurando continuidad operativa total en planta."
@@ -828,6 +871,10 @@
 
     // --- Desktop: slim dot rail with hover flyout labels ---
     function setupSideNav(root) {
+        const nav = root.querySelector(".ps-side-nav");
+        if (nav) {
+            nav.setAttribute("aria-label", isEn ? "Product sections navigation" : "Navegación de secciones de productos");
+        }
         const list = root.querySelector("#ps-side-nav-list");
         if (!list) return;
         list.innerHTML = "";

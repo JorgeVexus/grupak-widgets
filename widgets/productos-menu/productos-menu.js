@@ -22,7 +22,15 @@
     // 2. Fetch and inject HTML markup
     const container = document.getElementById("gpk-products-menu-root");
     if (container) {
-        fetch(`${baseURL}/productos-menu.html?v=${assetVersion}`)
+        const lang = (
+            container.getAttribute("data-lang") ||
+            (container.dataset && container.dataset.lang) ||
+            (window.location.pathname.startsWith("/en") ? "en" : "es")
+        ).toLowerCase();
+
+        const htmlFile = lang === "en" ? "productos-menu-en.html" : "productos-menu.html";
+
+        fetch(`${baseURL}/${htmlFile}?v=${assetVersion}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error loading products menu HTML");
                 return res.text();
