@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20260822-sustentabilidad-first";
+    var assetVersion = "20261003-lang-switcher";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -80,7 +80,57 @@
         bindProductLinks(navbar);
         bindFormLinks(navbar);
         bindAutoHide(navbar);
+        bindLangSwitch(navbar);
         highlightCurrentLink(navbar);
+    }
+
+    function bindLangSwitch(navbar) {
+        var switchLink = navbar.querySelector(".gpk-navbar-menu__lang-switch");
+        if (!switchLink) return;
+
+        var rawPath = window.location.pathname.replace(/\/$/, "");
+        if (!rawPath) rawPath = "/";
+
+        var pageMapEsToEn = {
+            "/": "/en/home",
+            "/index.html": "/en/home",
+            "/quienes-somos": "/en/about-us",
+            "/sustentabilidad": "/en/sustainability",
+            "/nuestra-gente": "/en/our-people",
+            "/contacto": "/en/contact",
+            "/certificaciones": "/en/certifications"
+        };
+
+        var pageMapEnToEs = {
+            "/en/home": "/",
+            "/en/about-us": "/quienes-somos",
+            "/en/sustainability": "/sustentabilidad",
+            "/en/our-people": "/nuestra-gente",
+            "/en/contact": "/contacto",
+            "/en/certifications": "/certificaciones",
+            "/en": "/"
+        };
+
+        var root =
+            document.getElementById("gpk-navbar-menu-root") ||
+            document.getElementById("grupak-navbar-menu-root");
+
+        var isEn = (
+            (root && (root.getAttribute("data-lang") || (root.dataset && root.dataset.lang))) ||
+            (window.location.pathname.startsWith("/en") ? "en" : "es")
+        ).toLowerCase() === "en";
+
+        if (isEn) {
+            var targetEs = pageMapEnToEs[rawPath] || "/";
+            switchLink.setAttribute("href", targetEs);
+            switchLink.setAttribute("title", "Español");
+            switchLink.textContent = "ES";
+        } else {
+            var targetEn = pageMapEsToEn[rawPath] || "/en/home";
+            switchLink.setAttribute("href", targetEn);
+            switchLink.setAttribute("title", "English");
+            switchLink.textContent = "EN";
+        }
     }
 
     function highlightCurrentLink(navbar) {
