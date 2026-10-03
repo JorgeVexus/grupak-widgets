@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20261003-links-v2";
+    var assetVersion = "20261003-news-v2";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -98,7 +98,8 @@
             "/sustentabilidad": "/en/sustainability",
             "/nuestra-gente": "/en/our-people",
             "/contacto": "/en/contact",
-            "/certificaciones": "/en/certifications"
+            "/certificaciones": "/en/certifications",
+            "/noticias": "/en/news"
         };
 
         var pageMapEnToEs = {
@@ -108,6 +109,7 @@
             "/en/our-people": "/nuestra-gente",
             "/en/contact": "/contacto",
             "/en/certifications": "/certificaciones",
+            "/en/news": "/noticias",
             "/en": "/"
         };
 
