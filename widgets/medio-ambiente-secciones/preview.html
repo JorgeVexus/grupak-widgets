@@ -173,6 +173,7 @@
   <!-- Barra de Herramientas Flotante -->
   <div class="demo-toolbar" aria-label="Controles de prueba">
     <span>🍃 Medio Ambiente Secciones</span>
+    <button onclick="toggleLang()">🌐 <span id="lang-btn-text">Cambiar a EN</span></button>
     <button onclick="replayAnimation()">🔄 Reiniciar Animación</button>
   </div>
 
@@ -203,7 +204,7 @@
   <!-- Script del Widget -->
   <script src="medio-ambiente-secciones.js"></script>
 
-  <!-- Helper para probar replay -->
+  <!-- Helper para probar replay y cambio de idioma -->
   <script>
     function replayAnimation() {
       const widget = document.getElementById("gpk-mas-widget");
@@ -211,6 +212,25 @@
       widget.classList.remove("mas-revealed");
       void widget.offsetWidth;
       widget.classList.add("mas-revealed");
+    }
+
+    function toggleLang() {
+      const root = document.getElementById("gpk-mas-widget-root");
+      const current = root.getAttribute("data-lang");
+      const next = current === "en" ? "es" : "en";
+      root.setAttribute("data-lang", next);
+      document.getElementById("lang-btn-text").textContent = next === "en" ? "Cambiar a ES" : "Cambiar a EN";
+      
+      const isEnglish = next === "en";
+      const templateFile = isEnglish ? "medio-ambiente-secciones-en.html" : "medio-ambiente-secciones.html";
+      fetch(templateFile)
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          root.innerHTML = html;
+          const s = document.createElement("script");
+          s.src = "medio-ambiente-secciones.js";
+          document.body.appendChild(s);
+        });
     }
   </script>
 </body>

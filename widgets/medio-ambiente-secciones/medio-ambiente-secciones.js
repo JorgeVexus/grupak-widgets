@@ -42,6 +42,17 @@
   var existingWidget = document.getElementById("gpk-mas-widget");
 
   if (existingWidget) {
+    var isEnglish =
+      existingWidget.getAttribute("data-lang") === "en" ||
+      (existingWidget.parentElement && existingWidget.parentElement.getAttribute("data-lang") === "en") ||
+      window.location.pathname.indexOf("/en/") !== -1;
+    if (isEnglish) {
+      var wheelImg = existingWidget.querySelector(".mas-wheel-img");
+      if (wheelImg && wheelImg.getAttribute("src").indexOf("circulo-central-en") === -1) {
+        wheelImg.setAttribute("src", "images/circulo-central-en.webp");
+        wheelImg.setAttribute("alt", "Grupak Product Life Cycle");
+      }
+    }
     resolveImages(existingWidget);
     initWidget(existingWidget);
   } else if (root) {
