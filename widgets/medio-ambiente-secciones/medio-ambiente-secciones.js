@@ -19,7 +19,7 @@
     }
   }
 
-  var assetVersion = "20260907-zoom-fix-v2";
+  var assetVersion = "20261005-wedge5-fix-1";
 
   // 1. Inyectar estilos CSS si no están presentes
   if (!document.getElementById("gpk-mas-styles")) {
