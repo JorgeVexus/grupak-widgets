@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estrategia de Sustentabilidad — Vista Previa Local Grupak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gpk-green: #5f9d2f;
+      --gpk-gray: #6e6e6e;
+      --gpk-dark: #2f302f;
+      --gpk-bg: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f1f5f9;
+      color: var(--gpk-dark);
+    }
+
+    .preview-header {
+      background: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .preview-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gpk-dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .preview-badge {
+      background: #eaf4e2;
+      color: var(--gpk-green);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .lang-switcher {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 8px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #64748b;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: white;
+      color: var(--gpk-green);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .container-section {
+      max-width: 1540px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    .section-label {
+      padding: 16px 24px;
+      background: #fafafa;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="preview-header">
+    <div class="preview-title">
+      <span>Grupak — Estrategia de Sustentabilidad Widget</span>
+      <span class="preview-badge" id="current-lang-badge">Español</span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-es" onclick="switchLang('es')">Español (ES)</button>
+      <button class="lang-btn" id="btn-en" onclick="switchLang('en')">English (EN)</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container-section">
+      <div class="section-label">Widget Render Preview</div>
+      <!-- Widget Root Container -->
+      <div id="gpk-sust-widget-root" data-lang="es"></div>
+    </div>
+  </main>
+
+  <script src="sustentabilidad-estrategia.js"></script>
+
+  <script>
+    function switchLang(lang) {
+      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('current-lang-badge').textContent = lang === 'en' ? 'English (EN)' : 'Español (ES)';
+
+      var root = document.getElementById('gpk-sust-widget-root');
+      root.setAttribute('data-lang', lang);
+
+      var templateFile = lang === 'en' ? 'sustentabilidad-estrategia-en.html' : 'sustentabilidad-estrategia.html';
+      fetch(templateFile + '?v=' + Date.now())
+        .then(function(res) { return res.text(); })
+        .then(function(html) {
+          root.innerHTML = html;
+          // Trigger image resolution
+          root.querySelectorAll('img').forEach(function(img) {
+            var src = img.getAttribute('src');
+            if (lang === 'en' && (src.indexOf('sustentabilidad frame 3.webp') !== -1 || src.indexOf('sustentabilidad frame 3.png') !== -1)) {
+              src = src.replace('sustentabilidad frame 3.webp', 'sustentabilidad frame 3-en.webp')
+                       .replace('sustentabilidad frame 3.png', 'sustentabilidad frame 3-en.webp');
+            }
+            img.src = src;
+          });
+        });
+    }
+  </script>
+</body>
+</html>
