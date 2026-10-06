@@ -836,6 +836,7 @@
     align-items: center;
     gap: 12px;
     margin-top: 4px;
+    flex-wrap: wrap;
 }
 
 #gpk-ps-widget .abastecimientos-cta-text {
@@ -843,7 +844,9 @@
     font-size: 16px;
     color: #6e6e6e;
     margin: 0;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 #gpk-ps-widget .abastecimientos-btn {

@@ -10849,6 +10849,24 @@
     margin: 0;
 }
 
+#gpk-products-widget .abastecimientos-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+#gpk-products-widget .abastecimientos-cta-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #6e6e6e;
+    margin: 0;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
 #gpk-products-widget .abastecimientos-btn {
     display: inline-flex;
     align-items: center;
@@ -10938,6 +10956,23 @@
     #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-desc {
         font-size: 16px !important;
         line-height: 1.45 !important;
+    }
+
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-cta-row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+    }
+
+    #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-cta-text {
+        font-size: 15px !important;
+        line-height: 1.4 !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
     }
 
     #gpk-products-widget .ps-screen[data-mode="9c"] .abastecimientos-btn {

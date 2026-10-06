@@ -108,6 +108,7 @@
         color: var(--color-green, #5f9d2f);
         margin: 0 0 8px;
         line-height: 1.25;
+        white-space: normal !important;
     }
 
     #gpk-ps-widget .ps-screen[data-mode="4"].ps-mobile-laminas-intro-v1 .laminas-resistencia-desc {

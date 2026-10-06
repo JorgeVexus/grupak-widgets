@@ -516,6 +516,9 @@
   #gpk-ps-widget .ps-screen[data-mode="9c"].ps-mobile-abastecimientos-v1 .abastecimientos-cta-text {
     font-size: 15px !important;
     line-height: 1.4 !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
   }
 
   #gpk-ps-widget .ps-screen[data-mode="9c"].ps-mobile-abastecimientos-v1 .abastecimientos-btn {

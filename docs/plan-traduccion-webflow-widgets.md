@@ -107,7 +107,7 @@ Para asegurar una traducción natural, ejecutiva e internacional (evitando tradu
 | Widget | Archivo Clave | Versión Actual | Estado i18n |
 | :--- | :--- | :--- | :--- |
 | `productos-menu` | `productos-menu.js` | `20260822-energia-text` | **Completado** (Soporte `data-lang="en"` y fallback `/en/`) |
-| `productos-secciones` | `productos-secciones.js` | `seccion-reveal-50` | **Completado** (Soporte `data-lang="en"`, fetch de `productos-interactivos-en.html`, desktop dot nav & mobile reflow) |
+| `productos-secciones` | `productos-secciones.js` | `seccion-reveal-51` | **Completado** (Soporte `data-lang="en"`, fetch de `productos-interactivos-en.html`, desktop dot nav & mobile reflow) |
 | `lo-que-nos-impulsa` | `lo-que-nos-impulsa.js` | `20261002-hero-no-title` | Planificado (Sesión 3) |
 | `locations-map` | `locations-map.js` | - | Planificado (Sesión 3) |
 | `ciclo-de-vida` | `ciclo-de-vida.js` | - | Planificado (Sesión 3) |
