@@ -62,12 +62,12 @@
                 name: 'Corporativo',
                 category: 'Corporativo',
                 categoryClass: 'corporativo',
-                address: 'Lago Zúrich 245, Edificio Zúrich, piso 7, Ampliación Granada, C.P. 11529, Ciudad de México',
+                address: 'Avenida Paseo de la Reforma #115, Lomas de Chapultepec, Miguel Hidalgo, C.P. 11000, CDMX',
                 phone: '55 2581 0700',
                 imageUrl: 'widgets/locations-map/images/ubicaciones/corporativo.webp',
-                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Lago+Zurich+245+Edificio+Zurich+Piso+7+Ampliacion+Granada+11529+Ciudad+de+Mexico',
-                lat: 19.4360,
-                lng: -99.2030
+                mapUrl: 'https://www.google.com/maps/search/?api=1&query=Avenida+Paseo+de+la+Reforma+115+Lomas+de+Chapultepec+Miguel+Hidalgo+11000+CDMX',
+                lat: 19.4294,
+                lng: -99.2017
             },
             {
                 id: 'planta-toluca',
