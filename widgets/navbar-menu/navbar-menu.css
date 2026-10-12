@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: clamp(20px, 2vw, 34px);
+    gap: clamp(18px, 1.8vw, 28px);
     min-width: 0;
 }
 
@@ -193,11 +193,7 @@
     line-height: 16px;
 }
 
-.gpk-navbar-menu__tools {
-    display: flex;
-    align-items: center;
-    gap: clamp(14px, 1.5vw, 28px);
-}
+
 
 .gpk-navbar-menu__lang,
 .gpk-navbar-menu__search,
@@ -262,7 +258,7 @@
 .gpk-navbar-menu__tools {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
+    gap: clamp(18px, 1.8vw, 28px);
 }
 
 .gpk-navbar-menu__lang-switch {

@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20261012-lang-flags";
+    var assetVersion = "20261012-lang-flags-v2";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
