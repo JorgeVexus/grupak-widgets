@@ -269,16 +269,32 @@
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.04em;
-    padding: 6px 12px;
+    padding: 5px 11px;
     border: 1px solid currentColor;
     border-radius: 999px;
-    opacity: 0.85;
+    opacity: 0.9;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
     text-decoration: none;
     color: #ffffff;
+    line-height: 1;
     transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.gpk-navbar-menu__flag {
+    display: inline-block;
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.gpk-navbar-menu__lang-text {
+    display: inline-block;
+    line-height: 1;
 }
 
 .gpk-navbar-menu__lang-switch:is(:hover, :focus-visible) {

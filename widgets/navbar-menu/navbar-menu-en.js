@@ -7,7 +7,7 @@
         window.location.hostname === "127.0.0.1" ||
         window.location.protocol === "file:";
     var baseURL = isLocalhost ? "widgets/navbar-menu" : productionBaseURL;
-    var assetVersion = "20261003-news-v2";
+    var assetVersion = "20261012-lang-flags";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
         : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
@@ -122,16 +122,20 @@
             (window.location.pathname.startsWith("/en") ? "en" : "es")
         ).toLowerCase() === "en";
 
+        var usFlagSvg = '<svg class="gpk-navbar-menu__flag" viewBox="0 0 20 14" width="18" height="12" aria-hidden="true"><clipPath id="gpk-flag-us-clip"><rect width="20" height="14" rx="2"/></clipPath><g clip-path="url(#gpk-flag-us-clip)"><rect width="20" height="14" fill="#B22234"/><path d="M0 1.08h20v1.08H0zm0 2.15h20v1.08H0zm0 2.15h20v1.08H0zm0 2.15h20v1.08H0zm0 2.16h20v1.08H0zm0 2.15h20v1.08H0z" fill="#FFFFFF"/><rect width="8" height="7.54" fill="#3C3B6E"/><g fill="#FFFFFF" transform="scale(0.8) translate(0.6, 0.5)"><circle cx="2" cy="1.6" r="0.6"/><circle cx="5" cy="1.6" r="0.6"/><circle cx="8" cy="1.6" r="0.6"/><circle cx="3.5" cy="3.2" r="0.6"/><circle cx="6.5" cy="3.2" r="0.6"/><circle cx="2" cy="4.8" r="0.6"/><circle cx="5" cy="4.8" r="0.6"/><circle cx="8" cy="4.8" r="0.6"/><circle cx="3.5" cy="6.4" r="0.6"/><circle cx="6.5" cy="6.4" r="0.6"/><circle cx="2" cy="8" r="0.6"/><circle cx="5" cy="8" r="0.6"/><circle cx="8" cy="8" r="0.6"/></g></g></svg>';
+
+        var mxFlagSvg = '<svg class="gpk-navbar-menu__flag" viewBox="0 0 20 14" width="18" height="12" aria-hidden="true"><clipPath id="gpk-flag-mx-clip"><rect width="20" height="14" rx="2"/></clipPath><g clip-path="url(#gpk-flag-mx-clip)"><rect width="6.67" height="14" fill="#006847"/><rect x="6.67" width="6.66" height="14" fill="#FFFFFF"/><rect x="13.33" width="6.67" height="14" fill="#CE1126"/><path d="M10 4.2c-.4 0-.8.3-.9.7-.1.4.1.8.4 1-.2.2-.3.5-.2.8.2.4.6.7 1 .7.4 0 .7-.3.8-.7 0-.3-.1-.5-.3-.7.3-.2.4-.6.3-1-.1-.5-.6-.8-1.1-.8z" fill="#78481A"/><path d="M8.8 8.4c.3.5.7.9 1.2.9.5 0 .9-.4 1.2-.9-.4.2-.8.3-1.2.3-.4 0-.8-.1-1.2-.3z" fill="#006847"/><path d="M9.4 6.8c.2.2.4.3.6.3s.4-.1.6-.3c-.2.4-.4.6-.6.6s-.4-.2-.6-.6z" fill="#B38E3F"/></g></svg>';
+
         if (isEn) {
             var targetEs = pageMapEnToEs[rawPath] || "/";
             switchLink.setAttribute("href", targetEs);
             switchLink.setAttribute("title", "Español");
-            switchLink.textContent = "ES";
+            switchLink.innerHTML = mxFlagSvg + '<span class="gpk-navbar-menu__lang-text">ES</span>';
         } else {
             var targetEn = pageMapEsToEn[rawPath] || "/en/home";
             switchLink.setAttribute("href", targetEn);
             switchLink.setAttribute("title", "English");
-            switchLink.textContent = "EN";
+            switchLink.innerHTML = usFlagSvg + '<span class="gpk-navbar-menu__lang-text">EN</span>';
         }
     }
 
