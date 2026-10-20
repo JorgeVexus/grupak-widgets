@@ -268,7 +268,7 @@
             (window.location.pathname.startsWith("/en") ? "en" : "es")
         ).toLowerCase() === "en";
 
-        window.location.href = isEn ? "https://grupak.webflow.io/en/home#productos" : "https://grupak.webflow.io/#productos";
+        window.location.href = isEn ? "/en/home#productos" : "/#productos";
     }
 
     function bindFormLinks(navbar) {
