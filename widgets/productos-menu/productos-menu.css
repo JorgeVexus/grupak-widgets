@@ -67,7 +67,8 @@
     z-index: 1;
 }
 
-.gpk-product-item:hover {
+.gpk-product-item:hover,
+.gpk-product-item.gpk-active {
     z-index: 5;
 }
 

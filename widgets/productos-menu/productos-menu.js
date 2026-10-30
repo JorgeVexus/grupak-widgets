@@ -8,7 +8,7 @@
     const baseURL = isLocalhost
         ? "widgets/productos-menu"
         : "https://grupak-widgets.vercel.app/widgets/productos-menu";
-    const assetVersion = "20260822-energia-text";
+    const assetVersion = "20261030-click-expand";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-menu-styles")) {
@@ -65,36 +65,43 @@
             item.addEventListener('click', (e) => {
                 const saberMasBtn = e.target.closest('.gpk-saber-mas');
                 
-                // En pantallas medianas y móviles, manejamos la expansión estilo acordeón
-                if (window.innerWidth <= 1024) {
-                    if (saberMasBtn) {
-                        e.preventDefault();
-                        const navigate = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
-                        if (navigate) {
-                            navigate(targetSlide);
-                        }
-                    } else {
-                        // Alternamos el estado activo del acordeón
-                        const isActive = item.classList.contains('gpk-active');
-                        items.forEach(el => el.classList.remove('gpk-active'));
-                        if (!isActive) {
-                            item.classList.add('gpk-active');
-                        }
-                    }
-                } else {
-                    // En escritorio, un clic en cualquier parte del item (o el link) navega directamente
-                    e.preventDefault();
+                // Si el clic es en "Saber más", navegamos a la sección correspondiente
+                if (saberMasBtn) {
                     const navigate = window.gpkGoToProductsSection || window.gpkGoToProductsSlide;
                     if (navigate) {
+                        e.preventDefault();
                         navigate(targetSlide);
                     }
+                    return;
+                }
+
+                // Si hacen clic en el párrafo de descripción, evitamos colapsar accidentalmente
+                if (e.target.closest('.gpk-product-description')) {
+                    return;
+                }
+
+                // Clic en el enlace/título/item: despliega o colapsa la información
+                e.preventDefault();
+                const isActive = item.classList.contains('gpk-active');
+                items.forEach(el => el.classList.remove('gpk-active'));
+                if (!isActive) {
+                    item.classList.add('gpk-active');
+                }
+            });
+
+            // En desktop, al hacer hover sobre otro item se desactiva el anterior para evitar conflicto visual
+            item.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 1024) {
+                    items.forEach(el => {
+                        if (el !== item) el.classList.remove('gpk-active');
+                    });
                 }
             });
         });
 
-        // Limpieza de clases al cambiar tamaño a desktop
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 1024) {
+        // Cerrar item activo al hacer clic fuera del menú
+        document.addEventListener('click', (e) => {
+            if (!root.contains(e.target)) {
                 items.forEach(el => el.classList.remove('gpk-active'));
             }
         });
