@@ -42,7 +42,7 @@
         return 150 + Math.floor(Math.random() * 200);
     }
 
-    const assetVersion = "seccion-reveal-51";
+    const assetVersion = "seccion-reveal-52";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -93,7 +93,7 @@
         if (!root) return;
 
         const sourceFile = isEn ? "productos-interactivos-en.html" : "productos-interactivos.html";
-        fetch(`${sourceBaseURL}/${sourceFile}`)
+        fetch(`${sourceBaseURL}/${sourceFile}?v=${assetVersion}`)
             .then(res => {
                 if (!res.ok) throw new Error(`Error loading source ${sourceFile}`);
                 return res.text();
@@ -160,6 +160,7 @@
         swapLaminasStackImages(root);
         swapCorrugadorasImages(root);
         resolveAssetURLs(root);
+        normalizeDigitalTitles(root);
         prepareMobileCajasContent(root);
         scaleDesktopBoards(root);
         setupReveal(root);
@@ -336,6 +337,16 @@
             const spec2 = pane.querySelector(".spec-group-2 .spec-img-2");
             if (spec2) {
                 spec2.src = `${selfBaseURL}/images/seccion-laminas-2/corrugadora-02.webp`;
+            }
+        });
+    }
+
+    function normalizeDigitalTitles(root) {
+        root.querySelectorAll(".cajas-column h2, .digital-subtitle").forEach(el => {
+            if (el.innerHTML.includes("exhibidores<br>en")) {
+                el.innerHTML = el.innerHTML.replaceAll("exhibidores<br>en", "exhibidores <br>en");
+            } else if (el.innerHTML.includes("exhibidoresen")) {
+                el.innerHTML = el.innerHTML.replaceAll("exhibidoresen", "exhibidores en");
             }
         });
     }
