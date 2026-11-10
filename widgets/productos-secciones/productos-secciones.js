@@ -42,7 +42,7 @@
         return 150 + Math.floor(Math.random() * 200);
     }
 
-    const assetVersion = "seccion-reveal-52";
+    const assetVersion = "seccion-reveal-53";
     [
         ["gpk-ps-vendor-styles", "productos-secciones-vendor.css"],
         ["gpk-ps-styles", "productos-secciones.css"],
@@ -801,11 +801,11 @@
 
         const descriptions = isEn ? [
             "We achieve up to 80% thermal-electrical efficiency through our simultaneous cogeneration technology.",
-            "By maximizing fuel utilization, <strong>we cut emissions</strong> and optimize our carbon footprint.",
+            "By utilizing fuel more efficiently, we contribute to reducing emissions associated with our operations.",
             "We generate a substantial portion of our electricity demand, ensuring 100% operational continuity across plants."
         ] : [
             "Alcanzamos hasta un 80% de rendimiento energético mediante nuestra tecnología de cogeneración simultánea.",
-            "Al aprovechar mejor el combustible, <strong>reducimos emisiones</strong> y mejoramos nuestra huella de carbono.",
+            "Al aprovechar de forma más eficiente el combustible, contribuimos a la reducción de emisiones asociadas a nuestras operaciones.",
             "Generamos parte importante de la energía que utilizamos, asegurando continuidad operativa total en planta."
         ];
         screen.querySelectorAll(".energia-row").forEach((row, index) => {

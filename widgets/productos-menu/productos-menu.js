@@ -8,7 +8,7 @@
     const baseURL = isLocalhost
         ? "widgets/productos-menu"
         : "https://grupak-widgets.vercel.app/widgets/productos-menu";
-    const assetVersion = "20261030-click-expand";
+    const assetVersion = "20261110-energia-update";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-menu-styles")) {

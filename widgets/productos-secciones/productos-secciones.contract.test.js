@@ -450,7 +450,7 @@ test("Energía móvil reproduce las superficies del Figma", () => {
 test("Energía móvil usa la copia del Figma sin alterar el HTML fuente", () => {
     assert.match(js, /function prepareMobileEnergiaContent\(root\)/);
     assert.match(js, /Alcanzamos hasta un 80% de rendimiento energético/);
-    assert.match(js, /Al aprovechar mejor el combustible, <strong>reducimos emisiones<\/strong> y mejoramos nuestra huella de carbono/);
+    assert.match(js, /Al aprovechar de forma más eficiente el combustible, contribuimos a la reducción de emisiones asociadas a nuestras operaciones/);
     assert.match(js, /asegurando continuidad operativa total en planta/);
     assert.match(sourceHtml, /centrales térmicas convencionales/);
     assert.match(sourceHtml, /fabricación de papel y empaques/);
