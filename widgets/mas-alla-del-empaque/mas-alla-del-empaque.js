@@ -6,7 +6,7 @@
     const baseURL = isLocalhost 
         ? "/widgets/mas-alla-del-empaque" 
         : "https://grupak-widgets.vercel.app/widgets/mas-alla-del-empaque";
-    const internalBuild = "20261110-snap-v4";
+    const internalBuild = "20261110-snap-v5";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-mas-alla-styles")) {
