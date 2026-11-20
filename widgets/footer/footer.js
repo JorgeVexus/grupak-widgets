@@ -195,4 +195,28 @@
             }
         }
     });
+
+    var productSlides = { papel: 2, laminas: 4, cajas: 7, "impresion-digital": 9, grabados: 10, energia: 14 };
+
+    function requestedProductSlide() {
+        var key = new URLSearchParams(window.location.search).get("producto");
+        if (!key) {
+            var match = /^#productos-(.+)$/.exec(window.location.hash);
+            key = match && match[1];
+        }
+        return key && Object.prototype.hasOwnProperty.call(productSlides, key) ? productSlides[key] : null;
+    }
+
+    var requestedSlide = requestedProductSlide();
+    if (requestedSlide !== null) {
+        if (typeof (window.gpkGoToProductsSection || window.gpkGoToProductsSlide) === "function") {
+            goToProductSlide(requestedSlide);
+        } else {
+            try {
+                window.sessionStorage.setItem("gpkPendingProductSlide", String(requestedSlide));
+            } catch (err) {
+                console.warn("[gpk-footer] Could not store requested product slide", err);
+            }
+        }
+    }
 })();
