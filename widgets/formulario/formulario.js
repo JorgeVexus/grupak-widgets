@@ -420,7 +420,8 @@
         if (!country || !stateSelect || !stateText) return;
 
         country.addEventListener("change", function () {
-            if (country.value === "Otro") {
+            var val = country.value;
+            if (val === "Otro") {
                 stateSelect.style.display = "none";
                 stateSelect.disabled = true;
                 stateSelect.required = false;
@@ -575,6 +576,16 @@
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
+            var successMsg = isEnglish
+                ? "Thank you. Your information was sent successfully. Our team will contact you very soon."
+                : "Gracias. Tu información fue enviada correctamente. Nuestro equipo te contactará muy pronto.";
+            var errorMsg = isEnglish
+                ? "There was a problem sending the form. Please try again."
+                : "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.";
+            var netErrorMsg = isEnglish
+                ? "Could not connect to the server. Check your connection and try again."
+                : "No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.";
+
             var honeypot = form.querySelector('[name="_gotcha"]');
             if (honeypot && honeypot.value) {
                 form.reset();
@@ -585,7 +596,7 @@
 
             var label = button.textContent;
             button.disabled = true;
-            button.textContent = "Enviando...";
+            button.textContent = isEnglish ? "Sending..." : "Enviando...";
             status.className = "gpk-status";
             status.textContent = "";
 
@@ -643,13 +654,13 @@
                 })
                     .then(function (res) {
                         if (res.ok) {
-                            applyStatus("ok", "Gracias. Tu información fue enviada correctamente. Nuestro equipo te contactará muy pronto.");
+                            applyStatus("ok", successMsg);
                             return;
                         }
-                        applyStatus("error", "Hubo un problema al enviar el formulario. Por favor inténtalo de nuevo.");
+                        applyStatus("error", errorMsg);
                     })
                     .catch(function () {
-                        applyStatus("error", "No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.");
+                        applyStatus("error", netErrorMsg);
                     })
                     .finally(function () {
                         restoreButton();
