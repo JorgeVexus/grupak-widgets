@@ -5,6 +5,7 @@
 !.gitignore
 !/README.md
 !/vercel.json
+!/_headers
 !/changelogs/
 !/widgets/
 !/docs/
