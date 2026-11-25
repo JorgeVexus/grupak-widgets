@@ -12,8 +12,8 @@
     //
     // One section system for every screen size. The original 1850x1030 desktop
     // canvas is always scaled down to fit; there is no alternate responsive reflow.
-    const sourceProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
-    const selfProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-secciones";
+    const sourceProductionBaseURL = "https://grupak-widgets.pages.dev/widgets/productos-interactivos";
+    const selfProductionBaseURL = "https://grupak-widgets.pages.dev/widgets/productos-secciones";
     const isLocalHost = window.location.protocol === "file:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
     let selfBaseURL = selfProductionBaseURL;

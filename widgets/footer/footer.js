@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var productionBaseURL = "https://grupak-widgets.vercel.app/widgets/footer";
+    var productionBaseURL = "https://grupak-widgets.pages.dev/widgets/footer";
     var isLocalhost =
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1" ||
@@ -10,7 +10,7 @@
     var assetVersion = "20261110-footer-v3";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
-        : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
+        : "https://grupak-widgets.pages.dev/widgets/productos-interactivos/logoGrupak.svg";
 
     ensureStyles();
     mountWidget();

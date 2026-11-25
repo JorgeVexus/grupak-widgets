@@ -223,7 +223,7 @@ test('resolves localhost from the site root and file assets beside the current s
   );
   assert.equal(
     resolveBaseURL('https:', 'example.com', 'https://example.com', ''),
-    'https://grupak-widgets.vercel.app/widgets/slider%20certificaciones%20new/',
+    'https://grupak-widgets.pages.dev/widgets/slider%20certificaciones%20new/',
   );
   assert.match(js, /['"]\/widgets\/slider%20certificaciones%20new['"]/);
   assert.match(js, /document\.currentScript/);

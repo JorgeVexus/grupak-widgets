@@ -10,7 +10,7 @@
     window.location.hostname === "127.0.0.1" ||
     window.location.protocol === "file:";
 
-  var selfProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/sustentabilidad%20estrategia";
+  var selfProductionBaseURL = "https://grupak-widgets.pages.dev/widgets/sustentabilidad%20estrategia";
   var baseURL = isLocalhost
     ? "/widgets/sustentabilidad estrategia"
     : selfProductionBaseURL;

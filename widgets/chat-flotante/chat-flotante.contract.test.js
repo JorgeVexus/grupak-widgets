@@ -182,7 +182,7 @@ test("loads and safely crops the footer portrait as the header avatar", async fu
     var productionAvatar = productionApp.document.querySelector("[data-gpk-chat-avatar]");
     assert.match(
         productionAvatar.getAttribute("src"),
-        /^https:\/\/grupak-widgets\.vercel\.app\/widgets\/chat-flotante\/Images\/valeria\.webp\?v=/
+        /^https:\/\/grupak-widgets\.pages\.dev\/widgets\/chat-flotante\/Images\/valeria\.webp\?v=/
     );
 });
 

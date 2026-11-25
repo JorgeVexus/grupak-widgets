@@ -9,7 +9,7 @@
     var isDirectFile = isLocalhost && (window.location.pathname.indexOf("widgets/formulario") >= 0 || window.location.pathname.indexOf("formulario.html") >= 0);
     var baseURL = isLocalhost
         ? (isDirectFile ? "." : "widgets/formulario")
-        : "https://grupak-widgets.vercel.app/widgets/formulario";
+        : "https://grupak-widgets.pages.dev/widgets/formulario";
 
     var WEBHOOK_URL = "https://infinity-mind.app.n8n.cloud/webhook/grupak-landing-consent";
     var WEBHOOK_SOURCE = "landing-grupak-whatsapp";

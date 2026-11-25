@@ -4,7 +4,7 @@
     const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
     const baseURL = isLocalhost 
         ? "/widgets/linea-tiempo" 
-        : "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
+        : "https://grupak-widgets.pages.dev/widgets/linea-tiempo";
     const internalBuild = "20260907-sync-instant-v5";
     const scriptSearch = document.currentScript ? new URL(document.currentScript.src).search : "";
     const assetVersion = scriptSearch 
@@ -43,7 +43,7 @@
         const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
         const baseURL = isLocalhost 
             ? "/widgets/linea-tiempo" 
-            : "https://grupak-widgets.vercel.app/widgets/linea-tiempo";
+            : "https://grupak-widgets.pages.dev/widgets/linea-tiempo";
 
         // Scoped DOM elements under the widget root
         const root = document.getElementById("gpk-timeline-widget");

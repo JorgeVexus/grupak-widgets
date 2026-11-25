@@ -8,7 +8,7 @@
 
   var baseURL = isLocalhost
     ? "/widgets/medio-ambiente"
-    : "https://grupak-widgets.vercel.app/widgets/medio-ambiente";
+    : "https://grupak-widgets.pages.dev/widgets/medio-ambiente";
 
   if (!document.getElementById("gpk-medio-ambiente-styles")) {
     var link = document.createElement("link");

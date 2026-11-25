@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var productionBaseURL = "https://grupak-widgets.vercel.app/widgets/navbar-menu";
+    var productionBaseURL = "https://grupak-widgets.pages.dev/widgets/navbar-menu";
     var isLocalhost =
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1" ||
@@ -10,7 +10,7 @@
     var assetVersion = "20261012-lang-flags-v2";
     var logoURL = isLocalhost
         ? "widgets/productos-interactivos/logoGrupak.svg"
-        : "https://grupak-widgets.vercel.app/widgets/productos-interactivos/logoGrupak.svg";
+        : "https://grupak-widgets.pages.dev/widgets/productos-interactivos/logoGrupak.svg";
 
     ensureStyles();
     mountWidget();

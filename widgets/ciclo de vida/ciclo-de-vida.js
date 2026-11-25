@@ -12,7 +12,7 @@
 
     const baseURL = isLocalhost
         ? "/widgets/ciclo de vida"
-        : "https://grupak-widgets.vercel.app/widgets/ciclo%20de%20vida";
+        : "https://grupak-widgets.pages.dev/widgets/ciclo%20de%20vida";
 
     /* ── 1. Inject CSS ── */
     if (!document.getElementById("gpk-ciclo-styles")) {

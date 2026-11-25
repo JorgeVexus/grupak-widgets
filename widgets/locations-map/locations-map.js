@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    const baseURL = "https://grupak-widgets.vercel.app/widgets/locations-map";
+    const baseURL = "https://grupak-widgets.pages.dev/widgets/locations-map";
 
     // 1. Inject CSS stylesheet dynamically if not already present
     if (!document.getElementById("gpk-locations-styles")) {

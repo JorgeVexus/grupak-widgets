@@ -5,7 +5,7 @@
     const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
     const baseURL = isLocalhost 
         ? "/widgets/mas-alla-del-empaque" 
-        : "https://grupak-widgets.vercel.app/widgets/mas-alla-del-empaque";
+        : "https://grupak-widgets.pages.dev/widgets/mas-alla-del-empaque";
     const internalBuild = "20261110-snap-v5";
 
     // 1. Inject CSS stylesheet dynamically if not already present

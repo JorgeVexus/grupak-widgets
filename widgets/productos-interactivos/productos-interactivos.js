@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    const productionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
+    const productionBaseURL = "https://grupak-widgets.pages.dev/widgets/productos-interactivos";
     const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
     const baseURL = isLocalHost ? "/widgets/productos-interactivos" : productionBaseURL;
 
@@ -126,7 +126,7 @@
             5: "mobile-cajas",
             8: "mobile-grabados"
         };
-        const widgetProductionBaseURL = "https://grupak-widgets.vercel.app/widgets/productos-interactivos";
+        const widgetProductionBaseURL = "https://grupak-widgets.pages.dev/widgets/productos-interactivos";
         const widgetBaseURL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
             ? "/widgets/productos-interactivos"
             : widgetProductionBaseURL;

@@ -13,7 +13,7 @@
         window.location.hostname !== "localhost" &&
         window.location.hostname !== "127.0.0.1";
     var scriptBaseURL = script && script.src ? new URL(".", script.src) : null;
-    var productionWidgetsURL = new URL("https://grupak-widgets.vercel.app/widgets/");
+    var productionWidgetsURL = new URL("https://grupak-widgets.pages.dev/widgets/");
     var widgetsBaseURL = isProduction ? productionWidgetsURL : scriptBaseURL && new URL("../", scriptBaseURL);
     var chatBaseURL = isProduction ? new URL("chat-flotante/", productionWidgetsURL) : scriptBaseURL;
     var assetVersion = "20260907-contact-links-4";

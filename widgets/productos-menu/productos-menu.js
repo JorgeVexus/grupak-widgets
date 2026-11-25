@@ -7,7 +7,7 @@
         window.location.protocol === "file:";
     const baseURL = isLocalhost
         ? "widgets/productos-menu"
-        : "https://grupak-widgets.vercel.app/widgets/productos-menu";
+        : "https://grupak-widgets.pages.dev/widgets/productos-menu";
     const assetVersion = "20261110-energia-update";
 
     // 1. Inject CSS stylesheet dynamically if not already present

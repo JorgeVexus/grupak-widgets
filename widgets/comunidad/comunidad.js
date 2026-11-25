@@ -8,7 +8,7 @@
 
     var baseURL = isLocalhost
         ? "/widgets/comunidad"
-        : "https://grupak-widgets.vercel.app/widgets/comunidad";
+        : "https://grupak-widgets.pages.dev/widgets/comunidad";
     var internalBuild = "20260907-snap-v1";
 
     if (!document.getElementById("gpk-comunidad-styles")) {

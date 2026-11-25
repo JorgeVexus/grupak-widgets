@@ -8,7 +8,7 @@
 
     var baseURL = isLocalhost
         ? "/widgets/gestion"
-        : "https://grupak-widgets.vercel.app/widgets/gestion";
+        : "https://grupak-widgets.pages.dev/widgets/gestion";
 
     if (!document.getElementById("gpk-gestion-styles")) {
         var link = document.createElement("link");

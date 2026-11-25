@@ -11,7 +11,7 @@
     window.location.hostname === '127.0.0.1' ||
     window.location.protocol === 'file:';
 
-  var selfProductionBaseURL = 'https://grupak-widgets.vercel.app/widgets/lo-que-nos-impulsa';
+  var selfProductionBaseURL = 'https://grupak-widgets.pages.dev/widgets/lo-que-nos-impulsa';
   var baseURL = isLocalhost ? '/widgets/lo-que-nos-impulsa' : selfProductionBaseURL;
 
   // Si estamos en localhost, resolver relativo al script actual

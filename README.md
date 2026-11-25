@@ -30,7 +30,7 @@ Para añadir este widget en Webflow de manera asíncrona y con código ultra lim
 <div id="gpk-products-widget-root"></div>
 
 <!-- Cargador Autónomo del Widget -->
-<script src="https://grupak-widgets.vercel.app/widgets/productos-interactivos/productos-interactivos.js" defer></script>
+<script src="https://grupak-widgets.pages.dev/widgets/productos-interactivos/productos-interactivos.js" defer></script>
 ```
 
 El script se encargará automáticamente de inyectar los estilos CSS correspondientes, descargar el HTML del widget e inicializar todas las interacciones dinámicas.
