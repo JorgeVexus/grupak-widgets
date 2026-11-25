@@ -299,6 +299,31 @@
                 img.src = rebuildAssetURL(src.slice(selfPrefix.length), selfBaseURL);
             }
         });
+        // Videos: <source src> and poster also come from the shared interactivos HTML
+        // as site-relative paths, which would resolve against the host page (Webflow).
+        const resolveRelative = value => {
+            if (!value) return null;
+            if (value.startsWith(sourcePrefix)) return rebuildAssetURL(value.slice(sourcePrefix.length), sourceBaseURL);
+            if (value.startsWith(selfPrefix)) return rebuildAssetURL(value.slice(selfPrefix.length), selfBaseURL);
+            return null;
+        };
+        root.querySelectorAll("video").forEach(video => {
+            let changed = false;
+            const poster = resolveRelative(video.getAttribute("poster"));
+            if (poster) video.poster = poster;
+            video.querySelectorAll("source[src]").forEach(sourceEl => {
+                const resolved = resolveRelative(sourceEl.getAttribute("src"));
+                if (resolved) {
+                    sourceEl.src = resolved;
+                    changed = true;
+                }
+            });
+            if (changed) {
+                video.load();
+                const playAttempt = video.play();
+                if (playAttempt && typeof playAttempt.catch === "function") playAttempt.catch(() => {});
+            }
+        });
         root.querySelectorAll(".grabados-green-card[data-index]").forEach(card => {
             const index = card.getAttribute("data-index");
             card.style.backgroundImage = `url("${sourceBaseURL}/images/slide-grabados/grabados%20${index.padStart(2, "0")}.webp")`;
