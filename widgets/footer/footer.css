@@ -400,7 +400,8 @@ a.gpk-footer__col-title:hover {
 
 .gpk-footer__legal {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 8px 24px;
 }
 
 .gpk-footer__legal a {
