@@ -150,6 +150,20 @@
     transform: translate(0, 0) scale(1);
 }
 
+@media (min-width: 1101px) {
+    .gpk-navbar-menu .gpk-navbar-menu__item.is-suppressed .gpk-navbar-menu__dropdown,
+    .gpk-navbar-menu.gpk-nav-hidden .gpk-navbar-menu__dropdown {
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, 8px) scale(0.98);
+    }
+
+    .gpk-navbar-menu .gpk-navbar-menu__item.is-suppressed .gpk-navbar-menu__dropdown--right,
+    .gpk-navbar-menu.gpk-nav-hidden .gpk-navbar-menu__dropdown--right {
+        transform: translate(0, 8px) scale(0.98);
+    }
+}
+
 .gpk-navbar-menu__card {
     width: 320px;
     min-height: 80px;
