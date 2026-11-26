@@ -110,7 +110,7 @@
         footer.querySelectorAll('[data-gpk-action="product"]').forEach(function (link) {
             link.addEventListener("click", function (event) {
                 var rawSlide = link.getAttribute("data-gpk-slide");
-                if (!rawSlide) return;
+                if (!rawSlide || !hasProductsWidget()) return;
                 var parsed = parseInt(rawSlide, 10);
                 var slide = String(parsed) === rawSlide ? parsed : rawSlide;
 
@@ -118,6 +118,11 @@
                 goToProductSlide(slide);
             });
         });
+    }
+
+    function hasProductsWidget() {
+        return typeof (window.gpkGoToProductsSection || window.gpkGoToProductsSlide) === "function" ||
+            !!(document.getElementById("gpk-ps-widget-root") || document.getElementById("gpk-ps-widget") || document.getElementById("gpk-products-widget-root"));
     }
 
     function goToProductSlide(slide) {

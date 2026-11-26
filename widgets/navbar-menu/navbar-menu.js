@@ -236,12 +236,17 @@
         navbar.querySelectorAll('[data-gpk-action="product"]').forEach(function (link) {
             link.addEventListener("click", function (event) {
                 var slide = parseInt(link.getAttribute("data-gpk-slide"), 10);
-                if (Number.isNaN(slide)) return;
+                if (Number.isNaN(slide) || !hasProductsWidget()) return;
 
                 event.preventDefault();
                 goToProductSlide(slide);
             });
         });
+    }
+
+    function hasProductsWidget() {
+        return typeof window.gpkGoToProductsSlide === "function" ||
+            !!(document.getElementById("gpk-ps-widget-root") || document.getElementById("gpk-ps-widget") || document.getElementById("gpk-products-widget-root"));
     }
 
     function goToProductSlide(slide) {
