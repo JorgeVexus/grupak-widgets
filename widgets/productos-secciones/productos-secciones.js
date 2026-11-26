@@ -100,10 +100,20 @@
             })
             .then(html => {
                 const source = document.createElement("div");
-                source.innerHTML = html;
+                source.innerHTML = absolutizeAssetPaths(html);
                 build(root, source);
             })
             .catch(err => console.error("Error loading source content for productos-secciones:", err));
+    }
+
+    // The shared HTML uses site-relative src/poster paths. Resolving them before parsing
+    // stops the browser from requesting them against the host page (Webflow) first.
+    function absolutizeAssetPaths(html) {
+        return html.replace(
+            /\b(src|poster)=(["'])widgets\/(productos-interactivos|productos-secciones)\//g,
+            (match, attr, quote, widget) =>
+                `${attr}=${quote}${widget === "productos-interactivos" ? sourceBaseURL : selfBaseURL}/`
+        );
     }
 
     // One section per original "mode" (0-14), same content/classes as the source widget.
@@ -318,8 +328,8 @@
                     changed = true;
                 }
             });
-            if (changed) {
-                video.load();
+            if (changed) video.load();
+            if (changed || video.autoplay) {
                 const playAttempt = video.play();
                 if (playAttempt && typeof playAttempt.catch === "function") playAttempt.catch(() => {});
             }
